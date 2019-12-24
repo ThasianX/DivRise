@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @State private var addStocksShown = false
+    @State private var showingAddStocks = false
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -18,12 +18,20 @@ struct PortfolioContainerView: View {
         }
     }
     
+    var addButton: some View {
+        Button(action: { self.showingAddStocks.toggle() }) {
+            Text("Add")
+                .accessibility(label: Text("Add Stocks"))
+        }
+    }
+    
     var body: some View {
         PortfolioView(portfolioStocks: portfolioStocks)
-        .navigationBarTitle("portfolio")
-        .navigationBarItems(leading: EditButton())
-        .navigationBarItems(trailing: Text("Add button"))
-            .sheet(isPresented: $addStocksShown) {
+        .navigationBarTitle(Text("portfolio"))
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing: addButton)
+            .sheet(isPresented: $showingAddStocks) {
                 Text("Container view goes here")
         }
     }
