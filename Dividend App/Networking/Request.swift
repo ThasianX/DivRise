@@ -21,7 +21,7 @@ struct Request {
             .dataTaskPublisher(for: URLRequest(url: url))
             .map { $0.data }
             .decode(type: PortfolioStockResponse.self, decoder: Current.decoder)
-            .map { PortfolioStock(ticker: $0.security.ticker, startingDividend: startingDividend, currentDividend: $0.exDividend, growth: $0.exDividend / startingDividend)}
+            .map { PortfolioStock(id: $0.security.companyID,ticker: $0.security.ticker, startingDividend: startingDividend, currentDividend: $0.exDividend, growth: $0.exDividend / startingDividend)}
             .eraseToAnyPublisher()
     }
     
@@ -30,11 +30,12 @@ struct Request {
             .map { $0.companies }
             .flatMap { companies -> Publishers.MergeMany<AnyPublisher<SearchStock, Error>> in
                 let stocks = companies.map { company -> AnyPublisher<SearchStock, Error> in
+                    let id = company.id
                     let ticker = company.ticker
                     let fullName = company.name
                     return self.fetchNumber(identifier: ticker, tag: "marketcap")
                         .flatMap { marketCap -> AnyPublisher<SearchStock, Error> in
-                            return Just(SearchStock(ticker: ticker, fullName: fullName, marketCap: marketCap))
+                            return Just(SearchStock(id: id, ticker: ticker, fullName: fullName, marketCap: marketCap))
                                 .setFailureType(to: Error.self)
                                 .eraseToAnyPublisher()
                     }
@@ -46,7 +47,7 @@ struct Request {
         .eraseToAnyPublisher()
     }
     
-    func searchStocks(query: String) -> AnyPublisher<SearchStockResponse, Error> {
+    private func searchStocks(query: String) -> AnyPublisher<SearchStockResponse, Error> {
         let urlString = "https://api-v2.intrinio.com/companies/search"
         var url = URL(string: urlString)!
         
@@ -64,7 +65,7 @@ struct Request {
             .eraseToAnyPublisher()
     }
     
-    func fetchNumber(identifier: String, tag: String) -> AnyPublisher<Double, Error> {
+    private func fetchNumber(identifier: String, tag: String) -> AnyPublisher<Double, Error> {
         let urlString = "https://api-v2.intrinio.com/companies/{identifier}/data_point/{tag}/number".replacingOccurrences(of: "{identifier}", with: identifier)
             .replacingOccurrences(of: "{tag}", with: tag)
         let url = URL(string: urlString)!

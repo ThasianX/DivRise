@@ -11,4 +11,5 @@ import Foundation
 struct AppState: Codable, Equatable {
     var allPortfolioStocks: [String: PortfolioStock] = [:]
     var portfolioStocks: [String] = []
+    var searchResult: [SearchStock] = []
 }

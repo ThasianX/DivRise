@@ -12,6 +12,7 @@ import Combine
 struct Environment {
     var decoder = JSONDecoder()
     var encoder = JSONEncoder()
+    var request = Request()
     var files = FileManager.default
 }
 

@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct PortfolioStock: Codable, Hashable {
+struct PortfolioStock: Codable, Identifiable, Hashable {
+    let id: String
     let ticker: String
     let startingDividend: Double
     let currentDividend: Double
@@ -16,5 +17,5 @@ struct PortfolioStock: Codable, Hashable {
 }
 
 extension PortfolioStock {
-    static let mock = PortfolioStock(ticker: "AAPL", startingDividend: 0.55, currentDividend: 0.77, growth: 0.77 / 0.55)
+    static let mock = PortfolioStock(id: "com_NX6GzO", ticker: "AAPL", startingDividend: 0.55, currentDividend: 0.77, growth: 0.77 / 0.55)
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCA23B2A9C000863E0C /* SideEffect.swift */; };
+		1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */; };
 		1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511CFD23B2817600455C7F /* AddStockContainerView.swift */; };
 		1E511D0023B281CE00455C7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E511CFF23B281CE00455C7F /* Localizable.strings */; };
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
@@ -28,6 +30,9 @@
 		1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */; };
 		1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */; };
 		1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */; };
+		1E95DC5023B2B07000FDA3EA /* Double+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC4F23B2B07000FDA3EA /* Double+Truncate.swift */; };
+		1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */; };
+		1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */; };
 		1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* Request.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
@@ -36,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E114BCA23B2A9C000863E0C /* SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffect.swift; sourceTree = "<group>"; };
+		1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockRow.swift; sourceTree = "<group>"; };
 		1E511CFD23B2817600455C7F /* AddStockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockContainerView.swift; sourceTree = "<group>"; };
 		1E511CFF23B281CE00455C7F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1E511D0123B2830E00455C7F /* SearchStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockView.swift; sourceTree = "<group>"; };
@@ -59,6 +66,9 @@
 		1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioContainerView.swift; sourceTree = "<group>"; };
 		1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStock.swift; sourceTree = "<group>"; };
 		1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockResponse.swift; sourceTree = "<group>"; };
+		1E95DC4F23B2B07000FDA3EA /* Double+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Truncate.swift"; sourceTree = "<group>"; };
+		1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlertView.swift; sourceTree = "<group>"; };
+		1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		1EA096FD23B1DCDC00A5B8EC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
@@ -99,7 +109,6 @@
 				1E6E3F6E23B19F70009A0262 /* Launch */,
 				1E6E3F6D23B19F63009A0262 /* Features */,
 				1E8DCF5C23B1EC990018BADB /* Networking */,
-				1E6E3F7F23B1A31E009A0262 /* Extensions */,
 				1E6E3F6923B19ED3009A0262 /* Redux */,
 				1E511CFF23B281CE00455C7F /* Localizable.strings */,
 				1E6E3F5B23B19D90009A0262 /* Assets.xcassets */,
@@ -126,6 +135,7 @@
 				1E6E3F7723B1A17C009A0262 /* AppReducer.swift */,
 				1E6E3F7B23B1A20A009A0262 /* Store.swift */,
 				1E6E3F7D23B1A21C009A0262 /* Environment.swift */,
+				1E114BCA23B2A9C000863E0C /* SideEffect.swift */,
 			);
 			path = Redux;
 			sourceTree = "<group>";
@@ -157,6 +167,7 @@
 				1E6E3F8423B1A37D009A0262 /* Add */,
 				1E6E3F8523B1A383009A0262 /* Details */,
 				1EBC63C823B1EDA100F102CB /* Models */,
+				1E95DC4E23B2B05D00FDA3EA /* Extensions */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -183,6 +194,8 @@
 			children = (
 				1E511CFD23B2817600455C7F /* AddStockContainerView.swift */,
 				1E511D0123B2830E00455C7F /* SearchStockView.swift */,
+				1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */,
+				1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -201,6 +214,7 @@
 			children = (
 				1EA096FD23B1DCDC00A5B8EC /* Request.swift */,
 				1E8DCF5D23B1ECAB0018BADB /* Models */,
+				1E6E3F7F23B1A31E009A0262 /* Extensions */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -212,6 +226,15 @@
 				1E511D0523B2870100455C7F /* SearchStockResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1E95DC4E23B2B05D00FDA3EA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E95DC4F23B2B07000FDA3EA /* Double+Truncate.swift */,
+				1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1EBC63C823B1EDA100F102CB /* Models */ = {
@@ -295,8 +318,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */,
 				1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
+				1E95DC5023B2B07000FDA3EA /* Double+Truncate.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
@@ -304,6 +329,7 @@
 				1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */,
 				1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */,
 				1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */,
+				1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
@@ -311,9 +337,11 @@
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
 				1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */,
+				1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */,
 				1E6E3F7C23B1A20A009A0262 /* Store.swift in Sources */,
 				1E6E3F7823B1A17C009A0262 /* AppReducer.swift in Sources */,
 				1E6E3F8123B1A333009A0262 /* RandomAccessCollection.swift in Sources */,
+				1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */,
 				1E6E3F5823B19D8F009A0262 /* SceneDelegate.swift in Sources */,
 				1E6E3F8323B1A347009A0262 /* View+Embed.swift in Sources */,
 				1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */,

@@ -33,7 +33,7 @@ struct PortfolioView: View {
     var portfolioStocks: [PortfolioStock]
     
     var body: some View {
-        List(portfolioStocks, id: \.self) { stock in
+        List(portfolioStocks) { stock in
             NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
                 PortfolioStockView(portfolioStock: stock)
             }

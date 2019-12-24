@@ -9,13 +9,26 @@
 import SwiftUI
 
 struct SearchStockView: View {
+    @Binding var query: String
+    @Binding var showingAlert: Bool
+    @Binding var selectedStock: SearchStock?
+    
+    let searchedStocks: [SearchStock]
+    let onCommit: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
+            
+            List(searchedStocks) { stock in
+                Button(action: {
+                    self.showingAlert = true
+                    self.selectedStock = stock
+                }) {
+                    SearchStockRow(stock: stock)
+                }
+            }
+        }
     }
 }
 
-struct SearchStockView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchStockView()
-    }
-}
