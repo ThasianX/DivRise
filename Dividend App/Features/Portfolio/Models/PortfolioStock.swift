@@ -8,9 +8,13 @@
 
 import Foundation
 
-struct PortfolioStock: Codable, Equatable {
+struct PortfolioStock: Codable, Hashable {
     let ticker: String
     let startingDividend: Double
     let currentDividend: Double
     let growth: Double
+}
+
+extension PortfolioStock {
+    static let mock = PortfolioStock(ticker: "AAPL", startingDividend: 0.55, currentDividend: 0.77, growth: 0.77 / 0.55)
 }

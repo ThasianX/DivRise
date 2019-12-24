@@ -25,6 +25,9 @@
 		1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */; };
 		1EA096FE23B1DCDC00A5B8EC /* PortfolioStockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
+		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
+		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
+		1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockResponse.swift; sourceTree = "<group>"; };
 		1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockService.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
+		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
+		1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailContainerView.swift; sourceTree = "<group>"; };
+		1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,9 +142,10 @@
 			isa = PBXGroup;
 			children = (
 				1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */,
+				1EBC63C923B1EDF200F102CB /* PortfolioView.swift */,
+				1EBC63C823B1EDA100F102CB /* Models */,
 				1E6E3F8423B1A37D009A0262 /* Add */,
 				1E6E3F8523B1A383009A0262 /* Details */,
-				1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -170,6 +177,8 @@
 		1E6E3F8523B1A383009A0262 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */,
+				1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -197,6 +206,14 @@
 				1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		1EBC63C823B1EDA100F102CB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,12 +288,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EA096FE23B1DCDC00A5B8EC /* PortfolioStockService.swift in Sources */,
+				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
+				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
 				1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
+				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
 				1E6E3F7C23B1A20A009A0262 /* Store.swift in Sources */,
