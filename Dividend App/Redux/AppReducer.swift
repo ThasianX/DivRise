@@ -8,6 +8,8 @@
 
 func appReducer(state: inout AppState, action: AppAction) {
     switch action {
-        
+    case let .append(stock):
+        state.allPortfolioStocks[stock.ticker] = stock
+        state.portfolioStocks.append(stock.ticker)
     }
 }

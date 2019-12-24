@@ -21,6 +21,10 @@
 		1E6E3F8323B1A347009A0262 /* View+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8223B1A347009A0262 /* View+Embed.swift */; };
 		1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8623B1A3F5009A0262 /* RootView.swift */; };
 		1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */; };
+		1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */; };
+		1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */; };
+		1EA096FE23B1DCDC00A5B8EC /* PortfolioStockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */; };
+		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		1E6E3F8223B1A347009A0262 /* View+Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Embed.swift"; sourceTree = "<group>"; };
 		1E6E3F8623B1A3F5009A0262 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioContainerView.swift; sourceTree = "<group>"; };
+		1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStock.swift; sourceTree = "<group>"; };
+		1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockResponse.swift; sourceTree = "<group>"; };
+		1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockService.swift; sourceTree = "<group>"; };
+		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 			children = (
 				1E6E3F6E23B19F70009A0262 /* Launch */,
 				1E6E3F6D23B19F63009A0262 /* Features */,
+				1E8DCF5C23B1EC990018BADB /* Networking */,
 				1E6E3F7F23B1A31E009A0262 /* Extensions */,
 				1E6E3F6923B19ED3009A0262 /* Redux */,
 				1E6E3F5B23B19D90009A0262 /* Assets.xcassets */,
@@ -95,20 +104,13 @@
 		1E6E3F6923B19ED3009A0262 /* Redux */ = {
 			isa = PBXGroup;
 			children = (
-				1E6E3F6A23B19EDE009A0262 /* Actions */,
-				1E6E3F6F23B1A029009A0262 /* Reducers */,
-				1E6E3F7023B1A02D009A0262 /* States */,
-				1E6E3F7123B1A031009A0262 /* Models */,
+				1E6E3F7923B1A1C1009A0262 /* AppState.swift */,
+				1E6E3F6B23B19EEA009A0262 /* AppAction.swift */,
+				1E6E3F7723B1A17C009A0262 /* AppReducer.swift */,
+				1E6E3F7B23B1A20A009A0262 /* Store.swift */,
+				1E6E3F7D23B1A21C009A0262 /* Environment.swift */,
 			);
 			path = Redux;
-			sourceTree = "<group>";
-		};
-		1E6E3F6A23B19EDE009A0262 /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				1E6E3F6B23B19EEA009A0262 /* AppAction.swift */,
-			);
-			path = Actions;
 			sourceTree = "<group>";
 		};
 		1E6E3F6D23B19F63009A0262 /* Features */ = {
@@ -130,37 +132,13 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
-		1E6E3F6F23B1A029009A0262 /* Reducers */ = {
-			isa = PBXGroup;
-			children = (
-				1E6E3F7723B1A17C009A0262 /* AppReducer.swift */,
-			);
-			path = Reducers;
-			sourceTree = "<group>";
-		};
-		1E6E3F7023B1A02D009A0262 /* States */ = {
-			isa = PBXGroup;
-			children = (
-				1E6E3F7923B1A1C1009A0262 /* AppState.swift */,
-			);
-			path = States;
-			sourceTree = "<group>";
-		};
-		1E6E3F7123B1A031009A0262 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1E6E3F7B23B1A20A009A0262 /* Store.swift */,
-				1E6E3F7D23B1A21C009A0262 /* Environment.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		1E6E3F7223B1A0A6009A0262 /* Portfolio */ = {
 			isa = PBXGroup;
 			children = (
 				1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */,
 				1E6E3F8423B1A37D009A0262 /* Add */,
 				1E6E3F8523B1A383009A0262 /* Details */,
+				1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -177,6 +155,7 @@
 			children = (
 				1E6E3F8023B1A333009A0262 /* RandomAccessCollection.swift */,
 				1E6E3F8223B1A347009A0262 /* View+Embed.swift */,
+				1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -193,6 +172,31 @@
 			children = (
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		1E8DCF5C23B1EC990018BADB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1E8DCF5E23B1ECB40018BADB /* Services */,
+				1E8DCF5D23B1ECAB0018BADB /* Models */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		1E8DCF5D23B1ECAB0018BADB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E8DCF5F23B1ECCE0018BADB /* PortfolioStockResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1E8DCF5E23B1ECB40018BADB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1EA096FD23B1DCDC00A5B8EC /* PortfolioStockService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,9 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA096FE23B1DCDC00A5B8EC /* PortfolioStockService.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
+				1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
+				1E8DCF6023B1ECCE0018BADB /* PortfolioStockResponse.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
@@ -277,6 +284,7 @@
 				1E6E3F8123B1A333009A0262 /* RandomAccessCollection.swift in Sources */,
 				1E6E3F5823B19D8F009A0262 /* SceneDelegate.swift in Sources */,
 				1E6E3F8323B1A347009A0262 /* View+Embed.swift in Sources */,
+				1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
