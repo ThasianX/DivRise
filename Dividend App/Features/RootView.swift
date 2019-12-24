@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  Dividend App
 //
 //  Created by Kevin Li on 12/23/19.
@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            PortfolioContainerView()
+        }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RootView()
     }
 }
