@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Dividend App
+
+  Created by Kevin Li on 12/24/19.
+  Copyright © 2019 Kevin Li. All rights reserved.
+*/
+
+"add" = "Add";
+"add stocks" = "Add Stocks";
+"portfolio" = "Portfolio";
+

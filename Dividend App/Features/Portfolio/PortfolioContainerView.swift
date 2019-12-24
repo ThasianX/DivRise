@@ -20,8 +20,8 @@ struct PortfolioContainerView: View {
     
     var addButton: some View {
         Button(action: { self.showingAddStocks.toggle() }) {
-            Text("Add")
-                .accessibility(label: Text("Add Stocks"))
+            Text("add")
+                .accessibility(label: Text("add stocks"))
         }
     }
     
