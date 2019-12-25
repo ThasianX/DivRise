@@ -31,7 +31,9 @@ struct PortfolioContainerView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: addButton)
-            .sheet(isPresented: $showingAddStocks) {
+            .sheet(isPresented: $showingAddStocks, onDismiss: {
+                self.store.send(AppAction.setSearchResults(results: []))
+            }) {
                 AddStockContainerView().environmentObject(self.store)
         }
     }
