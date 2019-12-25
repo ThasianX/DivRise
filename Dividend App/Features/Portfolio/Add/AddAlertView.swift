@@ -63,8 +63,6 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                 .background(Color.white)
                 .relativeHeight(0.7)
                 .relativeWidth(0.7)
-                .shadow(radius: 1)
-                .opacity(isShowing ? 1 : 0)
             }
             
         }
