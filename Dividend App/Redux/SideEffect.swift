@@ -10,7 +10,10 @@ import Combine
 
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
-        .replaceError(with: [])
-        .map { .setSearchResults(results: $0)}
+        .map {
+            Logger.info("\($0)")
+            return .setSearchResults(results: $0)
+            
+    }
         .eraseToAnyPublisher()
 }

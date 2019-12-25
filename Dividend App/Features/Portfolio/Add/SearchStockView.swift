@@ -17,18 +17,22 @@ struct SearchStockView: View {
     let onCommit: () -> Void
     
     var body: some View {
-        VStack {
-            TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
-            
-            List(searchedStocks) { stock in
-                Button(action: {
-                    self.showingAlert = true
-                    self.selectedStock = stock
-                }) {
-                    SearchStockRow(stock: stock)
+        VStack(alignment: .leading) {
+                TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
+                
+                if searchedStocks.isEmpty {
+                    Text("Search Something")
+                } else {
+                    List(searchedStocks, id: \.self) { stock in
+                        SearchStockRow(stock: stock)
+                            .onTapGesture {
+                                self.selectedStock = stock
+                                self.showingAlert = true
+                        }
+                    }
                 }
             }
-        }
+        .padding()
     }
 }
 

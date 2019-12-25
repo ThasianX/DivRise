@@ -7,12 +7,28 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct SearchStockRow: View {
     let stock: SearchStock
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
+            if stock.image == "" {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.clear)
+                    .frame(width: 50, height: 50)
+            } else {
+                URLImage(URL(string: stock.image)!) { proxy in
+                    proxy.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipped()
+                }
+                .frame(width: 40, height: 40)
+            }
+            
+            
             VStack(alignment: .leading) {
                 Text(stock.ticker)
                     .font(.headline)
@@ -23,8 +39,9 @@ struct SearchStockRow: View {
             
             Spacer()
             
-            Text("$\(stock.marketCap.shortStringRepresentation)")
+            Text(stock.marketCap)
         }
+        .padding()
     }
 }
 

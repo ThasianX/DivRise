@@ -9,34 +9,32 @@
 import Foundation
 import Combine
 
+// MARK: AlphaVantage
+internal let alphaVantageApiKey = "5QZFJVD3UY66K9CG"
+internal let searchCompanyURL = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={query}&apikey={apikey}"
+
+// MARK: FinancialModelingPrep
+internal let companyProfileURL = "https://financialmodelingprep.com/api/v3/company/profile/{company}"
+
 struct Request {
-    func fetchPortfolioStock(identifier: String, startingDividend: Double) -> AnyPublisher<PortfolioStock, Error> {
-        let urlString = "https://api-v2.intrinio.com/securities/{identifier}/dividends/latest".replacingOccurrences(of: "{identifier}", with: identifier)
-        var url = URL(string: urlString)!
-        
-        let queryItems = [URLQueryItem(name: "api_key", value: "OjBjM2ZlMjE2NjdhYWQ4MGM4MTA2NzNkY2E0NWQ0ZTlm")]
-        url.appending(queryItems)
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: URLRequest(url: url))
-            .map { $0.data }
-            .decode(type: PortfolioStockResponse.self, decoder: Current.decoder)
-            .map { PortfolioStock(id: $0.security.companyID,ticker: $0.security.ticker, startingDividend: startingDividend, currentDividend: $0.exDividend, growth: $0.exDividend / startingDividend)}
+    func fetchPortfolioStock(identifier: String, startingDividend: Double) -> AnyPublisher<PortfolioStock, Never> {
+        return companyProfile(identifier: identifier)
+            .map { PortfolioStock(ticker: $0.symbol, startingDividend: startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: Double($0.profile.lastDiv)! / startingDividend) }
             .eraseToAnyPublisher()
     }
     
-    func getSearchedStocks(query: String) -> AnyPublisher<[SearchStock], Error> {
+    func getSearchedStocks(query: String) -> AnyPublisher<[SearchStock], Never> {
+        Logger.info("getSearchedStocks called with query: \(query)")
         return searchStocks(query: query)
-            .map { $0.companies }
-            .flatMap { companies -> Publishers.MergeMany<AnyPublisher<SearchStock, Error>> in
-                let stocks = companies.map { company -> AnyPublisher<SearchStock, Error> in
-                    let id = company.id
-                    let ticker = company.ticker
+            .map { $0.bestMatches }
+            .flatMap { companies -> Publishers.MergeMany<AnyPublisher<SearchStock, Never>> in
+                let stocks = companies.map { company -> AnyPublisher<SearchStock, Never> in
+                    let ticker = company.symbol
                     let fullName = company.name
-                    return self.fetchNumber(identifier: ticker, tag: "marketcap")
-                        .flatMap { marketCap -> AnyPublisher<SearchStock, Error> in
-                            return Just(SearchStock(id: id, ticker: ticker, fullName: fullName, marketCap: marketCap))
-                                .setFailureType(to: Error.self)
+                    return self.companyProfile(identifier: ticker)
+                        .flatMap { response -> AnyPublisher<SearchStock, Never> in
+                            let mktCap = (response.profile.mktCap == "") ? "$--" : Double(response.profile.mktCap)!.shortStringRepresentation
+                            return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap))
                                 .eraseToAnyPublisher()
                     }
                     .eraseToAnyPublisher()
@@ -47,33 +45,37 @@ struct Request {
         .eraseToAnyPublisher()
     }
     
-    private func searchStocks(query: String) -> AnyPublisher<SearchStockResponse, Error> {
-        let urlString = "https://api-v2.intrinio.com/companies/search"
-        var url = URL(string: urlString)!
+    private func searchStocks(query: String) -> AnyPublisher<SearchStockResponse, Never> {
+        let urlString = searchCompanyURL
+            .replacingOccurrences(of: "{query}", with: query)
+            .replacingOccurrences(of: "{apikey}", with: alphaVantageApiKey)
         
-        let queryItems = [
-            URLQueryItem(name: "query", value: query),
-            URLQueryItem(name: "api_key", value: "OjBjM2ZlMjE2NjdhYWQ4MGM4MTA2NzNkY2E0NWQ0ZTlm")
-        ]
+        let url = URL(string: urlString)!
         
-        url.appending(queryItems)
+        Logger.info(url.absoluteString)
         
         return URLSession.shared
             .dataTaskPublisher(for: URLRequest(url: url))
-            .map { $0.data }
-            .decode(type: SearchStockResponse.self, decoder: Current.decoder)
-            .eraseToAnyPublisher()
+            .map {
+                $0.data.printJSON()
+                return $0.data
+        }
+        .decode(type: SearchStockResponse.self, decoder: Current.decoder)
+        .replaceError(with: .noResponse)
+        .eraseToAnyPublisher()
     }
     
-    private func fetchNumber(identifier: String, tag: String) -> AnyPublisher<Double, Error> {
-        let urlString = "https://api-v2.intrinio.com/companies/{identifier}/data_point/{tag}/number".replacingOccurrences(of: "{identifier}", with: identifier)
-            .replacingOccurrences(of: "{tag}", with: tag)
+    private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
+        let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
         let url = URL(string: urlString)!
         
         return URLSession.shared
             .dataTaskPublisher(for: URLRequest(url: url))
-            .map { $0.data }
-            .decode(type: Double.self, decoder: Current.decoder)
+            .map {
+                $0.data.printJSON()
+                return $0.data }
+            .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }
 }

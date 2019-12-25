@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct SearchStock: Codable, Identifiable, Hashable {
-    var id: String
+struct SearchStock: Codable, Hashable {
     let ticker: String
     let fullName: String
-    let marketCap: Double
+    let image: String
+    let marketCap: String
 }
 
 extension SearchStock {
-    static let mock = SearchStock(id: "com_NX6GzO", ticker: "AAPL", fullName: "Apple Inc", marketCap: 981382326400)
+    static let mock = SearchStock(ticker: "AAPL", fullName: "Apple Inc", image: "https://financialmodelingprep.com/images-New-jpg/AAPL.jpg", marketCap: "$1.3T")
 }

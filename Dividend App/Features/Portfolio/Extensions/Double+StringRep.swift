@@ -30,6 +30,6 @@ extension Double {
         }
         // + 2 to have one digit after the comma, + 1 to not have any.
         // Remove the * and the number of digits argument to display all the digits after the comma.
-        return "\(String(format: "%0.*g", Int(log10(abs(interval))) + 2, interval))\(units[i])"
+        return "$\(String(format: "%0.*g", Int(log10(abs(interval))) + 2, interval))\(units[i])"
     }
 }

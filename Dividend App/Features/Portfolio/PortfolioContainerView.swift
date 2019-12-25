@@ -32,7 +32,7 @@ struct PortfolioContainerView: View {
             leading: EditButton(),
             trailing: addButton)
             .sheet(isPresented: $showingAddStocks) {
-                Text("Container view goes here")
+                AddStockContainerView().environmentObject(self.store)
         }
     }
 }
