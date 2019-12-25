@@ -34,7 +34,8 @@ struct Request {
                     return self.companyProfile(identifier: ticker)
                         .flatMap { response -> AnyPublisher<SearchStock, Never> in
                             let mktCap = (response.profile.mktCap == "") ? "$--" : Double(response.profile.mktCap)!.shortStringRepresentation
-                            return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap))
+                            let dividend = response.profile.lastDiv
+                            return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap, dividend: dividend))
                                 .eraseToAnyPublisher()
                     }
                     .eraseToAnyPublisher()

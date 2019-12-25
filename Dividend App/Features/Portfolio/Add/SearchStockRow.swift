@@ -17,7 +17,7 @@ struct SearchStockRow: View {
             if stock.image == "" {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.clear)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 40, height: 40)
             } else {
                 URLImage(URL(string: stock.image)!) { proxy in
                     proxy.image

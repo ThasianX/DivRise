@@ -7,7 +7,7 @@
 //
 
 enum AppAction {
-    case addToPortfolio(ticker: String)
+    case addToPortfolio(_ stock: PortfolioStock)
     case setSearchResults(results: [SearchStock])
 }
 

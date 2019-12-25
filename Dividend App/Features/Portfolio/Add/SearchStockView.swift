@@ -21,14 +21,14 @@ struct SearchStockView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
-                    TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
+                TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
                 if !query.isEmpty {
                     Button(action: {
                         self.query = ""
                         self.onCommit()
                     }) {
                         Image(systemName: "delete.left")
-                        .foregroundColor(Color(UIColor.opaqueSeparator))
+                            .foregroundColor(Color(UIColor.opaqueSeparator))
                     }
                 }
             }

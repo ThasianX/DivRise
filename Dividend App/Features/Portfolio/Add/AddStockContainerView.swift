@@ -21,23 +21,21 @@ struct AddStockContainerView: View {
             showingAlert: $showingAlert,
             selectedStock: $selectedStock,
             searchedStocks: store.state.searchResult,
-            onCommit: fetch
+            onCommit: searchStocks
             )
-            .onAppear(perform: fetch)
-            .alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text(selectedStock!.ticker),
-                    primaryButton: .destructive(Text("Add")),
-                    secondaryButton: .cancel())
-        }
-        .navigationBarTitle(Text("Add Stocks"))
+            .onAppear(perform: searchStocks)
+            .addAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
+            .navigationBarTitle(Text("Add Stocks"))
     }
     
-    private func fetch() {
+    private func searchStocks() {
         store.send(search(query: query))
     }
     
-    private func addStock(stock: SearchStock) {
-        store.send(AppAction.addToPortfolio(ticker: stock.ticker))
+    private func addStock() {
+        if let stock = selectedStock {
+            let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: Double(alertInput)!, currentDividend: Double(stock.dividend)!, growth: Double(stock.dividend)! / Double(alertInput)!)
+            store.send(.addToPortfolio(portfolioStock))
+        }
     }
 }

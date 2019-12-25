@@ -13,8 +13,9 @@ struct SearchStock: Codable, Hashable {
     let fullName: String
     let image: String
     let marketCap: String
+    let dividend: String
 }
 
 extension SearchStock {
-    static let mock = SearchStock(ticker: "AAPL", fullName: "Apple Inc", image: "https://financialmodelingprep.com/images-New-jpg/AAPL.jpg", marketCap: "$1.3T")
+    static let mock = SearchStock(ticker: "AAPL", fullName: "Apple Inc", image: "https://financialmodelingprep.com/images-New-jpg/AAPL.jpg", marketCap: "$1.3T", dividend: "2.92")
 }
