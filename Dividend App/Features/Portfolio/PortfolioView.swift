@@ -40,7 +40,7 @@ struct PortfolioView: View {
                     PortfolioStockView(portfolioStock: stock)
                 }
             }
-        .onDelete(perform: onDelete)
+            .onDelete(perform: onDelete)
         }
     }
 }
