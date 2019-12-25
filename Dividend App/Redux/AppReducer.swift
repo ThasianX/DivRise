@@ -12,6 +12,9 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.allPortfolioStocks[stock.ticker] = stock
         state.portfolioStocks.append(stock.ticker)
         
+    case let .removeFromPortfolio(offsets):
+        state.portfolioStocks.remove(atOffsets: offsets)
+        
     case let .setSearchResults(results):
         state.searchResult = results
     }

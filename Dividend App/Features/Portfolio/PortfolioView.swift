@@ -31,18 +31,16 @@ struct PortfolioStockView: View {
 
 struct PortfolioView: View {
     var portfolioStocks: [PortfolioStock]
+    var onDelete: (IndexSet) -> Void
     
     var body: some View {
-        List(portfolioStocks, id: \.self) { stock in
-            NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
-                PortfolioStockView(portfolioStock: stock)
+        List {
+            ForEach(portfolioStocks, id: \.self) { stock in
+                NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
+                    PortfolioStockView(portfolioStock: stock)
+                }
             }
+        .onDelete(perform: onDelete)
         }
-    }
-}
-
-struct PortfolioView_Previews: PreviewProvider {
-    static var previews: some View {
-        PortfolioView(portfolioStocks: [PortfolioStock.mock, PortfolioStock.mock, PortfolioStock.mock, PortfolioStock.mock])
     }
 }

@@ -69,7 +69,7 @@ extension Store where State: Codable {
                 let documentsURL = Current.files.urls(for: .applicationSupportDirectory, in: .userDomainMask).first,
                 let data = try? Current.encoder.encode(self.state)
                 else { return }
-
+            
             try? Current.files.createDirectory(
                 at: documentsURL,
                 withIntermediateDirectories: true,
@@ -77,7 +77,7 @@ extension Store where State: Codable {
             )
 
             let stateURL = documentsURL.appendingPathComponent("state.json")
-
+            
             if Current.files.fileExists(atPath: stateURL.absoluteString) {
                 try? Current.files.removeItem(at: stateURL)
             }

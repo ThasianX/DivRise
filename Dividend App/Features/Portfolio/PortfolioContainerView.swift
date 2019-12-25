@@ -26,7 +26,7 @@ struct PortfolioContainerView: View {
     }
     
     var body: some View {
-        PortfolioView(portfolioStocks: portfolioStocks)
+        PortfolioView(portfolioStocks: portfolioStocks, onDelete: onDelete)
         .navigationBarTitle(Text("portfolio"))
         .navigationBarItems(
             leading: EditButton(),
@@ -36,6 +36,10 @@ struct PortfolioContainerView: View {
             }) {
                 AddStockContainerView().environmentObject(self.store)
         }
+    }
+    
+    private func onDelete(at offsets: IndexSet) {
+        store.send(.removeFromPortfolio(offsets: offsets))
     }
 }
 

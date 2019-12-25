@@ -35,7 +35,7 @@ struct AddStockContainerView: View {
     private func addStock() {
         if let stock = selectedStock {
             let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: Double(alertInput)!, currentDividend: Double(stock.dividend)!, growth: Double(stock.dividend)! / Double(alertInput)!)
-            store.send(.addToPortfolio(portfolioStock))
+            store.send(.addToPortfolio(stock: portfolioStock))
         }
     }
 }
