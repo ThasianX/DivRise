@@ -11,9 +11,16 @@ import Combine
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
         .map {
-            Logger.info("\($0)")
             return .setSearchResults(results: $0)
             
     }
-        .eraseToAnyPublisher()
+    .eraseToAnyPublisher()
+}
+
+func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
+    Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
+        .map {
+            return .updatePortfolio(stocks: $0)
+    }
+    .eraseToAnyPublisher()
 }

@@ -10,8 +10,27 @@ import SwiftUI
 
 struct RootView: View {
     var body: some View {
-        NavigationView {
-            PortfolioContainerView()
+        TabView {
+            NavigationView {
+                PortfolioContainerView()
+            }
+            .tabItem {
+                Image(systemName: "tray.full.fill")
+                Text("portfolio")
+            }
+            
+            TrackerContainerView()
+            .tabItem {
+                Image(systemName: "chart.bar.fill")
+                Text("tracker")
+            }
+            
+            SettingsContainerView()
+            .tabItem {
+                Image(systemName: "gear")
+                Text("settings")
+            }
+            
         }
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 enum AppAction {
     case addToPortfolio(stock: PortfolioStock)
     case removeFromPortfolio(offsets: IndexSet)
+    case updatePortfolio(stocks: [PortfolioStock])
     case setSearchResults(results: [SearchStock])
 }
 

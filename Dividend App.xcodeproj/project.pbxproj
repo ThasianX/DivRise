@@ -40,6 +40,8 @@
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
 		1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */; };
 		1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */; };
+		1ED966BC23B55C01000BDE8D /* TrackerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */; };
+		1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */; };
 		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
 		1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +81,8 @@
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Json.swift"; sourceTree = "<group>"; };
+		1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerContainerView.swift; sourceTree = "<group>"; };
+		1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailContainerView.swift; sourceTree = "<group>"; };
 		1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +158,7 @@
 			children = (
 				1E6E3F8623B1A3F5009A0262 /* RootView.swift */,
 				1E6E3F7223B1A0A6009A0262 /* Portfolio */,
+				1ED966BA23B55BCD000BDE8D /* Tracker */,
 				1E6E3F7323B1A0C0009A0262 /* Settings */,
 			);
 			path = Features;
@@ -184,6 +189,7 @@
 		1E6E3F7323B1A0C0009A0262 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -255,6 +261,14 @@
 				1E511D0323B2831E00455C7F /* SearchStock.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1ED966BA23B55BCD000BDE8D /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */,
+			);
+			path = Tracker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +354,7 @@
 				1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
 				1E95DC5023B2B07000FDA3EA /* Double+StringRep.swift in Sources */,
+				1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
@@ -349,6 +364,7 @@
 				1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */,
 				1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */,
 				1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */,
+				1ED966BC23B55C01000BDE8D /* TrackerContainerView.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* CompanyProfileResponse.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,

@@ -17,9 +17,18 @@ internal let searchCompanyURL = "https://www.alphavantage.co/query?function=SYMB
 internal let companyProfileURL = "https://financialmodelingprep.com/api/v3/company/profile/{company}"
 
 struct Request {
-    func fetchPortfolioStock(identifier: String, startingDividend: Double) -> AnyPublisher<PortfolioStock, Never> {
-        return companyProfile(identifier: identifier)
-            .map { PortfolioStock(ticker: $0.symbol, startingDividend: startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: Double($0.profile.lastDiv)! / startingDividend) }
+    func updatedPortfolioStocks(stocks: [PortfolioStock]) -> AnyPublisher<[PortfolioStock], Never> {
+        let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<PortfolioStock, Never>], Never>(sequence: stocks.map(fetchPortfolioStock))
+        return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
+    }
+    
+    func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
+        return companyProfile(identifier: portfolioStock.ticker)
+            .map {
+                let stock = PortfolioStock(ticker: $0.symbol, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: Double($0.profile.lastDiv)! / portfolioStock.startingDividend)
+                
+                return stock
+        }
             .eraseToAnyPublisher()
     }
     
@@ -57,10 +66,7 @@ struct Request {
         
         return URLSession.shared
             .dataTaskPublisher(for: URLRequest(url: url))
-            .map {
-                $0.data.printJSON()
-                return $0.data
-        }
+            .map { $0.data }
         .decode(type: SearchStockResponse.self, decoder: Current.decoder)
         .replaceError(with: .noResponse)
         .eraseToAnyPublisher()
@@ -72,9 +78,7 @@ struct Request {
         
         return URLSession.shared
             .dataTaskPublisher(for: URLRequest(url: url))
-            .map {
-                $0.data.printJSON()
-                return $0.data }
+            .map { $0.data }
             .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
