@@ -23,9 +23,9 @@ struct AddStockContainerView: View {
             searchedStocks: store.state.searchResult,
             onCommit: searchStocks
             )
-            .onAppear(perform: searchStocks)
             .addAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
-            .navigationBarTitle(Text("Add Stocks"))
+            .navigationBarTitle(Text("search"))
+            .onDisappear(perform: clearSearchResults)
     }
     
     private func searchStocks() {
@@ -37,5 +37,9 @@ struct AddStockContainerView: View {
             let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: Double(alertInput)!, currentDividend: Double(stock.dividend)!, growth: Double(stock.dividend)! / Double(alertInput)!)
             store.send(.addToPortfolio(stock: portfolioStock))
         }
+    }
+    
+    private func clearSearchResults() {
+        store.send(.setSearchResults(results: []))
     }
 }

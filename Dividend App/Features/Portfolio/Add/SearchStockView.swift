@@ -6,9 +6,13 @@
 //  Copyright © 2019 Kevin Li. All rights reserved.
 //
 
+// Credits: https://stackoverflow.com/questions/56490963/how-to-display-a-search-bar-with-swiftui?rq=1
+
 import SwiftUI
 
 struct SearchStockView: View {
+    @State private var showCancelButton: Bool = false
+    
     @Binding var query: String
     @Binding var showingAlert: Bool
     @Binding var selectedStock: SearchStock?
@@ -19,34 +23,44 @@ struct SearchStockView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                TextField("Search stocks, funds....", text: $query, onCommit: onCommit)
-                if !query.isEmpty {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    
+                    TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
+                        .foregroundColor(.primary)
+                    
                     Button(action: {
                         self.query = ""
                         self.onCommit()
                     }) {
-                        Image(systemName: "delete.left")
-                            .foregroundColor(Color(UIColor.opaqueSeparator))
+                        Image(systemName: "xmark.circle.fill").opacity(query == "" ? 0 : 1)
                     }
                 }
+                .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                .foregroundColor(.secondary)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10.0)
+                
+                if showCancelButton  {
+                    Button("Cancel") {
+                        UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                        self.query = ""
+                        self.showCancelButton = false
+                    }
+                    .foregroundColor(Color(.systemBlue))
+                }
             }
-            Divider()
+            .padding(.horizontal)
             
-            if searchedStocks.isEmpty {
-                Spacer()
-            } else {
-                List(searchedStocks, id: \.self) { stock in
-                    SearchStockRow(stock: stock)
-                        .onTapGesture {
-                            self.selectedStock = stock
-                            self.showingAlert = true
-                    }
+            List(searchedStocks, id: \.self) { stock in
+                SearchStockRow(stock: stock)
+                    .onTapGesture {
+                        self.selectedStock = stock
+                        self.showingAlert = true
                 }
             }
+        .resignKeyboardOnDragGesture()
         }
-        .padding()
     }
 }
 

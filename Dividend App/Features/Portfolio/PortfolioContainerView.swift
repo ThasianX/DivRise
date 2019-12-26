@@ -10,7 +10,6 @@ import SwiftUI
 
 struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @State private var showingAddStocks = false
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -18,24 +17,16 @@ struct PortfolioContainerView: View {
         }
     }
     
-    var addButton: some View {
-        Button(action: { self.showingAddStocks.toggle() }) {
-            Text("add")
-                .accessibility(label: Text("add stocks"))
-        }
-    }
-    
     var body: some View {
         PortfolioView(portfolioStocks: portfolioStocks, onDelete: onDelete)
-        .navigationBarTitle(Text("portfolio"))
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing: addButton)
-            .sheet(isPresented: $showingAddStocks, onDismiss: {
-                self.store.send(AppAction.setSearchResults(results: []))
-            }) {
-                AddStockContainerView().environmentObject(self.store)
-        }
+            .navigationBarTitle(Text("portfolio"))
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing:
+                NavigationLink(destination: AddStockContainerView().environmentObject(self.store)) {
+                    Text("Add")
+                }
+        )
     }
     
     private func onDelete(at offsets: IndexSet) {
