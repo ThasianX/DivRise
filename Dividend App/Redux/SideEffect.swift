@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Foundation
 
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
@@ -23,4 +24,12 @@ func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppActio
             return .updatePortfolio(stocks: $0)
     }
     .eraseToAnyPublisher()
+}
+
+func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> {
+    let date = Date()
+    let record = Record(month: date.monthMedium, year: date.year)
+    
+    return Just(AppAction.addMonthlyDividend(record: record, amount: dividend))
+        .eraseToAnyPublisher()
 }

@@ -13,6 +13,7 @@ enum AppAction {
     case removeFromPortfolio(offsets: IndexSet)
     case updatePortfolio(stocks: [PortfolioStock])
     case setSearchResults(results: [SearchStock])
+    case addMonthlyDividend(record: Record, amount: Double)
 }
 
 

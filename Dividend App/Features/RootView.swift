@@ -19,18 +19,21 @@ struct RootView: View {
                 Text("portfolio")
             }
             
-            TrackerContainerView()
+            NavigationView {
+                TrackerContainerView()
+            }
             .tabItem {
                 Image(systemName: "chart.bar.fill")
                 Text("tracker")
             }
             
-            SettingsContainerView()
-            .tabItem {
-                Image(systemName: "gear")
-                Text("settings")
+            NavigationView {
+                SettingsContainerView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("settings")
+                }
             }
-            
         }
     }
 }

@@ -20,6 +20,15 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .setSearchResults(results):
         state.searchResult = results
+        
+    case let .addMonthlyDividend(record, dividend):
+        if state.allMonthlyRecords.last == record {
+            let lastIndex = state.allMonthlyRecords.count - 1
+            state.allMonthlyRecords[lastIndex] = record
+            state.allMonthlyDividends[lastIndex] = dividend
+        } else {
+            state.allMonthlyRecords.append(record)
+            state.allMonthlyDividends.append(dividend)
+        }
     }
-    
 }
