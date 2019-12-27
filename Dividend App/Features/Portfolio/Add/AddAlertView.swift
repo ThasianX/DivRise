@@ -31,6 +31,10 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         .font(.caption)
                     
                     HStack {
+                        if !input.isEmpty {
+                            Text("$")
+                        }
+                        
                         TextField("Starting dividend...", text: $input)
                             .keyboardType(.decimalPad)
                         
