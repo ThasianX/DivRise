@@ -15,6 +15,9 @@ struct AddStockContainerView: View {
     @State private var alertInput = ""
     @State private var selectedStock: SearchStock? = nil
     
+    @State private var errorMessage = ""
+    @State private var showingError = false
+    
     var body: some View {
         SearchStockView(
             query: $query,
@@ -23,7 +26,10 @@ struct AddStockContainerView: View {
             searchedStocks: store.state.searchResult,
             onCommit: searchStocks
             )
-            .addAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
+            .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
+            .alert(isPresented: $showingError) {
+                Alert(title: Text(errorMessage), dismissButton: .default(Text("ok")))
+        }
             .navigationBarTitle(Text("search"))
             .onDisappear(perform: clearSearchResults)
     }
@@ -33,9 +39,18 @@ struct AddStockContainerView: View {
     }
     
     private func addStock() {
-        if let stock = selectedStock {
-            let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: Double(alertInput)!, currentDividend: Double(stock.dividend)!, growth: Double(stock.dividend)! / Double(alertInput)!)
-            store.send(.addToPortfolio(stock: portfolioStock))
+        if let stock = selectedStock, let currentDividend = Double(stock.dividend), let startingDividend = Double(alertInput) {
+            if startingDividend == 0 {
+                errorMessage = "Starting dividend cannot be 0"
+                showingError = true
+            } else if store.state.allPortfolioStocks.keys.contains(stock.ticker) {
+                errorMessage = "Your portfolio already contains \(stock.ticker). To edit, visit settings"
+                showingError = true
+            } else {
+                let growth = ((currentDividend / startingDividend) - 1.0) * 100
+                let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
+                store.send(.addToPortfolio(stock: portfolioStock))
+            }
         }
     }
     

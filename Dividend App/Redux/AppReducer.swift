@@ -9,8 +9,10 @@
 func appReducer(state: inout AppState, action: AppAction) {
     switch action {
     case let .addToPortfolio(stock):
+        if !state.allPortfolioStocks.keys.contains(stock.ticker) {
+            state.portfolioStocks.append(stock.ticker)
+        }
         state.allPortfolioStocks[stock.ticker] = stock
-        state.portfolioStocks.append(stock.ticker)
         
     case let .removeFromPortfolio(offsets):
         state.portfolioStocks.remove(atOffsets: offsets)

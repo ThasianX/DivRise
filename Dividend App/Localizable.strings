@@ -11,4 +11,6 @@
 "portfolio" = "Portfolio";
 "tracker" = "Dividend Growth";
 "settings" = "Settings";
+"ok" = "Got it";
+"startingDividend 0" = "Starting dividend cannot be 0";
 
