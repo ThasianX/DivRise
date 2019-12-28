@@ -29,7 +29,7 @@ struct AddStockContainerView: View {
     }
     
     private func searchStocks() {
-        store.send(search(query: query))
+        store.send(search(query: query.trimmingCharacters(in: .whitespacesAndNewlines)))
     }
     
     private func addStock() {

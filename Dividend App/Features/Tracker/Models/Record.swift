@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Record: Codable, Hashable {
+public struct Record: Codable, Hashable {
     let month: String
     let year: String
+}
+
+extension Record {
+    static let mock = Record(month: "Jan", year: "2018")
 }

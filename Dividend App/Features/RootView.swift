@@ -29,10 +29,10 @@ struct RootView: View {
             
             NavigationView {
                 SettingsContainerView()
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("settings")
-                }
+            }
+            .tabItem {
+                Image(systemName: "gear")
+                Text("settings")
             }
         }
     }

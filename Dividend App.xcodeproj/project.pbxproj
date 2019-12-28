@@ -42,9 +42,18 @@
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
 		1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */; };
 		1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */; };
+		1ED6131923B6B1BE00CF4CD0 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131423B6B1BE00CF4CD0 /* IndicatorPoint.swift */; };
+		1ED6131A23B6B1BE00CF4CD0 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131523B6B1BE00CF4CD0 /* LineView.swift */; };
+		1ED6131B23B6B1BE00CF4CD0 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131623B6B1BE00CF4CD0 /* Legend.swift */; };
+		1ED6131C23B6B1BE00CF4CD0 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131723B6B1BE00CF4CD0 /* LineChartView.swift */; };
+		1ED6131D23B6B1BE00CF4CD0 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131823B6B1BE00CF4CD0 /* Line.swift */; };
+		1ED6131F23B6B1C600CF4CD0 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131E23B6B1C600CF4CD0 /* Helpers.swift */; };
+		1ED6132523B6C7A400CF4CD0 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132223B6C7A400CF4CD0 /* BarChartView.swift */; };
+		1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132323B6C7A400CF4CD0 /* BarChartRow.swift */; };
+		1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132423B6C7A400CF4CD0 /* BarChartCell.swift */; };
+		1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132B23B6CAFD00CF4CD0 /* SettingsView.swift */; };
 		1ED966BC23B55C01000BDE8D /* TrackerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */; };
 		1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */; };
-		1ED966C123B560BB000BDE8D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED966C023B560BB000BDE8D /* SwiftUICharts */; };
 		1ED966C323B560D2000BDE8D /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966C223B560D2000BDE8D /* TrackerView.swift */; };
 		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
 		1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */; };
@@ -75,7 +84,6 @@
 		1E6E3F8223B1A347009A0262 /* View+Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Embed.swift"; sourceTree = "<group>"; };
 		1E6E3F8623B1A3F5009A0262 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioContainerView.swift; sourceTree = "<group>"; };
-		1E86AECE23B5CB6600B38275 /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ChartView; path = ../ChartView; sourceTree = "<group>"; };
 		1E86AED023B5CC4500B38275 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		1E86AED323B5D63C00B38275 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStock.swift; sourceTree = "<group>"; };
@@ -88,6 +96,16 @@
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Json.swift"; sourceTree = "<group>"; };
+		1ED6131423B6B1BE00CF4CD0 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
+		1ED6131523B6B1BE00CF4CD0 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		1ED6131623B6B1BE00CF4CD0 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
+		1ED6131723B6B1BE00CF4CD0 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		1ED6131823B6B1BE00CF4CD0 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		1ED6131E23B6B1C600CF4CD0 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		1ED6132223B6C7A400CF4CD0 /* BarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		1ED6132323B6C7A400CF4CD0 /* BarChartRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartRow.swift; sourceTree = "<group>"; };
+		1ED6132423B6C7A400CF4CD0 /* BarChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCell.swift; sourceTree = "<group>"; };
+		1ED6132B23B6CAFD00CF4CD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerContainerView.swift; sourceTree = "<group>"; };
 		1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		1ED966C223B560D2000BDE8D /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
@@ -101,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E64C22D23B3205900C06444 /* URLImage in Frameworks */,
-				1ED966C123B560BB000BDE8D /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +128,6 @@
 		1E6E3F4923B19D8E009A0262 = {
 			isa = PBXGroup;
 			children = (
-				1E86AECE23B5CB6600B38275 /* ChartView */,
 				1E6E3F5423B19D8F009A0262 /* Dividend App */,
 				1E6E3F5323B19D8F009A0262 /* Products */,
 			);
@@ -128,6 +144,7 @@
 		1E6E3F5423B19D8F009A0262 /* Dividend App */ = {
 			isa = PBXGroup;
 			children = (
+				1ED6132023B6C77C00CF4CD0 /* Graphs */,
 				1E6E3F6E23B19F70009A0262 /* Launch */,
 				1E6E3F6D23B19F63009A0262 /* Features */,
 				1E8DCF5C23B1EC990018BADB /* Networking */,
@@ -200,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */,
+				1ED6132B23B6CAFD00CF4CD0 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -289,6 +307,38 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1ED6131323B6B1BE00CF4CD0 /* LineChart */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6131423B6B1BE00CF4CD0 /* IndicatorPoint.swift */,
+				1ED6131523B6B1BE00CF4CD0 /* LineView.swift */,
+				1ED6131623B6B1BE00CF4CD0 /* Legend.swift */,
+				1ED6131723B6B1BE00CF4CD0 /* LineChartView.swift */,
+				1ED6131823B6B1BE00CF4CD0 /* Line.swift */,
+			);
+			path = LineChart;
+			sourceTree = "<group>";
+		};
+		1ED6132023B6C77C00CF4CD0 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6131E23B6B1C600CF4CD0 /* Helpers.swift */,
+				1ED6131323B6B1BE00CF4CD0 /* LineChart */,
+				1ED6132123B6C7A400CF4CD0 /* BarChart */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		1ED6132123B6C7A400CF4CD0 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6132223B6C7A400CF4CD0 /* BarChartView.swift */,
+				1ED6132323B6C7A400CF4CD0 /* BarChartRow.swift */,
+				1ED6132423B6C7A400CF4CD0 /* BarChartCell.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
 		1ED966BA23B55BCD000BDE8D /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +368,6 @@
 			name = "Dividend App";
 			packageProductDependencies = (
 				1E64C22C23B3205900C06444 /* URLImage */,
-				1ED966C023B560BB000BDE8D /* SwiftUICharts */,
 			);
 			productName = "Dividend App";
 			productReference = 1E6E3F5223B19D8F009A0262 /* Dividend App.app */;
@@ -350,7 +399,6 @@
 			mainGroup = 1E6E3F4923B19D8E009A0262;
 			packageReferences = (
 				1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */,
-				1ED966BF23B560BB000BDE8D /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 1E6E3F5323B19D8F009A0262 /* Products */;
 			projectDirPath = "";
@@ -382,12 +430,17 @@
 			files = (
 				1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */,
 				1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */,
+				1ED6131923B6B1BE00CF4CD0 /* IndicatorPoint.swift in Sources */,
 				1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
 				1E95DC5023B2B07000FDA3EA /* Double+StringRep.swift in Sources */,
+				1ED6131B23B6B1BE00CF4CD0 /* Legend.swift in Sources */,
 				1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
+				1ED6131A23B6B1BE00CF4CD0 /* LineView.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
+				1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */,
+				1ED6132523B6C7A400CF4CD0 /* BarChartView.swift in Sources */,
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
 				1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */,
 				1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */,
@@ -400,12 +453,17 @@
 				1E86AED423B5D63C00B38275 /* Date+Formatter.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* CompanyProfileResponse.swift in Sources */,
+				1ED6131F23B6B1C600CF4CD0 /* Helpers.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
+				1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
 				1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */,
+				1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */,
+				1ED6131D23B6B1BE00CF4CD0 /* Line.swift in Sources */,
+				1ED6131C23B6B1BE00CF4CD0 /* LineChartView.swift in Sources */,
 				1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */,
 				1E6E3F7C23B1A20A009A0262 /* Store.swift in Sources */,
 				1E6E3F7823B1A17C009A0262 /* AppReducer.swift in Sources */,
@@ -618,14 +676,6 @@
 				minimumVersion = 0.9.9;
 			};
 		};
-		1ED966BF23B560BB000BDE8D /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -633,11 +683,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
-		};
-		1ED966C023B560BB000BDE8D /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1ED966BF23B560BB000BDE8D /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

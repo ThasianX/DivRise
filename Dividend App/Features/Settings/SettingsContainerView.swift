@@ -12,7 +12,8 @@ struct SettingsContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     
     var body: some View {
-        Text("Settings")
+        SettingsView()
+        .navigationBarTitle("settings")
     }
 }
 
