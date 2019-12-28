@@ -132,7 +132,7 @@ struct MagnifierRect: View {
             if (self.colorScheme == .dark ){
                  RoundedRectangle(cornerRadius: 16)
                     .stroke(Color.white, lineWidth: self.colorScheme == .dark ? 2 : 0)
-                    .frame(width: 80, height: 260)
+                    .frame(width: 80, height: 280)
                     
             }else{
                  RoundedRectangle(cornerRadius: 16)

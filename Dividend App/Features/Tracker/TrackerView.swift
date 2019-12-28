@@ -30,6 +30,7 @@ struct TrackerView: View {
 struct TrackerView_Previews: PreviewProvider {
     static var previews: some View {
         TrackerView(monthlyRecords: [Record(month: "Jan", year: "2019"), Record(month: "Feb", year: "2019"), Record(month: "Mar", year: "2019"), Record(month: "Apr", year: "2019"), Record(month: "May", year: "2019"), Record(month: "Jun", year: "2019"), Record(month: "Jul", year: "2019"), Record(month: "Jun", year: "2019"), Record(month: "Aug", year: "2019")], monthlyDividends: [8,23.444444,54,32,12.31,37,7.05,23.32333,43])
+            .environment(\.colorScheme, .dark)
 //        TrackerView(monthlyRecords: [Record(month: "Jan", year: "2019")], monthlyDividends: [8])
     }
 }
