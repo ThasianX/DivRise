@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddAlertView<Presenting>: View where Presenting: View  {
+    @SwiftUI.Environment(\.colorScheme) var colorScheme: ColorScheme
     @Binding var isShowing: Bool
     @Binding var input: String
     
@@ -25,7 +26,6 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                 VStack {
                     Text(stock!.ticker)
                         .font(.headline)
-                        .padding(.bottom)
                     
                     Text("Enter your starting annual dividend amount")
                         .font(.caption)
@@ -51,21 +51,28 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                                 self.reset()
                             }
                         }) {
+                            Spacer()
                             Text("Cancel")
+                            Spacer()
                         }
+                        Divider()
                         Button(action: {
                             withAnimation {
                                 self.onAdd()
                                 self.reset()
                             }
                         }) {
+                            Spacer()
                             Text("Add")
+                            Spacer()
                         }
                     }
                 }
+                .colorInvert()
                 .padding()
-                .background(Color.white)
-                .relativeHeight(0.7)
+                .background(Color.backgroundColor(for: colorScheme))
+                .cornerRadius(16)
+                .relativeHeight(0.2)
                 .relativeWidth(0.7)
             }
             

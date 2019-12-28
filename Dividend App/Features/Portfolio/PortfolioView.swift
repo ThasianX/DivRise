@@ -17,14 +17,16 @@ struct PortfolioStockView: View {
             
             Spacer()
             
-            Text("$\(String(format: "%.2f",  portfolioStock.currentDividend))")
+            Text("$\(String(format: "%.2f", portfolioStock.currentDividend))")
             
-            if portfolioStock.growth > 1 {
+            if portfolioStock.growth > 0 {
                 Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.green)
+            } else if portfolioStock.growth == 0{
+                Text("0%").foregroundColor(.gray)
             } else {
                 Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.red)
             }
-            
+             
         }
     }
 }

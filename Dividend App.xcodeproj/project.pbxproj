@@ -52,6 +52,7 @@
 		1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132323B6C7A400CF4CD0 /* BarChartRow.swift */; };
 		1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132423B6C7A400CF4CD0 /* BarChartCell.swift */; };
 		1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132B23B6CAFD00CF4CD0 /* SettingsView.swift */; };
+		1ED6132E23B7069800CF4CD0 /* Color+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6132D23B7069800CF4CD0 /* Color+DarkMode.swift */; };
 		1ED966BC23B55C01000BDE8D /* TrackerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */; };
 		1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */; };
 		1ED966C323B560D2000BDE8D /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED966C223B560D2000BDE8D /* TrackerView.swift */; };
@@ -106,6 +107,7 @@
 		1ED6132323B6C7A400CF4CD0 /* BarChartRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartRow.swift; sourceTree = "<group>"; };
 		1ED6132423B6C7A400CF4CD0 /* BarChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCell.swift; sourceTree = "<group>"; };
 		1ED6132B23B6CAFD00CF4CD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1ED6132D23B7069800CF4CD0 /* Color+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+DarkMode.swift"; sourceTree = "<group>"; };
 		1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerContainerView.swift; sourceTree = "<group>"; };
 		1ED966BD23B55CC0000BDE8D /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		1ED966C223B560D2000BDE8D /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				1E95DC4F23B2B07000FDA3EA /* Double+StringRep.swift */,
 				1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */,
 				1E42A6C423B423530010DB8F /* Keyboard.swift */,
+				1ED6132D23B7069800CF4CD0 /* Color+DarkMode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
 				1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */,
 				1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */,
+				1ED6132E23B7069800CF4CD0 /* Color+DarkMode.swift in Sources */,
 				1ED6131D23B6B1BE00CF4CD0 /* Line.swift in Sources */,
 				1ED6131C23B6B1BE00CF4CD0 /* LineChartView.swift in Sources */,
 				1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */,

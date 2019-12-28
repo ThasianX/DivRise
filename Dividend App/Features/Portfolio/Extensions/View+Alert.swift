@@ -10,7 +10,7 @@ import SwiftUI
 
 extension View {
     
-    func addAlert(isShowing: Binding<Bool>,
+    func addTextFieldAlert(isShowing: Binding<Bool>,
                   stock: SearchStock?,
                   input: Binding<String>,
                   onAdd: @escaping () -> Void) -> some View {
