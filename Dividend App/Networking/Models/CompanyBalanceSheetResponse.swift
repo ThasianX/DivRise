@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyBalanceSheetResponse: Codable {
+struct CompanyBalanceSheetResponse: Codable, Hashable {
     let symbol: String
     let financials: [Financial]
     
     // MARK: - Financial
-    struct Financial: Codable {
+    struct Financial: Codable, Hashable {
         let date, cashAndCashEquivalents, shortTermInvestments, cashAndShortTermInvestments: String
         let receivables, inventories, totalCurrentAssets, propertyPlantEquipmentNet: String
         let goodwillAndIntangibleAssets, longTermInvestments, taxAssets, totalNonCurrentAssets: String

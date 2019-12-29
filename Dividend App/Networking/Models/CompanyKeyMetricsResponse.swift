@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyKeyMetricsResponse: Codable {
+struct CompanyKeyMetricsResponse: Codable, Hashable {
     let symbol: String
     let metrics: [Metric]
 
     // MARK: - Metric
-    struct Metric: Codable {
+    struct Metric: Codable, Hashable {
         let date, marketCap, peRatio, pbRatio: String
         let debtToEquity, netDebtToEBITDA, dividendYield, payoutRatio: String
         let grahamNumber, roic: String

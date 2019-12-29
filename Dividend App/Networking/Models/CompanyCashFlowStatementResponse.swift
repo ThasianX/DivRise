@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyCashFlowStatementResponse: Codable {
+struct CompanyCashFlowStatementResponse: Codable, Hashable {
     let symbol: String
     let financials: [Financial]
     
     // MARK: - Financial
-    struct Financial: Codable {
+    struct Financial: Codable, Hashable {
         let date, depreciationAmortization, stockBasedCompensation, operatingCashFlow: String
         let capitalExpenditure, acquisitionsAndDisposals, investmentPurchasesAndSales, investingCashFlow: String
         let issuanceRepaymentOfDebt, issuanceBuybacksOfShares, dividendPayments, financingCashFlow: String

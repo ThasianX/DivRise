@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyFinancialGrowthResponse: Codable {
+struct CompanyFinancialGrowthResponse: Codable, Hashable {
     let symbol: String
     let growth: [Growth]
     
     // MARK: - Growth
-    struct Growth: Codable {
+    struct Growth: Codable, Hashable {
         let date, grossProfitGrowth, ebitGrowth, operatingIncomeGrowth: String
         let netIncomeGrowth, epsGrowth, epsDilutedGrowth, weightedAverageSharesGrowth: String
         let weightedAverageSharesDilutedGrowth, dividendsPerShareGrowth, operatingCashFlowGrowth, freeCashFlowGrowth: String

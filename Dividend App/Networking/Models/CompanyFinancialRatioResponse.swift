@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyFinancialRatioResponse: Codable {
+struct CompanyFinancialRatioResponse: Codable, Hashable {
     let symbol: String
     let ratios: [Ratio]
     
     // MARK: - Ratio
-    struct Ratio: Codable {
+    struct Ratio: Codable, Hashable {
         let date: String
         let investmentValuationRatios: InvestmentValuationRatios
         let profitabilityIndicatorRatios: ProfitabilityIndicatorRatios
@@ -24,20 +24,20 @@ struct CompanyFinancialRatioResponse: Codable {
     }
 
     // MARK: - CashFlowIndicatorRatios
-    struct CashFlowIndicatorRatios: Codable {
+    struct CashFlowIndicatorRatios: Codable, Hashable {
         let operatingCashFlowPerShare, freeCashFlowPerShare, cashPerShare, payoutRatio: String
         let receivablesTurnover, operatingCashFlowSalesRatio, freeCashFlowOperatingCashFlowRatio, cashFlowCoverageRatios: String
         let shortTermCoverageRatios, capitalExpenditureCoverageRatios, dividendpaidAndCapexCoverageRatios, dividendPayoutRatio: String
     }
 
     // MARK: - DebtRatios
-    struct DebtRatios: Codable {
+    struct DebtRatios: Codable, Hashable {
         let debtRatio, debtEquityRatio, longtermDebtToCapitalization, totalDebtToCapitalization: String
         let interestCoverage, cashFlowToDebtRatio, companyEquityMultiplier: String
     }
 
     // MARK: - InvestmentValuationRatios
-    struct InvestmentValuationRatios: Codable {
+    struct InvestmentValuationRatios: Codable, Hashable {
         let priceBookValueRatio, priceToBookRatio, priceToSalesRatio, priceEarningsRatio: String
         let receivablesTurnover, priceToFreeCashFlowsRatio, priceToOperatingCashFlowsRatio, priceCashFlowRatio: String
         let priceEarningsToGrowthRatio, priceSalesRatio, dividendYield, enterpriseValueMultiple: String
@@ -45,19 +45,19 @@ struct CompanyFinancialRatioResponse: Codable {
     }
 
     // MARK: - LiquidityMeasurementRatios
-    struct LiquidityMeasurementRatios: Codable {
+    struct LiquidityMeasurementRatios: Codable, Hashable {
         let currentRatio, quickRatio, cashRatio, daysOfSalesOutstanding: String
         let daysOfInventoryOutstanding, operatingCycle, daysOfPayablesOutstanding, cashConversionCycle: String
     }
 
     // MARK: - OperatingPerformanceRatios
-    struct OperatingPerformanceRatios: Codable {
+    struct OperatingPerformanceRatios: Codable, Hashable {
         let receivablesTurnover, payablesTurnover, inventoryTurnover, fixedAssetTurnover: String
         let assetTurnover: String
     }
 
     // MARK: - ProfitabilityIndicatorRatios
-    struct ProfitabilityIndicatorRatios: Codable {
+    struct ProfitabilityIndicatorRatios: Codable, Hashable {
         let niperEBT, ebtperEBIT, ebitperRevenue, grossProfitMargin: String
         let operatingProfitMargin, pretaxProfitMargin, netProfitMargin, effectiveTaxRate: String
         let returnOnAssets, returnOnEquity, returnOnCapitalEmployed, nIperEBT: String

@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CompanyIncomeStatementResponse: Codable {
+struct CompanyIncomeStatementResponse: Codable, Hashable {
     let symbol: String
     let financials: [Financial]
     
     // MARK: Financial
-    struct Financial: Codable {
+    struct Financial: Codable, Hashable {
         let date, revenue, revenueGrowth, costOfRevenue: String
         let grossProfit, rDExpenses, sgAExpense, operatingExpenses: String
         let operatingIncome, interestExpense, earningsBeforeTax, incomeTaxExpense: String
