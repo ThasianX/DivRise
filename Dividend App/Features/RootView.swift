@@ -9,6 +9,13 @@
 import SwiftUI
 
 struct RootView: View {
+    
+    init() {
+//        UITableView.appearance().backgroundColor = .clear
+//        UITableViewCell.appearance().backgroundColor = .clear
+//        UITabBar.appearance().backgroundColor = UIColor.black
+    }
+    
     var body: some View {
         TabView {
             NavigationView {

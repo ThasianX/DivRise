@@ -14,6 +14,7 @@ enum AppAction {
     case updatePortfolio(stocks: [PortfolioStock])
     case setSearchResults(results: [SearchStock])
     case addMonthlyDividend(record: Record, amount: Double)
+    case setDetailStock(detail: DetailStock)
 }
 
 

@@ -8,29 +8,6 @@
 
 import SwiftUI
 
-struct PortfolioStockView: View {
-    var portfolioStock: PortfolioStock
-    
-    var body: some View {
-        HStack {
-            Text(portfolioStock.ticker)
-            
-            Spacer()
-            
-            Text("$\(String(format: "%.2f", portfolioStock.currentDividend))")
-            
-            if portfolioStock.growth > 0 {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.green)
-            } else if portfolioStock.growth == 0{
-                Text("0%").foregroundColor(.gray)
-            } else {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.red)
-            }
-             
-        }
-    }
-}
-
 struct PortfolioView: View {
     var portfolioStocks: [PortfolioStock]
     var onDelete: (IndexSet) -> Void
@@ -44,5 +21,6 @@ struct PortfolioView: View {
             }
             .onDelete(perform: onDelete)
         }
+        
     }
 }

@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct PortfolioDetailView: View {
+    let detailStock: DetailStock
+    
     var body: some View {
         Text("Detail")
     }
@@ -16,6 +18,6 @@ struct PortfolioDetailView: View {
 
 struct PortfolioDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioDetailView()
+        PortfolioDetailView(detailStock: .mock)
     }
 }

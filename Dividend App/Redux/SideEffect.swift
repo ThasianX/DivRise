@@ -33,3 +33,11 @@ func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> 
     return Just(AppAction.addMonthlyDividend(record: record, amount: dividend))
         .eraseToAnyPublisher()
 }
+
+func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<AppAction, Never> {
+    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialRatio(identifier: identifier), Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: period))
+        .receive(on: RunLoop.main)
+        .map { publisher1, financialRatio, financialGrowth in
+            
+    }
+}

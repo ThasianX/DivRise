@@ -14,4 +14,5 @@ struct AppState: Codable, Equatable {
     var searchResult: [SearchStock] = []
     var allMonthlyRecords: [Record] = []
     var allMonthlyDividends: [Double] = []
+    var currentDetailStock: DetailStock = .mock
 }

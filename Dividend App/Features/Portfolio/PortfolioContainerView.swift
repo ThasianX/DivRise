@@ -27,7 +27,7 @@ struct PortfolioContainerView: View {
                     Text("Add")
                 }
         )
-        .onAppear(perform: reloadDividends)
+            .onAppear(perform: reloadDividends)
     }
     
     private func onDelete(at offsets: IndexSet) {

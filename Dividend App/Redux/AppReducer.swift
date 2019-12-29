@@ -32,5 +32,11 @@ func appReducer(state: inout AppState, action: AppAction) {
             state.allMonthlyRecords.append(record)
             state.allMonthlyDividends.append(dividend)
         }
+
+    case let .setDetailStock(detail):
+        state.currentDetailStock = detail
+        
     }
+    
+    
 }
