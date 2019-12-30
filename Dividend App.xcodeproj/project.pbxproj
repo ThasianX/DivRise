@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCA23B2A9C000863E0C /* SideEffect.swift */; };
 		1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */; };
+		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
+		1E3BCB7223B9CBE400FAD5AA /* CurrentDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */; };
 		1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42A6C423B423530010DB8F /* Keyboard.swift */; };
 		1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511CFD23B2817600455C7F /* AddStockContainerView.swift */; };
 		1E511D0023B281CE00455C7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E511CFF23B281CE00455C7F /* Localizable.strings */; };
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
 		1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0323B2831E00455C7F /* SearchStock.swift */; };
 		1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0523B2870100455C7F /* SearchStockResponse.swift */; };
+		1E54FC8B23B9358100D7DC04 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 1E54FC8A23B9358100D7DC04 /* SwiftUIX */; };
+		1E54FC8D23B9A80300D7DC04 /* DetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FC8C23B9A80300D7DC04 /* DetailState.swift */; };
+		1E54FC8F23B9AA5600D7DC04 /* DetailAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */; };
 		1E62D36023B82CE80093E83B /* CompanyKeyMetricsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D35F23B82CE80093E83B /* CompanyKeyMetricsResponse.swift */; };
 		1E62D36223B837880093E83B /* CompanyIncomeStatementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36123B837880093E83B /* CompanyIncomeStatementResponse.swift */; };
 		1E62D36423B838030093E83B /* CompanyBalanceSheetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36323B838030093E83B /* CompanyBalanceSheetResponse.swift */; };
@@ -48,6 +53,7 @@
 		1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */; };
 		1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* Request.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
+		1EA7B19823B9E620007F1F7A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA7B19723B9E620007F1F7A /* CardView.swift */; };
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
 		1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */; };
 		1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */; };
@@ -72,12 +78,16 @@
 /* Begin PBXFileReference section */
 		1E114BCA23B2A9C000863E0C /* SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffect.swift; sourceTree = "<group>"; };
 		1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockRow.swift; sourceTree = "<group>"; };
+		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
+		1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDetailStockRow.swift; sourceTree = "<group>"; };
 		1E42A6C423B423530010DB8F /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		1E511CFD23B2817600455C7F /* AddStockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockContainerView.swift; sourceTree = "<group>"; };
 		1E511CFF23B281CE00455C7F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1E511D0123B2830E00455C7F /* SearchStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockView.swift; sourceTree = "<group>"; };
 		1E511D0323B2831E00455C7F /* SearchStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStock.swift; sourceTree = "<group>"; };
 		1E511D0523B2870100455C7F /* SearchStockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockResponse.swift; sourceTree = "<group>"; };
+		1E54FC8C23B9A80300D7DC04 /* DetailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailState.swift; sourceTree = "<group>"; };
+		1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAttributes.swift; sourceTree = "<group>"; };
 		1E62D35F23B82CE80093E83B /* CompanyKeyMetricsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyKeyMetricsResponse.swift; sourceTree = "<group>"; };
 		1E62D36123B837880093E83B /* CompanyIncomeStatementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyIncomeStatementResponse.swift; sourceTree = "<group>"; };
 		1E62D36323B838030093E83B /* CompanyBalanceSheetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyBalanceSheetResponse.swift; sourceTree = "<group>"; };
@@ -112,6 +122,7 @@
 		1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		1EA096FD23B1DCDC00A5B8EC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
+		1EA7B19723B9E620007F1F7A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Json.swift"; sourceTree = "<group>"; };
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E64C22D23B3205900C06444 /* URLImage in Frameworks */,
+				1E54FC8B23B9358100D7DC04 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +283,9 @@
 			children = (
 				1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */,
 				1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */,
+				1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */,
+				1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */,
+				1EA7B19723B9E620007F1F7A /* CardView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -333,6 +348,8 @@
 				1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */,
 				1E511D0323B2831E00455C7F /* SearchStock.swift */,
 				1E62D36F23B87A020093E83B /* DetailStock.swift */,
+				1E54FC8C23B9A80300D7DC04 /* DetailState.swift */,
+				1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -398,6 +415,7 @@
 			name = "Dividend App";
 			packageProductDependencies = (
 				1E64C22C23B3205900C06444 /* URLImage */,
+				1E54FC8A23B9358100D7DC04 /* SwiftUIX */,
 			);
 			productName = "Dividend App";
 			productReference = 1E6E3F5223B19D8F009A0262 /* Dividend App.app */;
@@ -429,6 +447,7 @@
 			mainGroup = 1E6E3F4923B19D8E009A0262;
 			packageReferences = (
 				1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */,
+				1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 1E6E3F5323B19D8F009A0262 /* Products */;
 			projectDirPath = "";
@@ -468,6 +487,7 @@
 				1ED6131B23B6B1BE00CF4CD0 /* Legend.swift in Sources */,
 				1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */,
 				1E62D36623B839B90093E83B /* CompanyCashFlowStatementResponse.swift in Sources */,
+				1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */,
 				1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */,
 				1ED6131A23B6B1BE00CF4CD0 /* LineView.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
@@ -481,6 +501,7 @@
 				1ED966C323B560D2000BDE8D /* TrackerView.swift in Sources */,
 				1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */,
 				1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */,
+				1E3BCB7223B9CBE400FAD5AA /* CurrentDetailStockRow.swift in Sources */,
 				1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */,
 				1E62D36E23B86BDC0093E83B /* HostingController.swift in Sources */,
 				1E62D36223B837880093E83B /* CompanyIncomeStatementResponse.swift in Sources */,
@@ -490,6 +511,7 @@
 				1E86AED423B5D63C00B38275 /* Date+Formatter.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* CompanyProfileResponse.swift in Sources */,
+				1E54FC8D23B9A80300D7DC04 /* DetailState.swift in Sources */,
 				1ED6131F23B6B1C600CF4CD0 /* Helpers.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
@@ -497,7 +519,9 @@
 				1E62D36C23B86A020093E83B /* PortfolioStockView.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */,
+				1EA7B19823B9E620007F1F7A /* CardView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
+				1E54FC8F23B9AA5600D7DC04 /* DetailAttributes.swift in Sources */,
 				1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */,
 				1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */,
 				1ED6132E23B7069800CF4CD0 /* Color+DarkMode.swift in Sources */,
@@ -708,6 +732,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
@@ -719,6 +751,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E54FC8A23B9358100D7DC04 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
 		1E64C22C23B3205900C06444 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */;

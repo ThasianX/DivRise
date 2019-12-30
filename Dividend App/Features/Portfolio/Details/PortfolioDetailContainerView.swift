@@ -8,20 +8,38 @@
 
 import SwiftUI
 import Combine
+import SwiftUIX
 
 struct PortfolioDetailContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @State var selectedPeriod = "annual"
+    @ObservedObject var detailState = DetailState()
     
-    let ticker: String
-    
+    let portfolioStock: PortfolioStock
     
     var body: some View {
-        PortfolioDetailView(detailStock: store.state.currentDetailStock)
+        PortfolioDetailView(selectedPeriod: $detailState.selectedPeriod, selectedDetailAttribute: $detailState.selectedDetailAttribute, attributeNames: $detailState.attributeOrder, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues())
+        .onAppear(perform: loadDetailStock)
     }
     
-    private func createInitialDetails() {
-        // Initial: payout ratio, fcfe, net debt to ebitda ratio, pe ratio, dividend yield, graham number, dividend per share, ROIC, debt to equity, operating profit margin, asset turnover ratio, debt to capital ratio, PEG ratio
-        store.send(setCurrentDetailStock(identifier: ticker, period: selectedPeriod))
+    private func loadDetailStock() {
+        store.send(setCurrentDetailStock(identifier: portfolioStock.ticker, period: detailState.selectedPeriod))
+    }
+    
+    private func getRecords() -> [Record] {
+        if let detailStock = store.state.currentDetailStock {
+            return detailStock.records
+        } else {
+            return []
+        }
+    }
+    
+    private func getAttributeValues() -> [[Double]] {
+        if let detailStock = store.state.currentDetailStock {
+            return detailState.attributeOrder.compactMap {
+                detailStock.details[$0]!
+            }
+        } else {
+            return []
+        }
     }
 }

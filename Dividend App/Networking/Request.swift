@@ -32,7 +32,7 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
         }
         .eraseToAnyPublisher()
     }

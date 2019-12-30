@@ -9,35 +9,34 @@
 import SwiftUI
 
 public struct LineChartView: View {
-//    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    //    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     @ObservedObject var data:ChartData
     public var title: String
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
-
+    
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
     @State private var currentValue: Double = 2 {
         didSet{
             if (oldValue != self.currentValue && showIndicatorDot) {
-//                selectionFeedbackGenerator.selectionChanged()
+                //                selectionFeedbackGenerator.selectionChanged()
                 HapticFeedback.playSelection()
             }
             
         }
     }
+    @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
-    private var rateValue: Int
     
-    public init(records: [Record], data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium ,rateValue: Int? = 14, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.legend = legend
         self.style = style
         self.formSize = form!
-        self.rateValue = rateValue!
         self.dropShadow = dropShadow!
     }
     
@@ -51,25 +50,25 @@ public struct LineChartView: View {
                         if (self.legend != nil){
                             Text(self.legend!).font(.callout).foregroundColor(self.style.legendTextColor)
                         }
-                        HStack {
-                            if (self.rateValue >= 0){
-                                Image(systemName: "arrow.up")
-                            }else{
-                                Image(systemName: "arrow.down")
-                            }
-                            Text("\(self.rateValue)%")
-                        }
                     }
                     .transition(.opacity)
                     .animation(.easeIn(duration: 0.1))
                     .padding([.leading, .top])
                 }else{
-                    HStack{
+                    VStack {
                         Spacer()
-                        Text("\(self.currentValue, specifier: "%.2f")")
-                            .font(.system(size: 41, weight: .bold, design: .default))
-                            .offset(x: 0, y: 30)
-                        Spacer()
+                            .frame(height: 20)
+                        HStack{
+                            Spacer()
+                            Text("\(self.currentRecord.month) \(self.currentRecord.year)")
+                            Spacer()
+                        }
+                        HStack{
+                            Spacer()
+                            Text("\(self.currentValue, specifier: "%.2f")")
+                                .font(.system(size: 41, weight: .bold, design: .default))
+                            Spacer()
+                        }
                     }
                     .transition(.scale)
                     .animation(.spring())
@@ -103,6 +102,7 @@ public struct LineChartView: View {
         let index:Int = Int(round((toPoint.x)/stepWidth))
         if (index >= 0 && index < data.points.count){
             self.currentValue = self.data.points[index]
+            self.currentRecord = self.data.records[index]
             return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(self.data.points[index])*stepHeight)
         }
         return .zero

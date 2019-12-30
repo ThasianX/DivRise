@@ -46,7 +46,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var dividendYields = [Double]()
             var grahamNumbers = [Double]()
             var dividendPerShares = [Double]()
-            var roics = [Double]()
             var debtToEquitys = [Double]()
             var operatingProfitMargins = [Double]()
             var assetTurnoverRatios = [Double]()
@@ -59,7 +58,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].payoutRatio) {
-                    payoutRatios.append(val)
+                    payoutRatios.append(val*100)
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].netDebtToEBITDA) {
@@ -71,15 +70,11 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].dividendYield) {
-                    dividendYields.append(val)
+                    dividendYields.append(val*100)
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].grahamNumber) {
                     grahamNumbers.append(val)
-                }
-                
-                if let val = Double(publisher1.0.metrics[i].roic) {
-                    roics.append(val)
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].debtToEquity) {
@@ -115,23 +110,25 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     let epsGrowth = Double(financialGrowth.growth[i].epsGrowth) {
                     pegRatios.append(peRatio / epsGrowth)
                 }
-                
             }
+            
+            var details = [String: [Double]]()
+            details[DetailAttributes.payoutRatios] = payoutRatios
+            details[DetailAttributes.fcfes] = fcfes
+            details[DetailAttributes.netDebtToEBITDAs] = netDebtToEBITDAs
+            details[DetailAttributes.peRatios] = peRatios
+            details[DetailAttributes.dividendYields] = dividendYields
+            details[DetailAttributes.grahamNumbers] = grahamNumbers
+            details[DetailAttributes.dividendPerShares] = dividendPerShares
+            details[DetailAttributes.debtToEquitys] = debtToEquitys
+            details[DetailAttributes.operatingProfitMargins] = operatingProfitMargins
+            details[DetailAttributes.assetTurnoverRatios] = assetTurnoverRatios
+            details[DetailAttributes.debtToCapitalRatios] = debtToCapitalRatios
+            details[DetailAttributes.pegRatios] = pegRatios
+            
             let detailStock = DetailStock(
                 records: records,
-                payoutRatios: payoutRatios,
-                fcfes: fcfes,
-                netDebtToEBITDAs: netDebtToEBITDAs,
-                peRatios: peRatios,
-                dividendYields: dividendYields,
-                grahamNumbers: grahamNumbers,
-                dividendPerShares: dividendPerShares,
-                roics: roics,
-                debtToEquitys: debtToEquitys,
-                operatingProfitMargins: operatingProfitMargins,
-                assetTurnoverRatios: (period == "annual") ? assetTurnoverRatios : [],
-                debtToCapitalRatios: debtToCapitalRatios,
-                pegRatios: pegRatios
+                details: details
             )
             return AppAction.setDetailStock(detail: detailStock)
     }

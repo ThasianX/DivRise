@@ -26,6 +26,12 @@ extension Formatter {
         formatter.dateFormat = "MMMM yyyy"
         return formatter
     }()
+    
+    static let fullString: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }
 
 extension Date {
@@ -40,4 +46,5 @@ extension Date {
     var mediumStyle: String {
         return Formatter.mediumStyle.string(from: self)
     }
+    
 }

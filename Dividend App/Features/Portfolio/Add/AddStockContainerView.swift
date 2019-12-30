@@ -48,7 +48,7 @@ struct AddStockContainerView: View {
                 showingError = true
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
-                let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
+                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
                 store.send(.addToPortfolio(stock: portfolioStock))
             }
         }

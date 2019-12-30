@@ -13,15 +13,16 @@ struct TrackerView: View {
     let monthlyDividends: [Double]
     
     var body: some View {
+        // TODO: Add a toggle between bar chart and line chart. Landscape mode
         VStack {
-            if monthlyRecords.count == 0 {
-                Text("Add dividends to display graph")
-            } else if monthlyRecords.count == 1 {
-                BarChartView(data: monthlyDividends, title: "\(monthlyRecords.first!.month) \(monthlyRecords.first!.year)", style: Styles.barChartStyleOrangeLight)
-            } else {
+//            if monthlyRecords.count == 0 {
+//                Text("Add dividends to display graph")
+//            } else if monthlyRecords.count == 1 {
+//                BarChartView(data: monthlyDividends, title: "\(monthlyRecords.first!.month) \(monthlyRecords.first!.year)", style: Styles.barChartStyleOrangeLight)
+//            } else {
                 LineView(records: monthlyRecords, data: monthlyDividends, title: "Monthly Dividends", style: Styles.lineChartStyleOne)
                 .padding()
-            }
+//            }
         }
     }
     

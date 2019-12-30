@@ -15,7 +15,7 @@ struct PortfolioView: View {
     var body: some View {
         List {
             ForEach(portfolioStocks, id: \.self) { stock in
-                NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
+                NavigationLink(destination: PortfolioDetailContainerView(portfolioStock: stock)) {
                     PortfolioStockView(portfolioStock: stock)
                 }
             }
