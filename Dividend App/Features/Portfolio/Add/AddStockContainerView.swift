@@ -28,9 +28,9 @@ struct AddStockContainerView: View {
             )
             .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
             .alert(isPresented: $showingError) {
-                Alert(title: Text(errorMessage), dismissButton: .default(Text("ok")))
+                Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
-            .navigationBarTitle(Text("search"))
+            .navigationBarTitle(Text("Search"))
             .onDisappear(perform: clearSearchResults)
     }
     

@@ -17,12 +17,12 @@ struct CompanyFinancialGrowthResponse: Codable, Hashable {
         let date, grossProfitGrowth, ebitGrowth, operatingIncomeGrowth: String
         let netIncomeGrowth, epsGrowth, epsDilutedGrowth, weightedAverageSharesGrowth: String
         let weightedAverageSharesDilutedGrowth, dividendsPerShareGrowth, operatingCashFlowGrowth, freeCashFlowGrowth: String
-        let the10YRevenueGrowthPerShare, the5YRevenueGrowthPerShare, the3YRevenueGrowthPerShare, the10YOperatingCFGrowthPerShare: String
-        let the5YOperatingCFGrowthPerShare, the3YOperatingCFGrowthPerShare, the10YNetIncomeGrowthPerShare, the5YNetIncomeGrowthPerShare: String
-        let the3YNetIncomeGrowthPerShare, the10YShareholdersEquityGrowthPerShare, the5YShareholdersEquityGrowthPerShare, the3YShareholdersEquityGrowthPerShare: String
-        let the10YDividendPerShareGrowthPerShare, the5YDividendPerShareGrowthPerShare, the3YDividendPerShareGrowthPerShare, receivablesGrowth: String
-        let inventoryGrowth, assetGrowth, bookValuePerShareGrowth, debtGrowth: String
-        let rDExpenseGrowth, sgAExpensesGrowth: String
+        let the10YRevenueGrowthPerShare, the5YRevenueGrowthPerShare, the3YRevenueGrowthPerShare, the10YOperatingCFGrowthPerShare: String?
+        let the5YOperatingCFGrowthPerShare, the3YOperatingCFGrowthPerShare, the10YNetIncomeGrowthPerShare, the5YNetIncomeGrowthPerShare: String?
+        let the3YNetIncomeGrowthPerShare, the10YShareholdersEquityGrowthPerShare, the5YShareholdersEquityGrowthPerShare, the3YShareholdersEquityGrowthPerShare: String?
+        let the10YDividendPerShareGrowthPerShare, the5YDividendPerShareGrowthPerShare, the3YDividendPerShareGrowthPerShare: String?
+        let receivablesGrowth, inventoryGrowth, assetGrowth, bookValuePerShareGrowth: String
+        let debtGrowth, rDExpenseGrowth, sgAExpensesGrowth: String
 
         enum CodingKeys: String, CodingKey {
             case date

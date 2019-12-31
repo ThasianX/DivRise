@@ -53,6 +53,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var pegRatios = [Double]()
             
             for i in 0..<publisher1.0.metrics.count {
+                Logger.info("\(i)")
                 if let date = Formatter.fullString.date(from: publisher1.0.metrics[i].date) {
                     records.append(Record(month: date.monthMedium, year: date.year))
                 }
@@ -97,7 +98,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     operatingProfitMargins.append(ebit / revenue)
                 }
                 
-                if let val = Double(financialRatio.ratios[i].operatingPerformanceRatios.assetTurnover) {
+                if period == "annual", let val = Double(financialRatio.ratios[i].operatingPerformanceRatios.assetTurnover) {
                     assetTurnoverRatios.append(val)
                 }
                 
@@ -108,7 +109,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 
                 if let peRatio = Double(publisher1.0.metrics[i].peRatio),
                     let epsGrowth = Double(financialGrowth.growth[i].epsGrowth) {
-                    pegRatios.append(peRatio / epsGrowth)
+                    pegRatios.append(peRatio / (epsGrowth*100))
                 }
             }
             
@@ -130,6 +131,8 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 records: records,
                 details: details
             )
+            
+            Logger.info("\(detailStock)")
             return AppAction.setDetailStock(detail: detailStock)
     }
     .eraseToAnyPublisher()

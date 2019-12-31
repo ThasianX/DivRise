@@ -27,9 +27,9 @@ struct Line: View {
     var stepHeight: CGFloat {
         if let min = data.points.min(), let max = data.points.max(), min != max {
             if (min < 0){
-                return (frame.size.height-padding) / CGFloat(data.points.max()! - data.points.min()!)
+                return (frame.size.height-padding) / CGFloat(max - min)
             }else{
-                return (frame.size.height-padding) / CGFloat(data.points.max()! + data.points.min()!)
+                return (frame.size.height-padding) / CGFloat(max + min)
             }
         }
         return 0

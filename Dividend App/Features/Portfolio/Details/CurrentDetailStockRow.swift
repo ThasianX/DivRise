@@ -13,9 +13,9 @@ struct CurrentDetailStockRow: View {
     let attributeValues: [[Double]]
     
     var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
         HStack {
             ForEach(attributeValues.indexed(), id: \.1.self) { i, values in
-                
                 HStack {
                     VStack {
                         ForEach(values.indexed(), id: \.1.self) { j, value in
@@ -24,7 +24,7 @@ struct CurrentDetailStockRow: View {
                                     .font(.caption)
                                 Spacer()
                                 
-                                Text(String(value))
+                                Text("\(value.shortStringRepresentation)")
                                     .font(.caption)
                                 
                             }
@@ -35,6 +35,10 @@ struct CurrentDetailStockRow: View {
                 }
             }
         }
+        .padding(40)
+        .frame(height: 60)
+        Spacer()
+    }
     }
 }
 

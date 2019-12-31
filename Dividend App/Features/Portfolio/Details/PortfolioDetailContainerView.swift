@@ -13,11 +13,12 @@ import SwiftUIX
 struct PortfolioDetailContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     @ObservedObject var detailState = DetailState()
+    @State var selectedAttributeIndex: Int? = nil
     
     let portfolioStock: PortfolioStock
     
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $detailState.selectedPeriod, selectedDetailAttribute: $detailState.selectedDetailAttribute, attributeNames: $detailState.attributeOrder, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues())
+        PortfolioDetailView(selectedPeriod: $detailState.selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $detailState.attributeOrder, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
         .onAppear(perform: loadDetailStock)
     }
     

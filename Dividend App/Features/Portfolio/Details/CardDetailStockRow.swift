@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct CardDetailStockRow: View {
+    @Binding var selectedAttributeIndex: Int?
+    
     let abbreviatedNames: [String]
     let fullNames: [String]
+    let descriptions: [String]
     let records: [Record]
     let attributeValues: [[Double]]
     
@@ -20,17 +23,18 @@ struct CardDetailStockRow: View {
                 ForEach(0..<abbreviatedNames.count) { index in
                     GeometryReader { geometry in
                         CardView(
+                            index: .constant(nil),
                             abbreviatedName: self.abbreviatedNames[index],
                             fullName: self.fullNames[index],
-                            description: "",
-                            records: self.records,
-                            values: self.attributeValues[index])
+                            description: self.descriptions[index],
+                            records: self.records.reversed(),
+                            values: self.attributeValues[index].reversed())
                             .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 40) / -20), axis: (x: 0, y: 10.0, z: 0))
                             .onTapGesture {
-                                
+                                self.selectedAttributeIndex = index
                         }
                     }
-                    .frame(width: 250, height: 150)
+                    .frame(width: 200, height: 250)
                 }
             }
             .padding(40)

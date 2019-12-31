@@ -11,38 +11,56 @@ import SwiftUIX
 
 struct PortfolioDetailView: View {
     @Binding var selectedPeriod: String
-    @Binding var selectedDetailAttribute: String?
+    @Binding var selectedAttributeIndex: Int?
     @Binding var attributeNames: [String]
     
     let portfolioStock: PortfolioStock
     let records: [Record]
     let attributeValues: [[Double]]
+    let onPeriodChange: () -> Void
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(portfolioStock.ticker)
-                    .font(.largeTitle)
-                Text(portfolioStock.fullName)
-                    .font(.subheadline)
-                Button(action: {
-                    self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
-                }) {
-                    Text(self.selectedPeriod.capitalized)
+        ZStack {
+            VStack(alignment: .leading, spacing: 30) {
+                HStack {
+                    Text(portfolioStock.ticker)
+                        .font(.largeTitle)
+                    Text(portfolioStock.fullName)
+                        .font(.subheadline)
+                    Spacer()
+                    Button(action: {
+                        self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
+                        self.onPeriodChange()
+                    }) {
+                        Text(self.selectedPeriod.capitalized)
+                    }
+                }
+                .padding(30)
+                
+                if attributeValues.count > 0 {
+                    ActivityIndicator()
+                        .animated(false)
+                    
+                    CurrentDetailStockRow(attributeNames: getAbbreviatedNames(), attributeValues: getCurrentValues())
+                    
+                    CardDetailStockRow(selectedAttributeIndex: $selectedAttributeIndex, abbreviatedNames: getAbbreviatedNames(), fullNames: getFullNames(), descriptions: getDescriptions(), records: records, attributeValues: attributeValues)
+                    
+                } else {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        ActivityIndicator()
+                            .animated(true)
+                        Spacer()
+                    }
+                    Spacer()
                 }
             }
+            .blur(radius: selectedAttributeIndex == nil ? 0 : 40)
+            .animation(.easeInOut)
             
-            if attributeValues.count > 0 {
-                ActivityIndicator()
-                .animated(false)
-                
-                CurrentDetailStockRow(attributeNames: getAbbreviatedNames(), attributeValues: getCurrentValues())
-                
-                CardDetailStockRow(abbreviatedNames: getAbbreviatedNames(), fullNames: getFullNames(), records: records, attributeValues: attributeValues)
-                
-            } else {
-                ActivityIndicator()
-                .animated(true)
+            if selectedAttributeIndex != nil {
+                CardView(index: $selectedAttributeIndex, abbreviatedName: getAbbreviatedNames()[selectedAttributeIndex!], fullName: getFullNames()[selectedAttributeIndex!], description: getDescriptions()[selectedAttributeIndex!], records: records.reversed(), values: attributeValues[selectedAttributeIndex!].reversed())
             }
         }
     }
@@ -56,6 +74,12 @@ struct PortfolioDetailView: View {
     private func getAbbreviatedNames() -> [String] {
         attributeNames.compactMap {
             DetailAttributes.abbreviated[$0]
+        }
+    }
+    
+    private func getDescriptions() -> [String] {
+        attributeNames.compactMap {
+            DetailAttributes.descriptions[$0]
         }
     }
     

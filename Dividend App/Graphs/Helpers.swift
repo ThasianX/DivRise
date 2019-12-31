@@ -140,7 +140,7 @@ class ChartData: ObservableObject {
 }
 
 class TestData{
-    static public var data:ChartData = ChartData(records: [], points: [37,72,51,22,39,47,66,85,50])
+    static public var data:ChartData = ChartData(records: [], points: [0.6137386018237082, 0.2815539332538736, 0.17518342474101156, 0.24931948665991222])
 }
 
 extension Color {

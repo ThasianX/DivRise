@@ -24,10 +24,10 @@ struct TrackerContainerView: View {
     
     var body: some View {
         TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
-        .navigationBarTitle("tracker")
+        .navigationBarTitle("Dividend Growth")
             .navigationBarItems(trailing: Button(action: {
                 self.showingAdd = true
-            }) { Text("add")})
+            }) { Text("Add")})
             .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                 AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
         }
@@ -57,7 +57,7 @@ struct AddDividendView: View {
                     .keyboardType(.decimalPad)
             }
             Button(action: onAdd) {
-                Text("add")
+                Text("Add")
             }
         }
         .padding(40)

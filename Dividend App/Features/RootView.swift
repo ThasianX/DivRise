@@ -23,7 +23,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "tray.full.fill")
-                Text("portfolio")
+                Text("Portfolio")
             }
             
             NavigationView {
@@ -31,7 +31,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "chart.bar.fill")
-                Text("tracker")
+                Text("Dividend Growth")
             }
             
             NavigationView {
@@ -39,7 +39,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "gear")
-                Text("settings")
+                Text("Settings")
             }
         }
     }

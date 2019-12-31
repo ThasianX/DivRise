@@ -60,7 +60,7 @@ struct Request {
                     let fullName = company.name
                     return self.companyProfile(identifier: ticker)
                         .flatMap { response -> AnyPublisher<SearchStock, Never> in
-                            let mktCap = (response.profile.mktCap == "") ? "$--" : Double(response.profile.mktCap)!.shortStringRepresentation
+                            let mktCap = (response.profile.mktCap == "") ? "$--" : "$\(Double(response.profile.mktCap)!.shortStringRepresentation)"
                             let dividend = response.profile.lastDiv
                             return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap, dividend: dividend))
                                 .eraseToAnyPublisher()
@@ -89,16 +89,17 @@ struct Request {
     }
     
     // MARK: Details
-    func getCompanyKeyMetrics(identifier: String, period: String) -> AnyPublisher<CompanyKeyMetricsResponse, Never> {
+    func getCompanyKeyMetrics(identifier: String, period: String) -> AnyPublisher<CompanyKeyMetrics, Never> {
         let urlString = companyKeyMetricsURL
             .replacingOccurrences(of: "{company}", with: identifier)
             .replacingOccurrences(of: "{period}", with: period)
         let url = URL(string: urlString)!
         
+        
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: CompanyKeyMetricsResponse.self, decoder: Current.decoder)
+            .decode(type: CompanyKeyMetrics.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }

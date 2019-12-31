@@ -10,6 +10,8 @@ import SwiftUI
 
 struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
+    @State private var showingDetail = false
+    @State private var selectedIndex = 0
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -18,8 +20,8 @@ struct PortfolioContainerView: View {
     }
     
     var body: some View {
-        PortfolioView(portfolioStocks: portfolioStocks, onDelete: onDelete)
-            .navigationBarTitle(Text("portfolio"))
+        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks, onDelete: onDelete)
+            .navigationBarTitle(Text("Portfolio"))
             .navigationBarItems(
                 leading: EditButton(),
                 trailing:
@@ -27,6 +29,10 @@ struct PortfolioContainerView: View {
                     Text("Add")
                 }
         )
+        .sheet(isPresented: self.$showingDetail) {
+            PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex])
+                .environmentObject(self.store)
+        }
             .onAppear(perform: reloadDividends)
     }
     

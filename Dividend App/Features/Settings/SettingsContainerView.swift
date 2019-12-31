@@ -13,7 +13,7 @@ struct SettingsContainerView: View {
     
     var body: some View {
         SettingsView()
-        .navigationBarTitle("settings")
+        .navigationBarTitle("Settings")
     }
 }
 

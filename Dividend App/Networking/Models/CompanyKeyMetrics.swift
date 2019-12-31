@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CompanyKeyMetricsResponse: Codable, Hashable {
+struct CompanyKeyMetrics: Codable, Hashable {
     let symbol: String
     let metrics: [Metric]
 
@@ -16,7 +16,7 @@ struct CompanyKeyMetricsResponse: Codable, Hashable {
     struct Metric: Codable, Hashable {
         let date, marketCap, peRatio, pbRatio: String
         let debtToEquity, netDebtToEBITDA, dividendYield, payoutRatio: String
-        let grahamNumber, roic: String
+        let grahamNumber: String
 
         enum CodingKeys: String, CodingKey {
             case date
@@ -28,14 +28,13 @@ struct CompanyKeyMetricsResponse: Codable, Hashable {
             case dividendYield = "Dividend Yield"
             case payoutRatio = "Payout Ratio"
             case grahamNumber = "Graham Number"
-            case roic = "ROIC"
         }
     }
 }
 
 
-extension CompanyKeyMetricsResponse {
-    static let noResponse = CompanyKeyMetricsResponse(
+extension CompanyKeyMetrics {
+    static let noResponse = CompanyKeyMetrics(
         symbol: "", metrics: []
     )
 }

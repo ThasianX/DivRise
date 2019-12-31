@@ -9,13 +9,19 @@
 import SwiftUI
 
 struct PortfolioView: View {
+    @Binding var showingDetail: Bool
+    @Binding var selectedIndex: Int
+    
     var portfolioStocks: [PortfolioStock]
     var onDelete: (IndexSet) -> Void
     
     var body: some View {
         List {
-            ForEach(portfolioStocks, id: \.self) { stock in
-                NavigationLink(destination: PortfolioDetailContainerView(portfolioStock: stock)) {
+            ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
+                Button(action: {
+                    self.selectedIndex = index
+                    self.showingDetail.toggle()
+                }) {
                     PortfolioStockView(portfolioStock: stock)
                 }
             }
