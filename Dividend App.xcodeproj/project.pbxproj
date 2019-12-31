@@ -43,6 +43,7 @@
 		1E6E3F8323B1A347009A0262 /* View+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8223B1A347009A0262 /* View+Embed.swift */; };
 		1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8623B1A3F5009A0262 /* RootView.swift */; };
 		1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */; };
+		1E72E90F23BB2B8D00C899E1 /* AddDividendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72E90E23BB2B8D00C899E1 /* AddDividendView.swift */; };
 		1E86AED123B5CC4500B38275 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E86AED023B5CC4500B38275 /* Record.swift */; };
 		1E86AED423B5D63C00B38275 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E86AED323B5D63C00B38275 /* Date+Formatter.swift */; };
 		1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */; };
@@ -111,6 +112,7 @@
 		1E6E3F8223B1A347009A0262 /* View+Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Embed.swift"; sourceTree = "<group>"; };
 		1E6E3F8623B1A3F5009A0262 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioContainerView.swift; sourceTree = "<group>"; };
+		1E72E90E23BB2B8D00C899E1 /* AddDividendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDividendView.swift; sourceTree = "<group>"; };
 		1E86AED023B5CC4500B38275 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		1E86AED323B5D63C00B38275 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		1E8DCF5A23B1E7070018BADB /* PortfolioStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStock.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			children = (
 				1ED966BB23B55C01000BDE8D /* TrackerContainerView.swift */,
 				1ED966C223B560D2000BDE8D /* TrackerView.swift */,
+				1E72E90E23BB2B8D00C899E1 /* AddDividendView.swift */,
 				1E86AECF23B5CC3200B38275 /* Models */,
 				1E86AED223B5D62E00B38275 /* Extensions */,
 			);
@@ -476,6 +479,7 @@
 				1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */,
 				1E62D36023B82CE80093E83B /* CompanyKeyMetrics.swift in Sources */,
 				1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */,
+				1E72E90F23BB2B8D00C899E1 /* AddDividendView.swift in Sources */,
 				1ED6131923B6B1BE00CF4CD0 /* IndicatorPoint.swift in Sources */,
 				1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,

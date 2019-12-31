@@ -9,6 +9,7 @@
 import Foundation
 
 enum AppAction {
+    case toggleNotifications(enabled: Bool)
     case addToPortfolio(stock: PortfolioStock)
     case removeFromPortfolio(offsets: IndexSet)
     case updatePortfolio(stocks: [PortfolioStock])

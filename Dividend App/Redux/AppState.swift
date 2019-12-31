@@ -9,6 +9,7 @@
 import Foundation
 
 struct AppState: Codable, Equatable {
+    var notificationsSet: Bool = false
     var allPortfolioStocks: [String: PortfolioStock] = [:]
     var portfolioStocks: [String] = []
     var searchResult: [SearchStock] = []

@@ -32,6 +32,13 @@ extension Formatter {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
+    static let longDateStyle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
+    
 }
 
 extension Date {

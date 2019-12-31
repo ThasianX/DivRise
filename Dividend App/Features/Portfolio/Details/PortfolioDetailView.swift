@@ -29,9 +29,7 @@ struct PortfolioDetailView: View {
                         .font(.subheadline)
                     Spacer()
                     Button(action: {
-                        Logger.info(self.selectedPeriod)
                         self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
-                        Logger.info(self.selectedPeriod)
                         self.onPeriodChange()
                     }) {
                         Text(self.selectedPeriod.capitalized)

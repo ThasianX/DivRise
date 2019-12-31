@@ -11,18 +11,13 @@ import Foundation
 
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
-        .map {
-            return .setSearchResults(results: $0)
-            
-    }
+        .map { .setSearchResults(results: $0) }
     .eraseToAnyPublisher()
 }
 
 func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
-        .map {
-            return .updatePortfolio(stocks: $0)
-    }
+        .map { .updatePortfolio(stocks: $0) }
     .eraseToAnyPublisher()
 }
 
@@ -52,7 +47,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var pegRatios = [Double]()
             
             for i in 0..<publisher1.0.metrics.count {
-                Logger.info("\(i)")
                 if let date = Formatter.fullString.date(from: publisher1.0.metrics[i].date) {
                     records.append(Record(month: date.monthMedium, year: date.year))
                 }
@@ -126,7 +120,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 details: details
             )
             
-            return AppAction.setDetailStock(detail: detailStock)
+            return .setDetailStock(detail: detailStock)
     }
     .eraseToAnyPublisher()
 }

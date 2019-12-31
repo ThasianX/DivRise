@@ -40,7 +40,11 @@ struct AddStockContainerView: View {
     
     private func addStock() {
         if let stock = selectedStock, let currentDividend = Double(stock.dividend), let startingDividend = Double(alertInput) {
-            if startingDividend == 0 {
+            
+            if stock.dividend == "0" {
+                errorMessage = "Must choose stock with dividends"
+                showingError = true
+            } else if startingDividend == 0 {
                 errorMessage = "Starting dividend cannot be 0"
                 showingError = true
             } else if store.state.allPortfolioStocks.keys.contains(stock.ticker) {

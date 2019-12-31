@@ -93,7 +93,7 @@ public struct LineView: View {
 
 struct LineView_Previews: PreviewProvider {
     static var previews: some View {
-        LineView(records: [.mock, .mock, .mock,.mock,.mock,.mock,.mock,.mock,.mock,],data: [8,23,54,32,12,37,7,23,43], title: "Full chart", style: Styles.lineChartStyleOne)
+        LineView(records: [.mock, .mock, .mock,.mock,.mock,.mock,.mock,.mock,.mock,],data: [8,23], title: "Full chart", style: Styles.lineChartStyleOne)
     }
 }
 
