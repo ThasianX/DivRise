@@ -16,6 +16,7 @@ struct PortfolioDetailView: View {
     
     let portfolioStock: PortfolioStock
     let records: [Record]
+    let sharePriceRecords: [Record]
     let attributeValues: [[Double]]
     let onPeriodChange: () -> Void
     
@@ -43,7 +44,7 @@ struct PortfolioDetailView: View {
                     
                     CurrentDetailStockRow(attributeNames: getAbbreviatedNames(), attributeValues: getCurrentValues())
                     
-                    CardDetailStockRow(selectedAttributeIndex: $selectedAttributeIndex, abbreviatedNames: getAbbreviatedNames(), fullNames: getFullNames(), descriptions: getDescriptions(), records: records, attributeValues: attributeValues)
+                    CardDetailStockRow(selectedAttributeIndex: $selectedAttributeIndex, abbreviatedNames: getAbbreviatedNames(), fullNames: getFullNames(), descriptions: getDescriptions(), records: records, sharePriceRecords: sharePriceRecords, attributeValues: attributeValues)
                     
                 } else {
                     Spacer()
@@ -60,7 +61,7 @@ struct PortfolioDetailView: View {
             .animation(.easeInOut)
             
             if selectedAttributeIndex != nil {
-                CardView(index: $selectedAttributeIndex, abbreviatedName: getAbbreviatedNames()[selectedAttributeIndex!], fullName: getFullNames()[selectedAttributeIndex!], description: getDescriptions()[selectedAttributeIndex!], records: records.reversed(), values: attributeValues[selectedAttributeIndex!].reversed())
+                CardView(index: $selectedAttributeIndex, abbreviatedName: getAbbreviatedNames()[selectedAttributeIndex!], fullName: getFullNames()[selectedAttributeIndex!], description: getDescriptions()[selectedAttributeIndex!], records: records.reversed(), sharePriceRecords: sharePriceRecords.reversed(), values: attributeValues[selectedAttributeIndex!].reversed())
             }
         }
     }
@@ -86,6 +87,7 @@ struct PortfolioDetailView: View {
     private func getCurrentValues() -> [[Double]] {
         var values = [[Double]]()
         var inner = [Double]()
+        
         for (i, arr) in attributeValues.enumerated() {
             if i % 3 == 0 && !inner.isEmpty {
                 values.append(inner)

@@ -66,7 +66,7 @@ public struct LineChartView: View {
                             .frame(height: 20)
                         HStack{
                             Spacer()
-                            Text("\(self.currentRecord.month) \(self.currentRecord.year)")
+                            Text("\(self.currentRecord.month)\((self.currentRecord.day != nil) ? " \(self.currentRecord.day!), " : " ")\(self.currentRecord.year)")
                             Spacer()
                         }
                         HStack{

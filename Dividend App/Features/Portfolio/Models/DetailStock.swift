@@ -10,5 +10,6 @@ import Foundation
 
 struct DetailStock: Codable, Hashable {
     let records: [Record]
+    let sharePriceRecords: [Record]
     let details: [String: [Double]]
 }

@@ -21,6 +21,8 @@ internal let companyIncomeURL = "https://financialmodelingprep.com/api/v3/financ
 internal let companyBalanceURL = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/{company}?period={period}"
 internal let companyFinancialRatioURL = "https://financialmodelingprep.com/api/v3/financial-ratios/{company}"
 internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/v3/financial-statement-growth/{company}?period={period}"
+internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
+
 
 struct Request {
     // MARK: Portfolio
@@ -155,6 +157,19 @@ struct Request {
             .dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: CompanyFinancialGrowthResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getStockHistoricalPriceURL(identifier: String) -> AnyPublisher<StockHistoricalPriceResponse, Never> {
+        let urlString = stockHistoricalPriceURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: StockHistoricalPriceResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }

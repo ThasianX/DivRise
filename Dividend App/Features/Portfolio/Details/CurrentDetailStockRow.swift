@@ -60,7 +60,7 @@ struct CurrentDetailStockRow: View {
         } else if name == "FCFE" {
             return Text("$\(value.shortStringRepresentation)")
             .font(.caption)
-        } else if name == "DPS" {
+        } else if name == "DPS" || name == "Price" {
             return Text("$\(value, specifier: "%.2f")")
             .font(.caption)
         } else {

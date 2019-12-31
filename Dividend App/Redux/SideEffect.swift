@@ -23,16 +23,16 @@ func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppActio
 
 func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> {
     let date = Date()
-    let record = Record(month: date.monthMedium, year: date.year)
+    let record = Record(month: date.monthMedium, day: nil, year: date.year)
     
     return Just(AppAction.addMonthlyDividend(record: record, amount: dividend))
         .eraseToAnyPublisher()
 }
 
 func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<AppAction, Never> {
-    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: period))
+    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: "annual"), Current.request.getStockHistoricalPriceURL(identifier: identifier))
         .receive(on: RunLoop.main)
-        .map { publisher1, financialGrowth in
+        .map { publisher1, financialGrowth, historicalPrices in
             var records = [Record]()
             var payoutRatios = [Double]()
             var fcfes = [Double]()
@@ -45,10 +45,14 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var operatingProfitMargins = [Double]()
             var debtToCapitalRatios = [Double]()
             var pegRatios = [Double]()
+            var pegRatioIndex = 0
             
             for i in 0..<publisher1.0.metrics.count {
                 if let date = Formatter.fullString.date(from: publisher1.0.metrics[i].date) {
-                    records.append(Record(month: date.monthMedium, year: date.year))
+                    if !records.isEmpty && date.year != records.last!.year {
+                        pegRatioIndex += 1
+                    }
+                    records.append(Record(month: date.monthMedium, day: nil, year: date.year))
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].payoutRatio) {
@@ -59,8 +63,10 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     netDebtToEBITDAs.append(val)
                 }
                 
-                if let val = Double(publisher1.0.metrics[i].peRatio) {
-                    peRatios.append(val)
+                if let peRatio = Double(publisher1.0.metrics[i].peRatio),
+                let epsGrowth = Double(financialGrowth.growth[pegRatioIndex].the5YNetIncomeGrowthPerShare!) {
+                    peRatios.append(peRatio)
+                    pegRatios.append(peRatio / (epsGrowth*100))
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].dividendYield) {
@@ -96,11 +102,30 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     debtToCapitalRatios.append(totalDebt / (totalDebt + totalShareholderEquity))
                 }
                 
-                if let peRatio = Double(publisher1.0.metrics[i].peRatio),
-                    let epsGrowth = Double(financialGrowth.growth[i].epsGrowth) {
-                    pegRatios.append(peRatio / (epsGrowth*100))
+            }
+            
+            var sharePriceRecords = [Record]()
+            var sharePrices = [Double]()
+            
+            if historicalPrices.historical.count > 1500 {
+                for i in ((historicalPrices.historical.count - 1500)..<historicalPrices.historical.count).reversed() {
+                    if let date = Formatter.fullString.date(from: historicalPrices.historical[i].date) {
+                        sharePriceRecords.append(Record(month: date.monthMedium, day: date.day, year: date.year))
+                    }
+                    
+                    sharePrices.append(historicalPrices.historical[i].close)
+                }
+            } else {
+                for i in (0..<historicalPrices.historical.count).reversed() {
+                    if let date = Formatter.fullString.date(from: historicalPrices.historical[i].date) {
+                        sharePriceRecords.append(Record(month: date.monthMedium, day: date.day, year: date.year))
+                    }
+                    
+                    sharePrices.append(historicalPrices.historical[i].close)
                 }
             }
+            
+            
             
             var details = [String: [Double]]()
             details[DetailAttributes.payoutRatios] = payoutRatios
@@ -114,9 +139,11 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             details[DetailAttributes.operatingProfitMargins] = operatingProfitMargins
             details[DetailAttributes.debtToCapitalRatios] = debtToCapitalRatios
             details[DetailAttributes.pegRatios] = pegRatios
+            details[DetailAttributes.sharePrices] = sharePrices
             
             let detailStock = DetailStock(
                 records: records,
+                sharePriceRecords: sharePriceRecords,
                 details: details
             )
             

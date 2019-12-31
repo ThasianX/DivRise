@@ -24,7 +24,7 @@ struct PortfolioDetailContainerView: View {
     }
     
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
+        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
         .onAppear(perform: loadDetailStock)
     }
     
@@ -37,6 +37,14 @@ struct PortfolioDetailContainerView: View {
     private func getRecords() -> [Record] {
         if let detailStock = store.state.currentDetailStock {
             return detailStock.records
+        } else {
+            return []
+        }
+    }
+    
+    private func getSharePriceRecords() -> [Record] {
+        if let detailStock = store.state.currentDetailStock {
+            return detailStock.sharePriceRecords
         } else {
             return []
         }
