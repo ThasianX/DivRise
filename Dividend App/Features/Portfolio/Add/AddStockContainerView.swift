@@ -28,9 +28,9 @@ struct AddStockContainerView: View {
             )
             .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
             .alert(isPresented: $showingError) {
-                Alert(title: Text(errorMessage), dismissButton: .default(Text("ok")))
+                Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
-            .navigationBarTitle(Text("search"))
+            .navigationBarTitle(Text("Search"))
             .onDisappear(perform: clearSearchResults)
     }
     
@@ -40,7 +40,11 @@ struct AddStockContainerView: View {
     
     private func addStock() {
         if let stock = selectedStock, let currentDividend = Double(stock.dividend), let startingDividend = Double(alertInput) {
-            if startingDividend == 0 {
+            
+            if stock.dividend == "0" {
+                errorMessage = "Must choose stock with dividends"
+                showingError = true
+            } else if startingDividend == 0 {
                 errorMessage = "Starting dividend cannot be 0"
                 showingError = true
             } else if store.state.allPortfolioStocks.keys.contains(stock.ticker) {
@@ -48,7 +52,7 @@ struct AddStockContainerView: View {
                 showingError = true
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
-                let portfolioStock = PortfolioStock(ticker: stock.ticker, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
+                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
                 store.send(.addToPortfolio(stock: portfolioStock))
             }
         }

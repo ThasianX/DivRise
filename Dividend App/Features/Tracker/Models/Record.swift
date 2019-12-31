@@ -10,9 +10,10 @@ import Foundation
 
 public struct Record: Codable, Hashable {
     let month: String
+    let day: String?
     let year: String
 }
 
 extension Record {
-    static let mock = Record(month: "Jan", year: "2018")
+    static let mock = Record(month: "Jan", day: nil, year: "2018")
 }

@@ -8,6 +8,9 @@
 
 func appReducer(state: inout AppState, action: AppAction) {
     switch action {
+    case let .toggleNotifications(enabled):
+        state.notificationsSet = enabled
+        
     case let .addToPortfolio(stock):
         if !state.allPortfolioStocks.keys.contains(stock.ticker) {
             state.portfolioStocks.append(stock.ticker)
@@ -32,5 +35,14 @@ func appReducer(state: inout AppState, action: AppAction) {
             state.allMonthlyRecords.append(record)
             state.allMonthlyDividends.append(dividend)
         }
+
+    case let .setDetailStock(detail):
+        state.currentDetailStock = detail
+        
+    case let .setSelectedPeriod(period):
+        state.selectedPeriod = period
+        
+    case let.setAttributeNames(attributeNames):
+        state.attributeNames = attributeNames
     }
 }

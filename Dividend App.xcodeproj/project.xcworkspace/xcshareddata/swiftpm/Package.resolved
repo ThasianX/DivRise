@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SwiftUIX",
+        "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
+        "state": {
+          "branch": "master",
+          "revision": "a02a471ed195e35dd3687e10753a7c50dc0097e3",
+          "version": null
+        }
+      },
+      {
         "package": "URLImage",
         "repositoryURL": "https://github.com/dmytro-anokhin/url-image.git",
         "state": {

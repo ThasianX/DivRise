@@ -9,35 +9,40 @@
 import SwiftUI
 
 public struct LineChartView: View {
-//    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    //    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     @ObservedObject var data:ChartData
     public var title: String
+    public var detailPrefix: String
+    public var detailSuffix: String
+    public var shortenDouble: Bool
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
-
+    
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
     @State private var currentValue: Double = 2 {
         didSet{
             if (oldValue != self.currentValue && showIndicatorDot) {
-//                selectionFeedbackGenerator.selectionChanged()
+                //                selectionFeedbackGenerator.selectionChanged()
                 HapticFeedback.playSelection()
             }
             
         }
     }
+    @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
-    private var rateValue: Int
     
-    public init(records: [Record], data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium ,rateValue: Int? = 14, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
+        self.detailPrefix = detailPrefix
+        self.detailSuffix = detailSuffix
+        self.shortenDouble = shortenDouble
         self.legend = legend
         self.style = style
         self.formSize = form!
-        self.rateValue = rateValue!
         self.dropShadow = dropShadow!
     }
     
@@ -51,25 +56,30 @@ public struct LineChartView: View {
                         if (self.legend != nil){
                             Text(self.legend!).font(.callout).foregroundColor(self.style.legendTextColor)
                         }
-                        HStack {
-                            if (self.rateValue >= 0){
-                                Image(systemName: "arrow.up")
-                            }else{
-                                Image(systemName: "arrow.down")
-                            }
-                            Text("\(self.rateValue)%")
-                        }
                     }
                     .transition(.opacity)
                     .animation(.easeIn(duration: 0.1))
                     .padding([.leading, .top])
                 }else{
-                    HStack{
+                    VStack {
                         Spacer()
-                        Text("\(self.currentValue, specifier: "%.2f")")
-                            .font(.system(size: 41, weight: .bold, design: .default))
-                            .offset(x: 0, y: 30)
-                        Spacer()
+                            .frame(height: 20)
+                        HStack{
+                            Spacer()
+                            Text("\(self.currentRecord.month)\((self.currentRecord.day != nil) ? " \(self.currentRecord.day!), " : " ")\(self.currentRecord.year)")
+                            Spacer()
+                        }
+                        HStack{
+                            Spacer()
+                            
+                            if shortenDouble { Text("\(detailPrefix)\(self.currentValue.shortStringRepresentation)\(detailSuffix)")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                            } else { Text("\(detailPrefix)\(self.currentValue, specifier: "%.2f")\(detailSuffix)")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                            }
+                            
+                            Spacer()
+                        }
                     }
                     .transition(.scale)
                     .animation(.spring())
@@ -103,6 +113,7 @@ public struct LineChartView: View {
         let index:Int = Int(round((toPoint.x)/stepWidth))
         if (index >= 0 && index < data.points.count){
             self.currentValue = self.data.points[index]
+            self.currentRecord = self.data.records[index]
             return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(self.data.points[index])*stepHeight)
         }
         return .zero
@@ -112,7 +123,7 @@ public struct LineChartView: View {
 struct WidgetView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LineChartView(records: [.mock, .mock, .mock,.mock,.mock,.mock,.mock,.mock,.mock,], data: [8,23,54,32,12,37,7,23,43], title: "Line chart", legend: "Basic")
+            LineChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [6137386018237082, 281539332538736, 17518342474101156, 249319486659912, 1115280464216635, 11460104011073, 2818422889043964, 1349161666467065, 5056442831215968, 6401420838971583, 699696969696966], title: "Line chart", detailPrefix: "$", legend: "Basic")
                 .environment(\.colorScheme, .light)
         }
     }

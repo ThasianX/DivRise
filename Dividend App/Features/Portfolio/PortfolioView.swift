@@ -8,41 +8,25 @@
 
 import SwiftUI
 
-struct PortfolioStockView: View {
-    var portfolioStock: PortfolioStock
-    
-    var body: some View {
-        HStack {
-            Text(portfolioStock.ticker)
-            
-            Spacer()
-            
-            Text("$\(String(format: "%.2f", portfolioStock.currentDividend))")
-            
-            if portfolioStock.growth > 0 {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.green)
-            } else if portfolioStock.growth == 0{
-                Text("0%").foregroundColor(.gray)
-            } else {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.red)
-            }
-             
-        }
-    }
-}
-
 struct PortfolioView: View {
+    @Binding var showingDetail: Bool
+    @Binding var selectedIndex: Int
+    
     var portfolioStocks: [PortfolioStock]
     var onDelete: (IndexSet) -> Void
     
     var body: some View {
         List {
-            ForEach(portfolioStocks, id: \.self) { stock in
-                NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
+            ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
+                Button(action: {
+                    self.selectedIndex = index
+                    self.showingDetail.toggle()
+                }) {
                     PortfolioStockView(portfolioStock: stock)
                 }
             }
             .onDelete(perform: onDelete)
         }
+        
     }
 }

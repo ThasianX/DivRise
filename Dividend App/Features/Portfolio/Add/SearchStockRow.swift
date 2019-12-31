@@ -15,7 +15,7 @@ struct SearchStockRow: View {
     var body: some View {
         HStack(alignment: .center) {
             if stock.image == "" {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 8)
                     .fill(Color.clear)
                     .frame(width: 40, height: 40)
             } else {
@@ -25,6 +25,7 @@ struct SearchStockRow: View {
                         .aspectRatio(contentMode: .fit)
                         .clipped()
                 }
+                .cornerRadius(8)
                 .frame(width: 40, height: 40)
             }
             

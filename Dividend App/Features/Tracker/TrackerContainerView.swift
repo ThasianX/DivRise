@@ -11,8 +11,8 @@ import SwiftUI
 struct TrackerContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     
-    @State var dividendInput = ""
-    @State var showingAdd = false
+    @State private var dividendInput = ""
+    @State private var showingAdd = false
     
     private var monthlyRecords: [Record] {
         store.state.allMonthlyRecords
@@ -24,10 +24,10 @@ struct TrackerContainerView: View {
     
     var body: some View {
         TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
-        .navigationBarTitle("tracker")
+        .navigationBarTitle("Dividend Growth")
             .navigationBarItems(trailing: Button(action: {
                 self.showingAdd = true
-            }) { Text("add")})
+            }) { Text("Add")})
             .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                 AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
         }
@@ -41,25 +41,4 @@ struct TrackerContainerView: View {
     }
 }
 
-struct AddDividendView: View {
-    @Binding var input: String
-    let onAdd: () -> Void
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(Date().mediumStyle)
-            Divider()
-            HStack {
-                Text("$")
-                    .font(.system(size: 50))
-                TextField("0.00", text: $input)
-                    .font(.system(size: 50))
-                    .keyboardType(.decimalPad)
-            }
-            Button(action: onAdd) {
-                Text("add")
-            }
-        }
-        .padding(40)
-    }
-}
+

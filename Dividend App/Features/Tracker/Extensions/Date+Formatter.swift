@@ -11,7 +11,13 @@ import Foundation
 extension Formatter {
     static let monthMedium: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "LLL"
+        formatter.dateFormat = "MMM"
+        return formatter
+    }()
+    
+    static let day: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
         return formatter
     }()
     
@@ -26,11 +32,28 @@ extension Formatter {
         formatter.dateFormat = "MMMM yyyy"
         return formatter
     }()
+    
+    static let fullString: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
+    static let longDateStyle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
+    
 }
 
 extension Date {
     var monthMedium: String {
         return Formatter.monthMedium.string(from: self)
+    }
+    
+    var day: String {
+        return Formatter.day.string(from: self)
     }
     
     var year: String {
@@ -40,4 +63,5 @@ extension Date {
     var mediumStyle: String {
         return Formatter.mediumStyle.string(from: self)
     }
+    
 }

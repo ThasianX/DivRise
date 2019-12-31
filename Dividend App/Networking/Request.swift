@@ -15,8 +15,17 @@ internal let searchCompanyURL = "https://www.alphavantage.co/query?function=SYMB
 
 // MARK: FinancialModelingPrep
 internal let companyProfileURL = "https://financialmodelingprep.com/api/v3/company/profile/{company}"
+internal let companyKeyMetricsURL = "https://financialmodelingprep.com/api/v3/company-key-metrics/{company}?period={period}"
+internal let companyCashFlowURL = "https://financialmodelingprep.com/api/v3/financials/cash-flow-statement/{company}?period={period}"
+internal let companyIncomeURL = "https://financialmodelingprep.com/api/v3/financials/income-statement/{company}?period={period}"
+internal let companyBalanceURL = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/{company}?period={period}"
+internal let companyFinancialRatioURL = "https://financialmodelingprep.com/api/v3/financial-ratios/{company}"
+internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/v3/financial-statement-growth/{company}?period={period}"
+internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
+
 
 struct Request {
+    // MARK: Portfolio
     func updatedPortfolioStocks(stocks: [PortfolioStock]) -> AnyPublisher<[PortfolioStock], Never> {
         let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<PortfolioStock, Never>], Never>(sequence: stocks.map(fetchPortfolioStock))
         return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
@@ -25,13 +34,25 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
         }
+        .eraseToAnyPublisher()
+    }
+    
+    private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
+        let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: URLRequest(url: url))
+            .map { $0.data }
+            .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }
     
+    // MARK: Add
     func getSearchedStocks(query: String) -> AnyPublisher<[SearchStock], Never> {
-        Logger.info("getSearchedStocks called with query: \(query)")
         return searchStocks(query: query)
             .map { $0.bestMatches }
             .flatMap { companies -> Publishers.MergeMany<AnyPublisher<SearchStock, Never>> in
@@ -40,7 +61,7 @@ struct Request {
                     let fullName = company.name
                     return self.companyProfile(identifier: ticker)
                         .flatMap { response -> AnyPublisher<SearchStock, Never> in
-                            let mktCap = (response.profile.mktCap == "") ? "$--" : Double(response.profile.mktCap)!.shortStringRepresentation
+                            let mktCap = (response.profile.mktCap == "") ? "$--" : "$\(Double(response.profile.mktCap)!.shortStringRepresentation)"
                             let dividend = response.profile.lastDiv
                             return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap, dividend: dividend))
                                 .eraseToAnyPublisher()
@@ -60,24 +81,95 @@ struct Request {
         
         let url = URL(string: urlString)!
         
-        Logger.info(url.absoluteString)
-        
         return URLSession.shared
             .dataTaskPublisher(for: URLRequest(url: url))
             .map { $0.data }
-        .decode(type: SearchStockResponse.self, decoder: Current.decoder)
-        .replaceError(with: .noResponse)
-        .eraseToAnyPublisher()
+            .decode(type: SearchStockResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
     }
     
-    private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
-        let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
+    // MARK: Details
+    func getCompanyKeyMetrics(identifier: String, period: String) -> AnyPublisher<CompanyKeyMetrics, Never> {
+        let urlString = companyKeyMetricsURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+            .replacingOccurrences(of: "{period}", with: period)
+        let url = URL(string: urlString)!
+        
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: CompanyKeyMetrics.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getCompanyCashFlowStatement(identifier: String, period: String) -> AnyPublisher<CompanyCashFlowStatementResponse, Never> {
+        let urlString = companyCashFlowURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+            .replacingOccurrences(of: "{period}", with: period)
         let url = URL(string: urlString)!
         
         return URLSession.shared
-            .dataTaskPublisher(for: URLRequest(url: url))
+            .dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
+            .decode(type: CompanyCashFlowStatementResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getCompanyIncomeStatement(identifier: String, period: String) -> AnyPublisher<CompanyIncomeStatementResponse, Never> {
+        let urlString = companyIncomeURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+            .replacingOccurrences(of: "{period}", with: period)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: CompanyIncomeStatementResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getCompanyBalanceSheet(identifier: String, period: String) -> AnyPublisher<CompanyBalanceSheetResponse, Never> {
+        let urlString = companyBalanceURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+            .replacingOccurrences(of: "{period}", with: period)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: CompanyBalanceSheetResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getCompanyFinancialStatementGrowth(identifier: String, period: String) -> AnyPublisher<CompanyFinancialGrowthResponse, Never> {
+        let urlString = companyFinancialGrowthURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+            .replacingOccurrences(of: "{period}", with: period)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: CompanyFinancialGrowthResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    func getStockHistoricalPriceURL(identifier: String) -> AnyPublisher<StockHistoricalPriceResponse, Never> {
+        let urlString = stockHistoricalPriceURL
+            .replacingOccurrences(of: "{company}", with: identifier)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: StockHistoricalPriceResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }
