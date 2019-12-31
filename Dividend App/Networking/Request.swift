@@ -51,7 +51,6 @@ struct Request {
     
     // MARK: Add
     func getSearchedStocks(query: String) -> AnyPublisher<[SearchStock], Never> {
-        Logger.info("getSearchedStocks called with query: \(query)")
         return searchStocks(query: query)
             .map { $0.bestMatches }
             .flatMap { companies -> Publishers.MergeMany<AnyPublisher<SearchStock, Never>> in

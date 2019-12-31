@@ -88,7 +88,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 
                 if let ebit = Double(publisher1.2.financials[i].ebit),
                     let revenue = Double(publisher1.2.financials[i].revenue) {
-                    operatingProfitMargins.append(ebit / revenue)
+                    operatingProfitMargins.append((ebit / revenue)*100)
                 }
                 
                 if let totalDebt = Double(publisher1.1.financials[i].totalDebt),

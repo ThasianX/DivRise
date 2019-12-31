@@ -18,7 +18,7 @@ struct TrackerView: View {
             if monthlyRecords.count == 0 {
                 Text("Add dividends to display graph")
             } else {
-                BarChartView(data: monthlyDividends, title: "Monthly Dividends", style: Styles.barChartStyleOrangeLight)
+                BarChartView(data: monthlyDividends, title: "Dividends", style: Styles.barChartStyleOrangeLight)
             }
 //                LineView(records: monthlyRecords, data: monthlyDividends, title: "Monthly Dividends", style: Styles.lineChartStyleOne)
 //                .padding()

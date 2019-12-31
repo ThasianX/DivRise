@@ -93,6 +93,7 @@ struct PortfolioDetailView: View {
             }
             inner.append(arr.first!)
         }
+        values.append(inner)
         return values
     }
     

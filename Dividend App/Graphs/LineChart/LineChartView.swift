@@ -12,6 +12,9 @@ public struct LineChartView: View {
     //    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     @ObservedObject var data:ChartData
     public var title: String
+    public var detailPrefix: String
+    public var detailSuffix: String
+    public var shortenDouble: Bool
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
@@ -31,9 +34,12 @@ public struct LineChartView: View {
     @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
     
-    public init(records: [Record], data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
+        self.detailPrefix = detailPrefix
+        self.detailSuffix = detailSuffix
+        self.shortenDouble = shortenDouble
         self.legend = legend
         self.style = style
         self.formSize = form!
@@ -65,8 +71,13 @@ public struct LineChartView: View {
                         }
                         HStack{
                             Spacer()
-                            Text("\(self.currentValue.shortStringRepresentation)")
+                            
+                            if shortenDouble { Text("\(detailPrefix)\(self.currentValue.shortStringRepresentation)\(detailSuffix)")
                                 .font(.system(size: 35, weight: .bold, design: .default))
+                            } else { Text("\(detailPrefix)\(self.currentValue, specifier: "%.2f")\(detailSuffix)")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                            }
+                            
                             Spacer()
                         }
                     }
@@ -112,7 +123,7 @@ public struct LineChartView: View {
 struct WidgetView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LineChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [6137386018237082, 281539332538736, 17518342474101156, 249319486659912, 1115280464216635, 11460104011073, 2818422889043964, 1349161666467065, 5056442831215968, 6401420838971583, 699696969696966], title: "Line chart", legend: "Basic")
+            LineChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [6137386018237082, 281539332538736, 17518342474101156, 249319486659912, 1115280464216635, 11460104011073, 2818422889043964, 1349161666467065, 5056442831215968, 6401420838971583, 699696969696966], title: "Line chart", detailPrefix: "$", legend: "Basic")
                 .environment(\.colorScheme, .light)
         }
     }

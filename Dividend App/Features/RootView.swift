@@ -76,21 +76,24 @@ struct RootView: View {
             }
         } else if let error = error {
             Logger.info(error.localizedDescription)
-        }
+            }
         }
         
         UNUserNotificationCenter.current().getNotificationSettings() { settings in
             switch settings.authorizationStatus {
             case .authorized:
                 ()
+                
             case .denied, .notDetermined, .provisional:
                 DispatchQueue.main.async {
+                    Logger.info("Denied")
                     self.store.send(.toggleNotifications(enabled: false))
                 }
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 
+            @unknown default:
+                ()
             }
-            
         }
     }
 }

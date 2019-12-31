@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct CardView: View {
     @Binding var index: Int?
@@ -36,7 +37,15 @@ struct CardView: View {
                     Spacer()
                 }
                 
-                LineChartView(records: records, data: values, title: abbreviatedName)
+                if abbreviatedName == "Payout" || abbreviatedName == "Yield" || abbreviatedName == "OPM" {
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailSuffix: "%")
+                } else if abbreviatedName == "FCFE" {
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$", shortenDouble: true)
+                } else if abbreviatedName == "DPS" {
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$")
+                } else {
+                    LineChartView(records: records, data: values, title: abbreviatedName)
+                }
                 
                 Spacer()
                 

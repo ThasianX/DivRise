@@ -24,8 +24,20 @@ struct CurrentDetailStockRow: View {
                                     .font(.caption)
                                 Spacer()
                                 
-                                Text("\(value.shortStringRepresentation)")
-                                    .font(.caption)
+                                self.getProperName(name: self.attributeNames[i*3 + j], value: value)
+//                                if self.attributeNames[i*3 + j] == "Payout" || self.attributeNames[i*3 + j] == "Yield" {
+//                                    Text("\(value, specifier: "%.2f")%")
+//                                    .font(.caption)
+//                                } else if self.attributeNames[i*3 + j] == "FCFE" {
+//                                    Text("$\(value, specifier: "%.2f")")
+//                                    .font(.caption)
+//                                } else if self.attributeNames[i*3 + j] == "DPS" {
+//                                    Text("$\(value, specifier: "%.2f")")
+//                                    .font(.caption)
+//                                } else {
+//                                    Text("\(value, specifier: "%.2f")")
+//                                    .font(.caption)
+//                                }
                                 
                             }
                             .frame(width: 120)
@@ -38,7 +50,23 @@ struct CurrentDetailStockRow: View {
         .padding(40)
         .frame(height: 60)
         Spacer()
+        }
     }
+    
+    private func getProperName(name: String, value: Double) -> Text {
+        if name == "Payout" || name == "Yield" || name == "OPM" {
+            return Text("\(value, specifier: "%.2f")%")
+            .font(.caption)
+        } else if name == "FCFE" {
+            return Text("$\(value.shortStringRepresentation)")
+            .font(.caption)
+        } else if name == "DPS" {
+            return Text("$\(value, specifier: "%.2f")")
+            .font(.caption)
+        } else {
+            return Text("\(value, specifier: "%.2f")")
+            .font(.caption)
+        }
     }
 }
 
