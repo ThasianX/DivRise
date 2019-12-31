@@ -15,4 +15,8 @@ struct AppState: Codable, Equatable {
     var allMonthlyRecords: [Record] = []
     var allMonthlyDividends: [Double] = []
     var currentDetailStock: DetailStock?
+    var selectedPeriod: String = "annual"
+    var attributeNames: [String] = ["peRatios", "pegRatios", "payoutRatios", "dividendYields", "dividendPerShares", "fcfes", "netDebtToEBITDAs", "grahamNumbers", "debtToEquitys", "operatingProfitMargins", "debtToCapitalRatios"]
 }
+
+

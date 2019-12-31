@@ -9,6 +9,4 @@
 import Foundation
 
 class DetailState: ObservableObject {
-    @Published var selectedPeriod = "annual"
-    @Published var attributeOrder = ["peRatios", "pegRatios", "payoutRatios", "dividendYields", "dividendPerShares", "fcfes", "netDebtToEBITDAs", "grahamNumbers", "debtToEquitys", "operatingProfitMargins", "assetTurnoverRatios", "debtToCapitalRatios"]
 }

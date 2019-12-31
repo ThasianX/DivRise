@@ -8,22 +8,30 @@
 
 import SwiftUI
 import Combine
-import SwiftUIX
 
 struct PortfolioDetailContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @ObservedObject var detailState = DetailState()
+    @State var selectedPeriod: String
+    @State var attributeNames: [String]
     @State var selectedAttributeIndex: Int? = nil
     
     let portfolioStock: PortfolioStock
     
+    init(portfolioStock: PortfolioStock, selectedPeriod: String, attributeNames: [String]) {
+        self.portfolioStock = portfolioStock
+        _selectedPeriod = State(initialValue: selectedPeriod)
+        _attributeNames = State(initialValue: attributeNames)
+    }
+    
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $detailState.selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $detailState.attributeOrder, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
+        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
         .onAppear(perform: loadDetailStock)
     }
     
     private func loadDetailStock() {
-        store.send(setCurrentDetailStock(identifier: portfolioStock.ticker, period: detailState.selectedPeriod))
+        store.send(.setDetailStock(detail: nil))
+        store.send(.setSelectedPeriod(period: selectedPeriod))
+        store.send(setCurrentDetailStock(identifier: portfolioStock.ticker, period: selectedPeriod))
     }
     
     private func getRecords() -> [Record] {
@@ -36,7 +44,7 @@ struct PortfolioDetailContainerView: View {
     
     private func getAttributeValues() -> [[Double]] {
         if let detailStock = store.state.currentDetailStock {
-            return detailState.attributeOrder.compactMap {
+            return attributeNames.compactMap {
                 detailStock.details[$0]!
             }
         } else {

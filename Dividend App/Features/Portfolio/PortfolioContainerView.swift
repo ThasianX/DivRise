@@ -30,7 +30,7 @@ struct PortfolioContainerView: View {
                 }
         )
         .sheet(isPresented: self.$showingDetail) {
-            PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex])
+            PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames)
                 .environmentObject(self.store)
         }
             .onAppear(perform: reloadDividends)

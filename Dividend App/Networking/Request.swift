@@ -146,19 +146,6 @@ struct Request {
             .eraseToAnyPublisher()
     }
     
-    func getCompanyFinancialRatio(identifier: String) -> AnyPublisher<CompanyFinancialRatioResponse, Never> {
-        let urlString = companyFinancialRatioURL
-            .replacingOccurrences(of: "{company}", with: identifier)
-        let url = URL(string: urlString)!
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: CompanyFinancialRatioResponse.self, decoder: Current.decoder)
-            .replaceError(with: .noResponse)
-            .eraseToAnyPublisher()
-    }
-    
     func getCompanyFinancialStatementGrowth(identifier: String, period: String) -> AnyPublisher<CompanyFinancialGrowthResponse, Never> {
         let urlString = companyFinancialGrowthURL
             .replacingOccurrences(of: "{company}", with: identifier)

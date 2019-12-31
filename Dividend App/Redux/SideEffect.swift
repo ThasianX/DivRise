@@ -35,9 +35,9 @@ func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> 
 }
 
 func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<AppAction, Never> {
-    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialRatio(identifier: identifier), Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: period))
+    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: period))
         .receive(on: RunLoop.main)
-        .map { publisher1, financialRatio, financialGrowth in
+        .map { publisher1, financialGrowth in
             var records = [Record]()
             var payoutRatios = [Double]()
             var fcfes = [Double]()
@@ -48,7 +48,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var dividendPerShares = [Double]()
             var debtToEquitys = [Double]()
             var operatingProfitMargins = [Double]()
-            var assetTurnoverRatios = [Double]()
             var debtToCapitalRatios = [Double]()
             var pegRatios = [Double]()
             
@@ -98,10 +97,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     operatingProfitMargins.append(ebit / revenue)
                 }
                 
-                if period == "annual", let val = Double(financialRatio.ratios[i].operatingPerformanceRatios.assetTurnover) {
-                    assetTurnoverRatios.append(val)
-                }
-                
                 if let totalDebt = Double(publisher1.1.financials[i].totalDebt),
                     let totalShareholderEquity = Double(publisher1.1.financials[i].totalShareholdersEquity) {
                     debtToCapitalRatios.append(totalDebt / (totalDebt + totalShareholderEquity))
@@ -123,7 +118,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             details[DetailAttributes.dividendPerShares] = dividendPerShares
             details[DetailAttributes.debtToEquitys] = debtToEquitys
             details[DetailAttributes.operatingProfitMargins] = operatingProfitMargins
-            details[DetailAttributes.assetTurnoverRatios] = assetTurnoverRatios
             details[DetailAttributes.debtToCapitalRatios] = debtToCapitalRatios
             details[DetailAttributes.pegRatios] = pegRatios
             
@@ -132,7 +126,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 details: details
             )
             
-            Logger.info("\(detailStock)")
             return AppAction.setDetailStock(detail: detailStock)
     }
     .eraseToAnyPublisher()

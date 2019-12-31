@@ -18,7 +18,6 @@ struct DetailAttributes {
     static let dividendPerShares = "dividendPerShares"
     static let debtToEquitys = "debtToEquitys"
     static let operatingProfitMargins = "operatingProfitMargins"
-    static let assetTurnoverRatios = "assetTurnoverRatios"
     static let debtToCapitalRatios = "debtToCapitalRatios"
     static let pegRatios = "pegRatios"
     
@@ -32,7 +31,6 @@ struct DetailAttributes {
         "dividendPerShares": "DPS",
         "debtToEquitys": "D/E",
         "operatingProfitMargins": "OPM",
-        "assetTurnoverRatios": "ATR",
         "debtToCapitalRatios": "D/C",
         "pegRatios": "PEG"
     ]
@@ -47,7 +45,6 @@ struct DetailAttributes {
         "dividendPerShares": "Dividend per Share",
         "debtToEquitys": "Debt-To-Equity Ratio",
         "operatingProfitMargins": "Operating Profit Margin",
-        "assetTurnoverRatios": "Asset Turnover Ratio",
         "debtToCapitalRatios": "Debt-to-Capital Ratio",
         "pegRatios": "Price/Earnings-to-Growth Ratio"
     ]
@@ -62,7 +59,6 @@ struct DetailAttributes {
         "dividendPerShares": "Take dividend yield and multiply it by the current share price to get DPS. The higher, the more direct income you get.",
         "debtToEquitys": "Measures the degree to which a company is financing its operation through total liabilities versus shareholder equity. The lower the ratio, the lower the leverage, and thus the lower the risk. A ratio over 2 is usually not worth investing.",
         "operatingProfitMargins": "Represents the company's earnings before interest and taxes. Higher and more stable margins are preferred as they help our earnings compound faster. It also could be a sign that the company has an economic moat.",
-        "assetTurnoverRatios": "Signifies how many sales each dollar of assets generated. More efficient companies will be able to generate more profits out of their assets and increase our returns.",
         "debtToCapitalRatios": "Measure of how much interest bearing debt a company is using to finance its business. Useful because if a company fails, it pays debt first, then shareholders, and we want to know the risk. A ratio over 50% is usually not worth investing, unless it's utilities.",
         "pegRatios": "The lower the ratio, the more the stock may be undervalued, given its future earnings expectations. A ratio above 1.0 is usually considered overvalued."
         ]

@@ -36,7 +36,10 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .setDetailStock(detail):
         state.currentDetailStock = detail
         
+    case let .setSelectedPeriod(period):
+        state.selectedPeriod = period
+        
+    case let.setAttributeNames(attributeNames):
+        state.attributeNames = attributeNames
     }
-    
-    
 }
