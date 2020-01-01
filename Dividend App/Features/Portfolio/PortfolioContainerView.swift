@@ -42,6 +42,7 @@ struct PortfolioContainerView: View {
     
     private func reloadDividends() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.store.send(.setSearchResults(results: []))
             self.store.send(updatePortfolio(portfolioStocks: self.portfolioStocks))
         }
     }

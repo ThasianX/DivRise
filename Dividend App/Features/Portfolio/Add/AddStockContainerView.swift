@@ -25,13 +25,13 @@ struct AddStockContainerView: View {
             selectedStock: $selectedStock,
             searchedStocks: store.state.searchResult,
             onCommit: searchStocks
-            )
+        )
             .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
-            .navigationBarTitle(Text("Search"))
-            .onDisappear(perform: clearSearchResults)
+        .animation(.easeInOut)
+        .navigationBarTitle(Text("Search"))
     }
     
     private func searchStocks() {
@@ -56,9 +56,5 @@ struct AddStockContainerView: View {
                 store.send(.addToPortfolio(stock: portfolioStock))
             }
         }
-    }
-    
-    private func clearSearchResults() {
-        store.send(.setSearchResults(results: []))
     }
 }

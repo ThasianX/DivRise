@@ -21,6 +21,7 @@ struct SearchStockRow: View {
             } else {
                 URLImage(URL(string: stock.image)!) { proxy in
                     proxy.image
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .clipped()

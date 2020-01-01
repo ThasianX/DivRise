@@ -26,31 +26,26 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
             if isShowing {
                 VStack {
                     Text(stock!.ticker)
-                        .font(.headline)
+                        .font(.title)
                     
                     Text("Enter your starting annual dividend amount")
-                        .font(.caption)
+                        .font(.headline)
                     
                     HStack {
                         if !input.isEmpty {
                             Text("$")
+                                .font(.system(size: 30))
                         }
                         
-                        TextField("Starting dividend...", text: $input)
+                        TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
                             .keyboardType(.decimalPad)
-                        
-                        Button(action: {
-                            self.input = self.stock!.dividend
-                        }) {
-                            Text("Current")
-                        }
+                            .font(.system(size: 30))
                     }
                     Divider()
                     HStack {
                         Button(action: {
-                            withAnimation {
-                                self.reset()
-                            }
+                            self.reset()
+                            
                         }) {
                             Spacer()
                             Text("Cancel")
@@ -58,25 +53,24 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         }
                         Divider()
                         Button(action: {
-                            withAnimation {
-                                self.onAdd()
-                                self.reset()
-                            }
+                            self.onAdd()
+                            self.reset()
+                            
                         }) {
                             Spacer()
                             Text("Add")
                             Spacer()
                         }
                     }
+                    .frame(height: 30)
                 }
                 .colorInvert()
                 .padding()
                 .background(Color.backgroundColor(for: colorScheme))
                 .cornerRadius(16)
-                .relativeHeight(0.2)
+                .relativeHeight(0.35)
                 .relativeWidth(0.7)
             }
-            
         }
     }
     

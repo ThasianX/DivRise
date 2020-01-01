@@ -53,11 +53,21 @@ struct SearchStockView: View {
             .padding(.horizontal)
             
             List(searchedStocks, id: \.self) { stock in
-                SearchStockRow(stock: stock)
-                    .onTapGesture {
+                Button(action: {
+                    if stock.dividend != "" {
                         self.selectedStock = stock
                         self.showingAlert = true
+                    }
+                }) {
+                    SearchStockRow(stock: stock)
                 }
+                
+                
+//                SearchStockRow(stock: stock)
+//                    .onTapGesture {
+//                        self.selectedStock = stock
+//                        self.showingAlert = true
+//                }
             }
         .resignKeyboardOnDragGesture()
         }
