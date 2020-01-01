@@ -11,13 +11,19 @@ import Foundation
 
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
-        .map { .setSearchResults(results: $0) }
+        .map { AppAction.setSearchResults(results: $0) }
     .eraseToAnyPublisher()
 }
 
 func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
-        .map { .updatePortfolio(stocks: $0) }
+        .map { AppAction.updatePortfolio(stocks: $0) }
+    .eraseToAnyPublisher()
+}
+
+func updateNextDividendDate(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
+    Current.request.updatedUpcomingDividendDates(stocks: portfolioStocks)
+        .map { AppAction.updateUpcomingDivDates(dates: $0) }
     .eraseToAnyPublisher()
 }
 
@@ -147,7 +153,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 details: details
             )
             
-            return .setDetailStock(detail: detailStock)
+            return AppAction.setDetailStock(detail: detailStock)
     }
     .eraseToAnyPublisher()
 }

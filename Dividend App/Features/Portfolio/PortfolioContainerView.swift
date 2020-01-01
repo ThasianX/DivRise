@@ -12,6 +12,7 @@ struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     @State private var showingDetail = false
     @State private var selectedIndex = 0
+    @State private var bottomSheetShown = false
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -19,31 +20,61 @@ struct PortfolioContainerView: View {
         }
     }
     
+    private var upcomingDividendDates: [Date] {
+        store.state.portfolioStocks.compactMap {
+            store.state.allUpcomingDivDates[$0]
+        }
+    }
+    
     var body: some View {
-        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks, onDelete: onDelete)
-            .navigationBarTitle(Text("Portfolio"))
+        ZStack {
+            PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks, onDelete: onDelete, onMove: onMove)
+                .navigationBarTitle(Text("Portfolio"))
+                .onAppear(perform: reloadDividends)
+                .sheet(isPresented: self.$showingDetail) {
+                    PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames)
+                        .environmentObject(self.store)
+            }
             .navigationBarItems(
                 leading: EditButton(),
                 trailing:
                 NavigationLink(destination: AddStockContainerView().environmentObject(self.store)) {
                     Text("Add")
                 }
-        )
-        .sheet(isPresented: self.$showingDetail) {
-            PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames)
-                .environmentObject(self.store)
+            )
+            
+            GeometryReader { geometry in
+                BottomSheetView(
+                    isOpen: self.$bottomSheetShown,
+                    maxHeight: geometry.size.height * 0.9
+                ) {
+                    PortfolioInfoContainerView(portfolioStocks: self.portfolioStocks, upcomingDividendDates: self.upcomingDividendDates)
+                        .onAppear(perform: self.reloadDividendDates)
+                        .environmentObject(self.store)
+                }
+            }.edgesIgnoringSafeArea(.all)
         }
-            .onAppear(perform: reloadDividends)
     }
     
     private func onDelete(at offsets: IndexSet) {
         store.send(.removeFromPortfolio(offsets: offsets))
     }
     
+    private func onMove(from source: IndexSet, to destination: Int) {
+        store.send(.moveStockInPortfolio(previous: source, current: destination))
+    }
+    
     private func reloadDividends() {
+        Logger.info("Appear")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             self.store.send(.setSearchResults(results: []))
             self.store.send(updatePortfolio(portfolioStocks: self.portfolioStocks))
+        }
+    }
+    
+    private func reloadDividendDates() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
         }
     }
 }

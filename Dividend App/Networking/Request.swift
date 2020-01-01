@@ -39,6 +39,21 @@ struct Request {
         .eraseToAnyPublisher()
     }
     
+    func updatedUpcomingDividendDates(stocks: [PortfolioStock]) -> AnyPublisher<[UpcomingDividend], Never> {
+        let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<UpcomingDividend, Never>], Never>(sequence: stocks.map(fetchUpcomingDividendDate))
+        return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
+    }
+    
+    func fetchUpcomingDividendDate(portfolioStock: PortfolioStock) -> AnyPublisher<UpcomingDividend, Never> {
+        return getCompanyCashFlowStatement(identifier: portfolioStock.ticker, period: "quarter")
+            .map {
+                var date = DateFormatter.fullString.date(from: $0.financials.first!.date)!
+                date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
+        }
+        .eraseToAnyPublisher()
+    }
+    
     private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
         let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
         let url = URL(string: urlString)!

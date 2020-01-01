@@ -27,7 +27,7 @@ extension Formatter {
         return formatter
     }()
     
-    static let mediumStyle: DateFormatter = {
+    static let mediumStyleNoDay: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         return formatter
@@ -39,9 +39,9 @@ extension Formatter {
         return formatter
     }()
     
-    static let longDateStyle: DateFormatter = {
+    static let mediumStyle: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .medium
         return formatter
     }()
     
@@ -60,8 +60,11 @@ extension Date {
         return Formatter.year.string(from: self)
     }
     
+    var mediumStyleNoDay: String {
+        return Formatter.mediumStyleNoDay.string(from: self)
+    }
+    
     var mediumStyle: String {
         return Formatter.mediumStyle.string(from: self)
     }
-    
 }

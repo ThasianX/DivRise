@@ -14,6 +14,7 @@ struct PortfolioView: View {
     
     var portfolioStocks: [PortfolioStock]
     var onDelete: (IndexSet) -> Void
+    var onMove: (IndexSet, Int) -> Void
     
     var body: some View {
         List {
@@ -26,7 +27,7 @@ struct PortfolioView: View {
                 }
             }
             .onDelete(perform: onDelete)
+            .onMove(perform: onMove)
         }
-        
     }
 }

@@ -14,7 +14,7 @@ struct AddDividendView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text(Date().mediumStyle)
+            Text(Date().mediumStyleNoDay)
                 .font(.system(size: 60))
                 .bold()
             

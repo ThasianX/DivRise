@@ -20,8 +20,20 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .removeFromPortfolio(offsets):
         state.portfolioStocks.remove(atOffsets: offsets)
         
+    case let .moveStockInPortfolio(previous, current):
+        state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
+
+    case let .updateStartingDividend(double, index):
+        let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
+        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, startingDividend: double, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / double) - 1.0) * 100)
+        
+        state.allPortfolioStocks[state.portfolioStocks[index]] = updatedStock
+        
     case let .updatePortfolio(stocks):
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
+        
+    case let .updateUpcomingDivDates(dates):
+        dates.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
         
     case let .setSearchResults(results):
         state.searchResult = results
