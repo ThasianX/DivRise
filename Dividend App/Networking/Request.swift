@@ -54,6 +54,9 @@ struct Request {
             .map {
                 var date = DateFormatter.fullString.date(from: $0.financials.first!.date)!
                 date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                if Date() > date {
+                    date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                }
                 return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
         }
         .eraseToAnyPublisher()
