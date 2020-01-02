@@ -11,14 +11,9 @@
 import SwiftUI
 
 struct SearchStockView: View {
-    @State private var showCancelButton: Bool = false
-    
     @Binding var query: String
-    @Binding var showingAlert: Bool {
-        didSet {
-            
-        }
-    }
+    @Binding var showCancelButton: Bool
+    @Binding var showingAlert: Bool
     @Binding var selectedStock: SearchStock?
     
     let searchedStocks: [SearchStock]
@@ -29,7 +24,7 @@ struct SearchStockView: View {
             get: { self.query }, 
             set: { self.query = $0
                 self.onCommit()
-        }
+            }
         )
         
         return VStack(alignment: .leading) {
@@ -73,7 +68,9 @@ struct SearchStockView: View {
                     SearchStockRow(stock: stock)
                 }
             }
-        .resignKeyboardOnDragGesture()
+            .transition(.identity)
+            .animation(nil)
+            .resignKeyboardOnDragGesture()
         }
     }
 }
