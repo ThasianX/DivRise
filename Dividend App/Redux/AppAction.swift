@@ -19,6 +19,7 @@ enum AppAction {
     case setSearchResults(results: [SearchStock])
     case addMonthlyDividend(record: Record, amount: Double)
     case setDetailStock(detail: DetailStock?)
+    case setStockNews(news: [StockNews])
     case setSelectedPeriod(period: String)
     case setAttributeNames(attributeNames: [String])
 }

@@ -8,6 +8,22 @@
 
 import Foundation
 
+extension ISO8601DateFormatter {
+    convenience init(_ formatOptions: Options, timeZone: TimeZone = TimeZone(secondsFromGMT: 0)!) {
+        self.init()
+        self.formatOptions = formatOptions
+        self.timeZone = timeZone
+    }
+}
+
+extension DateFormatter {
+    convenience init(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) {
+        self.init()
+        self.dateStyle = dateStyle
+        self.timeStyle = timeStyle
+    }
+}
+
 extension Formatter {
     static let monthMedium: DateFormatter = {
         let formatter = DateFormatter()
@@ -45,6 +61,7 @@ extension Formatter {
         return formatter
     }()
     
+    static let iso8601 = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
 }
 
 extension Date {
@@ -70,5 +87,11 @@ extension Date {
     
     func getPreviousMonth() -> Date? {
         return Calendar.current.date(byAdding: .month, value: -1, to: self)
+    }
+}
+
+extension String {
+    var iso8601: Date? {
+        return Formatter.iso8601.date(from: self)
     }
 }

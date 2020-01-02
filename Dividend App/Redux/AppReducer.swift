@@ -51,6 +51,9 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .setDetailStock(detail):
         state.currentDetailStock = detail
         
+    case let .setStockNews(news):
+        state.currentStockNews = news
+        
     case let .setSelectedPeriod(period):
         state.selectedPeriod = period
         

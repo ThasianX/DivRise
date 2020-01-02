@@ -12,19 +12,19 @@ import Foundation
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
         .map { AppAction.setSearchResults(results: $0) }
-    .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
 }
 
 func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
         .map { AppAction.updatePortfolio(stocks: $0) }
-    .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
 }
 
 func updateNextDividendDate(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedUpcomingDividendDates(stocks: portfolioStocks)
         .map { AppAction.updateUpcomingDivDates(dates: $0) }
-    .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
 }
 
 func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> {
@@ -70,7 +70,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 }
                 
                 if let peRatio = Double(publisher1.0.metrics[i].peRatio),
-                let epsGrowth = Double(financialGrowth.growth[pegRatioIndex].the5YNetIncomeGrowthPerShare!) {
+                    let epsGrowth = Double(financialGrowth.growth[pegRatioIndex].the5YNetIncomeGrowthPerShare!) {
                     peRatios.append(peRatio)
                     pegRatios.append(peRatio / (epsGrowth*100))
                 }
@@ -154,6 +154,26 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             )
             
             return AppAction.setDetailStock(detail: detailStock)
+    }
+    .eraseToAnyPublisher()
+}
+
+func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
+    Current.request.getStockNews(query: query)
+        .map {
+            if $0.status != "ok" {
+                return AppAction.setStockNews(news: [])
+            } else {
+                var stockNews = [StockNews]()
+                for article in $0.articles {
+                    if let image = URL(string: article.urlToImage), let url = URL(string: article.url) {
+                        let interval = Date().timeIntervalSince(article.publishedAt)
+                        let news = StockNews(title: article.title, source: article.source.name, image: image, url: url, publishedSince: interval.timeIntervalAsString())
+                        stockNews.append(news)
+                    }
+                }
+                return AppAction.setStockNews(news: stockNews)
+            }
     }
     .eraseToAnyPublisher()
 }

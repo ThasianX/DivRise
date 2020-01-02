@@ -24,7 +24,7 @@ struct PortfolioDetailContainerView: View {
     }
     
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock)
+        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock, stockNews: store.state.currentStockNews)
         .onAppear(perform: loadDetailStock)
     }
     
@@ -32,6 +32,7 @@ struct PortfolioDetailContainerView: View {
         store.send(.setDetailStock(detail: nil))
         store.send(.setSelectedPeriod(period: selectedPeriod))
         store.send(setCurrentDetailStock(identifier: portfolioStock.ticker, period: selectedPeriod))
+        store.send(setCurrentNews(query: portfolioStock.ticker))
     }
     
     private func getRecords() -> [Record] {

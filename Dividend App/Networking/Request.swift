@@ -23,6 +23,10 @@ internal let companyFinancialRatioURL = "https://financialmodelingprep.com/api/v
 internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/v3/financial-statement-growth/{company}?period={period}"
 internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
 
+// MARK: NewsApi
+internal let newsApiKey = "ee63141d64414d6186b390761526c5ba"
+internal let everythingURL = "https://newsapi.org/v2/everything"
+
 
 struct Request {
     // MARK: Portfolio
@@ -39,6 +43,7 @@ struct Request {
         .eraseToAnyPublisher()
     }
     
+    // MARK: Portfolio Info
     func updatedUpcomingDividendDates(stocks: [PortfolioStock]) -> AnyPublisher<[UpcomingDividend], Never> {
         let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<UpcomingDividend, Never>], Never>(sequence: stocks.map(fetchUpcomingDividendDate))
         return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
@@ -185,6 +190,22 @@ struct Request {
             .dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: StockHistoricalPriceResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: News
+    func getStockNews(query: String) -> AnyPublisher<NewsEverythingResponse, Never> {
+        var url = URL(string: everythingURL)!
+        
+        let queryItems = [URLQueryItem(name: "q", value: query),
+                        URLQueryItem(name: "apiKey", value: newsApiKey)]
+        url.appending(queryItems)
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: NewsEverythingResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }

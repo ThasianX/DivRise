@@ -19,6 +19,7 @@ struct PortfolioDetailView: View {
     let sharePriceRecords: [Record]
     let attributeValues: [[Double]]
     let onPeriodChange: () -> Void
+    let stockNews: [StockNews]
     
     var body: some View {
         ZStack {
@@ -62,6 +63,16 @@ struct PortfolioDetailView: View {
             
             if selectedAttributeIndex != nil {
                 CardView(index: $selectedAttributeIndex, abbreviatedName: getAbbreviatedNames()[selectedAttributeIndex!], fullName: getFullNames()[selectedAttributeIndex!], description: getDescriptions()[selectedAttributeIndex!], records: records.reversed(), sharePriceRecords: sharePriceRecords.reversed(), values: attributeValues[selectedAttributeIndex!].reversed())
+            }
+            
+            if stockNews.count > 0 {
+                ActivityIndicator()
+                    .animated(false)
+                
+                
+            } else {
+                ActivityIndicator()
+                    .animated(true)
             }
         }
     }
