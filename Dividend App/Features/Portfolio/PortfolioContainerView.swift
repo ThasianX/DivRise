@@ -11,8 +11,8 @@ import SwiftUI
 struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     @State private var showingDetail = false
-    @State private var selectedIndex = 0
     @State private var bottomSheetShown = false
+    @State private var selectedIndex = 0
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -39,7 +39,7 @@ struct PortfolioContainerView: View {
                 leading: EditButton(),
                 trailing:
                 NavigationLink(destination: AddStockContainerView().environmentObject(self.store)) {
-                    Text("Add")
+                    Image(systemName: "magnifyingglass")
                 }
             )
             
@@ -65,7 +65,6 @@ struct PortfolioContainerView: View {
     }
     
     private func reloadDividends() {
-        Logger.info("Appear")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             self.store.send(.setSearchResults(results: []))
             self.store.send(updatePortfolio(portfolioStocks: self.portfolioStocks))

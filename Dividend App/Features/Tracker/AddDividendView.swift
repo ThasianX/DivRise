@@ -14,11 +14,11 @@ struct AddDividendView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text(Date().mediumStyleNoDay)
+            Text(Date().getPreviousMonth()!.mediumStyleNoDay)
                 .font(.system(size: 60))
                 .bold()
-            
             Divider()
+            
             HStack {
                 Text("$")
                     .font(.system(size: 50))
@@ -31,14 +31,16 @@ struct AddDividendView: View {
             HStack {
                 Spacer()
                 Button(action: onAdd) {
-                    Image(systemName: "signature")
+                    Image(systemName: "dollarsign.circle.fill")
                     .resizable()
                         .frame(width: 50, height: 50)
                 }
                 Spacer()
             }
+            
+            Spacer()
         }
-        .padding(40)
+        .padding()
     }
 }
 

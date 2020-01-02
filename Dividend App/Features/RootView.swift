@@ -27,6 +27,7 @@ struct RootView: View {
                 Image(systemName: "tray.full.fill")
                 Text("Portfolio")
             }
+            .tag(0)
             
             NavigationView {
                 TrackerContainerView()
@@ -35,6 +36,7 @@ struct RootView: View {
                 Image(systemName: "chart.bar.fill")
                 Text("Dividend Growth")
             }
+            .tag(1)
             
             NavigationView {
                 SettingsContainerView()
@@ -43,6 +45,7 @@ struct RootView: View {
                 Image(systemName: "gear")
                 Text("Settings")
             }
+            .tag(2)
         }
         .onAppear(perform: requestPermissions)
     }

@@ -67,4 +67,8 @@ extension Date {
     var mediumStyle: String {
         return Formatter.mediumStyle.string(from: self)
     }
+    
+    func getPreviousMonth() -> Date? {
+        return Calendar.current.date(byAdding: .month, value: -1, to: self)
+    }
 }

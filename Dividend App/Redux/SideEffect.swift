@@ -28,7 +28,7 @@ func updateNextDividendDate(portfolioStocks: [PortfolioStock]) -> AnyPublisher<A
 }
 
 func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> {
-    let date = Date()
+    let date = Date().getPreviousMonth()!
     let record = Record(month: date.monthMedium, day: nil, year: date.year)
     
     return Just(AppAction.addMonthlyDividend(record: record, amount: dividend))

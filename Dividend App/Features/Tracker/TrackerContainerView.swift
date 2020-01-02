@@ -27,14 +27,14 @@ struct TrackerContainerView: View {
         .navigationBarTitle("Dividend Growth")
             .navigationBarItems(trailing: Button(action: {
                 self.showingAdd = true
-            }) { Text("Add")})
+            }) { Image(systemName: "plus") })
             .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                 AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
         }
     }
     
     private func addMonthlyDividend() {
-        if let dividend = Double(dividendInput) {
+        if let dividend = Double(dividendInput), dividend > 0 {
             showingAdd = false
             store.send(updateMonthlyDividends(dividend: dividend))
         }

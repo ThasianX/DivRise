@@ -9,7 +9,7 @@
 import SwiftUI
 
 public struct BarChartView : View {
-    public var data: [Double]
+    @ObservedObject var data: ChartData
     public var title: String
     public var legend: String?
     public var style: ChartStyle
@@ -28,11 +28,13 @@ public struct BarChartView : View {
             }
         }
     }
+    @State private var currentRecord: Record = .mock
+    
     var isFullWidth:Bool {
         return self.formSize == ChartForm.large
     }
-    public init(data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
-        self.data = data
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+        self.data = ChartData(records: records, points: data)
         self.title = title
         self.legend = legend
         self.style = style
@@ -46,37 +48,41 @@ public struct BarChartView : View {
                 .fill(self.style.backgroundColor)
                 .cornerRadius(20)
                 .shadow(color: Color.gray, radius: self.dropShadow ? 8 : 0)
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 20){
                 HStack{
                     if(!showValue){
                         Text(self.title)
-                            .font(.headline)
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
                             .foregroundColor(self.style.textColor)
                     }else{
-                        Text("$\(self.currentValue, specifier: "%.2f")")
-                            .font(.headline)
+                        Text("\(self.currentRecord.month) \(self.currentRecord.year) - $\(self.currentValue, specifier: "%.2f")")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
                             .foregroundColor(self.style.textColor)
                     }
-                    if(self.formSize == ChartForm.large && self.legend != nil && !showValue) {
-                        Text(self.legend!)
-                            .font(.callout)
-                            .foregroundColor(self.style.accentColor)
-                            .transition(.opacity)
-                            .animation(.easeOut)
-                    }
                     Spacer()
-                    Image(systemName: "waveform.path.ecg")
+                    if !showValue {
+                        Image(systemName: "chart.bar")
                         .imageScale(.large)
                         .foregroundColor(self.style.legendTextColor)
+                    } else {
+                        HStack {
+                            if ((self.currentValue / self.data.points.first!) - 1) >= 0 {
+                                Image(systemName: "arrow.up")
+                                .imageScale(.large)
+                                .foregroundColor(self.style.legendTextColor)
+                                Text("\((((self.currentValue / self.data.points.first!) - 1)*100), specifier: "%.0f")%")
+                            } else {
+                                Image(systemName: "arrow.down")
+                                .imageScale(.large)
+                                .foregroundColor(self.style.legendTextColor)
+                                Text("\((((self.currentValue / self.data.points.first!) - 1)*100), specifier: "%.0f")%")
+                            }
+                        }
+                    }
                 }.padding()
-                BarChartRow(data: data, accentColor: self.style.accentColor, secondGradientAccentColor: self.style.secondGradientColor, touchLocation: self.$touchLocation)
-                if self.legend != nil  && self.formSize == ChartForm.medium {
-                    Text(self.legend!)
-                        .font(.headline)
-                        .foregroundColor(self.style.legendTextColor)
-                        .padding()
-                }
-                
+                BarChartRow(data: data.points, accentColor: self.style.accentColor, secondGradientAccentColor: self.style.secondGradientColor, touchLocation: self.$touchLocation)
             }
         }.frame(minWidth:self.formSize.width, maxWidth: self.isFullWidth ? .infinity : self.formSize.width, minHeight:self.formSize.height, maxHeight:self.formSize.height)
             .gesture(DragGesture()
@@ -84,6 +90,7 @@ public struct BarChartView : View {
                     self.touchLocation = value.location.x/self.formSize.width
                     self.showValue = true
                     self.currentValue = self.getCurrentValue()
+                    self.currentRecord = self.getCurrentRecord()
                 })
                 .onEnded({ value in
                     self.showValue = false
@@ -94,16 +101,21 @@ public struct BarChartView : View {
         )
     }
     
+    func getCurrentRecord()-> Record {
+        let index = max(0,min(self.data.records.count-1,Int(floor((self.touchLocation*self.formSize.width)/(self.formSize.width/CGFloat(self.data.records.count))))))
+        return self.data.records[index]
+    }
+    
     func getCurrentValue()-> Double {
-        let index = max(0,min(self.data.count-1,Int(floor((self.touchLocation*self.formSize.width)/(self.formSize.width/CGFloat(self.data.count))))))
-        return self.data[index]
+        let index = max(0,min(self.data.points.count-1,Int(floor((self.touchLocation*self.formSize.width)/(self.formSize.width/CGFloat(self.data.points.count))))))
+        return self.data.points[index]
     }
 }
 
 #if DEBUG
 struct ChartView_Previews : PreviewProvider {
     static var previews: some View {
-        BarChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary")
+        BarChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary", form: CGSize(width: 300, height: 500))
     }
 }
 #endif

@@ -34,12 +34,12 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                     HStack {
                         if !input.isEmpty {
                             Text("$")
-                                .font(.system(size: 30))
+                                .font(.system(size: 25))
                         }
                         
                         TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
                             .keyboardType(.decimalPad)
-                            .font(.system(size: 30))
+                            .font(.system(size: 25))
                     }
                     Divider()
                     HStack {
