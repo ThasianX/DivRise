@@ -43,7 +43,7 @@ struct RootView: View {
                     .offset(x: -40)
                 Spacer()
                 
-                MenuRight(show: $showInfo)
+                MenuRight(showInfo: $showInfo)
                     .environmentObject(self.store)
                     .offset(x: -16)
             }
@@ -242,13 +242,24 @@ struct MenuButton: View {
 
 struct MenuRight: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @Binding var show: Bool
+    @Binding var showInfo: Bool
     @State var showSearch = false
+    
+    private var portfolioStocks: [PortfolioStock] {
+        store.state.portfolioStocks.compactMap {
+            store.state.allPortfolioStocks[$0]
+        }
+    }
     
     var body: some View {
         return ZStack(alignment: .topTrailing) {
             HStack {
-                Button(action: { self.show.toggle() }) {
+                Button(action: {
+                    self.showInfo.toggle()
+                    if self.showInfo {
+                        self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
+                    }
+                }) {
                     CircleButton(icon: "info.circle")
                 }
                 Button(action: { self.showSearch.toggle() }) {

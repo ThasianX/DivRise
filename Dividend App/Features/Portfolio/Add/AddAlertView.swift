@@ -30,6 +30,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         .foregroundColor(Color("textColor"))
                     
                     Text("Enter your starting annual dividend amount")
+                    .fixedSize(horizontal: false, vertical: true)
                         .font(.headline)
                         .foregroundColor(Color("textColor"))
                     
