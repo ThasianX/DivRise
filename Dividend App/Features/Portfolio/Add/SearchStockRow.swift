@@ -33,15 +33,19 @@ struct SearchStockRow: View {
             
             VStack(alignment: .leading) {
                 Text(stock.ticker)
+                .foregroundColor(Color("textColor"))
                     .font(.headline)
                 
                 Text(stock.fullName)
+                .foregroundColor(Color("textColor"))
                     .font(.subheadline)
             }
             
             Spacer()
             
             Text(stock.marketCap)
+            .foregroundColor(Color("textColor"))
+            .bold()
         }
         .padding()
     }
@@ -50,5 +54,6 @@ struct SearchStockRow: View {
 struct SearchStockRow_Previews: PreviewProvider {
     static var previews: some View {
         SearchStockRow(stock: .mock)
+            .background(Color.black)
     }
 }

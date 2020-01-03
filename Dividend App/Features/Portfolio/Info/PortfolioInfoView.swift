@@ -17,26 +17,37 @@ struct PortfolioInfoView: View {
     let upcomingDates: [Date]
     
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Portfolio Info")
-                .font(.system(size: 30))
+        ZStack {
+            BlurView(style: .systemMaterialDark)
             
-            if upcomingDates.count != portfolioStocks.count {
-                ActivityIndicator()
-                    .animated(true)
-            } else {
-                ActivityIndicator()
-                    .animated(false)
-                List(portfolioStocks.indexed(), id: \.1.self) { index, stock in
-                    Button(action: {
-                        self.selectedIndex = index
-                        self.formShown = true
-                    }) {
-                        PortfolioInfoRow(stock: stock, date: self.upcomingDates[index])
+            VStack(spacing: 0) {
+                TitleView()
+                    .foregroundColor(Color("textColor"))
+                    .blur(radius: formShown ? 20 : 0)
+                    .animation(.default)
+                
+                if upcomingDates.count != portfolioStocks.count {
+                    ActivityIndicator()
+                        .animated(true)
+                } else {
+                    ZStack {
+                        ActivityIndicator()
+                            .animated(false)
+                        VStack(spacing: 5) {
+                            ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
+                                Button(action: {
+                                    self.selectedIndex = index
+                                    self.formShown = true
+                                }) {
+                                    PortfolioInfoRow(stock: stock, date: self.upcomingDates[index])
+                                    Divider()
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
                     }
                 }
-                .transition(.identity)
-                .animation(nil)
+                Spacer()
             }
         }
     }
@@ -48,6 +59,21 @@ struct PortfolioInfoView_Previews: PreviewProvider {
     }
 }
 
+struct TitleView: View {
+    var body: some View {
+        return VStack {
+            HStack {
+                Text("Dividend Info")
+                    .foregroundColor(Color("textColor"))
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                
+                Spacer()
+            }
+        }.padding()
+    }
+}
+
 struct PortfolioInfoRow: View {
     let stock: PortfolioStock
     let date: Date
@@ -56,9 +82,11 @@ struct PortfolioInfoRow: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(stock.ticker)
+                    .foregroundColor(Color("textColor"))
                     .font(.headline)
                     .fontWeight(.heavy)
                 Text(stock.fullName)
+                    .foregroundColor(Color("textColor"))
                     .font(.caption)
                     .lineLimit(nil)
             }
@@ -67,20 +95,28 @@ struct PortfolioInfoRow: View {
             
             VStack {
                 HStack(spacing: 0) {
+                    Spacer()
                     Text("Starting dividend: ")
+                        .foregroundColor(Color("textColor"))
                         .font(.footnote)
                     Text("$\(stock.startingDividend, specifier: "%.2f")")
+                        .foregroundColor(Color("textColor"))
                         .font(.subheadline)
                         .fontWeight(.bold)
                 }
                 HStack(spacing: 0) {
+                    Spacer()
                     Text("Next dividend: ")
+                        .foregroundColor(Color("textColor"))
                         .font(.footnote)
                     Text(date.mediumStyle)
+                        .foregroundColor(Color("textColor"))
                         .font(.subheadline)
                         .fontWeight(.bold)
                 }
             }
         }
+        .padding(.leading, 8)
+        .padding(.trailing, 8)
     }
 }

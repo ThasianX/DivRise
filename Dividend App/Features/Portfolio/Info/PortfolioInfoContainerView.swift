@@ -14,11 +14,21 @@ struct PortfolioInfoContainerView: View {
     @State private var selectedIndex: Int = 0
     @State private var formShown: Bool = false
     
-    let portfolioStocks: [PortfolioStock]
-    let upcomingDividendDates: [Date]
+    private var portfolioStocks: [PortfolioStock] {
+        store.state.portfolioStocks.compactMap {
+            store.state.allPortfolioStocks[$0]
+        }
+    }
+    
+    private var upcomingDividendDates: [Date] {
+        store.state.portfolioStocks.compactMap {
+            store.state.allUpcomingDivDates[$0]
+        }
+    }
     
     var body: some View {
         PortfolioInfoView(selectedIndex: $selectedIndex, formShown: $formShown, portfolioStocks: portfolioStocks, upcomingDates: upcomingDividendDates)
+//            .onAppear(perform: reloadDividendDates)
             .sheet(isPresented: $formShown, onDismiss: {
                 self.startingDividend = ""
             }) {
@@ -56,6 +66,12 @@ struct PortfolioInfoContainerView: View {
                         }
                     }
                 }
+        }
+    }
+    
+    private func reloadDividendDates() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
         }
     }
     

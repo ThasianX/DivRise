@@ -33,7 +33,6 @@ struct AddStockContainerView: View {
                 Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
         .animation(.easeInOut)
-        .navigationBarTitle(Text("Search"))
     }
     
     private func searchStocks() {
@@ -58,5 +57,15 @@ struct AddStockContainerView: View {
                 store.send(.addToPortfolio(stock: portfolioStock))
             }
         }
+    }
+}
+
+struct AddStockContainerView_Previews: PreviewProvider {
+    static var previews: some View {
+        var appState = AppState()
+        appState.searchResult = [.mock, .mock, .mock, .mock]
+        
+        return AddStockContainerView()
+        .environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }

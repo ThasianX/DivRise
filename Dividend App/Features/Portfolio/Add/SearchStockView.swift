@@ -20,13 +20,13 @@ struct SearchStockView: View {
     let onCommit: () -> Void
     
     var body: some View {
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
                     
                     TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
-                        .foregroundColor(.primary)
+                        .foregroundColor(Color("textColor"))
                     
                     Button(action: {
                         self.query = ""
@@ -36,8 +36,8 @@ struct SearchStockView: View {
                     }
                 }
                 .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                .foregroundColor(.secondary)
-                .background(Color(.secondarySystemBackground))
+                .foregroundColor(Color.gray)
+                .background(Color.white)
                 .cornerRadius(10.0)
                 
                 if showCancelButton  {
@@ -65,6 +65,12 @@ struct SearchStockView: View {
             .animation(nil)
             .resignKeyboardOnDragGesture()
         }
+        .background(Color("modalBackground"))
     }
 }
 
+struct SearchStockView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchStockView(query: .constant(""), showCancelButton: .constant(false), showingAlert: .constant(false), selectedStock: .constant(nil), searchedStocks: [.mock, .mock, .mock, .mock], onCommit: { })
+    }
+}

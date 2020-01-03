@@ -26,6 +26,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 rootView: RootView()
                     .environmentObject(store)
             )
+            
+            if #available(iOS 13.0, *) {
+                window.overrideUserInterfaceStyle = .light
+            }
             self.window = window
             window.makeKeyAndVisible()
         }
