@@ -21,12 +21,14 @@ struct SearchStockView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: 8)
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
                     
                     TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
-                        .foregroundColor(Color("textColor"))
+                        .foregroundColor(Color.black)
                     
                     Button(action: {
                         self.query = ""
@@ -66,6 +68,7 @@ struct SearchStockView: View {
             .resignKeyboardOnDragGesture()
         }
         .background(Color("modalBackground"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -13,9 +13,11 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .addToPortfolio(stock):
         if !state.allPortfolioStocks.keys.contains(stock.ticker) {
+            Logger.info("Doesn't contain stock")
             state.portfolioStocks.append(stock.ticker)
         }
         state.allPortfolioStocks[stock.ticker] = stock
+        Logger.info("\(state.allPortfolioStocks)")
         
     case let .removeFromPortfolio(offsets):
         state.portfolioStocks.remove(atOffsets: offsets)
@@ -33,7 +35,9 @@ func appReducer(state: inout AppState, action: AppAction) {
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
         
     case let .updateUpcomingDivDates(dates):
+        Logger.info("\(dates)")
         dates.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
+        Logger.info("\(state.allUpcomingDivDates)")
         
     case let .setSearchResults(results):
         state.searchResult = results

@@ -28,7 +28,7 @@ struct PortfolioInfoContainerView: View {
     
     var body: some View {
         PortfolioInfoView(selectedIndex: $selectedIndex, formShown: $formShown, portfolioStocks: portfolioStocks, upcomingDates: upcomingDividendDates)
-//            .onAppear(perform: reloadDividendDates)
+            .onAppear(perform: reloadDividendDates)
             .sheet(isPresented: $formShown, onDismiss: {
                 self.startingDividend = ""
             }) {

@@ -53,9 +53,9 @@ struct RootView: View {
             MenuView(show: $show)
                 .environmentObject(self.store)
         }
-            //            .onAppear(perform: requestPermissions)
-            .background(Color("background"))
-            .edgesIgnoringSafeArea(.all)
+        .onAppear(perform: requestPermissions)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
     
     private func requestPermissions() { UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in

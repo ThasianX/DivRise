@@ -28,11 +28,16 @@ struct AddStockContainerView: View {
             searchedStocks: store.state.searchResult,
             onCommit: searchStocks
         )
+        .onDisappear(perform: clearSearch)
             .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
         .animation(.easeInOut)
+    }
+    
+    private func clearSearch() {
+            self.store.send(.setSearchResults(results: []))
     }
     
     private func searchStocks() {
