@@ -146,7 +146,7 @@ struct BasicNewsRow: View {
         ZStack {
             if orientation == "vertical" {
                 VStack(alignment: .leading) {
-                    URLImage(self.entry.image, delay: 0.5) { proxy in
+                    URLImage(self.entry.image, incremental: true) { proxy in
                         proxy.image
                             .renderingMode(.original)
                             .resizable()
@@ -184,7 +184,7 @@ struct BasicNewsRow: View {
                     
                     Spacer()
                     
-                    URLImage(self.entry.image, delay: 0.5) { proxy in
+                    URLImage(self.entry.image, incremental: true) { proxy in
                         proxy.image
                             .renderingMode(.original)
                             .resizable()
@@ -207,7 +207,7 @@ struct BigNewsRow: View {
         HStack {
             Spacer()
             VStack(alignment: .leading) {
-                URLImage(self.entry.image, delay: 0.5) { proxy in
+                URLImage(self.entry.image, incremental: true) { proxy in
                     proxy.image
                         .renderingMode(.original)
                         .resizable()

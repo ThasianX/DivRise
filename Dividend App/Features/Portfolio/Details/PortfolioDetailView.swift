@@ -26,23 +26,25 @@ struct PortfolioDetailView: View {
     var body: some View {
         ZStack {
             GeometryReader { geometry in
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        HStack {
-                            Text(self.portfolioStock.ticker)
-                                .font(.largeTitle)
-                            Text(self.portfolioStock.fullName)
-                                .font(.subheadline)
-                            Spacer()
-                            Button(action: {
-                                self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
-                                self.onPeriodChange()
-                            }) {
-                                Text(self.selectedPeriod.capitalized)
-                            }
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Text(self.portfolioStock.ticker)
+                            .font(.largeTitle)
+                        Text(self.portfolioStock.fullName)
+                            .font(.subheadline)
+                        Spacer()
+                        Button(action: {
+                            self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
+                            self.onPeriodChange()
+                        }) {
+                            Text(self.selectedPeriod.capitalized)
                         }
-                        .padding()
-                        
+                    }
+                    .padding()
+                    
+                    Divider()
+                    
+                ScrollView(.vertical, showsIndicators: false) {
                         if self.attributeValues.count > 0 {
                             ZStack {
                                 ActivityIndicator()
