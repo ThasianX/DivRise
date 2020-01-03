@@ -15,6 +15,7 @@ public struct LineChartView: View {
     public var detailPrefix: String
     public var detailSuffix: String
     public var shortenDouble: Bool
+    public var allowGesture: Bool
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
@@ -34,12 +35,13 @@ public struct LineChartView: View {
     @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
     
-    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.detailPrefix = detailPrefix
         self.detailSuffix = detailSuffix
         self.shortenDouble = shortenDouble
+        self.allowGesture = allowGesture
         self.legend = legend
         self.style = style
         self.formSize = form!
@@ -94,7 +96,7 @@ public struct LineChartView: View {
                 .offset(x: 0, y: 0)
             }.frame(width: self.formSize.width, height: self.formSize.height)
         }
-        .gesture(DragGesture()
+        .gesture((allowGesture) ? (DragGesture()
         .onChanged({ value in
             self.touchLocation = value.location
             self.showIndicatorDot = true
@@ -103,7 +105,7 @@ public struct LineChartView: View {
             .onEnded({ value in
                 self.showIndicatorDot = false
             })
-        )
+            ) : nil)
     }
     
     @discardableResult func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {

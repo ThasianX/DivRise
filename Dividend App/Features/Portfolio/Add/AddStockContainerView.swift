@@ -14,6 +14,7 @@ struct AddStockContainerView: View {
     @State private var showingAlert = false
     @State private var alertInput = ""
     @State private var selectedStock: SearchStock? = nil
+    @State private var showCancelButton: Bool = false
     
     @State private var errorMessage = ""
     @State private var showingError = false
@@ -21,6 +22,7 @@ struct AddStockContainerView: View {
     var body: some View {
         SearchStockView(
             query: $query,
+            showCancelButton: $showCancelButton,
             showingAlert: $showingAlert,
             selectedStock: $selectedStock,
             searchedStocks: store.state.searchResult,

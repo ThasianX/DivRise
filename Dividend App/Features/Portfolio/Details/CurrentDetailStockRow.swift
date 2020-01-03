@@ -14,58 +14,46 @@ struct CurrentDetailStockRow: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-        HStack {
-            ForEach(attributeValues.indexed(), id: \.1.self) { i, values in
-                HStack {
-                    VStack {
-                        ForEach(values.indexed(), id: \.1.self) { j, value in
-                            HStack {
-                                Text("\(self.attributeNames[i*3 + j])")
-                                    .font(.caption)
-                                Spacer()
-                                
-                                self.getProperName(name: self.attributeNames[i*3 + j], value: value)
-//                                if self.attributeNames[i*3 + j] == "Payout" || self.attributeNames[i*3 + j] == "Yield" {
-//                                    Text("\(value, specifier: "%.2f")%")
-//                                    .font(.caption)
-//                                } else if self.attributeNames[i*3 + j] == "FCFE" {
-//                                    Text("$\(value, specifier: "%.2f")")
-//                                    .font(.caption)
-//                                } else if self.attributeNames[i*3 + j] == "DPS" {
-//                                    Text("$\(value, specifier: "%.2f")")
-//                                    .font(.caption)
-//                                } else {
-//                                    Text("\(value, specifier: "%.2f")")
-//                                    .font(.caption)
-//                                }
-                                
+            HStack {
+                ForEach(attributeValues.indexed(), id: \.1.self) { i, values in
+                    HStack {
+                        VStack {
+                            ForEach(values.indexed(), id: \.1.self) { j, value in
+                                HStack {
+                                    Text("\(self.attributeNames[i*3 + j])")
+                                        .font(.caption)
+                                    Spacer()
+                                    
+                                    self.getProperName(name: self.attributeNames[i*3 + j], value: value)
+                                }
+                                .frame(width: 120)
                             }
-                            .frame(width: 120)
+                        }
+                        
+                        if self.attributeValues.count-1 > i {
+                            Divider()
                         }
                     }
-                    Divider()
                 }
             }
-        }
-        .padding(40)
-        .frame(height: 60)
-        Spacer()
+            .padding(40)
+            .frame(height: 60)
         }
     }
     
     private func getProperName(name: String, value: Double) -> Text {
         if name == "Payout" || name == "Yield" || name == "OPM" {
             return Text("\(value, specifier: "%.2f")%")
-            .font(.caption)
+                .font(.caption)
         } else if name == "FCFE" {
             return Text("$\(value.shortStringRepresentation)")
-            .font(.caption)
+                .font(.caption)
         } else if name == "DPS" || name == "Price" {
             return Text("$\(value, specifier: "%.2f")")
-            .font(.caption)
+                .font(.caption)
         } else {
             return Text("\(value, specifier: "%.2f")")
-            .font(.caption)
+                .font(.caption)
         }
     }
 }

@@ -39,15 +39,15 @@ struct CardView: View {
                 }
                 
                 if abbreviatedName == "Payout" || abbreviatedName == "Yield" || abbreviatedName == "OPM" {
-                    LineChartView(records: records, data: values, title: abbreviatedName, detailSuffix: "%")
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailSuffix: "%", allowGesture: (index != nil) ? true : false)
                 } else if abbreviatedName == "FCFE" {
-                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$", shortenDouble: true)
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$", shortenDouble: true, allowGesture: (index != nil) ? true : false)
                 } else if abbreviatedName == "DPS" {
-                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$")
+                    LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$", allowGesture: (index != nil) ? true : false)
                 } else if abbreviatedName == "Price" {
-                    LineChartView(records: sharePriceRecords, data: values, title: abbreviatedName, detailPrefix: "$")
+                    LineChartView(records: sharePriceRecords, data: values, title: abbreviatedName, detailPrefix: "$", allowGesture: (index != nil) ? true : false)
                 } else {
-                    LineChartView(records: records, data: values, title: abbreviatedName)
+                    LineChartView(records: records, data: values, title: abbreviatedName, allowGesture: (index != nil) ? true : false)
                 }
                 
                 Spacer()
@@ -56,7 +56,7 @@ struct CardView: View {
                     Button(action: {
                         self.index = nil
                     }) {
-                        Image(systemName: "clear")
+                        Image(systemName: "x.circle.fill")
                         .resizable()
                             .frame(width: 50, height: 50)
                     }

@@ -166,8 +166,8 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
             } else {
                 var stockNews = [StockNews]()
                 for article in $0.articles {
-                    if let image = URL(string: article.urlToImage), let url = URL(string: article.url) {
-                        let interval = Date().timeIntervalSince(article.publishedAt)
+                    if let image = URL(string: article.urlToImage), let url = URL(string: article.url), let publishedDate = article.publishedAt.toLocalTime {
+                        let interval = Date().timeIntervalSince(publishedDate)
                         let news = StockNews(title: article.title, source: article.source.name, image: image, url: url, publishedSince: interval.timeIntervalAsString())
                         stockNews.append(news)
                     }

@@ -61,6 +61,13 @@ extension Formatter {
         return formatter
     }()
     
+    static let utcStyle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        return formatter
+    }()
+    
     static let iso8601 = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
 }
 
@@ -88,9 +95,15 @@ extension Date {
     func getPreviousMonth() -> Date? {
         return Calendar.current.date(byAdding: .month, value: -1, to: self)
     }
+    
+    
 }
 
 extension String {
+    var toLocalTime: Date? {
+        return Formatter.utcStyle.date(from: self)
+    }
+    
     var iso8601: Date? {
         return Formatter.iso8601.date(from: self)
     }

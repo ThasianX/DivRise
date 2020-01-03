@@ -11,33 +11,21 @@
 import SwiftUI
 
 struct SearchStockView: View {
-    @State private var showCancelButton: Bool = false
-    
     @Binding var query: String
-    @Binding var showingAlert: Bool {
-        didSet {
-            
-        }
-    }
+    @Binding var showCancelButton: Bool
+    @Binding var showingAlert: Bool
     @Binding var selectedStock: SearchStock?
     
     let searchedStocks: [SearchStock]
     let onCommit: () -> Void
     
     var body: some View {
-        let binding = Binding<String>(
-            get: { self.query }, 
-            set: { self.query = $0
-                self.onCommit()
-        }
-        )
-        
         return VStack(alignment: .leading) {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
                     
-                    TextField("Search stocks, funds...", text: binding, onCommit: onCommit)
+                    TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
                         .foregroundColor(.primary)
                     
                     Button(action: {
@@ -73,7 +61,9 @@ struct SearchStockView: View {
                     SearchStockRow(stock: stock)
                 }
             }
-        .resignKeyboardOnDragGesture()
+            .transition(.identity)
+            .animation(nil)
+            .resignKeyboardOnDragGesture()
         }
     }
 }
