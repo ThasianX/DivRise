@@ -202,12 +202,14 @@ struct Request {
         var url = URL(string: everythingURL)!
         
         let queryItems = [URLQueryItem(name: "q", value: query),
-                        URLQueryItem(name: "apiKey", value: newsApiKey)]
+                        URLQueryItem(name: "apiKey", value: newsApiKey),
+                        URLQueryItem(name: "language", value: "en"),
+                        URLQueryItem(name: "sortBy", value: "publishedAt")]
         url.appending(queryItems)
         
         return URLSession.shared
             .dataTaskPublisher(for: url)
-            .map { $0.data }
+            .map { return $0.data }
             .decode(type: NewsEverythingResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()

@@ -11,22 +11,19 @@ import Foundation
 // MARK: - Pokedex
 struct NewsEverythingResponse: Codable, Hashable {
     let status: String
-    let totalResults: Int
     let articles: [Article]
     
     // MARK: - Article
     struct Article: Codable, Hashable {
         let source: Source
-        let author, title, articleDescription: String
+        let title: String
         let url: String
         let urlToImage: String
-        let publishedAt: Date
-        let content: String
+        let publishedAt: String
 
         enum CodingKeys: String, CodingKey {
-            case source, author, title
-            case articleDescription = "description"
-            case url, urlToImage, publishedAt, content
+            case source, title
+            case url, urlToImage, publishedAt
         }
     }
 
@@ -37,7 +34,7 @@ struct NewsEverythingResponse: Codable, Hashable {
 }
 
 extension NewsEverythingResponse {
-    static let noResponse = NewsEverythingResponse(status: "", totalResults: 0, articles: [])
+    static let noResponse = NewsEverythingResponse(status: "", articles: [])
 }
 
 

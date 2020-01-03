@@ -14,6 +14,8 @@ struct PortfolioDetailContainerView: View {
     @State var selectedPeriod: String
     @State var attributeNames: [String]
     @State var selectedAttributeIndex: Int? = nil
+    @State var showingSafari: Bool = false
+    @State var url: URL = URL(string: "https://www.google.com/")!
     
     let portfolioStock: PortfolioStock
     
@@ -24,8 +26,11 @@ struct PortfolioDetailContainerView: View {
     }
     
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock, stockNews: store.state.currentStockNews)
-        .onAppear(perform: loadDetailStock)
+        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, showingSafari: $showingSafari, url: $url, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock, stockNews: store.state.currentStockNews)
+            .onAppear(perform: loadDetailStock)
+            .sheet(isPresented: $showingSafari) {
+                SafariView(url: self.url)
+        }
     }
     
     private func loadDetailStock() {

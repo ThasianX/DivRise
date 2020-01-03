@@ -20,19 +20,12 @@ struct SearchStockView: View {
     let onCommit: () -> Void
     
     var body: some View {
-        let binding = Binding<String>(
-            get: { self.query }, 
-            set: { self.query = $0
-                self.onCommit()
-            }
-        )
-        
         return VStack(alignment: .leading) {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
                     
-                    TextField("Search stocks, funds...", text: binding, onCommit: onCommit)
+                    TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
                         .foregroundColor(.primary)
                     
                     Button(action: {

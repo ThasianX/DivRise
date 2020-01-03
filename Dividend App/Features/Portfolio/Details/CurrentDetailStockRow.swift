@@ -29,13 +29,15 @@ struct CurrentDetailStockRow: View {
                                 .frame(width: 120)
                             }
                         }
-                        Divider()
+                        
+                        if self.attributeValues.count-1 > i {
+                            Divider()
+                        }
                     }
                 }
             }
             .padding(40)
             .frame(height: 60)
-            Spacer()
         }
     }
     
