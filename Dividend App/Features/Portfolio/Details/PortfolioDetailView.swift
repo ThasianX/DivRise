@@ -15,6 +15,7 @@ struct PortfolioDetailView: View {
     @Binding var attributeNames: [String]
     @Binding var showingSafari: Bool
     @Binding var url: URL
+    @Binding var show: Bool
     
     let portfolioStock: PortfolioStock
     let records: [Record]
@@ -28,13 +29,15 @@ struct PortfolioDetailView: View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text(self.portfolioStock.ticker)
-                            .font(.largeTitle)
-                            .foregroundColor(Color("textColor"))
-                        Text(self.portfolioStock.fullName)
-                            .font(.subheadline)
-                            .foregroundColor(Color("textColor"))
+                            Text(self.portfolioStock.ticker)
+                                .font(.largeTitle)
+                                .foregroundColor(Color("textColor"))
+                            Text(self.portfolioStock.fullName)
+                                .font(.subheadline)
+                                .foregroundColor(Color("textColor"))
+                        
                         Spacer()
+                        
                         Button(action: {
                             self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
                             self.onPeriodChange()
@@ -42,6 +45,17 @@ struct PortfolioDetailView: View {
                             Text(self.selectedPeriod.capitalized)
                                 .foregroundColor(Color.blue)
                         }
+                        .padding(.trailing, 8)
+                        
+                        Button(action: {
+                            self.show = false
+                        }) {
+                            Image(systemName: "x.circle.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.gray)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     .padding()
                     
@@ -111,6 +125,6 @@ struct PortfolioDetailView: View {
 
 struct PortfolioDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioDetailView(selectedPeriod: .constant("annual"), selectedAttributeIndex: .constant(nil), attributeNames: .constant(["sharePrices", "peRatios", "pegRatios", "payoutRatios", "dividendYields", "dividendPerShares", "fcfes", "netDebtToEBITDAs", "grahamNumbers", "debtToEquitys", "operatingProfitMargins", "debtToCapitalRatios"]), showingSafari: .constant(false), url: .constant(URL(string: "https://www.google.com/")!), portfolioStock: .mock, records: [.mock, .mock], sharePriceRecords: [Record(month: "Sep", day: "2", year: "2019"), Record(month: "Sep", day: "3", year: "2018")], attributeValues: [[2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6]], onPeriodChange: { }, stockNews: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock])
+        PortfolioDetailView(selectedPeriod: .constant("annual"), selectedAttributeIndex: .constant(nil), attributeNames: .constant(["sharePrices", "peRatios", "pegRatios", "payoutRatios", "dividendYields", "dividendPerShares", "fcfes", "netDebtToEBITDAs", "grahamNumbers", "debtToEquitys", "operatingProfitMargins", "debtToCapitalRatios"]), showingSafari: .constant(false), url: .constant(URL(string: "https://www.google.com/")!), show: .constant(true), portfolioStock: .mock, records: [.mock, .mock], sharePriceRecords: [Record(month: "Sep", day: "2", year: "2019"), Record(month: "Sep", day: "3", year: "2018")], attributeValues: [[2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6], [2,6]], onPeriodChange: { }, stockNews: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock])
     }
 }
