@@ -96,7 +96,22 @@ extension Date {
         return Calendar.current.date(byAdding: .month, value: -1, to: self)
     }
     
+    func getHour() -> Int {
+        return Calendar.current.component(.hour, from: self)
+    }
     
+    func getMinute() -> Int {
+        return Calendar.current.component(.minute, from: self)
+    }
+    
+    func dateAtTime(hour: Int, minute: Int) -> Date {
+         let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        
+        return calendar.date(from: dateComponents)!
+    }
 }
 
 extension String {

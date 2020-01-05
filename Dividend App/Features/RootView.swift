@@ -58,38 +58,20 @@ struct RootView: View {
         .onAppear(perform: requestPermissions)
         .background(Color("background"))
         .edgesIgnoringSafeArea(.all)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            Logger.info("Will enter foreground notification recieved")
+            self.requestPermissions()
+        }
     }
     
-    private func requestPermissions() { UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+    private func requestPermissions() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
         if success {
             Logger.info("Permission granted")
-            if !self.store.state.notificationsSet {
-                var component = DateComponents()
-                component.day = 1
-                component.hour = 10
-                let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
-                
-                let content = UNMutableNotificationContent()
-                content.title = "Input monthly dividend!"
-                
-                let id = UUID().uuidString
-                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-                
-                UNUserNotificationCenter.current().add(request) { error in
-                    if error != nil {
-                        Logger.info("Couldn't set notification")
-                    } else {
-                        
-                        DispatchQueue.main.async {
-                            self.store.send(.toggleNotifications(enabled: true))
-                            Logger.info("Notification set")
-                        }
-                    }
-                }
-            }
+            self.setNotification()
         } else if let error = error {
             Logger.info(error.localizedDescription)
-        }
+            }
         }
         
         UNUserNotificationCenter.current().getNotificationSettings() { settings in
@@ -106,6 +88,34 @@ struct RootView: View {
                 
             @unknown default:
                 ()
+            }
+        }
+    }
+    
+    private func setNotification() {
+        if !self.store.state.notificationsSet {
+            var component = DateComponents()
+            component.day = self.store.state.notificationDay
+            component.hour = self.store.state.notificationTime.getHour()
+            component.minute = self.store.state.notificationTime.getMinute()
+            let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Input monthly dividend!"
+            
+            let id = UUID().uuidString
+            let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                if error != nil {
+                    Logger.info("Couldn't set notification")
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.store.send(.toggleNotifications(enabled: true))
+                        Logger.info("Notification set")
+                    }
+                }
             }
         }
     }
@@ -170,15 +180,17 @@ struct MenuView: View {
                     if item.title == "Dividend Tracker" {
                         Button(action: { self.showDividendTracker.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
-                                .sheet(isPresented: self.$showDividendTracker) { TrackerContainerView()
-                                    .environmentObject(self.store)
+                                .sheet(isPresented: self.$showDividendTracker) {
+                                    TrackerContainerView()
+                                        .environmentObject(self.store)
                             }
                         }
                     } else if item.title == "Settings" {
                         Button(action: { self.showSettings.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
-                                .sheet(isPresented: self.$showSettings) { SettingsContainerView()
-                                    .environmentObject(self.store)
+                                .sheet(isPresented: self.$showSettings) {
+                                    SettingsContainerView(receive: self.store.state.notificationsSet, daySelection: self.store.state.notificationDay, dateSelection: self.store.state.notificationTime, show: self.$showSettings)
+                                        .environmentObject(self.store)
                             }
                         }
                     } else {

@@ -10,6 +10,9 @@ import Foundation
 
 enum AppAction {
     case toggleNotifications(enabled: Bool)
+    case setNotificationDay(day: Int)
+    case setNotificationTime(time: Date)
+    
     case addToPortfolio(stock: PortfolioStock)
     case removeFromPortfolio(offsets: IndexSet)
     case moveStockInPortfolio(previous: IndexSet, current: Int)
@@ -17,8 +20,11 @@ enum AppAction {
     case updatePortfolio(stocks: [PortfolioStock])
     case addUpcomingDivDate(dividend: UpcomingDividend)
     case updateUpcomingDivDates(dividends: [UpcomingDividend])
+    
     case setSearchResults(results: [SearchStock])
+    
     case addMonthlyDividend(record: Record, amount: Double)
+    
     case setDetailStock(detail: DetailStock?)
     case setStockNews(news: [StockNews])
     case setSelectedPeriod(period: String)

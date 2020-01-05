@@ -11,6 +11,12 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .toggleNotifications(enabled):
         state.notificationsSet = enabled
         
+    case let .setNotificationDay(day):
+        state.notificationDay = day
+        
+    case let .setNotificationTime(time):
+        state.notificationTime = time
+        
     case let .addToPortfolio(stock):
         if !state.allPortfolioStocks.keys.contains(stock.ticker) {
             Logger.info("Doesn't contain stock")
@@ -24,7 +30,7 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .moveStockInPortfolio(previous, current):
         state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
-
+        
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
         let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100)
@@ -52,7 +58,7 @@ func appReducer(state: inout AppState, action: AppAction) {
             state.allMonthlyRecords.append(record)
             state.allMonthlyDividends.append(dividend)
         }
-
+        
     case let .setDetailStock(detail):
         state.currentDetailStock = detail
         

@@ -9,11 +9,18 @@
 import Foundation
 
 struct AppState: Codable, Equatable {
+    // MARK: Notifications
     var notificationsSet: Bool = false
+    var notificationDay: Int = 1
+    var notificationTime: Date = Date().dateAtTime(hour: 7, minute: 0)
+    
+    // MARK: Notifications
     var allPortfolioStocks: [String: PortfolioStock] = [:]
     var allUpcomingDivDates: [String: Date] = [:]
     var portfolioStocks: [String] = []
+    
     var searchResult: [SearchStock] = []
+    
     var allMonthlyRecords: [Record] = []
     var allMonthlyDividends: [Double] = []
     var currentDetailStock: DetailStock?
