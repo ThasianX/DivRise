@@ -22,10 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(
-                rootView: RootView()
-                    .environmentObject(store)
+            window.rootViewController = HostingController(
+                rootView: AnyView(RootView()
+                    .environmentObject(store))
             )
+            
+            if #available(iOS 13.0, *) {
+                // Textfield becomes unreadable in dark mode
+                window.overrideUserInterfaceStyle = .light
+            }
             self.window = window
             window.makeKeyAndVisible()
         }

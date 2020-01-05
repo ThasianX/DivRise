@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUIX
 
 struct AddAlertView<Presenting>: View where Presenting: View  {
-    @SwiftUI.Environment(\.colorScheme) var colorScheme: ColorScheme
+    @SwiftUI.Environment(\.colorScheme) var colorScheme
     @Binding var isShowing: Bool
     @Binding var input: String
     
@@ -27,19 +27,31 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                 VStack {
                     Text(stock!.ticker)
                         .font(.title)
+                        .foregroundColor(Color("textColor"))
                     
                     Text("Enter your starting annual dividend amount")
+                    .fixedSize(horizontal: false, vertical: true)
                         .font(.headline)
+                        .foregroundColor(Color("textColor"))
                     
                     HStack {
                         if !input.isEmpty {
                             Text("$")
                                 .font(.system(size: 25))
+                                .foregroundColor(Color("textColor"))
                         }
                         
-                        TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
+                        if colorScheme == ColorScheme.dark {
+                            TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
                             .keyboardType(.decimalPad)
                             .font(.system(size: 25))
+                            .foregroundColor(Color("textColor"))
+                        } else {
+                          TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
+                            .keyboardType(.decimalPad)
+                            .font(.system(size: 25))
+                            .colorInvert()
+                        }
                     }
                     Divider()
                     HStack {
@@ -49,6 +61,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         }) {
                             Spacer()
                             Text("Cancel")
+                                .foregroundColor(.orange)
                             Spacer()
                         }
                         Divider()
@@ -59,14 +72,14 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         }) {
                             Spacer()
                             Text("Add")
+                            .foregroundColor(.orange)
                             Spacer()
                         }
                     }
                     .frame(height: 30)
                 }
-                .colorInvert()
                 .padding()
-                .background(Color.backgroundColor(for: colorScheme))
+                .background(Color.black)
                 .cornerRadius(16)
                 .relativeHeight(0.35)
                 .relativeWidth(0.7)

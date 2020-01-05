@@ -73,11 +73,13 @@ public struct BarChartView : View {
                                 .imageScale(.large)
                                 .foregroundColor(self.style.legendTextColor)
                                 Text("\((((self.currentValue / self.data.points.first!) - 1)*100), specifier: "%.0f")%")
+                                .foregroundColor(self.style.textColor)
                             } else {
                                 Image(systemName: "arrow.down")
                                 .imageScale(.large)
                                 .foregroundColor(self.style.legendTextColor)
                                 Text("\((((self.currentValue / self.data.points.first!) - 1)*100), specifier: "%.0f")%")
+                                .foregroundColor(self.style.textColor)
                             }
                         }
                     }

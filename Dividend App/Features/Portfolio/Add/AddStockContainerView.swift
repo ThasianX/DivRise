@@ -28,12 +28,16 @@ struct AddStockContainerView: View {
             searchedStocks: store.state.searchResult,
             onCommit: searchStocks
         )
+        .onDisappear(perform: clearSearch)
             .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
         }
         .animation(.easeInOut)
-        .navigationBarTitle(Text("Search"))
+    }
+    
+    private func clearSearch() {
+            self.store.send(.setSearchResults(results: []))
     }
     
     private func searchStocks() {
@@ -54,9 +58,20 @@ struct AddStockContainerView: View {
                 showingError = true
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
-                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
+                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
                 store.send(.addToPortfolio(stock: portfolioStock))
+                store.send(addNextDividendDate(portfolioStock: portfolioStock))
             }
         }
+    }
+}
+
+struct AddStockContainerView_Previews: PreviewProvider {
+    static var previews: some View {
+        var appState = AppState()
+        appState.searchResult = [.mock, .mock, .mock, .mock]
+        
+        return AddStockContainerView()
+        .environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }

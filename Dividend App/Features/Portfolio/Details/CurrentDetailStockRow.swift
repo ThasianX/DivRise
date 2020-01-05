@@ -22,6 +22,7 @@ struct CurrentDetailStockRow: View {
                                 HStack {
                                     Text("\(self.attributeNames[i*3 + j])")
                                         .font(.caption)
+                                        .foregroundColor(Color("textColor"))
                                     Spacer()
                                     
                                     self.getProperName(name: self.attributeNames[i*3 + j], value: value)
@@ -45,15 +46,19 @@ struct CurrentDetailStockRow: View {
         if name == "Payout" || name == "Yield" || name == "OPM" {
             return Text("\(value, specifier: "%.2f")%")
                 .font(.caption)
+                .foregroundColor(Color("textColor"))
         } else if name == "FCFE" {
             return Text("$\(value.shortStringRepresentation)")
                 .font(.caption)
+                .foregroundColor(Color("textColor"))
         } else if name == "DPS" || name == "Price" {
             return Text("$\(value, specifier: "%.2f")")
                 .font(.caption)
+                .foregroundColor(Color("textColor"))
         } else {
             return Text("\(value, specifier: "%.2f")")
                 .font(.caption)
+                .foregroundColor(Color("textColor"))
         }
     }
 }
@@ -61,5 +66,6 @@ struct CurrentDetailStockRow: View {
 struct CurrentDetailStockRow_Previews: PreviewProvider {
     static var previews: some View {
         CurrentDetailStockRow(attributeNames: ["P/E", "Payout", "ND/EBITDA", "Graham", "ROIC", "Yield"], attributeValues: [[5, 50, 45.65], [5, 3]])
+            .background(Color.black)
     }
 }

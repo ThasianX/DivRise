@@ -21,9 +21,15 @@ func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppActio
         .eraseToAnyPublisher()
 }
 
+func addNextDividendDate(portfolioStock: PortfolioStock) -> AnyPublisher<AppAction, Never> {
+    Current.request.updatedUpcomingDividendDates(stocks: [portfolioStock])
+        .map { AppAction.addUpcomingDivDate(dividend: $0.first!) }
+        .eraseToAnyPublisher()
+}
+
 func updateNextDividendDate(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedUpcomingDividendDates(stocks: portfolioStocks)
-        .map { AppAction.updateUpcomingDivDates(dates: $0) }
+        .map { AppAction.updateUpcomingDivDates(dividends: $0) }
         .eraseToAnyPublisher()
 }
 
@@ -162,11 +168,12 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getStockNews(query: query)
         .map {
             if $0.status != "ok" {
+                Logger.info("\($0.status)")
                 return AppAction.setStockNews(news: [])
             } else {
                 var stockNews = [StockNews]()
                 for article in $0.articles {
-                    if let image = URL(string: article.urlToImage), let url = URL(string: article.url), let publishedDate = article.publishedAt.toLocalTime {
+                    if let imageUrl = article.urlToImage, let image = URL(string: imageUrl), let url = URL(string: article.url), let publishedDate = article.publishedAt.toLocalTime {
                         let interval = Date().timeIntervalSince(publishedDate)
                         let news = StockNews(title: article.title, source: article.source.name, image: image, url: url, publishedSince: interval.timeIntervalAsString())
                         stockNews.append(news)
