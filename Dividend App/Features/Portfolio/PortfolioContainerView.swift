@@ -23,7 +23,6 @@ struct PortfolioContainerView: View {
     var body: some View {
         ZStack {
             PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks)
-                .navigationBarTitle(Text("Portfolio"))
                 .onAppear(perform: reloadDividends)
                 .sheet(isPresented: self.$showingDetail) {
                     PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames)

@@ -181,7 +181,7 @@ struct MenuView: View {
                         Button(action: { self.showDividendTracker.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
                                 .sheet(isPresented: self.$showDividendTracker) {
-                                    TrackerContainerView()
+                                    TrackerContainerView(show: self.$showDividendTracker)
                                         .environmentObject(self.store)
                             }
                         }
@@ -272,7 +272,7 @@ struct MenuRight: View {
                 Button(action: { self.showSearch.toggle() }) {
                     CircleButton(icon: "magnifyingglass.circle")
                         .sheet(isPresented: self.$showSearch) {
-                            AddStockContainerView()
+                            AddStockContainerView(show: self.$showSearch)
                                 .environmentObject(self.store)
                     }
                 }

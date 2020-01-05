@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AddStockContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
+    
+    @Binding var show: Bool
+    
     @State private var query = ""
     @State private var showingAlert = false
     @State private var alertInput = ""
@@ -20,20 +23,34 @@ struct AddStockContainerView: View {
     @State private var showingError = false
     
     var body: some View {
-        SearchStockView(
-            query: $query,
-            showCancelButton: $showCancelButton,
-            showingAlert: $showingAlert,
-            selectedStock: $selectedStock,
-            searchedStocks: store.state.searchResult,
-            onCommit: searchStocks
-        )
-        .onDisappear(perform: clearSearch)
-            .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
-            .alert(isPresented: $showingError) {
-                Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
+        NavigationView {
+            SearchStockView(
+                query: $query,
+                showCancelButton: $showCancelButton,
+                showingAlert: $showingAlert,
+                selectedStock: $selectedStock,
+                searchedStocks: store.state.searchResult,
+                onCommit: searchStocks
+            )
+            .onDisappear(perform: clearSearch)
+                .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
+                .alert(isPresented: $showingError) {
+                    Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
+            }
+            .animation(.easeInOut)
+            .navigationBarTitle(Text("Add Stocks"))
+                .navigationBarItems(trailing:
+                    Button(action: {
+                    self.show = false
+                }) {
+                    Image(systemName: "x.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color.gray)
+                }
+                .buttonStyle(PlainButtonStyle())
+            )
         }
-        .animation(.easeInOut)
     }
     
     private func clearSearch() {
@@ -71,7 +88,7 @@ struct AddStockContainerView_Previews: PreviewProvider {
         var appState = AppState()
         appState.searchResult = [.mock, .mock, .mock, .mock]
         
-        return AddStockContainerView()
+        return AddStockContainerView(show: .constant(true))
         .environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }
