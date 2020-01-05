@@ -10,21 +10,31 @@ import SwiftUI
 import SwiftUIX
 
 struct PortfolioInfoView: View {
+    @SwiftUI.Environment(\.editMode) var editMode
+    @Binding var showEditInfo: Bool
     @Binding var selectedIndex: Int
-    @Binding var formShown: Bool
     
-    var portfolioStocks: [PortfolioStock]
+    let portfolioStocks: [PortfolioStock]
     let upcomingDates: [Date]
+    
+    let onDelete: (IndexSet) -> Void
+    let onMove: (IndexSet, Int) -> Void
     
     var body: some View {
         ZStack {
             BlurView(style: .systemMaterialDark)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-                TitleView()
-                    .foregroundColor(Color("textColor"))
-                    .blur(radius: formShown ? 20 : 0)
-                    .animation(.default)
+                HStack {
+                    TitleView()
+                        .foregroundColor(Color("textColor"))
+                        .blur(radius: editMode?.wrappedValue == EditMode.active ? 20 : 0)
+                        .animation(.default)
+                    
+                    EditButton()
+                        .padding()
+                }
                 
                 if upcomingDates.count != portfolioStocks.count {
                     ActivityIndicator()
@@ -33,18 +43,19 @@ struct PortfolioInfoView: View {
                     ZStack {
                         ActivityIndicator()
                             .animated(false)
-                        VStack(spacing: 5) {
+                        List {
                             ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
                                 Button(action: {
                                     self.selectedIndex = index
-                                    self.formShown = true
+                                    self.showEditInfo = true
                                 }) {
                                     PortfolioInfoRow(stock: stock, date: self.upcomingDates[index])
-                                    Divider()
                                 }
-                                .buttonStyle(PlainButtonStyle())
                             }
+                            .onDelete(perform: onDelete)
+                            .onMove(perform: onMove)
                         }
+                        .animation(.easeInOut)
                     }
                 }
                 Spacer()
@@ -55,7 +66,7 @@ struct PortfolioInfoView: View {
 
 struct PortfolioInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioInfoView(selectedIndex: .constant(0), formShown: .constant(false), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock], upcomingDates: [Date(), Date(), Date(), Date(), Date(), Date()])
+        PortfolioInfoView(showEditInfo: .constant(false), selectedIndex: .constant(0), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock], upcomingDates: [Date(), Date(), Date(), Date(), Date(), Date()], onDelete: { _ in }, onMove: { _, _ in})
     }
 }
 

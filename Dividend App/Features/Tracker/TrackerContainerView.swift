@@ -23,14 +23,17 @@ struct TrackerContainerView: View {
     }
     
     var body: some View {
-        TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
-        .navigationBarTitle("Dividend Growth")
-            .navigationBarItems(trailing: Button(action: {
-                self.showingAdd = true
-            }) { Image(systemName: "plus") })
-            .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
-                AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
+        NavigationView {
+            TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
+                .navigationBarItems(trailing: Button(action: {
+                    self.showingAdd = true
+                }) { Image(systemName: "plus") })
+                .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
+                    AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
+            }
+            .navigationBarTitle(Text("Dividend Tracker"))
         }
+        
     }
     
     private func addMonthlyDividend() {
@@ -41,4 +44,12 @@ struct TrackerContainerView: View {
     }
 }
 
-
+struct TrackerContainerView_Previews: PreviewProvider {
+    static var previews: some View {
+        var appState = AppState()
+        appState.allMonthlyRecords = []
+        appState.allMonthlyDividends = []
+        
+        return TrackerContainerView().environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
+    }
+}

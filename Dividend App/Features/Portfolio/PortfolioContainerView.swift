@@ -22,40 +22,14 @@ struct PortfolioContainerView: View {
     
     var body: some View {
         ZStack {
-            PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks, onDelete: onDelete, onMove: onMove)
+            PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks)
                 .navigationBarTitle(Text("Portfolio"))
                 .onAppear(perform: reloadDividends)
                 .sheet(isPresented: self.$showingDetail) {
                     PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames)
                         .environmentObject(self.store)
             }
-//            .navigationBarItems(
-//                leading: EditButton(),
-//                trailing:
-//                NavigationLink(destination: AddStockContainerView().environmentObject(self.store)) {
-//                    Image(systemName: "magnifyingglass")
-//                }
-//            )
-            
-//            GeometryReader { geometry in
-//                BottomSheetView(
-//                    isOpen: self.$bottomSheetShown,
-//                    maxHeight: geometry.size.height * 0.9
-//                ) {
-//                    PortfolioInfoContainerView(portfolioStocks: self.portfolioStocks, upcomingDividendDates: self.upcomingDividendDates)
-//                        .onAppear(perform: self.reloadDividendDates)
-//                        .environmentObject(self.store)
-//                }
-//            }.edgesIgnoringSafeArea(.all)
         }
-    }
-    
-    private func onDelete(at offsets: IndexSet) {
-        store.send(.removeFromPortfolio(offsets: offsets))
-    }
-    
-    private func onMove(from source: IndexSet, to destination: Int) {
-        store.send(.moveStockInPortfolio(previous: source, current: destination))
     }
     
     private func reloadDividends() {

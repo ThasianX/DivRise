@@ -10,9 +10,9 @@ import SwiftUI
 
 struct PortfolioInfoContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @State private var startingDividend: String = ""
+    
+    @State private var showEditInfo: Bool = false
     @State private var selectedIndex: Int = 0
-    @State private var formShown: Bool = false
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -27,45 +27,10 @@ struct PortfolioInfoContainerView: View {
     }
     
     var body: some View {
-        PortfolioInfoView(selectedIndex: $selectedIndex, formShown: $formShown, portfolioStocks: portfolioStocks, upcomingDates: upcomingDividendDates)
+        PortfolioInfoView(showEditInfo: $showEditInfo, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks, upcomingDates: upcomingDividendDates, onDelete: onDelete, onMove: onMove)
             .onAppear(perform: reloadDividendDates)
-            .sheet(isPresented: $formShown, onDismiss: {
-                self.startingDividend = ""
-            }) {
-                Form {
-                    Section(header: Text("Starting Dividend").font(.system(size: 20))) {
-                        HStack {
-                            if !self.startingDividend.isEmpty {
-                                Text("$")
-                                    .font(.system(size: 50))
-                            }
-                            TextField("$\(self.portfolioStocks[self.selectedIndex].startingDividend, specifier: "%.2f")", text: self.$startingDividend)
-                                .keyboardType(.decimalPad)
-                                .font(.system(size: 50))
-                        }
-                        
-                    }
-                    
-                    Section {
-                        Button(action: {
-                            withAnimation {
-                                self.onUpdate()
-                            }
-                        }) {
-                            Text("Update")
-                                .foregroundColor(.green)
-                        }
-                        
-                        Button(action: {
-                            withAnimation {
-                                self.formShown.toggle()
-                            }
-                        }) {
-                            Text("Cancel")
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
+            .sheet(isPresented: $showEditInfo) {
+                EditInfoView(showEditInfo: self.$showEditInfo, portfolioStock: self.portfolioStocks[self.selectedIndex],  selectedIndex: self.selectedIndex, onUpdate: self.onUpdate)
         }
     }
     
@@ -75,10 +40,26 @@ struct PortfolioInfoContainerView: View {
         }
     }
     
-    private func onUpdate() {
-        if let val = Double(startingDividend) {
-            store.send(.updateStartingDividend(double: val, index: selectedIndex))
-            formShown.toggle()
-        }
+    private func onDelete(at offsets: IndexSet) {
+        store.send(.removeFromPortfolio(offsets: offsets))
+    }
+    
+    private func onMove(from source: IndexSet, to destination: Int) {
+        store.send(.moveStockInPortfolio(previous: source, current: destination))
+    }
+    
+    private func onUpdate(index: Int, value: Double) {
+        store.send(.updateStartingDividend(index: index, value: value))
+    }
+}
+
+struct PortfolioInfoContainerView_Previews: PreviewProvider {
+    static var previews: some View {
+        var appState = AppState()
+        appState.portfolioStocks = ["AAPL", "AAPL", "AAPL", "AAPL", "AAPL", "AAPL", "AAPL", "AAPL", "AAPL"]
+        appState.allPortfolioStocks = ["AAPL": .mock]
+        appState.allUpcomingDivDates = ["AAPL": Date()]
+        
+        return PortfolioInfoContainerView().environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }

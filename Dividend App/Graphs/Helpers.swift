@@ -38,6 +38,13 @@ public struct Styles {
         textColor: Color.black,
         legendTextColor: Color.gray)
     
+    public static let lineChartDarkStyle = ChartStyle(
+    backgroundColor: Color.black,
+    accentColor: Colors.OrangeStart,
+    secondGradientColor: Colors.OrangeEnd,
+    textColor: Color.white,
+    legendTextColor: Color.gray)
+    
     public static let barChartStyleOrangeLight = ChartStyle(
         backgroundColor: Color.white,
         accentColor: Colors.OrangeStart,

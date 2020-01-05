@@ -38,7 +38,7 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
         }
         .eraseToAnyPublisher()
     }
@@ -209,7 +209,9 @@ struct Request {
         
         return URLSession.shared
             .dataTaskPublisher(for: url)
-            .map { return $0.data }
+            .map {
+                $0.data.printJSON()
+                return $0.data }
             .decode(type: NewsEverythingResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()

@@ -22,6 +22,8 @@ struct RootView: View {
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
         UITableView.appearance().separatorColor = UIColor.gray
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     var body: some View {
@@ -135,7 +137,7 @@ struct MenuRow: View {
             
             Text(text)
                 .font(.headline)
-                .foregroundColor(.primary)
+                .foregroundColor(Color("textColor"))
             
             Spacer()
         }
@@ -179,6 +181,8 @@ struct MenuView: View {
                                     .environmentObject(self.store)
                             }
                         }
+                    } else {
+                        MenuRow(image: item.icon, text: item.title)
                     }
                 }
                 Spacer()
@@ -186,7 +190,7 @@ struct MenuView: View {
             .padding(.top, 20)
             .padding(30)
             .frame(minWidth: 0, maxWidth: 360)
-            .background(Color.gray)
+            .background(Color("button"))
             .cornerRadius(30)
             .padding(.trailing, 60)
             .shadow(radius: 20)
@@ -245,20 +249,11 @@ struct MenuRight: View {
     @Binding var showInfo: Bool
     @State var showSearch = false
     
-    private var portfolioStocks: [PortfolioStock] {
-        store.state.portfolioStocks.compactMap {
-            store.state.allPortfolioStocks[$0]
-        }
-    }
-    
     var body: some View {
         return ZStack(alignment: .topTrailing) {
             HStack {
                 Button(action: {
                     self.showInfo.toggle()
-                    if self.showInfo {
-                        self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
-                    }
                 }) {
                     CircleButton(icon: "info.circle")
                 }

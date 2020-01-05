@@ -18,7 +18,7 @@ struct NewsEverythingResponse: Codable, Hashable {
         let source: Source
         let title: String
         let url: String
-        let urlToImage: String
+        let urlToImage: String?
         let publishedAt: String
 
         enum CodingKeys: String, CodingKey {

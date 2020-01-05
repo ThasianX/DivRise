@@ -13,8 +13,6 @@ struct PortfolioView: View {
     @Binding var selectedIndex: Int
     
     var portfolioStocks: [PortfolioStock]
-    var onDelete: (IndexSet) -> Void
-    var onMove: (IndexSet, Int) -> Void
     
     var body: some View {
         VStack {
@@ -41,8 +39,6 @@ struct PortfolioView: View {
                         PortfolioStockView(portfolioStock: stock)
                     }
                 }
-                .onDelete(perform: onDelete)
-                .onMove(perform: onMove)
             }
         }
         .padding(.top, 70)
@@ -51,7 +47,7 @@ struct PortfolioView: View {
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioView(showingDetail: .constant(false), selectedIndex: .constant(0), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], onDelete: { _ in }, onMove: { _, _ in })
+        PortfolioView(showingDetail: .constant(false), selectedIndex: .constant(0), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock])
             .background(Color("background"))
     }
 }
