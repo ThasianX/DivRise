@@ -10,7 +10,7 @@ import SwiftUI
 
 extension View {
     
-    func addAlert(isShowing: Binding<Bool>,
+    func addTextFieldAlert(isShowing: Binding<Bool>,
                   stock: SearchStock?,
                   input: Binding<String>,
                   onAdd: @escaping () -> Void) -> some View {
@@ -20,8 +20,6 @@ extension View {
                      stock: stock,
                      onAdd: onAdd)
     }
-    
-    // Credits: https://vmanot.com/reimplementing-swiftui-s-deprecated-relative-view-sizing-functions
     
     func relativeHeight(
         _ ratio: CGFloat,
@@ -60,5 +58,4 @@ extension View {
             )
         }
     }
-    
 }

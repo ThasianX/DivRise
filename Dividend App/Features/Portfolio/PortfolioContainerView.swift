@@ -10,6 +10,9 @@ import SwiftUI
 
 struct PortfolioContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
+    @State private var showingDetail = false
+    @State private var bottomSheetShown = false
+    @State private var selectedIndex = 0
     
     private var portfolioStocks: [PortfolioStock] {
         store.state.portfolioStocks.compactMap {
@@ -18,25 +21,24 @@ struct PortfolioContainerView: View {
     }
     
     var body: some View {
-        PortfolioView(portfolioStocks: portfolioStocks, onDelete: onDelete)
-            .navigationBarTitle(Text("portfolio"))
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing:
-                NavigationLink(destination: AddStockContainerView().environmentObject(self.store)) {
-                    Text("Add")
-                }
-        )
-        .onAppear(perform: reloadDividends)
-    }
-    
-    private func onDelete(at offsets: IndexSet) {
-        store.send(.removeFromPortfolio(offsets: offsets))
+        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, portfolioStocks: portfolioStocks)
+            .onAppear(perform: reloadDividends)
+            .sheet(isPresented: self.$showingDetail) {
+                PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames, show: self.$showingDetail)
+                    .environmentObject(self.store)
+        }
     }
     
     private func reloadDividends() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.store.send(.setSearchResults(results: []))
             self.store.send(updatePortfolio(portfolioStocks: self.portfolioStocks))
+        }
+    }
+    
+    private func reloadDividendDates() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
         }
     }
 }

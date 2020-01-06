@@ -8,39 +8,63 @@
 
 import SwiftUI
 
-struct PortfolioStockView: View {
-    var portfolioStock: PortfolioStock
+struct PortfolioView: View {
+    @Binding var showingDetail: Bool
+    @Binding var selectedIndex: Int
+    
+    var portfolioStocks: [PortfolioStock]
     
     var body: some View {
-        HStack {
-            Text(portfolioStock.ticker)
-            
-            Spacer()
-            
-            Text("$\(String(format: "%.2f",  portfolioStock.currentDividend))")
-            
-            if portfolioStock.growth > 1 {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.green)
-            } else {
-                Text("\(String(format: "%.2f", portfolioStock.growth))%").foregroundColor(.red)
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Portfolio")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color("textColor"))
+                    
+                    Text("\(portfolioStocks.count) Stocks")
+                        .foregroundColor(.gray)
+                }
+                Spacer()
             }
+            .padding(.leading, 60.0)
             
+            if portfolioStocks.count == 0 {
+                ZStack {
+                    Text("Add stocks to display")
+                        .foregroundColor(Color("textColor"))
+                        .font(.headline)
+                        .italic()
+                    
+                    List {
+                        ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
+                            PortfolioStockView(portfolioStock: stock)
+                        }
+                    }
+                    .opacity(0.5)
+                    .disabled(true)
+                }
+            } else {
+                List {
+                    ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
+                        Button(action: {
+                            self.selectedIndex = index
+                            self.showingDetail.toggle()
+                        }) {
+                            PortfolioStockView(portfolioStock: stock)
+                        }
+                    }
+                }
+            }
         }
+        .padding(.top, 70)
     }
 }
 
-struct PortfolioView: View {
-    var portfolioStocks: [PortfolioStock]
-    var onDelete: (IndexSet) -> Void
-    
-    var body: some View {
-        List {
-            ForEach(portfolioStocks, id: \.self) { stock in
-                NavigationLink(destination: PortfolioDetailContainerView(ticker: stock.ticker)) {
-                    PortfolioStockView(portfolioStock: stock)
-                }
-            }
-            .onDelete(perform: onDelete)
-        }
+struct PortfolioView_Previews: PreviewProvider {
+    static var previews: some View {
+        PortfolioView(showingDetail: .constant(false), selectedIndex: .constant(0), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock])
+            .background(Color("background"))
     }
 }

@@ -15,31 +15,37 @@ struct SearchStockRow: View {
     var body: some View {
         HStack(alignment: .center) {
             if stock.image == "" {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 8)
                     .fill(Color.clear)
                     .frame(width: 40, height: 40)
             } else {
                 URLImage(URL(string: stock.image)!) { proxy in
                     proxy.image
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .clipped()
                 }
+                .cornerRadius(8)
                 .frame(width: 40, height: 40)
             }
             
             
             VStack(alignment: .leading) {
                 Text(stock.ticker)
+                .foregroundColor(Color("textColor"))
                     .font(.headline)
                 
                 Text(stock.fullName)
+                .foregroundColor(Color("textColor"))
                     .font(.subheadline)
             }
             
             Spacer()
             
             Text(stock.marketCap)
+            .foregroundColor(Color("textColor"))
+            .bold()
         }
         .padding()
     }
@@ -48,5 +54,6 @@ struct SearchStockRow: View {
 struct SearchStockRow_Previews: PreviewProvider {
     static var previews: some View {
         SearchStockRow(stock: .mock)
+            .background(Color.black)
     }
 }

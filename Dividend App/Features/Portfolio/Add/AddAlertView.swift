@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddAlertView<Presenting>: View where Presenting: View  {
+    @SwiftUI.Environment(\.colorScheme) var colorScheme
     @Binding var isShowing: Bool
     @Binding var input: String
     
@@ -24,47 +25,64 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
             if isShowing {
                 VStack {
                     Text(stock!.ticker)
-                        .font(.headline)
-                        .padding(.bottom)
+                        .font(.title)
+                        .foregroundColor(Color("textColor"))
                     
                     Text("Enter your starting annual dividend amount")
-                        .font(.caption)
+                    .fixedSize(horizontal: false, vertical: true)
+                        .font(.headline)
+                        .foregroundColor(Color("textColor"))
                     
                     HStack {
-                        TextField("Starting dividend...", text: $input)
-                            .keyboardType(.decimalPad)
+                        if !input.isEmpty {
+                            Text("$")
+                                .font(.system(size: 25))
+                                .foregroundColor(Color("textColor"))
+                        }
                         
-                        Button(action: {
-                            self.input = self.stock!.dividend
-                        }) {
-                            Text("Current")
+                        if colorScheme == ColorScheme.dark {
+                            TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
+                            .keyboardType(.decimalPad)
+                            .font(.system(size: 25))
+                            .foregroundColor(Color("textColor"))
+                        } else {
+                          TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
+                            .keyboardType(.decimalPad)
+                            .font(.system(size: 25))
+                            .colorInvert()
                         }
                     }
                     Divider()
                     HStack {
                         Button(action: {
-                            withAnimation {
-                                self.reset()
-                            }
+                            self.reset()
+                            
                         }) {
+                            Spacer()
                             Text("Cancel")
+                                .foregroundColor(.orange)
+                            Spacer()
                         }
+                        Divider()
                         Button(action: {
-                            withAnimation {
-                                self.onAdd()
-                                self.reset()
-                            }
+                            self.onAdd()
+                            self.reset()
+                            
                         }) {
+                            Spacer()
                             Text("Add")
+                            .foregroundColor(.orange)
+                            Spacer()
                         }
                     }
+                    .frame(height: 30)
                 }
                 .padding()
-                .background(Color.white)
-                .relativeHeight(0.7)
+                .background(Color.black)
+                .cornerRadius(16)
+                .relativeHeight(0.35)
                 .relativeWidth(0.7)
             }
-            
         }
     }
     
