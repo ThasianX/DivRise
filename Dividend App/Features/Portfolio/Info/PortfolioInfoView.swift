@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct PortfolioInfoView: View {
     @SwiftUI.Environment(\.editMode) var editMode
@@ -36,13 +35,23 @@ struct PortfolioInfoView: View {
                         .padding()
                 }
                 
-                if upcomingDates.count != portfolioStocks.count {
-                    ActivityIndicator()
-                        .animated(true)
+                if portfolioStocks.count == 0 || portfolioStocks.count != upcomingDates.count {
+                    ZStack {
+                        Text("Add stocks to display")
+                            .foregroundColor(Color("textColor"))
+                            .font(.headline)
+                            .italic()
+                        
+                        List {
+                            ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
+                                PortfolioInfoRow(stock: stock, date: UpcomingDividend.sample[index])
+                            }
+                        }
+                        .opacity(0.3)
+                        .disabled(true)
+                    }
                 } else {
                     ZStack {
-                        ActivityIndicator()
-                            .animated(false)
                         List {
                             ForEach(portfolioStocks.indexed(), id: \.1.self) { index, stock in
                                 Button(action: {
@@ -55,7 +64,6 @@ struct PortfolioInfoView: View {
                             .onDelete(perform: onDelete)
                             .onMove(perform: onMove)
                         }
-                        .animation(.easeInOut)
                     }
                 }
                 Spacer()

@@ -28,6 +28,9 @@ struct RootView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
+            Color("background")
+                .edgesIgnoringSafeArea(.all)
+            
             PortfolioContainerView()
                 .blur(radius: show ? 20 : 0)
                 .scaleEffect(showInfo ? 0.95 : 1)
@@ -56,8 +59,6 @@ struct RootView: View {
                 .environmentObject(self.store)
         }
         .onAppear(perform: requestPermissions)
-        .background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             Logger.info("Will enter foreground notification recieved")
             self.requestPermissions()
@@ -181,7 +182,7 @@ struct MenuView: View {
                         Button(action: { self.showDividendTracker.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
                                 .sheet(isPresented: self.$showDividendTracker) {
-                                    TrackerContainerView()
+                                    TrackerContainerView(show: self.$showDividendTracker)
                                         .environmentObject(self.store)
                             }
                         }
@@ -272,7 +273,7 @@ struct MenuRight: View {
                 Button(action: { self.showSearch.toggle() }) {
                     CircleButton(icon: "magnifyingglass.circle")
                         .sheet(isPresented: self.$showSearch) {
-                            AddStockContainerView()
+                            AddStockContainerView(show: self.$showSearch)
                                 .environmentObject(self.store)
                     }
                 }

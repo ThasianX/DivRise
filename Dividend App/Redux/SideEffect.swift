@@ -137,8 +137,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 }
             }
             
-            
-            
             var details = [String: [Double]]()
             details[DetailAttributes.payoutRatios] = payoutRatios
             details[DetailAttributes.fcfes] = fcfes

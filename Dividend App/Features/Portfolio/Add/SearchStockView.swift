@@ -20,55 +20,59 @@ struct SearchStockView: View {
     let onCommit: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Spacer()
-                .frame(height: 8)
-            HStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    
-                    TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
-                        .foregroundColor(Color.black)
-                    
-                    Button(action: {
-                        self.query = ""
-                        self.onCommit()
-                    }) {
-                        Image(systemName: "xmark.circle.fill").opacity(query == "" ? 0 : 1)
-                    }
-                }
-                .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                .foregroundColor(Color.gray)
-                .background(Color.white)
-                .cornerRadius(10.0)
-                
-                if showCancelButton  {
-                    Button("Cancel") {
-                        UIApplication.shared.endEditing(true) // this must be placed before the other commands here
-                        self.query = ""
-                        self.showCancelButton = false
-                    }
-                    .foregroundColor(Color(.systemBlue))
-                }
-            }
-            .padding(.horizontal)
+        ZStack {
+            Color("modalBackground")
+                .edgesIgnoringSafeArea(.all)
             
-            List(searchedStocks, id: \.self) { stock in
-                Button(action: {
-                    if stock.dividend != "" {
-                        self.selectedStock = stock
-                        self.showingAlert = true
+            VStack(alignment: .leading) {
+                Spacer()
+                    .frame(height: 8)
+                HStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        
+                        TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
+                            .foregroundColor(Color.black)
+                        
+                        Button(action: {
+                            self.query = ""
+                            self.onCommit()
+                        }) {
+                            Image(systemName: "xmark.circle.fill").opacity(query == "" ? 0 : 1)
+                        }
                     }
-                }) {
-                    SearchStockRow(stock: stock)
+                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                    .foregroundColor(Color.gray)
+                    .background(Color.white)
+                    .cornerRadius(10.0)
+                    
+                    if showCancelButton  {
+                        Button("Cancel") {
+                            UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                            self.query = ""
+                            self.showCancelButton = false
+                        }
+                        .foregroundColor(Color(.systemBlue))
+                    }
                 }
+                .padding(.horizontal)
+                
+                List(searchedStocks, id: \.self) { stock in
+                    Button(action: {
+                        if stock.dividend != "" {
+                            self.selectedStock = stock
+                            self.showingAlert = true
+                        }
+                    }) {
+                        SearchStockRow(stock: stock)
+                    }
+                }
+                .transition(.identity)
+                .animation(nil)
+                .resignKeyboardOnDragGesture()
             }
-            .transition(.identity)
-            .animation(nil)
-            .resignKeyboardOnDragGesture()
         }
-        .background(Color("modalBackground"))
-        .edgesIgnoringSafeArea(.all)
+        
     }
 }
 

@@ -17,16 +17,19 @@ struct PortfolioDetailContainerView: View {
     @State var showingSafari: Bool = false
     @State var url: URL = URL(string: "https://www.google.com/")!
     
+    @Binding var show: Bool
+    
     let portfolioStock: PortfolioStock
     
-    init(portfolioStock: PortfolioStock, selectedPeriod: String, attributeNames: [String]) {
+    init(portfolioStock: PortfolioStock, selectedPeriod: String, attributeNames: [String], show: Binding<Bool>) {
         self.portfolioStock = portfolioStock
         _selectedPeriod = State(initialValue: selectedPeriod)
         _attributeNames = State(initialValue: attributeNames)
+        self._show = show
     }
     
     var body: some View {
-        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, showingSafari: $showingSafari, url: $url, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock, stockNews: store.state.currentStockNews)
+        PortfolioDetailView(selectedPeriod: $selectedPeriod, selectedAttributeIndex: $selectedAttributeIndex, attributeNames: $attributeNames, showingSafari: $showingSafari, url: $url, show: $show, portfolioStock: portfolioStock, records: getRecords(), sharePriceRecords: getSharePriceRecords(), attributeValues: getAttributeValues(), onPeriodChange: loadDetailStock, stockNews: store.state.currentStockNews)
             .onAppear(perform: loadDetailStock)
             .sheet(isPresented: $showingSafari) {
                 SafariView(url: self.url)

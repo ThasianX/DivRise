@@ -14,6 +14,8 @@ struct TrackerContainerView: View {
     @State private var dividendInput = ""
     @State private var showingAdd = false
     
+    @Binding var show: Bool
+    
     private var monthlyRecords: [Record] {
         store.state.allMonthlyRecords
     }
@@ -25,9 +27,24 @@ struct TrackerContainerView: View {
     var body: some View {
         NavigationView {
             TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
-                .navigationBarItems(trailing: Button(action: {
-                    self.showingAdd = true
-                }) { Image(systemName: "plus") })
+                .navigationBarItems(
+                    leading: Button(action: {
+                        self.showingAdd = true
+                    }) {
+                        Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                    },
+                    trailing: Button(action: {
+                        self.show = false
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.gray)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+            )
                 .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                     AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
             }
@@ -50,6 +67,6 @@ struct TrackerContainerView_Previews: PreviewProvider {
         appState.allMonthlyRecords = []
         appState.allMonthlyDividends = []
         
-        return TrackerContainerView().environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
+        return TrackerContainerView(show: .constant(true)).environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }
