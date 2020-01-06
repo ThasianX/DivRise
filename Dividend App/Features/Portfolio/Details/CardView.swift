@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct CardView: View {
     @Binding var index: Int?
