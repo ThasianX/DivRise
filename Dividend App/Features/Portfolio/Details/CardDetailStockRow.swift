@@ -41,7 +41,7 @@ struct CardDetailStockRow: View {
             }
             .padding(40)
         }
-        .frame(width: UIScreen.main.bounds.width, height: 300)
+        .frame(height: 300)
     }
 }
 

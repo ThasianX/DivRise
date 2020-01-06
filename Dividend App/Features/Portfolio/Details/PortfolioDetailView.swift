@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct PortfolioDetailView: View {
     @Binding var selectedPeriod: String
@@ -26,66 +25,65 @@ struct PortfolioDetailView: View {
     
     var body: some View {
         ZStack {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                            Text(self.portfolioStock.ticker)
-                                .font(.largeTitle)
-                                .foregroundColor(Color("textColor"))
-                            Text(self.portfolioStock.fullName)
-                                .font(.subheadline)
-                                .foregroundColor(Color("textColor"))
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
-                            self.onPeriodChange()
-                        }) {
-                            Text(self.selectedPeriod.capitalized)
-                                .foregroundColor(Color.blue)
-                        }
-                        .padding(.trailing, 8)
-                        
-                        Button(action: {
-                            self.show = false
-                        }) {
-                            Image(systemName: "x.circle.fill")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.gray)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+            Color("background")
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text(self.portfolioStock.ticker)
+                        .font(.largeTitle)
+                        .foregroundColor(Color("textColor"))
+                    Text(self.portfolioStock.fullName)
+                        .font(.subheadline)
+                        .foregroundColor(Color("textColor"))
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        self.selectedPeriod = (self.selectedPeriod == "annual") ? "quarter" : "annual"
+                        self.onPeriodChange()
+                    }) {
+                        Text(self.selectedPeriod.capitalized)
+                            .foregroundColor(Color.blue)
                     }
-                    .padding()
+                    .padding(.trailing, 8)
                     
-                    Divider()
-                        .background(Color.white)
-                    
-                ScrollView(.vertical, showsIndicators: false) {
-                        if self.attributeValues.count > 0 {
-                                VStack {
-                                    CurrentDetailStockRow(attributeNames: self.getAbbreviatedNames(), attributeValues: self.getCurrentValues())
-                                    
-                                    CardDetailStockRow(selectedAttributeIndex: self.$selectedAttributeIndex, abbreviatedNames: self.getAbbreviatedNames(), fullNames: self.getFullNames(), descriptions: self.getDescriptions(), records: self.records, sharePriceRecords: self.sharePriceRecords, attributeValues: self.attributeValues)
-                                }
-                        }
-                        
-                        if self.stockNews.count > 0 {
+                    Button(action: {
+                        self.show = false
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.gray)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding()
+                
+                Divider()
+                    .background(Color.white)
+                
+                if self.attributeValues.count > 0 && self.stockNews.count > 0 {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            CurrentDetailStockRow(attributeNames: self.getAbbreviatedNames(), attributeValues: self.getCurrentValues())
+                            
+                            CardDetailStockRow(selectedAttributeIndex: self.$selectedAttributeIndex, abbreviatedNames: self.getAbbreviatedNames(), fullNames: self.getFullNames(), descriptions: self.getDescriptions(), records: self.records, sharePriceRecords: self.sharePriceRecords, attributeValues: self.attributeValues)
+                            
                             StockNewsView(showingSafari: self.$showingSafari, url: self.$url, stockNews: self.stockNews)
                         }
                     }
                 }
-                .frame(width: geometry.size.width)
-                .blur(radius: self.selectedAttributeIndex == nil ? 0 : 40)
-                .animation(.easeInOut)
+                
+                Spacer()
             }
+            .blur(radius: self.selectedAttributeIndex == nil ? 0 : 40)
+            .animation(.easeInOut)
+            
             if self.selectedAttributeIndex != nil {
                 CardView(index: self.$selectedAttributeIndex, abbreviatedName: self.getAbbreviatedNames()[self.selectedAttributeIndex!], fullName: self.getFullNames()[self.selectedAttributeIndex!], description: self.getDescriptions()[self.selectedAttributeIndex!], records: self.records.reversed(), sharePriceRecords: self.sharePriceRecords.reversed(), values: self.attributeValues[self.selectedAttributeIndex!].reversed())
             }
         }
-        .background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
     }
     
     private func getFullNames() -> [String] {
