@@ -18,7 +18,6 @@
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
 		1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0323B2831E00455C7F /* SearchStock.swift */; };
 		1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0523B2870100455C7F /* SearchStockResponse.swift */; };
-		1E54FC8B23B9358100D7DC04 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 1E54FC8A23B9358100D7DC04 /* SwiftUIX */; };
 		1E54FC8F23B9AA5600D7DC04 /* DetailAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */; };
 		1E556FA323BBF78400CB569B /* StockHistoricalPriceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E556FA223BBF78400CB569B /* StockHistoricalPriceResponse.swift */; };
 		1E62D36023B82CE80093E83B /* CompanyKeyMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D35F23B82CE80093E83B /* CompanyKeyMetrics.swift */; };
@@ -168,7 +167,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E64C22D23B3205900C06444 /* URLImage in Frameworks */,
-				1E54FC8B23B9358100D7DC04 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +448,6 @@
 			name = "Dividend App";
 			packageProductDependencies = (
 				1E64C22C23B3205900C06444 /* URLImage */,
-				1E54FC8A23B9358100D7DC04 /* SwiftUIX */,
 			);
 			productName = "Dividend App";
 			productReference = 1E6E3F5223B19D8F009A0262 /* Dividend App.app */;
@@ -482,7 +479,6 @@
 			mainGroup = 1E6E3F4923B19D8E009A0262;
 			packageReferences = (
 				1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */,
-				1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 1E6E3F5323B19D8F009A0262 /* Products */;
 			projectDirPath = "";
@@ -776,14 +772,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
@@ -795,11 +783,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1E54FC8A23B9358100D7DC04 /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E54FC8923B9358100D7DC04 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
-		};
 		1E64C22C23B3205900C06444 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */;

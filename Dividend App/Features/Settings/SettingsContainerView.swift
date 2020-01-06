@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct SettingsContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
