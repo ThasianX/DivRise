@@ -27,8 +27,14 @@ struct Line: View {
     var stepHeight: CGFloat {
         if let min = data.points.min(), let max = data.points.max(), min != max {
             if (min < 0){
+                if max - min < 10 {
+                    return (frame.size.height-padding) / CGFloat(10+(max - min))
+                }
                 return (frame.size.height-padding) / CGFloat(max - min)
             }else{
+                if max - min < 10 {
+                    return (frame.size.height-padding) / CGFloat(10+(max + min))
+                }
                 return (frame.size.height-padding) / CGFloat(max + min)
             }
         }
@@ -135,8 +141,11 @@ extension Path {
         guard var offset = points.min() else { return path }
         offset -= 3
         path.move(to: .zero)
-        var p1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
-        path.addLine(to: p1)
+        var p1 = CGPoint(x: 0, y: 0)
+        if points[0].isFinite {
+            p1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+            path.addLine(to: p1)
+        }
         for pointIndex in 1..<points.count {
             if points[pointIndex].isFinite {
                 let p2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))

@@ -59,7 +59,9 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var pegRatios = [Double]()
             var pegRatioIndex = 0
             
-            for i in 0..<publisher1.0.metrics.count {
+            let minimum = min(min(publisher1.0.metrics.count, publisher1.1.financials.count), min(publisher1.2.financials.count, publisher1.3.financials.count))
+            
+            for i in 0..<minimum {
                 if let date = Formatter.fullString.date(from: publisher1.0.metrics[i].date) {
                     if !records.isEmpty && date.year != records.last!.year {
                         pegRatioIndex += 1
@@ -78,7 +80,11 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 if let peRatio = Double(publisher1.0.metrics[i].peRatio),
                     let epsGrowth = Double(financialGrowth.growth[pegRatioIndex].the5YNetIncomeGrowthPerShare!) {
                     peRatios.append(peRatio)
-                    pegRatios.append(peRatio / (epsGrowth*100))
+                    if (peRatio / (epsGrowth*100)).isFinite {
+                        pegRatios.append(peRatio / (epsGrowth*100))
+                    } else {
+                        pegRatios.append(0)
+                    }
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].dividendYield) {
@@ -106,7 +112,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 
                 if let ebit = Double(publisher1.2.financials[i].ebit),
                     let revenue = Double(publisher1.2.financials[i].revenue) {
-                    operatingProfitMargins.append((ebit / revenue)*100)
+                        operatingProfitMargins.append((ebit / revenue)*100)
                 }
                 
                 if let totalDebt = Double(publisher1.1.financials[i].totalDebt),
@@ -150,6 +156,9 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             details[DetailAttributes.debtToCapitalRatios] = debtToCapitalRatios
             details[DetailAttributes.pegRatios] = pegRatios
             details[DetailAttributes.sharePrices] = sharePrices
+            
+            Logger.info("\(debtToCapitalRatios)")
+            Logger.info("\(debtToEquitys)")
             
             let detailStock = DetailStock(
                 records: records,

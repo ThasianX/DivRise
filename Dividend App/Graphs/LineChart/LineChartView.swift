@@ -125,7 +125,7 @@ public struct LineChartView: View {
 struct WidgetView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LineChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [0.6137386018237082, 0.2815539332538736, 0.17518342474101156, 0.24931948665991222, -1.1515280464216635, 1.1460104011887073, 0.2818422889043964, -1.3491616766467065, 1.5056442831215968, 0.6401420838971583, -56.699696969696966], title: "Line chart", detailPrefix: "$", legend: "Basic")
+            LineChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [0.4894840180369058, 0.5384738882135731, 0.5007662742045343, 0.5069929507840947, 0.4770271058000583, 0.451138886207895, 0.43058826430588265, 0.3802580349645011, 0.3721135568627892, 0.4151055314002707], title: "Line chart", detailPrefix: "$", legend: "Basic")
                 .environment(\.colorScheme, .light)
         }
     }
