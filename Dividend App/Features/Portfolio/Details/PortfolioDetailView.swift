@@ -86,6 +86,7 @@ struct PortfolioDetailView: View {
         }
     }
     
+    // Data helpers
     private func getFullNames() -> [String] {
         attributeNames.compactMap {
             DetailAttributes.full[$0]

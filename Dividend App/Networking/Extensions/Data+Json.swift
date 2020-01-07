@@ -6,6 +6,8 @@
 //  Copyright © 2019 Kevin Li. All rights reserved.
 //
 
+// Purpose: Helps with debugging JSON
+
 import Foundation
 
 extension Data {

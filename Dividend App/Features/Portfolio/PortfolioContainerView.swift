@@ -35,11 +35,5 @@ struct PortfolioContainerView: View {
             self.store.send(updatePortfolio(portfolioStocks: self.portfolioStocks))
         }
     }
-    
-    private func reloadDividendDates() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            self.store.send(updateNextDividendDate(portfolioStocks: self.portfolioStocks))
-        }
-    }
 }
 

@@ -44,9 +44,3 @@ struct CardDetailStockRow: View {
         .frame(height: 300)
     }
 }
-
-//struct DetailStockRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailStockRow()
-//    }
-//}

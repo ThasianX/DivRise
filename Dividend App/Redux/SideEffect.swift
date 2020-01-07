@@ -9,12 +9,14 @@
 import Combine
 import Foundation
 
+// MARK: Search
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
         .map { AppAction.setSearchResults(results: $0) }
         .eraseToAnyPublisher()
 }
 
+// MARK: Portfolio
 func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
         .map { AppAction.updatePortfolio(stocks: $0) }
@@ -41,6 +43,7 @@ func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> 
         .eraseToAnyPublisher()
 }
 
+// MARK: Stock Detail
 func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<AppAction, Never> {
     return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: "annual"), Current.request.getStockHistoricalPriceURL(identifier: identifier))
         .receive(on: RunLoop.main)

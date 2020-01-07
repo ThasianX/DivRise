@@ -43,6 +43,7 @@ struct PortfolioDetailContainerView: View {
         store.send(setCurrentNews(query: portfolioStock.ticker))
     }
     
+    // Detail helpers
     private func getRecords() -> [Record] {
         if let detailStock = store.state.currentDetailStock {
             return detailStock.records
