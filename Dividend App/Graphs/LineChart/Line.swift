@@ -16,7 +16,7 @@ struct Line: View {
     @State private var showFull: Bool = false
     @State var showBackground: Bool = true
     
-    let padding: CGFloat = 3
+    let padding: CGFloat = 30
     
     var stepWidth: CGFloat {
         if data.points.count < 2 {
@@ -26,7 +26,7 @@ struct Line: View {
     }
     var stepHeight: CGFloat {
         if let min = data.points.min(), let max = data.points.max(), min != max {
-            if (min < 0){
+            if (min <= 0){
                 if max - min < 10 {
                     return (frame.size.height-padding) / CGFloat(10+(max - min))
                 }

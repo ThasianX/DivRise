@@ -160,9 +160,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             details[DetailAttributes.pegRatios] = pegRatios
             details[DetailAttributes.sharePrices] = sharePrices
             
-            Logger.info("\(debtToCapitalRatios)")
-            Logger.info("\(debtToEquitys)")
-            
             let detailStock = DetailStock(
                 records: records,
                 sharePriceRecords: sharePriceRecords,
