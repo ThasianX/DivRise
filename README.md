@@ -2,6 +2,8 @@
 
 DivRise is an iOS app written in **Pure SwiftUI** that tracks dividend prices of your stocks, gives you in-depth information about dividend paying stocks like the next dividend date and allows you to log your monthly dividend payments.
 
+**Architecture**: Single State Redux Container
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,6 +26,9 @@ Open Dividend App.xcodeproj and run
 
 * [ChartView](https://github.com/AppPear/ChartView) - SwiftUI Charts
 * [URLImage](https://github.com/dmytro-anokhin/url-image) - Remote Image Loading
+
+## Contributing
+- If you find a bug, or would like to suggest a new feature or enhancement, it'd be nice if you could [search the issue tracker first](https://github.com/ThasianX/DivRise/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free to [file a new one](https://github.com/ThasianX/DivRise/issues/new).
 
 ## License
 
