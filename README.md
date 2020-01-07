@@ -27,6 +27,9 @@ Open Dividend App.xcodeproj and run
 * [ChartView](https://github.com/AppPear/ChartView) - SwiftUI Charts
 * [URLImage](https://github.com/dmytro-anokhin/url-image) - Remote Image Loading
 
+## Contributing
+- If you find a bug, or would like to suggest a new feature or enhancement, it'd be nice if you could [search the issue tracker first](https://github.com/ThasianX/DivRise/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free to [file a new one](https://github.com/ThasianX/DivRise/issues/new).
+
 ## License
 
 This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details
