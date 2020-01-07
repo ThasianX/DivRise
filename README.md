@@ -2,6 +2,8 @@
 
 DivRise is an iOS app written in **Pure SwiftUI** that tracks dividend prices of your stocks, gives you in-depth information about dividend paying stocks like the next dividend date and allows you to log your monthly dividend payments.
 
+**Architecture**: Single State Redux Container
+
 ## Getting Started
 
 ### Prerequisites
