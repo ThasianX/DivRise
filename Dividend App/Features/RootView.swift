@@ -136,8 +136,8 @@ struct RootView_Previews: PreviewProvider {
 
 struct MenuRow: View {
     
-    var image = ""
-    var text = ""
+    var image = "pencil.circle.fill"
+    var text = "Edit"
     
     var body: some View {
         return HStack {

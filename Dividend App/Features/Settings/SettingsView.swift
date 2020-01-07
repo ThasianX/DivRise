@@ -18,6 +18,7 @@ struct SettingsView: View {
     
     var body: some View {
         
+        // Pretty much observable state wrappers
         let receiveBinding = Binding<Bool>(get: {
             return self.receive
         }, set: {

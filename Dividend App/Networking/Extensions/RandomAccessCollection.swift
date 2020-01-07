@@ -7,6 +7,7 @@
 //
 
 // Credits: https://github.com/mecid/swiftui-recipes-app/blob/master/Recipes/Shared/Extensions/RandomAccessCollection.swift
+// Purpose: Allows you to get index from ForEach or List when iterating through an array
 
 import Foundation
 

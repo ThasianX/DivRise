@@ -40,6 +40,7 @@ struct PortfolioInfoContainerView: View {
         }
     }
     
+    // List helpers
     private func onDelete(at offsets: IndexSet) {
         store.send(.removeFromPortfolio(offsets: offsets))
     }
@@ -48,6 +49,7 @@ struct PortfolioInfoContainerView: View {
         store.send(.moveStockInPortfolio(previous: source, current: destination))
     }
     
+    // Edit helpers
     private func onUpdate(index: Int, value: Double) {
         store.send(.updateStartingDividend(index: index, value: value))
     }

@@ -14,17 +14,21 @@ struct AppState: Codable, Equatable {
     var notificationDay: Int = 1
     var notificationTime: Date = Date().dateAtTime(hour: 7, minute: 0)
     
-    // MARK: Notifications
+    // MARK: Main Portfolio
     var allPortfolioStocks: [String: PortfolioStock] = [:]
-    var allUpcomingDivDates: [String: Date] = [:]
     var portfolioStocks: [String] = []
     
+    // MARK: Portfolio Info
+    var allMonthlyRecords: [Record] = []
+    var allUpcomingDivDates: [String: Date] = [:]
+    var allMonthlyDividends: [Double] = []
+    
+    // MARK: Search
     var searchResult: [SearchStock] = []
     
-    var allMonthlyRecords: [Record] = []
-    var allMonthlyDividends: [Double] = []
+    // MARK: Stock Details
     var currentDetailStock: DetailStock?
-    var currentStockNews: [StockNews] = []
     var selectedPeriod: String = "annual"
     var attributeNames: [String] = [DetailAttributes.sharePrices, DetailAttributes.peRatios, DetailAttributes.pegRatios, DetailAttributes.payoutRatios, DetailAttributes.dividendYields, DetailAttributes.dividendPerShares, DetailAttributes.fcfes, DetailAttributes.netDebtToEBITDAs, DetailAttributes.grahamNumbers, DetailAttributes.debtToEquitys, DetailAttributes.operatingProfitMargins, DetailAttributes.debtToCapitalRatios]
+    var currentStockNews: [StockNews] = []
 }

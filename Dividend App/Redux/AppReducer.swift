@@ -8,6 +8,7 @@
 
 func appReducer(state: inout AppState, action: AppAction) {
     switch action {
+    // MARK: Notifications
     case let .toggleNotifications(enabled):
         state.notificationsSet = enabled
         
@@ -17,6 +18,7 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .setNotificationTime(time):
         state.notificationTime = time
         
+    // MARK: Portfolio
     case let .addToPortfolio(stock):
         if !state.allPortfolioStocks.keys.contains(stock.ticker) {
             Logger.info("Doesn't contain stock")
@@ -46,9 +48,11 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
         
+    // MARK: Search
     case let .setSearchResults(results):
         state.searchResult = results
         
+    // MARK: Dividend Tracker
     case let .addMonthlyDividend(record, dividend):
         if state.allMonthlyRecords.last == record {
             let lastIndex = state.allMonthlyRecords.count - 1
@@ -59,16 +63,17 @@ func appReducer(state: inout AppState, action: AppAction) {
             state.allMonthlyDividends.append(dividend)
         }
         
+    // MARK: Stock Detail
     case let .setDetailStock(detail):
         state.currentDetailStock = detail
-        
-    case let .setStockNews(news):
-        state.currentStockNews = news
         
     case let .setSelectedPeriod(period):
         state.selectedPeriod = period
         
     case let.setAttributeNames(attributeNames):
         state.attributeNames = attributeNames
+        
+    case let .setStockNews(news):
+        state.currentStockNews = news
     }
 }

@@ -29,7 +29,7 @@ internal let everythingURL = "https://newsapi.org/v2/everything"
 
 
 struct Request {
-    // MARK: Portfolio
+    // MARK: Main Portfolio
     func updatedPortfolioStocks(stocks: [PortfolioStock]) -> AnyPublisher<[PortfolioStock], Never> {
         let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<PortfolioStock, Never>], Never>(sequence: stocks.map(fetchPortfolioStock))
         return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
@@ -60,18 +60,6 @@ struct Request {
                 return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
         }
         .eraseToAnyPublisher()
-    }
-    
-    private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
-        let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
-        let url = URL(string: urlString)!
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: URLRequest(url: url))
-            .map { $0.data }
-            .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
-            .replaceError(with: .noResponse)
-            .eraseToAnyPublisher()
     }
     
     // MARK: Add
@@ -108,6 +96,19 @@ struct Request {
             .dataTaskPublisher(for: URLRequest(url: url))
             .map { $0.data }
             .decode(type: SearchStockResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: Portfolio & Search Shared
+    private func companyProfile(identifier: String) -> AnyPublisher<CompanyProfileResponse, Never> {
+        let urlString = companyProfileURL.replacingOccurrences(of: "{company}", with: identifier)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: URLRequest(url: url))
+            .map { $0.data }
+            .decode(type: CompanyProfileResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
             .eraseToAnyPublisher()
     }

@@ -9,10 +9,12 @@
 import Foundation
 
 enum AppAction {
+    // MARK: Notifications
     case toggleNotifications(enabled: Bool)
     case setNotificationDay(day: Int)
     case setNotificationTime(time: Date)
     
+    // MARK: Portfolio
     case addToPortfolio(stock: PortfolioStock)
     case removeFromPortfolio(offsets: IndexSet)
     case moveStockInPortfolio(previous: IndexSet, current: Int)
@@ -21,14 +23,17 @@ enum AppAction {
     case addUpcomingDivDate(dividend: UpcomingDividend)
     case updateUpcomingDivDates(dividends: [UpcomingDividend])
     
+    // MARK: Search
     case setSearchResults(results: [SearchStock])
     
+    // MARK: Dividend Tracker
     case addMonthlyDividend(record: Record, amount: Double)
     
+    // MARK: Stock Detail
     case setDetailStock(detail: DetailStock?)
-    case setStockNews(news: [StockNews])
     case setSelectedPeriod(period: String)
     case setAttributeNames(attributeNames: [String])
+    case setStockNews(news: [StockNews])
 }
 
 

@@ -14,6 +14,7 @@ struct AddStockContainerView: View {
     @Binding var show: Bool
     
     @State private var query = ""
+    
     @State private var showingAlert = false
     @State private var alertInput = ""
     @State private var selectedStock: SearchStock? = nil
@@ -53,6 +54,7 @@ struct AddStockContainerView: View {
         }
     }
     
+    // Search helpers
     private func clearSearch() {
             self.store.send(.setSearchResults(results: []))
     }
