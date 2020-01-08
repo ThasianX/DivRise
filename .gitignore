@@ -23,5 +23,11 @@ DerivedData/
 !default.perspectivev3
 .DS_Store
 
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
 ## Gcc Patch
 /*.gcno
