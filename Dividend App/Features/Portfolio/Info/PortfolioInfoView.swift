@@ -36,12 +36,25 @@ struct PortfolioInfoView: View {
                 }
                 
                 if portfolioStocks.count == 0 || portfolioStocks.count != upcomingDates.count {
+//                    List {
+//                        ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
+//                            Button(action: {
+//                                self.selectedIndex = index
+//                                self.showEditInfo = true
+//                            }) {
+//                                PortfolioInfoRow(stock: stock, date: UpcomingDividend.sample[index])
+//                            }
+//                        }
+//                        .onDelete(perform: onDelete)
+//                        .onMove(perform: onMove)
+//                    }
+                    
                     ZStack {
                         Text("Add stocks to display")
                             .foregroundColor(Color("textColor"))
                             .font(.headline)
                             .italic()
-                        
+
                         List {
                             ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
                                 PortfolioInfoRow(stock: stock, date: UpcomingDividend.sample[index])

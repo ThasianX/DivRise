@@ -25,7 +25,9 @@ struct PortfolioContainerView: View {
             .onAppear(perform: reloadDividends)
             .sheet(isPresented: self.$showingDetail) {
                 PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames, show: self.$showingDetail)
-                    .environmentObject(self.store)
+                        .environmentObject(self.store)
+//                PortfolioDetailContainerView(portfolioStock: PortfolioStock.sample[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames, show: self.$showingDetail)
+//                    .environmentObject(self.store)
         }
     }
     
