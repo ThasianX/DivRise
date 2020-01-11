@@ -19,8 +19,9 @@ struct DetailAttributes {
     static let debtToEquitys = "debtToEquitys"
     static let operatingProfitMargins = "operatingProfitMargins"
     static let debtToCapitalRatios = "debtToCapitalRatios"
-    static let pegRatios = "pegRatios"
     static let sharePrices = "sharePrices"
+    
+    static let defaultOrder = [DetailAttributes.sharePrices, DetailAttributes.peRatios, DetailAttributes.payoutRatios, DetailAttributes.dividendYields, DetailAttributes.dividendPerShares, DetailAttributes.fcfes, DetailAttributes.netDebtToEBITDAs, DetailAttributes.grahamNumbers, DetailAttributes.debtToEquitys, DetailAttributes.operatingProfitMargins, DetailAttributes.debtToCapitalRatios]
     
     static let abbreviated = [
         payoutRatios: "Payout",
@@ -33,7 +34,6 @@ struct DetailAttributes {
         debtToEquitys: "D/E",
         operatingProfitMargins: "OPM",
         debtToCapitalRatios: "D/C",
-        pegRatios: "PEG",
         sharePrices: "Price"
     ]
     
@@ -48,7 +48,6 @@ struct DetailAttributes {
         debtToEquitys: "Debt-To-Equity Ratio",
         operatingProfitMargins: "Operating Profit Margin",
         debtToCapitalRatios: "Debt-to-Capital Ratio",
-        pegRatios: "Price/Earnings-to-Growth Ratio",
         sharePrices: "Share Price"
     ]
     
@@ -63,7 +62,6 @@ struct DetailAttributes {
         debtToEquitys: "Measures the degree to which a company is financing its operation through total liabilities versus shareholder equity. The lower the ratio, the lower the leverage, and thus the lower the risk. A ratio over 2 is usually not worth investing.",
         operatingProfitMargins: "Represents the company's earnings before interest and taxes. Higher and more stable margins are preferred as they help our earnings compound faster. It also could be a sign that the company has an economic moat.",
         debtToCapitalRatios: "Measure of how much interest bearing debt a company is using to finance its business. Useful because if a company fails, it pays debt first, then shareholders, and we want to know the risk. A ratio over 50% is usually not worth investing, unless it's utilities.",
-        pegRatios: "The lower the ratio, the more the stock may be undervalued, given its future earnings expectations. A ratio above 1.0 is usually considered overvalued.",
         sharePrices: "Price of a single share of stock in the company. Generally, a good time to buy a stock is when its share prices are below historical averages and if you are confident that the stock will do well in the future."
         ]
 

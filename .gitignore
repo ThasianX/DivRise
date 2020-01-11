@@ -2,6 +2,9 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## App Specific
+Networking/Configuration.swift
+
 ## User settings
 xcuserdata/
 
@@ -22,6 +25,12 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 .DS_Store
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
 
 ## Gcc Patch
 /*.gcno

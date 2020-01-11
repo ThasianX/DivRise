@@ -25,18 +25,32 @@ struct PortfolioView: View {
                     
                     Text("\(portfolioStocks.count) Stocks")
                         .foregroundColor(.gray)
+//                    Text("\(PortfolioStock.sample.count) Stocks")
+//                        .foregroundColor(.gray)
+                    
                 }
                 Spacer()
             }
             .padding(.leading, 60.0)
             
             if portfolioStocks.count == 0 {
+//                List {
+//                    ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
+//                        Button(action: {
+//                            self.selectedIndex = index
+//                            self.showingDetail.toggle()
+//                        }) {
+//                            PortfolioStockView(portfolioStock: stock)
+//                        }
+//                    }
+//                }
+                
                 ZStack {
                     Text("Add stocks to display")
                         .foregroundColor(Color("textColor"))
                         .font(.headline)
                         .italic()
-                    
+
                     List {
                         ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
                             PortfolioStockView(portfolioStock: stock)

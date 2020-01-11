@@ -20,22 +20,21 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     // MARK: Portfolio
     case let .addToPortfolio(stock):
-        if !state.allPortfolioStocks.keys.contains(stock.ticker) {
-            Logger.info("Doesn't contain stock")
-            state.portfolioStocks.append(stock.ticker)
-        }
+        state.portfolioStocks.append(stock.ticker)
         state.allPortfolioStocks[stock.ticker] = stock
-        Logger.info("\(state.allPortfolioStocks)")
+        state.sectorCompanies[stock.sector]?.append(stock)
         
     case let .removeFromPortfolio(offsets):
+        let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
         state.portfolioStocks.remove(atOffsets: offsets)
-        
+        state.sectorCompanies[stock.sector]?.removeAll(where: { $0 == stock })
+       
     case let .moveStockInPortfolio(previous, current):
         state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
         
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
-        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100)
+        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector)
         
         state.allPortfolioStocks[state.portfolioStocks[index]] = updatedStock
         

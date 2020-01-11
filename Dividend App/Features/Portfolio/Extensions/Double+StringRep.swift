@@ -18,6 +18,9 @@ extension Double {
         if self.isInfinite {
             return "\(self < 0.0 ? "-" : "+")Infinity"
         }
+        if self.isZero {
+            return "0"
+        }
         let units = ["", "k", "M", "B", "T"]
         var interval = self
         var i = 0
