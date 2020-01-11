@@ -73,11 +73,11 @@ struct AddStockContainerView: View {
                 errorMessage = "Starting dividend cannot be 0"
                 showingError = true
             } else if store.state.allPortfolioStocks.keys.contains(stock.ticker) {
-                errorMessage = "Your portfolio already contains \(stock.ticker). To edit, visit settings"
+                errorMessage = "Your portfolio already contains \(stock.ticker). To edit, visit info"
                 showingError = true
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
-                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth)
+                let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector)
                 store.send(.addToPortfolio(stock: portfolioStock))
                 store.send(addNextDividendDate(portfolioStock: portfolioStock))
             }

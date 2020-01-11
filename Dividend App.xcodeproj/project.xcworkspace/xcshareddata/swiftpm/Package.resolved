@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SunburstDiagram",
+        "repositoryURL": "https://github.com/lludo/SwiftSunburstDiagram",
+        "state": {
+          "branch": "master",
+          "revision": "0a7550272128c358ae13ff3a84c10efe9625dff6",
+          "version": null
+        }
+      },
+      {
         "package": "URLImage",
         "repositoryURL": "https://github.com/dmytro-anokhin/url-image.git",
         "state": {

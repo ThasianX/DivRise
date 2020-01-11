@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E085CE523C7800C008A3021 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E085CE423C7800C008A3021 /* UIImage+Resize.swift */; };
+		1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A59C623C77DA700DE39BC /* UIColor+Additions.swift */; };
 		1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCA23B2A9C000863E0C /* SideEffect.swift */; };
 		1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */; };
 		1E27CB9B23BC593300FFF7FF /* PortfolioInfoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */; };
@@ -75,6 +77,8 @@
 		1EE3832823BDB4CB00EB9203 /* StockNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832723BDB4CB00EB9203 /* StockNews.swift */; };
 		1EE3832A23BDBE7E00EB9203 /* TimeInterval+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832923BDBE7E00EB9203 /* TimeInterval+String.swift */; };
 		1EE3832E23BDC82500EB9203 /* StockNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832D23BDC82500EB9203 /* StockNewsView.swift */; };
+		1EEA279223C66CD200D63F4D /* SunburstDiagram in Frameworks */ = {isa = PBXBuildFile; productRef = 1EEA279123C66CD200D63F4D /* SunburstDiagram */; };
+		1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA279323C6728300D63F4D /* SectorAttributes.swift */; };
 		1EEF292D23BEB20E00BCD51D /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF292C23BEB20E00BCD51D /* SafariView.swift */; };
 		1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */; };
 		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
@@ -83,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E085CE423C7800C008A3021 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		1E0A59C623C77DA700DE39BC /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1E114BCA23B2A9C000863E0C /* SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffect.swift; sourceTree = "<group>"; };
 		1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockRow.swift; sourceTree = "<group>"; };
 		1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoContainerView.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		1EE3832723BDB4CB00EB9203 /* StockNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNews.swift; sourceTree = "<group>"; };
 		1EE3832923BDBE7E00EB9203 /* TimeInterval+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+String.swift"; sourceTree = "<group>"; };
 		1EE3832D23BDC82500EB9203 /* StockNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNewsView.swift; sourceTree = "<group>"; };
+		1EEA279323C6728300D63F4D /* SectorAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorAttributes.swift; sourceTree = "<group>"; };
 		1EEF292C23BEB20E00BCD51D /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoRow.swift; sourceTree = "<group>"; };
 		1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailContainerView.swift; sourceTree = "<group>"; };
@@ -164,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EEA279223C66CD200D63F4D /* SunburstDiagram in Frameworks */,
 				1E64C22D23B3205900C06444 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +368,8 @@
 				1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */,
 				1E42A6C423B423530010DB8F /* Keyboard.swift */,
 				1EE3832923BDBE7E00EB9203 /* TimeInterval+String.swift */,
+				1E0A59C623C77DA700DE39BC /* UIColor+Additions.swift */,
+				1E085CE423C7800C008A3021 /* UIImage+Resize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -373,6 +383,7 @@
 				1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */,
 				1ED5326A23BC5200009CC919 /* UpcomingDividend.swift */,
 				1EE3832723BDB4CB00EB9203 /* StockNews.swift */,
+				1EEA279323C6728300D63F4D /* SectorAttributes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -469,6 +480,7 @@
 			name = "Dividend App";
 			packageProductDependencies = (
 				1E64C22C23B3205900C06444 /* URLImage */,
+				1EEA279123C66CD200D63F4D /* SunburstDiagram */,
 			);
 			productName = "Dividend App";
 			productReference = 1E6E3F5223B19D8F009A0262 /* DivRise.app */;
@@ -500,6 +512,7 @@
 			mainGroup = 1E6E3F4923B19D8E009A0262;
 			packageReferences = (
 				1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */,
+				1EEA279023C66CD200D63F4D /* XCRemoteSwiftPackageReference "SwiftSunburstDiagram" */,
 			);
 			productRefGroup = 1E6E3F5323B19D8F009A0262 /* Products */;
 			projectDirPath = "";
@@ -534,6 +547,7 @@
 				1E72E90F23BB2B8D00C899E1 /* AddDividendView.swift in Sources */,
 				1ED6131923B6B1BE00CF4CD0 /* IndicatorPoint.swift in Sources */,
 				1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */,
+				1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
 				1E95DC5023B2B07000FDA3EA /* Double+StringRep.swift in Sources */,
 				1ED6131B23B6B1BE00CF4CD0 /* Legend.swift in Sources */,
@@ -550,6 +564,7 @@
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
 				1EE3832E23BDC82500EB9203 /* StockNewsView.swift in Sources */,
 				1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */,
+				1E085CE523C7800C008A3021 /* UIImage+Resize.swift in Sources */,
 				1E62D36A23B859700093E83B /* CompanyFinancialGrowthResponse.swift in Sources */,
 				1E62D36423B838030093E83B /* CompanyBalanceSheetResponse.swift in Sources */,
 				1ED5326B23BC5200009CC919 /* UpcomingDividend.swift in Sources */,
@@ -578,6 +593,7 @@
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
+				1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */,
 				1E62D36C23B86A020093E83B /* PortfolioStockView.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */,
@@ -804,6 +820,14 @@
 				minimumVersion = 0.9.9;
 			};
 		};
+		1EEA279023C66CD200D63F4D /* XCRemoteSwiftPackageReference "SwiftSunburstDiagram" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lludo/SwiftSunburstDiagram";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -811,6 +835,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E64C22B23B3205900C06444 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
+		};
+		1EEA279123C66CD200D63F4D /* SunburstDiagram */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EEA279023C66CD200D63F4D /* XCRemoteSwiftPackageReference "SwiftSunburstDiagram" */;
+			productName = SunburstDiagram;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

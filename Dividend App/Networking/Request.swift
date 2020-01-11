@@ -38,7 +38,7 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100, sector: $0.profile.sector)
         }
         .eraseToAnyPublisher()
     }
@@ -74,7 +74,7 @@ struct Request {
                         .flatMap { response -> AnyPublisher<SearchStock, Never> in
                             let mktCap = (response.profile.mktCap == "") ? "$--" : "$\(Double(response.profile.mktCap)!.shortStringRepresentation)"
                             let dividend = response.profile.lastDiv
-                            return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap, dividend: dividend))
+                            return Just(SearchStock(ticker: ticker, fullName: fullName, image: response.profile.image, marketCap: mktCap, dividend: dividend, sector: response.profile.sector))
                                 .eraseToAnyPublisher()
                     }
                     .eraseToAnyPublisher()
@@ -86,8 +86,9 @@ struct Request {
     }
     
     private func searchStocks(query: String) -> AnyPublisher<SearchStockResponse, Never> {
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let urlString = searchCompanyURL
-            .replacingOccurrences(of: "{query}", with: query)
+            .replacingOccurrences(of: "{query}", with: encodedQuery)
             .replacingOccurrences(of: "{apikey}", with: alphaVantageApiKey)
         
         let url = URL(string: urlString)!

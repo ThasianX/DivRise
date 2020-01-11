@@ -45,9 +45,9 @@ func updateMonthlyDividends(dividend: Double) -> AnyPublisher<AppAction, Never> 
 
 // MARK: Stock Detail
 func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<AppAction, Never> {
-    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest(Current.request.getCompanyFinancialStatementGrowth(identifier: identifier, period: "annual"), Current.request.getStockHistoricalPriceURL(identifier: identifier))
+    return Publishers.CombineLatest4(Current.request.getCompanyKeyMetrics(identifier: identifier, period: period), Current.request.getCompanyBalanceSheet(identifier: identifier, period: period), Current.request.getCompanyIncomeStatement(identifier: identifier, period: period), Current.request.getCompanyCashFlowStatement(identifier: identifier, period: period)).combineLatest( Current.request.getStockHistoricalPriceURL(identifier: identifier))
         .receive(on: RunLoop.main)
-        .map { publisher1, financialGrowth, historicalPrices in
+        .map { publisher1, historicalPrices in
             var records = [Record]()
             var payoutRatios = [Double]()
             var fcfes = [Double]()
@@ -59,16 +59,11 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             var debtToEquitys = [Double]()
             var operatingProfitMargins = [Double]()
             var debtToCapitalRatios = [Double]()
-            var pegRatios = [Double]()
-            var pegRatioIndex = 0
             
             let minimum = min(min(publisher1.0.metrics.count, publisher1.1.financials.count), min(publisher1.2.financials.count, publisher1.3.financials.count))
             
             for i in 0..<minimum {
                 if let date = Formatter.fullString.date(from: publisher1.0.metrics[i].date) {
-                    if !records.isEmpty && date.year != records.last!.year {
-                        pegRatioIndex += 1
-                    }
                     records.append(Record(month: date.monthMedium, day: nil, year: date.year))
                 }
                 
@@ -80,14 +75,8 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                     netDebtToEBITDAs.append(val)
                 }
                 
-                if let peRatio = Double(publisher1.0.metrics[i].peRatio),
-                    let epsGrowth = Double(financialGrowth.growth[pegRatioIndex].the5YNetIncomeGrowthPerShare!) {
+                if let peRatio = Double(publisher1.0.metrics[i].peRatio) {
                     peRatios.append(peRatio)
-                    if (peRatio / (epsGrowth*100)).isFinite {
-                        pegRatios.append(peRatio / (epsGrowth*100))
-                    } else {
-                        pegRatios.append(0)
-                    }
                 }
                 
                 if let val = Double(publisher1.0.metrics[i].dividendYield) {
@@ -157,7 +146,6 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             details[DetailAttributes.debtToEquitys] = debtToEquitys
             details[DetailAttributes.operatingProfitMargins] = operatingProfitMargins
             details[DetailAttributes.debtToCapitalRatios] = debtToCapitalRatios
-            details[DetailAttributes.pegRatios] = pegRatios
             details[DetailAttributes.sharePrices] = sharePrices
             
             let detailStock = DetailStock(
