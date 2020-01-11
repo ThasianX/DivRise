@@ -55,8 +55,8 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                     Divider()
                     HStack {
                         Button(action: {
+                            UIApplication.shared.endEditing(true)
                             self.reset()
-                            
                         }) {
                             Spacer()
                             Text("Cancel")
@@ -65,6 +65,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         }
                         Divider()
                         Button(action: {
+                            UIApplication.shared.endEditing(true)
                             self.onAdd()
                             self.reset()
                             

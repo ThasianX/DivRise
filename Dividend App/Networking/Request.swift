@@ -10,7 +10,6 @@ import Foundation
 import Combine
 
 // MARK: AlphaVantage
-internal let alphaVantageApiKey = "5QZFJVD3UY66K9CG"
 internal let searchCompanyURL = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={query}&apikey={apikey}"
 
 // MARK: FinancialModelingPrep
@@ -24,11 +23,11 @@ internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/
 internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
 
 // MARK: NewsApi
-internal let newsApiKey = "ee63141d64414d6186b390761526c5ba"
 internal let everythingURL = "https://newsapi.org/v2/everything"
 
-
 struct Request {
+    let configuration = Configuration()
+    
     // MARK: Main Portfolio
     func updatedPortfolioStocks(stocks: [PortfolioStock]) -> AnyPublisher<[PortfolioStock], Never> {
         let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<PortfolioStock, Never>], Never>(sequence: stocks.map(fetchPortfolioStock))
@@ -89,7 +88,7 @@ struct Request {
         let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let urlString = searchCompanyURL
             .replacingOccurrences(of: "{query}", with: encodedQuery)
-            .replacingOccurrences(of: "{apikey}", with: alphaVantageApiKey)
+            .replacingOccurrences(of: "{apikey}", with: configuration.alphaVantageApiKey)
         
         let url = URL(string: urlString)!
         
@@ -204,7 +203,7 @@ struct Request {
         var url = URL(string: everythingURL)!
         
         let queryItems = [URLQueryItem(name: "q", value: query),
-                        URLQueryItem(name: "apiKey", value: newsApiKey),
+                          URLQueryItem(name: "apiKey", value: configuration.newsApiKey),
                         URLQueryItem(name: "language", value: "en"),
                         URLQueryItem(name: "sortBy", value: "publishedAt")]
         url.appending(queryItems)
