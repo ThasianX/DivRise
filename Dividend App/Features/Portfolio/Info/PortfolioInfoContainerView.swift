@@ -77,6 +77,19 @@ struct PortfolioInfoContainerView: View {
             }
         }
         
+//        for sector in SectorAttributes.sectorOrder {
+//            let stocks = SectorAttributes.mock[sector]!
+//            if stocks.count > 0 {
+//                var children = [Node]()
+//                for stock in stocks {
+//                    let node = Node(name: stock.ticker, showName: true, backgroundColor: UIColor.randomDark)
+//                    children.append(node)
+//                }
+//                let image = UIImage(named: SectorAttributes.images[sector]!)?.resize(withSize: CGSize(width: 40, height: 40))
+//                sectors.append(Node(name: sector, showName: false, image: image, value: Double(stocks.count), backgroundColor: SectorAttributes.sectorColor[sector], children: children))
+//            }
+//        }
+        
         return sectors
     }
 }

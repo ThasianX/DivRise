@@ -753,7 +753,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"Dividend App/Preview Content\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
@@ -762,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.DivRise;
 				PRODUCT_NAME = DivRise;
 				SWIFT_VERSION = 5.0;
@@ -775,7 +775,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"Dividend App/Preview Content\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
@@ -784,7 +784,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.DivRise;
 				PRODUCT_NAME = DivRise;
 				SWIFT_VERSION = 5.0;

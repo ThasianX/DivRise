@@ -9,6 +9,6 @@
 import Foundation
 
 struct Configuration {
-    let alphaVantageApiKey = ""
-    let newsApiKey = ""
+    let alphaVantageApiKey = "NL32VMEBCYJL7P86"
+    let newsApiKey = "0fef0c5bfc4f4936b19f8cf5dde9fb1e"
 }
