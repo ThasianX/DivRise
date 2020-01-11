@@ -14,9 +14,9 @@ Xcode 11 will install all necessary dependencies through Swift Package Manager.
 
 ### Installing
 
-Since AlphaVantage has strict limits on API calls and the app is currently using my API keys, you may want to create an [api key](https://www.alphavantage.co/support/#api-key) and save your API key to `Dividend App/Networking/Request.swift` for best experience.
+Create an [AlphaVantage api key](https://www.alphavantage.co/support/#api-key) and save your API key to `Dividend App/Networking/Configuration.swift`.
 
-Also, since NewsAPI has strict limits on API calls, you may want to create an [api key](https://newsapi.org/register) and save your API key to `Dividend App/Networking/Request.swift`.
+Create a [NewsAPI api key](https://newsapi.org/register) and save your API key to `Dividend App/Networking/Configuration.swift`.
 
 ```
 Open Dividend App.xcodeproj and run
