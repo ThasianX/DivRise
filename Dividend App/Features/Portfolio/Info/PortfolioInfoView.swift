@@ -132,8 +132,7 @@ struct SunburstDiagramButton: View {
                     Image(systemName: "chart.pie.fill")
                         .resizable()
                         .frame(width: 50, height: 50)
-                        .foregroundColor(Color(red: 153/255, green: 102/255, blue: 255/255, opacity: (showSectorInfo) ? 1 : 0.3))
-                        .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
+                        .foregroundColor(showSectorInfo ? Color.pink : Color.purple)
                 })
             }
             .padding()
