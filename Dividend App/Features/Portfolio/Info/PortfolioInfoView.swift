@@ -38,6 +38,7 @@ struct PortfolioInfoView: View {
                     if !showSectorInfo {
                         EditButton()
                             .padding()
+                            .disabled(portfolioStocks.count == 0 ? true : false)
                     }
                 }
                 
@@ -91,6 +92,8 @@ struct PortfolioInfoView: View {
                 }
             }
             SunburstDiagramButton(showSectorInfo: $showSectorInfo)
+                .disabled(portfolioStocks.count == 0 ? true : false)
+                .opacity(portfolioStocks.count == 0 ? 0.3 : 1)
         }
     }
 }
