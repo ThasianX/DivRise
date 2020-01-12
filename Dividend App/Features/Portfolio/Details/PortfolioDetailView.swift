@@ -48,15 +48,7 @@ struct PortfolioDetailView: View {
                     }
                     .padding(.trailing, 8)
                     
-                    Button(action: {
-                        self.show = false
-                    }) {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color.gray)
-                    }
-                    .buttonStyle(PlainButtonStyle())
+                    ExitButton(show: $show)
                 }
                 .padding()
                 
@@ -77,7 +69,7 @@ struct PortfolioDetailView: View {
                 
                 Spacer()
             }
-            .blur(radius: self.selectedAttributeIndex == nil ? 0 : 40)
+            .blur(radius: self.selectedAttributeIndex == nil ? 0 : 75)
             .animation(.easeInOut)
             
             if self.selectedAttributeIndex != nil {

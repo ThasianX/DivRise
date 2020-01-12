@@ -81,6 +81,7 @@
 		1EEA279223C66CD200D63F4D /* SunburstDiagram in Frameworks */ = {isa = PBXBuildFile; productRef = 1EEA279123C66CD200D63F4D /* SunburstDiagram */; };
 		1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA279323C6728300D63F4D /* SectorAttributes.swift */; };
 		1EEF292D23BEB20E00BCD51D /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF292C23BEB20E00BCD51D /* SafariView.swift */; };
+		1EF05F8C23CAEBEE006CCD05 /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */; };
 		1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */; };
 		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
 		1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */; };
@@ -162,6 +163,7 @@
 		1EE3832D23BDC82500EB9203 /* StockNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNewsView.swift; sourceTree = "<group>"; };
 		1EEA279323C6728300D63F4D /* SectorAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorAttributes.swift; sourceTree = "<group>"; };
 		1EEF292C23BEB20E00BCD51D /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoRow.swift; sourceTree = "<group>"; };
 		1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailContainerView.swift; sourceTree = "<group>"; };
 		1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				1E6E3F7223B1A0A6009A0262 /* Portfolio */,
 				1ED966BA23B55BCD000BDE8D /* Tracker */,
 				1E6E3F7323B1A0C0009A0262 /* Settings */,
+				1EF05F8A23CAEBD1006CCD05 /* Common */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -435,6 +438,14 @@
 			path = Tracker;
 			sourceTree = "<group>";
 		};
+		1EF05F8A23CAEBD1006CCD05 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		1EF2530523C41F3900AB224C /* AlphaVantage */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,6 +622,7 @@
 				1E62D37023B87A020093E83B /* DetailStock.swift in Sources */,
 				1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */,
 				1E6E3F7C23B1A20A009A0262 /* Store.swift in Sources */,
+				1EF05F8C23CAEBEE006CCD05 /* ExitButton.swift in Sources */,
 				1E6E3F7823B1A17C009A0262 /* AppReducer.swift in Sources */,
 				1E6E3F8123B1A333009A0262 /* RandomAccessCollection.swift in Sources */,
 				1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */,
@@ -753,7 +765,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"Dividend App/Preview Content\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
@@ -762,7 +774,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.DivRise;
 				PRODUCT_NAME = DivRise;
 				SWIFT_VERSION = 5.0;
@@ -775,7 +787,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"Dividend App/Preview Content\"";
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				ENABLE_PREVIEWS = YES;
@@ -784,7 +796,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.DivRise;
 				PRODUCT_NAME = DivRise;
 				SWIFT_VERSION = 5.0;
