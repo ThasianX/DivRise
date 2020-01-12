@@ -35,15 +35,7 @@ struct TrackerContainerView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                     },
-                    trailing: Button(action: {
-                        self.show = false
-                    }) {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color.gray)
-                    }
-                    .buttonStyle(PlainButtonStyle())
+                    trailing: ExitButton(show: $show)
             )
                 .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                     AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)

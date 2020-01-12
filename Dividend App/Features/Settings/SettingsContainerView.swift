@@ -42,15 +42,15 @@ struct SettingsContainerView: View {
                             .navigationBarItems(
                                 leading: ExitButton(show: self.$showDetailOrdering),
                                 trailing: Button(action: {
-                                self.showDetailOrdering = false
-                                self.onCommit()
-                            }) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(.green)
+                                    self.showDetailOrdering = false
+                                    self.onCommit()
+                                }) {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
                                 }
-                            .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(PlainButtonStyle())
                         )
                     }
             }
@@ -129,7 +129,7 @@ struct DetailAttributeOrdering: View {
         List {
             ForEach(fullAttributeNames, id: \.self) { attribute in
                 Text(attribute)
-                .foregroundColor(Color("textColor"))
+                    .foregroundColor(Color("textColor"))
             }
             .onMove(perform: onMove)
         }
@@ -139,21 +139,5 @@ struct DetailAttributeOrdering: View {
     
     private func onMove(from source: IndexSet, to destination: Int) {
         attributeOrder.move(fromOffsets: source, toOffset: destination)
-    }
-}
-
-struct ExitButton: View {
-    @Binding var show: Bool
-    
-    var body: some View {
-        Button(action: {
-            self.show = false
-        }) {
-            Image(systemName: "x.circle.fill")
-                .resizable()
-                .frame(width: 20, height: 20)
-                .foregroundColor(.gray)
-            }
-        .buttonStyle(PlainButtonStyle())
     }
 }
