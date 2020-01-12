@@ -29,10 +29,12 @@ struct CardView: View {
             VStack(spacing: 20) {
                 if index != nil {
                     Text(fullName)
-                        .font(.headline)
+                        .font(.title)
+                        .foregroundColor(Color("textColor"))
 
                     Text(description)
-                        .font(.subheadline)
+                        .font(.headline)
+                        .foregroundColor(Color("textColor"))
                     
                     Spacer()
                 }

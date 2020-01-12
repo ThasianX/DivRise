@@ -77,7 +77,7 @@ struct PortfolioDetailView: View {
                 
                 Spacer()
             }
-            .blur(radius: self.selectedAttributeIndex == nil ? 0 : 40)
+            .blur(radius: self.selectedAttributeIndex == nil ? 0 : 75)
             .animation(.easeInOut)
             
             if self.selectedAttributeIndex != nil {
