@@ -22,8 +22,11 @@ internal let companyFinancialRatioURL = "https://financialmodelingprep.com/api/v
 internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/v3/financial-statement-growth/{company}?period={period}"
 internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
 
-// MARK: NewsApi
+// MARK: NewsAPI
 internal let everythingURL = "https://newsapi.org/v2/everything"
+
+// MARK: IEX Cloud
+internal let nextDividendDateURL = "https://sandbox.iexapis.com/stable/stock/{company}/stats/nextDividendDate?token={apikey}"
 
 struct Request {
     let configuration = Configuration()
@@ -49,16 +52,18 @@ struct Request {
     }
     
     func fetchUpcomingDividendDate(portfolioStock: PortfolioStock) -> AnyPublisher<UpcomingDividend, Never> {
-        return getCompanyCashFlowStatement(identifier: portfolioStock.ticker, period: "quarter")
-            .map {
-                var date = DateFormatter.fullString.date(from: $0.financials.first!.date)!
-                date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
-                if Date() > date {
-                    date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
-                }
-                return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
-        }
-        .eraseToAnyPublisher()
+        let urlString = nextDividendDateURL
+            .replacingOccurrences(of: "{company}", with: portfolioStock.ticker.lowercased())
+            .replacingOccurrences(of: "{apikey}", with: configuration.iexApiKey)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: String.self, decoder: Current.decoder)
+            .map { UpcomingDividend(ticker: portfolioStock.ticker, date: DateFormatter.fullString.date(from: $0)!)}
+            .replaceError(with: .mock)
+            .eraseToAnyPublisher()
     }
     
     // MARK: Add
