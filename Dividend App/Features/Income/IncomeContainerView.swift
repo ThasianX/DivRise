@@ -53,7 +53,7 @@ struct IncomeContainerView: View {
     }
 }
 
-struct TrackerContainerView_Previews: PreviewProvider {
+struct IncomeContainerView_Previews: PreviewProvider {
     static var previews: some View {
         var appState = AppState()
         appState.allMonthlyRecords = []

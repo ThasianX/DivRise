@@ -14,7 +14,6 @@ struct IncomeView: View {
     
     var body: some View {
         ZStack {
-
             Color("modalBackground")
                 .edgesIgnoringSafeArea(.all)
             
@@ -65,7 +64,7 @@ struct IncomeView: View {
     }
 }
 
-struct TrackerView_Previews: PreviewProvider {
+struct IncomeView_Previews: PreviewProvider {
     static var previews: some View {
         IncomeView(monthlyRecords: [Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019")], monthlyDividends: [8, 23, 28])
     }

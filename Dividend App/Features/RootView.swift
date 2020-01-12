@@ -196,11 +196,12 @@ struct MenuView: View {
                                         .environmentObject(self.store)
                             }
                         }
-                    } else if item.title == "Holdings"{
+                    } else if item.title == "Dividend Tracker"{
                         Button(action: { self.showDividendTracker.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
                                 .sheet(isPresented: self.$showDividendTracker) {
-                                    Text("")
+                                    TrackerContainerView(show: self.$showDividendTracker)
+                                        .environmentObject(self.store)
                             }
                         }
                     } else {

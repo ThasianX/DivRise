@@ -59,6 +59,11 @@
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
 		1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */; };
 		1EC64F2E23B2E29E00BC63A5 /* Data+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */; };
+		1ED27F5823CBC2BB0061FEB6 /* TrackerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED27F5723CBC2BB0061FEB6 /* TrackerContainerView.swift */; };
+		1ED27F5A23CBC2C00061FEB6 /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED27F5923CBC2C00061FEB6 /* TrackerView.swift */; };
+		1ED27F5D23CBCB3A0061FEB6 /* HoldingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED27F5C23CBCB3A0061FEB6 /* HoldingInfo.swift */; };
+		1ED27F5F23CBCEF70061FEB6 /* CurrentSharePriceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED27F5E23CBCEF70061FEB6 /* CurrentSharePriceResponse.swift */; };
+		1ED27F6123CBD8700061FEB6 /* PositionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED27F6023CBD8700061FEB6 /* PositionDetailsView.swift */; };
 		1ED5326B23BC5200009CC919 /* UpcomingDividend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5326A23BC5200009CC919 /* UpcomingDividend.swift */; };
 		1ED5326F23BC5739009CC919 /* PortfolioInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED5326E23BC5739009CC919 /* PortfolioInfoView.swift */; };
 		1ED6131923B6B1BE00CF4CD0 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6131423B6B1BE00CF4CD0 /* IndicatorPoint.swift */; };
@@ -142,6 +147,11 @@
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1EC64F2D23B2E29E00BC63A5 /* Data+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Json.swift"; sourceTree = "<group>"; };
+		1ED27F5723CBC2BB0061FEB6 /* TrackerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerContainerView.swift; sourceTree = "<group>"; };
+		1ED27F5923CBC2C00061FEB6 /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
+		1ED27F5C23CBCB3A0061FEB6 /* HoldingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingInfo.swift; sourceTree = "<group>"; };
+		1ED27F5E23CBCEF70061FEB6 /* CurrentSharePriceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSharePriceResponse.swift; sourceTree = "<group>"; };
+		1ED27F6023CBD8700061FEB6 /* PositionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionDetailsView.swift; sourceTree = "<group>"; };
 		1ED5326A23BC5200009CC919 /* UpcomingDividend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingDividend.swift; sourceTree = "<group>"; };
 		1ED5326E23BC5739009CC919 /* PortfolioInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoView.swift; sourceTree = "<group>"; };
 		1ED6131423B6B1BE00CF4CD0 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -254,8 +264,8 @@
 			children = (
 				1E6E3F8623B1A3F5009A0262 /* RootView.swift */,
 				1E6E3F7223B1A0A6009A0262 /* Portfolio */,
-				1ED27F5423CBBD730061FEB6 /* Holdings */,
-				1ED966BA23B55BCD000BDE8D /* Tracker */,
+				1ED27F5423CBBD730061FEB6 /* Tracker */,
+				1ED966BA23B55BCD000BDE8D /* Income */,
 				1E6E3F7323B1A0C0009A0262 /* Settings */,
 				1EF05F8A23CAEBD1006CCD05 /* Common */,
 			);
@@ -403,11 +413,23 @@
 			path = "IEX Cloud";
 			sourceTree = "<group>";
 		};
-		1ED27F5423CBBD730061FEB6 /* Holdings */ = {
+		1ED27F5423CBBD730061FEB6 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				1ED27F5723CBC2BB0061FEB6 /* TrackerContainerView.swift */,
+				1ED27F5923CBC2C00061FEB6 /* TrackerView.swift */,
+				1ED27F6023CBD8700061FEB6 /* PositionDetailsView.swift */,
+				1ED27F5B23CBCB170061FEB6 /* Models */,
 			);
-			path = Holdings;
+			path = Tracker;
+			sourceTree = "<group>";
+		};
+		1ED27F5B23CBCB170061FEB6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1ED27F5C23CBCB3A0061FEB6 /* HoldingInfo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1ED6131323B6B1BE00CF4CD0 /* LineChart */ = {
@@ -442,7 +464,7 @@
 			path = BarChart;
 			sourceTree = "<group>";
 		};
-		1ED966BA23B55BCD000BDE8D /* Tracker */ = {
+		1ED966BA23B55BCD000BDE8D /* Income */ = {
 			isa = PBXGroup;
 			children = (
 				1ED966BB23B55C01000BDE8D /* IncomeContainerView.swift */,
@@ -451,7 +473,7 @@
 				1E86AECF23B5CC3200B38275 /* Models */,
 				1E86AED223B5D62E00B38275 /* Extensions */,
 			);
-			path = Tracker;
+			path = Income;
 			sourceTree = "<group>";
 		};
 		1EF05F8A23CAEBD1006CCD05 /* Common */ = {
@@ -488,6 +510,7 @@
 				1E62D36523B839B90093E83B /* CompanyCashFlowStatementResponse.swift */,
 				1E62D36923B859700093E83B /* CompanyFinancialGrowthResponse.swift */,
 				1E556FA223BBF78400CB569B /* StockHistoricalPriceResponse.swift */,
+				1ED27F5E23CBCEF70061FEB6 /* CurrentSharePriceResponse.swift */,
 			);
 			path = FinancialModelingPrep;
 			sourceTree = "<group>";
@@ -588,7 +611,9 @@
 				1ED6131A23B6B1BE00CF4CD0 /* LineView.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
 				1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */,
+				1ED27F5823CBC2BB0061FEB6 /* TrackerContainerView.swift in Sources */,
 				1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */,
+				1ED27F5A23CBC2C00061FEB6 /* TrackerView.swift in Sources */,
 				1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */,
 				1ED6132523B6C7A400CF4CD0 /* BarChartView.swift in Sources */,
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
@@ -604,6 +629,7 @@
 				1E8DCF5B23B1E7070018BADB /* PortfolioStock.swift in Sources */,
 				1ED966C323B560D2000BDE8D /* IncomeView.swift in Sources */,
 				1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */,
+				1ED27F5D23CBCB3A0061FEB6 /* HoldingInfo.swift in Sources */,
 				1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */,
 				1EFBDCB923BEFEEA00592F76 /* BlurView.swift in Sources */,
 				1E3BCB7223B9CBE400FAD5AA /* CurrentDetailStockRow.swift in Sources */,
@@ -630,6 +656,8 @@
 				1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */,
 				1EA7B19823B9E620007F1F7A /* CardView.swift in Sources */,
 				1E6E3F8723B1A3F5009A0262 /* RootView.swift in Sources */,
+				1ED27F5F23CBCEF70061FEB6 /* CurrentSharePriceResponse.swift in Sources */,
+				1ED27F6123CBD8700061FEB6 /* PositionDetailsView.swift in Sources */,
 				1E54FC8F23B9AA5600D7DC04 /* DetailAttributes.swift in Sources */,
 				1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */,
 				1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */,

@@ -21,6 +21,10 @@ struct AppState: Codable, Equatable {
     // MARK: Portfolio Info
     var allUpcomingDivDates: [String: Date] = [:]
     
+    // MARK: Dividend Tracker
+    var allHoldingsInfo: [String: HoldingInfo] = [:]
+    var currentSharePrices: [Double] = []
+    
     // MARK: Dividend Income
     var allMonthlyRecords: [Record] = []
     var allMonthlyDividends: [Double] = []

@@ -179,3 +179,10 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
     }
     .eraseToAnyPublisher()
 }
+
+func setCurrentSharePrices(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
+    Current.request.getCurrentSharePrices(stocks: portfolioStocks)
+        .map { AppAction.setCurrentSharePrices(prices: $0) }
+    .eraseToAnyPublisher()
+}
+

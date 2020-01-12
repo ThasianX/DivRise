@@ -51,6 +51,13 @@ func appReducer(state: inout AppState, action: AppAction) {
     case let .setSearchResults(results):
         state.searchResult = results
         
+    // MARK: Dividend Tracker
+    case let .addHoldingInfo(ticker, holdingInfo):
+        state.allHoldingsInfo[ticker] = holdingInfo
+        
+    case let .setCurrentSharePrices(prices):
+        state.currentSharePrices = prices
+        
     // MARK: Dividend Income
     case let .addMonthlyDividend(record, dividend):
         if state.allMonthlyRecords.last == record {
