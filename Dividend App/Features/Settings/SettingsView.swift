@@ -12,6 +12,7 @@ struct SettingsView: View {
     @Binding var receive: Bool
     @Binding var daySelection: Int
     @Binding var dateSelection: Date
+    @Binding var showDetailOrdering: Bool
     
     let openSettings: () -> Void
     let onNotificationChange: () -> Void
@@ -42,11 +43,19 @@ struct SettingsView: View {
         
         return
             ZStack {
-                
                 Color("modalBackground")
                     .edgesIgnoringSafeArea(.all)
                 
                 Form {
+                    Section(header: Text("Portfolio")) {
+                        Button(action: {
+                            self.showDetailOrdering = true
+                        }) {
+                            Text("Detail Attribute Ordering")
+                                .foregroundColor(Color("textColor"))
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                     Section(header: Text("Notifications")) {
                         Toggle(isOn: receiveBinding) {
                             Text("Recieve Notifications")
@@ -55,7 +64,7 @@ struct SettingsView: View {
                         
                         Stepper(value: dayBinding, in: 1...14) {
                             Text("Day of month: \(daySelection)")
-                            .foregroundColor(Color("textColor"))
+                                .foregroundColor(Color("textColor"))
                         }
                         .colorScheme(.dark)
                         .disabled(!receive)
@@ -67,7 +76,6 @@ struct SettingsView: View {
                         .colorScheme(.dark)
                         .disabled(!receive)
                     }
-                    
                 }
         }
     }

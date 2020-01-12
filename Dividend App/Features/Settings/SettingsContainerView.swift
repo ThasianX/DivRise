@@ -14,6 +14,8 @@ struct SettingsContainerView: View {
     @State var receive: Bool
     @State var daySelection: Int
     @State var dateSelection: Date
+    @State var detailOrdering: [String] = []
+    @State var showDetailOrdering: Bool = false
     
     @Binding var show: Bool
     
@@ -26,25 +28,48 @@ struct SettingsContainerView: View {
     
     var body: some View {
         NavigationView {
-            SettingsView(receive: $receive, daySelection: $daySelection, dateSelection: $dateSelection, openSettings: openSettings, onNotificationChange: onNotificationChange)
+            SettingsView(receive: $receive, daySelection: $daySelection, dateSelection: $dateSelection, showDetailOrdering: $showDetailOrdering, openSettings: openSettings, onNotificationChange: onNotificationChange)
                 .navigationBarTitle("Settings")
                 .navigationBarItems(trailing:
-                    Button(action: {
-                    self.show = false
-                }) {
-                    Image(systemName: "x.circle.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(Color.gray)
-                }
-                .buttonStyle(PlainButtonStyle())
+                    ExitButton(show: self.$show)
             )
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                        self.receive = self.store.state.notificationsSet
+                .sheet(isPresented: $showDetailOrdering) {
+                    NavigationView {
+                        DetailAttributeOrdering(showDetailOrdering: self.$showDetailOrdering, attributeOrder: self.$detailOrdering, fullAttributeNames: self.fullAttributeNames())
+                            .onAppear(perform: { self.detailOrdering = self.store.state.attributeNames })
+                            .environment(\.editMode, .constant(.active))
+                            .navigationBarTitle("Detail Attribute Order")
+                            .navigationBarItems(
+                                leading: ExitButton(show: self.$showDetailOrdering),
+                                trailing: Button(action: {
+                                self.showDetailOrdering = false
+                                self.onCommit()
+                            }) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.green)
+                                }
+                            .buttonStyle(PlainButtonStyle())
+                        )
                     }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                    self.receive = self.store.state.notificationsSet
                 }
+            }
         }
+    }
+    
+    private func fullAttributeNames() -> [String] {
+        store.state.attributeNames.compactMap {
+            DetailAttributes.full[$0]
+        }
+    }
+    
+    private func onCommit() {
+        self.store.send(.setAttributeNames(attributeNames: detailOrdering))
     }
     
     // Notification helpers
@@ -91,5 +116,44 @@ struct SettingsContainerView: View {
 struct SettingsContainerView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsContainerView(receive: false, daySelection: 10, dateSelection: Date().dateAtTime(hour: 2, minute: 2), show: .constant(true))
+    }
+}
+
+struct DetailAttributeOrdering: View {
+    @Binding var showDetailOrdering: Bool
+    @Binding var attributeOrder: [String]
+    
+    let fullAttributeNames: [String]
+    
+    var body: some View {
+        List {
+            ForEach(fullAttributeNames, id: \.self) { attribute in
+                Text(attribute)
+                .foregroundColor(Color("textColor"))
+            }
+            .onMove(perform: onMove)
+        }
+        .colorScheme(.dark)
+        .background(Color("modalBackground").edgesIgnoringSafeArea(.all))
+    }
+    
+    private func onMove(from source: IndexSet, to destination: Int) {
+        attributeOrder.move(fromOffsets: source, toOffset: destination)
+    }
+}
+
+struct ExitButton: View {
+    @Binding var show: Bool
+    
+    var body: some View {
+        Button(action: {
+            self.show = false
+        }) {
+            Image(systemName: "x.circle.fill")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.gray)
+            }
+        .buttonStyle(PlainButtonStyle())
     }
 }
