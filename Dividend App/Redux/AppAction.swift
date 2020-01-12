@@ -26,7 +26,7 @@ enum AppAction {
     // MARK: Search
     case setSearchResults(results: [SearchStock])
     
-    // MARK: Dividend Tracker
+    // MARK: Dividend Income
     case addMonthlyDividend(record: Record, amount: Double)
     
     // MARK: Stock Detail

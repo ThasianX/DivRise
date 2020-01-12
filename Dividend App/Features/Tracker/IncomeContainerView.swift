@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TrackerContainerView: View {
+struct IncomeContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     
     @State private var dividendInput = ""
@@ -26,21 +26,21 @@ struct TrackerContainerView: View {
     
     var body: some View {
         NavigationView {
-            TrackerView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
+            IncomeView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
                 .navigationBarItems(
                     leading: Button(action: {
                         self.showingAdd = true
                     }) {
                         Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                            .resizable()
+                            .frame(width: 20, height: 20)
                     },
                     trailing: ExitButton(show: $show)
             )
                 .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                     AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
             }
-            .navigationBarTitle(Text("Dividend Tracker"))
+            .navigationBarTitle(Text("Dividend Income"))
         }
         
     }
@@ -59,6 +59,6 @@ struct TrackerContainerView_Previews: PreviewProvider {
         appState.allMonthlyRecords = []
         appState.allMonthlyDividends = []
         
-        return TrackerContainerView(show: .constant(true)).environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
+        return IncomeContainerView(show: .constant(true)).environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }

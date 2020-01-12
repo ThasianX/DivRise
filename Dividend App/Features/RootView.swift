@@ -162,8 +162,9 @@ struct Menu: Identifiable {
 }
 
 let menuData = [
-    Menu(title: "My Portfolio", icon: "person.crop.circle"),
-    Menu(title: "Dividend Tracker", icon: "chart.bar.fill"),
+    Menu(title: "Portfolio", icon: "person.crop.circle"),
+    Menu(title: "Dividend Tracker", icon: "list.bullet"),
+    Menu(title: "Dividend Income", icon: "chart.bar.fill"),
     Menu(title: "Settings", icon: "gear")
 ]
 
@@ -171,6 +172,7 @@ struct MenuView: View {
     var menu = menuData
     @EnvironmentObject var store: Store<AppState, AppAction>
     @Binding var show: Bool
+    @State var showDividendIncome = false
     @State var showDividendTracker = false
     @State var showSettings = false
     
@@ -178,11 +180,11 @@ struct MenuView: View {
         return HStack {
             VStack(alignment: .leading) {
                 ForEach(menu) { item in
-                    if item.title == "Dividend Tracker" {
-                        Button(action: { self.showDividendTracker.toggle() }) {
+                    if item.title == "Dividend Income" {
+                        Button(action: { self.showDividendIncome.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
-                                .sheet(isPresented: self.$showDividendTracker) {
-                                    TrackerContainerView(show: self.$showDividendTracker)
+                                .sheet(isPresented: self.$showDividendIncome) {
+                                    IncomeContainerView(show: self.$showDividendIncome)
                                         .environmentObject(self.store)
                             }
                         }
@@ -192,6 +194,13 @@ struct MenuView: View {
                                 .sheet(isPresented: self.$showSettings) {
                                     SettingsContainerView(receive: self.store.state.notificationsSet, daySelection: self.store.state.notificationDay, dateSelection: self.store.state.notificationTime, show: self.$showSettings)
                                         .environmentObject(self.store)
+                            }
+                        }
+                    } else if item.title == "Holdings"{
+                        Button(action: { self.showDividendTracker.toggle() }) {
+                            MenuRow(image: item.icon, text: item.title)
+                                .sheet(isPresented: self.$showDividendTracker) {
+                                    Text("")
                             }
                         }
                     } else {

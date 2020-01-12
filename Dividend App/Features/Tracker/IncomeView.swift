@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TrackerView: View {
+struct IncomeView: View {
     let monthlyRecords: [Record]
     let monthlyDividends: [Double]
     
@@ -25,7 +25,7 @@ struct TrackerView: View {
                             Spacer()
                             HStack {
                                 Spacer()
-                                BarChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [8,23,54,32,12,37,7,23,43], title: "Dividend Growth", style: Styles.barChartStyleOrangeDark, form: CGSize(width: geometry.size.width*0.95, height: geometry.size.height*0.95))
+                                BarChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [8,23,54,32,12,37,7,23,43], title: "Passive Income", style: Styles.barChartStyleOrangeDark, form: CGSize(width: geometry.size.width*0.95, height: geometry.size.height*0.95))
                                     .allowsHitTesting(false)
                                     .opacity(0.3)
                                 
@@ -52,9 +52,8 @@ struct TrackerView: View {
                         
                         HStack {
                             Spacer()
-                            BarChartView(records: self.monthlyRecords, data: self.monthlyDividends, title: "Monthly Dividends", style: Styles.barChartStyleOrangeDark, form: CGSize(width: geometry.size.width*0.95, height: geometry.size.height*0.95))
+                            BarChartView(records: self.monthlyRecords, data: self.monthlyDividends, title: "Passive Income", style: Styles.barChartStyleOrangeDark, form: CGSize(width: geometry.size.width*0.95, height: geometry.size.height*0.95))
                             Spacer()
-                            //                BarChartView(records: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], data: [8,23,54,32,12,37,7,23,43], title: "Monthly Dividends", form: CGSize(width: geometry.size.width*0.95, height: geometry.size.height*0.95))
                         }
                         
                         Spacer()
@@ -68,7 +67,6 @@ struct TrackerView: View {
 
 struct TrackerView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackerView(monthlyRecords: [Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019")], monthlyDividends: [8, 23, 28])
-        //        TrackerView(monthlyRecords: [Record(month: "Jan", year: "2019")], monthlyDividends: [8])
+        IncomeView(monthlyRecords: [Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019"), Record(month: "Jan", day: nil, year: "2019")], monthlyDividends: [8, 23, 28])
     }
 }
