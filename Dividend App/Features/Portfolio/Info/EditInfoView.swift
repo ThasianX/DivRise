@@ -80,16 +80,8 @@ struct EditInfoView: View {
                 .padding(30)
                 
                 VStack {
-                    Button(action: {
-                        self.showEditInfo = false
-                    }) {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color.gray)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
+                    ExitButton(show: $showEditInfo)
+                        .padding()
                     
                     Spacer()
                 }
