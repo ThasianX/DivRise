@@ -26,7 +26,10 @@ internal let currentStockPriceURL = "https://financialmodelingprep.com/api/v3/st
 internal let everythingURL = "https://newsapi.org/v2/everything"
 
 // MARK: IEX Cloud
-internal let nextDividendDateURL = "https://cloud.iexapis.com/v1/stock/{company}/stats/nextDividendDate?token={apikey}"
+//internal let nextDividendDateURL = "https://cloud.iexapis.com/v1/stock/{company}/stats/nextDividendDate?token={apikey}"
+internal let nextDividendDateURL = "https://sandbox.iexapis.com/stable/stock/{company}/stats/nextEarningsDate?token={apikey}"
+internal let basicDividendURL = "https://sandbox.iexapis.com/stable/stock/{company}/dividends/3m?token=Tsk_654a34bcb8534b22934ed38896ce3d61"
+//https://cloud.iexapis.com/v1/stock/aapl/dividends/3m?token=sk_d8e794430fe94c7eaed86cc0a61da317
 
 struct Request {
     let configuration = Configuration()
@@ -40,10 +43,25 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100, sector: $0.profile.sector)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100, sector: $0.profile.sector, frequency: portfolioStock.frequency)
         }
         .eraseToAnyPublisher()
     }
+    
+    func fetchDividendFrequency(portfolioStock: PortfolioStock) -> AnyPublisher<String, Never> {
+           let urlString = basicDividendURL
+               .replacingOccurrences(of: "{company}", with: portfolioStock.ticker.lowercased())
+               .replacingOccurrences(of: "{apikey}", with: configuration.iexApiKey)
+           let url = URL(string: urlString)!
+           
+           return URLSession.shared
+               .dataTaskPublisher(for: url)
+               .map { $0.data }
+               .decode(type: BasicDividendResponse.self, decoder: Current.decoder)
+                .map { $0.frequency.capitalized }
+               .replaceError(with: "Quarterly")
+               .eraseToAnyPublisher()
+       }
     
     // MARK: Portfolio Info
     func updatedUpcomingDividendDates(stocks: [PortfolioStock]) -> AnyPublisher<[UpcomingDividend], Never> {
