@@ -26,7 +26,7 @@ internal let currentStockPriceURL = "https://financialmodelingprep.com/api/v3/st
 internal let everythingURL = "https://newsapi.org/v2/everything"
 
 // MARK: IEX Cloud
-internal let nextDividendDateURL = "https://sandbox.iexapis.com/stable/stock/{company}/stats/nextDividendDate?token={apikey}"
+internal let nextDividendDateURL = "https://cloud.iexapis.com/v1/stock/{company}/stats/nextDividendDate?token={apikey}"
 
 struct Request {
     let configuration = Configuration()
@@ -62,7 +62,7 @@ struct Request {
             .map { $0.data }
             .decode(type: String.self, decoder: Current.decoder)
             .map { UpcomingDividend(ticker: portfolioStock.ticker, date: DateFormatter.fullString.date(from: $0)!)}
-            .replaceError(with: .mock)
+            .replaceError(with: UpcomingDividend(ticker: portfolioStock.ticker, date: Date()))
             .eraseToAnyPublisher()
     }
     

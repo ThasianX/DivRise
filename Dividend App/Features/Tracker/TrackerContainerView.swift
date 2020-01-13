@@ -26,7 +26,7 @@ struct TrackerContainerView: View {
     
     var body: some View {
         NavigationView {
-            TrackerView(portfolioStocks: portfolioStocks, holdingsInfo: holdingsInfo, currentSharePrices: store.state.currentSharePrices, onCommit: editHolding)
+            TrackerView(portfolioStocks: portfolioStocks, holdingsInfo: holdingsInfo, currentSharePrices: store.state.currentSharePrices)
             .navigationBarTitle("Dividend Tracker")
             .navigationBarItems(trailing: ExitButton(show: $show))
             .onAppear(perform: getCurrentSharePrices)
@@ -35,9 +35,5 @@ struct TrackerContainerView: View {
     
     private func getCurrentSharePrices() {
         store.send(setCurrentSharePrices(portfolioStocks: portfolioStocks))
-    }
-    
-    private func editHolding(stock: PortfolioStock, holdingInfo: HoldingInfo) {
-        store.send(.addHoldingInfo(ticker: stock.ticker, holdingInfo: holdingInfo))
     }
 }
