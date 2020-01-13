@@ -28,6 +28,8 @@ Create an [AlphaVantage api key](https://www.alphavantage.co/support/#api-key) a
 
 Create a [NewsAPI api key](https://newsapi.org/register) and save your API key to `Dividend App/Networking/Configuration.swift`.
 
+Create an [IEX Cloud api key](https://iexcloud.io/cloud-login?r=https%3A%2F%2Fiexcloud.io%2Fconsole%2F#/register) and save your API key to `Dividend App/Networking/Configuration.swift`.
+
 ```
 Open Dividend App.xcodeproj and run
 ```
