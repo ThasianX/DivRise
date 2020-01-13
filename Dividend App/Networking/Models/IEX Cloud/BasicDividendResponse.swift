@@ -22,5 +22,5 @@ struct BasicDividendResponse: Codable, Hashable {
 
 
 extension BasicDividendResponse {
-    static let noResponse = BasicDividendResponse(symbol: "AAPL", exDate: "2017-08-10", paymentDate: "2017-08-17", recordDate: "2017-08-14", declaredDate: "2017-08-01", amount: 0.63, currency: "USD", description: "Apple declares dividend of .63", frequency: "quarterly")
+    static let noResponse = BasicDividendResponse(symbol: "AAPL", exDate: "2017-08-10", paymentDate: "2017-08-17", recordDate: "2017-08-14", declaredDate: "2017-08-01", amount: 0.63, currency: "USD", description: "Apple declares dividend of .63", frequency: "Quarterly")
 }

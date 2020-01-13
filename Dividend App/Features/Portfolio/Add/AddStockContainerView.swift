@@ -33,22 +33,22 @@ struct AddStockContainerView: View {
                 searchedStocks: store.state.searchResult,
                 onCommit: searchStocks
             )
-            .onDisappear(perform: clearSearch)
+                .onDisappear(perform: clearSearch)
                 .addTextFieldAlert(isShowing: $showingAlert, stock: selectedStock, input: $alertInput, onAdd: addStock)
                 .alert(isPresented: $showingError) {
                     Alert(title: Text(errorMessage), dismissButton: .default(Text("Got it")))
             }
             .animation(.easeInOut)
             .navigationBarTitle(Text("Add Stocks"))
-                .navigationBarItems(trailing:
-                    ExitButton(show: $show)
+            .navigationBarItems(trailing:
+                ExitButton(show: $show)
             )
         }
     }
     
     // Search helpers
     private func clearSearch() {
-            self.store.send(.setSearchResults(results: []))
+        self.store.send(.setSearchResults(results: []))
     }
     
     private func searchStocks() {
@@ -70,7 +70,13 @@ struct AddStockContainerView: View {
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
                 let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector, frequency: "")
-                store.send(addStockToPortfolio(portfolioStock: portfolioStock))
+                Current.request.fetchDividendFrequency(portfolioStock: portfolioStock).sink {
+                    let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector, frequency: $0)
+                    
+                    self.store.send(.addToPortfolio(stock: updatedStock))
+                    self.store.send(addNextDividendDate(portfolioStock: updatedStock))
+                }
+                .cancel()
             }
         }
     }
@@ -82,6 +88,6 @@ struct AddStockContainerView_Previews: PreviewProvider {
         appState.searchResult = [.mock, .mock, .mock, .mock]
         
         return AddStockContainerView(show: .constant(true))
-        .environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
+            .environmentObject(Store<AppState, AppAction>(initialState: appState, reducer: appReducer))
     }
 }

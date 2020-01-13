@@ -26,8 +26,6 @@ internal let currentStockPriceURL = "https://financialmodelingprep.com/api/v3/st
 internal let everythingURL = "https://newsapi.org/v2/everything"
 
 // MARK: IEX Cloud
-//internal let nextDividendDateURL = "https://cloud.iexapis.com/v1/stock/{company}/stats/nextDividendDate?token={apikey}"
-internal let nextDividendDateURL = "https://sandbox.iexapis.com/stable/stock/{company}/stats/nextEarningsDate?token={apikey}"
 internal let basicDividendURL = "https://sandbox.iexapis.com/stable/stock/{company}/dividends/3m?token=Tsk_654a34bcb8534b22934ed38896ce3d61"
 //https://cloud.iexapis.com/v1/stock/aapl/dividends/3m?token=sk_d8e794430fe94c7eaed86cc0a61da317
 
@@ -70,18 +68,28 @@ struct Request {
     }
     
     func fetchUpcomingDividendDate(portfolioStock: PortfolioStock) -> AnyPublisher<UpcomingDividend, Never> {
-        let urlString = nextDividendDateURL
-            .replacingOccurrences(of: "{company}", with: portfolioStock.ticker.lowercased())
-            .replacingOccurrences(of: "{apikey}", with: configuration.iexApiKey)
-        let url = URL(string: urlString)!
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: String.self, decoder: Current.decoder)
-            .map { UpcomingDividend(ticker: portfolioStock.ticker, date: DateFormatter.fullString.date(from: $0)!)}
-            .replaceError(with: UpcomingDividend(ticker: portfolioStock.ticker, date: Date()))
-            .eraseToAnyPublisher()
+        return getCompanyCashFlowStatement(identifier: portfolioStock.ticker, period: "quarter")
+            .map {
+                var date = DateFormatter.fullString.date(from: $0.financials.first!.date)!
+                if portfolioStock.frequency == "Quarterly" {
+                    date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                    }
+                } else if portfolioStock.frequency == "Semi-Annual" {
+                    date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
+                    }
+                } else {
+                    date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+                    }
+                }
+                return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
+        }
+        .eraseToAnyPublisher()
     }
     
     // MARK: Search

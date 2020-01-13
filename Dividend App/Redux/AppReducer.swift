@@ -34,7 +34,7 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
-        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector)
+        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector, frequency: stock.frequency)
         
         state.allPortfolioStocks[state.portfolioStocks[index]] = updatedStock
         

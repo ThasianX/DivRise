@@ -17,17 +17,6 @@ func search(query: String) -> AnyPublisher<AppAction, Never> {
 }
 
 // MARK: Portfolio
-func addStockToPortfolio(portfolioStock: PortfolioStock) -> AnyPublisher<AppAction, Never> {
-    Current.request.fetchDividendFrequency(portfolioStock: portfolioStock)
-        .map {
-            let stock = PortfolioStock(ticker: portfolioStock.ticker, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: portfolioStock.currentDividend, growth: portfolioStock.growth, sector: portfolioStock.sector, frequency: $0)
-            addNextDividendDate(portfolioStock: stock)
-            return AppAction.addToPortfolio(stock: stock)
-            
-    }
-        .eraseToAnyPublisher()
-}
-
 func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.updatedPortfolioStocks(stocks: portfolioStocks)
         .map { AppAction.updatePortfolio(stocks: $0) }
