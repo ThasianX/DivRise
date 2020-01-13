@@ -14,6 +14,16 @@ Xcode 11 will install all necessary dependencies through Swift Package Manager.
 
 ### Installing
 
+Create a configuration file for your API keys called `Configuration.swift` in `Dividend App/Networking/` with the following template:
+
+```
+struct Configuration {
+    let alphaVantageApiKey = ""
+    let newsApiKey = ""
+    let iexApiKey = ""
+}
+```
+
 Create an [AlphaVantage api key](https://www.alphavantage.co/support/#api-key) and save your API key to `Dividend App/Networking/Configuration.swift`.
 
 Create a [NewsAPI api key](https://newsapi.org/register) and save your API key to `Dividend App/Networking/Configuration.swift`.
