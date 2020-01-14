@@ -23,10 +23,17 @@ func updatePortfolio(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppActio
         .eraseToAnyPublisher()
 }
 
-func addNextDividendDate(portfolioStock: PortfolioStock) -> AnyPublisher<AppAction, Never> {
-    Current.request.updatedUpcomingDividendDates(stocks: [portfolioStock])
-        .map { AppAction.addUpcomingDivDate(dividend: $0.first!) }
-        .eraseToAnyPublisher()
+func addStockToPortfolio(stock: PortfolioStock) -> AnyPublisher<AppAction, Never> {
+    Current.request.fetchDividendFrequency(portfolioStock: stock)
+        .map {
+            PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: stock.startingDividend, currentDividend: stock.currentDividend, growth: stock.growth, sector: stock.sector, frequency: $0)
+    }
+    .flatMap { updatedStock in
+        Current.request.updatedUpcomingDividendDates(stocks: [updatedStock])
+            .map { AppAction.addToPortfolio(stock: updatedStock, dividend: $0.first!) }
+            .eraseToAnyPublisher()
+    }
+    .eraseToAnyPublisher()
 }
 
 func updateNextDividendDate(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
@@ -104,7 +111,7 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
                 
                 if let ebit = Double(publisher1.2.financials[i].ebit),
                     let revenue = Double(publisher1.2.financials[i].revenue) {
-                        operatingProfitMargins.append((ebit / revenue)*100)
+                    operatingProfitMargins.append((ebit / revenue)*100)
                 }
                 
                 if let totalDebt = Double(publisher1.1.financials[i].totalDebt),
@@ -179,3 +186,12 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
     }
     .eraseToAnyPublisher()
 }
+
+func setCurrentSharePrices(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
+    Current.request.getCurrentSharePrices(stocks: portfolioStocks)
+        .map {
+            Logger.info("\($0)")
+            return AppAction.setCurrentSharePrices(prices: $0) }
+        .eraseToAnyPublisher()
+}
+

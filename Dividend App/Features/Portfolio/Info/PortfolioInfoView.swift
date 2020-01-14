@@ -31,7 +31,7 @@ struct PortfolioInfoView: View {
             
             VStack(spacing: 0) {
                 HStack {
-                    TitleView(title: showSectorInfo ? "Sector Breakdown" : "Dividend Info")
+                    TitleView(title: showSectorInfo ? "Sector Breakdown" : "Portfolio Info")
                         .blur(radius: (editMode?.wrappedValue == EditMode.active && !showSectorInfo) ? 20 : 0)
                         .animation(.default)
                     

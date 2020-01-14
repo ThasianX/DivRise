@@ -18,12 +18,15 @@ internal let companyKeyMetricsURL = "https://financialmodelingprep.com/api/v3/co
 internal let companyCashFlowURL = "https://financialmodelingprep.com/api/v3/financials/cash-flow-statement/{company}?period={period}"
 internal let companyIncomeURL = "https://financialmodelingprep.com/api/v3/financials/income-statement/{company}?period={period}"
 internal let companyBalanceURL = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/{company}?period={period}"
-internal let companyFinancialRatioURL = "https://financialmodelingprep.com/api/v3/financial-ratios/{company}"
 internal let companyFinancialGrowthURL = "https://financialmodelingprep.com/api/v3/financial-statement-growth/{company}?period={period}"
 internal let stockHistoricalPriceURL = "https://financialmodelingprep.com/api/v3/historical-price-full/{company}?serietype=line"
+internal let currentStockPriceURL = "https://financialmodelingprep.com/api/v3/stock/real-time-price/{company}"
 
-// MARK: NewsApi
+// MARK: NewsAPI
 internal let everythingURL = "https://newsapi.org/v2/everything"
+
+// MARK: IEX Cloud
+internal let basicDividendURL = "https://cloud.iexapis.com/v1/stock/{company}/dividends/3m?token={apikey}"
 
 struct Request {
     let configuration = Configuration()
@@ -37,10 +40,25 @@ struct Request {
     func fetchPortfolioStock(portfolioStock: PortfolioStock) -> AnyPublisher<PortfolioStock, Never> {
         return companyProfile(identifier: portfolioStock.ticker)
             .map {
-                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100, sector: $0.profile.sector)
+                PortfolioStock(ticker: $0.symbol, fullName: portfolioStock.fullName, image: portfolioStock.image, startingDividend: portfolioStock.startingDividend, currentDividend: Double($0.profile.lastDiv)!, growth: ((Double($0.profile.lastDiv)! / portfolioStock.startingDividend) - 1.0) * 100, sector: $0.profile.sector, frequency: portfolioStock.frequency)
         }
         .eraseToAnyPublisher()
     }
+    
+    func fetchDividendFrequency(portfolioStock: PortfolioStock) -> AnyPublisher<String, Never> {
+           let urlString = basicDividendURL
+               .replacingOccurrences(of: "{company}", with: portfolioStock.ticker.lowercased())
+               .replacingOccurrences(of: "{apikey}", with: configuration.iexApiKey)
+           let url = URL(string: urlString)!
+           
+           return URLSession.shared
+               .dataTaskPublisher(for: url)
+               .map { $0.data }
+               .decode(type: BasicDividendResponse.self, decoder: Current.decoder)
+                .map { $0.frequency.capitalized }
+               .replaceError(with: "Quarterly")
+               .eraseToAnyPublisher()
+       }
     
     // MARK: Portfolio Info
     func updatedUpcomingDividendDates(stocks: [PortfolioStock]) -> AnyPublisher<[UpcomingDividend], Never> {
@@ -52,16 +70,28 @@ struct Request {
         return getCompanyCashFlowStatement(identifier: portfolioStock.ticker, period: "quarter")
             .map {
                 var date = DateFormatter.fullString.date(from: $0.financials.first!.date)!
-                date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
-                if Date() > date {
+                if portfolioStock.frequency == "Quarterly" {
                     date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                    }
+                } else if portfolioStock.frequency == "Semi-Annual" {
+                    date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
+                    }
+                } else {
+                    date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+                    if Date() > date {
+                        date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+                    }
                 }
                 return UpcomingDividend(ticker: portfolioStock.ticker, date: date)
         }
         .eraseToAnyPublisher()
     }
     
-    // MARK: Add
+    // MARK: Search
     func getSearchedStocks(query: String) -> AnyPublisher<[SearchStock], Never> {
         return searchStocks(query: query)
             .map { $0.bestMatches }
@@ -204,17 +234,35 @@ struct Request {
         
         let queryItems = [URLQueryItem(name: "q", value: query),
                           URLQueryItem(name: "apiKey", value: configuration.newsApiKey),
-                        URLQueryItem(name: "language", value: "en"),
-                        URLQueryItem(name: "sortBy", value: "publishedAt")]
+                          URLQueryItem(name: "language", value: "en"),
+                          URLQueryItem(name: "sortBy", value: "publishedAt")]
         url.appending(queryItems)
         
         return URLSession.shared
             .dataTaskPublisher(for: url)
-            .map {
-                $0.data.printJSON()
-                return $0.data }
+            .map { $0.data }
             .decode(type: NewsEverythingResponse.self, decoder: Current.decoder)
             .replaceError(with: .noResponse)
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: Dividend Tracker
+    func getCurrentSharePrices(stocks: [PortfolioStock]) -> AnyPublisher<[Double], Never> {
+        let publisherOfPublishers = Publishers.Sequence<[AnyPublisher<Double, Never>], Never>(sequence: stocks.map(getCurrentSharePrice))
+        return publisherOfPublishers.flatMap { $0 }.collect().eraseToAnyPublisher()
+    }
+    
+    func getCurrentSharePrice(portfolioStock: PortfolioStock) -> AnyPublisher<Double, Never> {
+        let urlString = currentStockPriceURL
+            .replacingOccurrences(of: "{company}", with: portfolioStock.ticker)
+        let url = URL(string: urlString)!
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: CurrentSharePriceResponse.self, decoder: Current.decoder)
+            .replaceError(with: .noResponse)
+            .map { $0.price }
             .eraseToAnyPublisher()
     }
 }
