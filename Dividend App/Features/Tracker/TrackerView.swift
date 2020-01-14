@@ -18,10 +18,25 @@ struct TrackerView: View {
         VStack {
             HoldingsListHeader()
             
-            if currentSharePrices.count == portfolioStocks.count {
-                List(portfolioStocks.indexed(), id: \.1.self) { i, stock in
-                    NavigationLink(destination: PositionDetailsContainerView(index: i)) {
-                        TrackerRow(stock: stock, holdingInfo: self.holdingsInfo[i], sharePrice: self.currentSharePrices[i])
+            if portfolioStocks.count == 0 {
+                ZStack {
+                    Text("Add stocks to display")
+                        .foregroundColor(Color("textColor"))
+                        .font(.headline)
+                        .italic()
+                    
+                    List(PortfolioStock.sample.indexed(), id: \.1.self) { i, stock in
+                        TrackerRow(stock: stock, holdingInfo: HoldingInfo.sample[i], sharePrice: HoldingInfo.sampleSharePrices[i])
+                    }
+                    .opacity(0.3)
+                    .disabled(true)
+                }
+            } else {
+                if currentSharePrices.count == portfolioStocks.count {
+                    List(portfolioStocks.indexed(), id: \.1.self) { i, stock in
+                        NavigationLink(destination: PositionDetailsContainerView(index: i)) {
+                            TrackerRow(stock: stock, holdingInfo: self.holdingsInfo[i], sharePrice: self.currentSharePrices[i])
+                        }
                     }
                 }
             }
@@ -72,6 +87,7 @@ struct TrackerRow: View {
                     .font(.headline)
                 Text(stock.fullName)
                     .font(.subheadline)
+                    .lineLimit(1)
             }
             
             Spacer()

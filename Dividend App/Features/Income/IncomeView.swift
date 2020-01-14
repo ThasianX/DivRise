@@ -38,6 +38,7 @@ struct IncomeView: View {
                             HStack {
                                 Spacer()
                                 Text("Not enough data to display")
+                                    .foregroundColor(Color("textColor"))
                                     .font(.headline)
                                     .italic()
                                 Spacer()

@@ -92,6 +92,10 @@ struct HoldingInfoForm: View {
             }
         }
         .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(Color.white, lineWidth: 2)
+        )
     }
 }
 
@@ -210,6 +214,7 @@ struct StockInfoRow: View {
         HStack {
             Text(attribute)
                 .foregroundColor(Color("textColor"))
+                .font(.callout)
             Spacer()
             Text(value)
                 .bold()
