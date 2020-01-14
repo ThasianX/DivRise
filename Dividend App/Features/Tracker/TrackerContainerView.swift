@@ -24,9 +24,28 @@ struct TrackerContainerView: View {
         }
     }
     
+    private var portfolioValue: Double {
+        var total = 0.0
+        let numShares = holdingsInfo.map { $0?.numOfShares }
+        for (i, price) in store.state.currentSharePrices.enumerated() {
+            if let num = numShares[i] {
+                total += num * price
+            }
+        }
+        return total
+    }
+    
+    private var portfolioCostBasis: Double {
+        return store.state.portfolioStocks.compactMap {
+            store.state.allHoldingsInfo[$0]
+        }
+        .map { $0.avgCostPerShare * $0.numOfShares }
+        .reduce(0, +)
+    }
+    
     var body: some View {
         NavigationView {
-            TrackerView(portfolioStocks: portfolioStocks, holdingsInfo: holdingsInfo, currentSharePrices: store.state.currentSharePrices)
+            TrackerView(portfolioStocks: portfolioStocks, holdingsInfo: holdingsInfo, currentSharePrices: store.state.currentSharePrices, portfolioValue: portfolioValue, portfolioCostBasis: portfolioCostBasis)
             .navigationBarTitle("Dividend Tracker")
             .navigationBarItems(trailing: ExitButton(show: $show))
             .onAppear(perform: getCurrentSharePrices)

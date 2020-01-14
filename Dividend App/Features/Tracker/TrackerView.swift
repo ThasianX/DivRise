@@ -13,9 +13,14 @@ struct TrackerView: View {
     let portfolioStocks: [PortfolioStock]
     let holdingsInfo: [HoldingInfo?]
     let currentSharePrices: [Double]
+    let portfolioValue: Double
+    let portfolioCostBasis: Double
     
     var body: some View {
         VStack {
+            AllHoldingsInfo(totalStocks: portfolioStocks.count, value: portfolioValue, costBasis: portfolioCostBasis)
+            CustomDivider()
+            
             HoldingsListHeader()
             
             if portfolioStocks.count == 0 {
@@ -26,7 +31,10 @@ struct TrackerView: View {
                         .italic()
                     
                     List(PortfolioStock.sample.indexed(), id: \.1.self) { i, stock in
-                        TrackerRow(stock: stock, holdingInfo: HoldingInfo.sample[i], sharePrice: HoldingInfo.sampleSharePrices[i])
+                        NavigationLink(destination: EmptyView()) {
+                            TrackerRow(stock: stock, holdingInfo: HoldingInfo.sample[i], sharePrice: HoldingInfo.sampleSharePrices[i], portfolioValue: self.portfolioValue)
+                        }
+                        .colorScheme(.dark)
                     }
                     .opacity(0.3)
                     .disabled(true)
@@ -35,8 +43,9 @@ struct TrackerView: View {
                 if currentSharePrices.count == portfolioStocks.count {
                     List(portfolioStocks.indexed(), id: \.1.self) { i, stock in
                         NavigationLink(destination: PositionDetailsContainerView(index: i)) {
-                            TrackerRow(stock: stock, holdingInfo: self.holdingsInfo[i], sharePrice: self.currentSharePrices[i])
+                            TrackerRow(stock: stock, holdingInfo: self.holdingsInfo[i], sharePrice: self.currentSharePrices[i], portfolioValue: self.portfolioValue)
                         }
+                        .colorScheme(.dark)
                     }
                 }
             }
@@ -47,14 +56,66 @@ struct TrackerView: View {
 
 struct TrackerView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackerView(portfolioStocks: [.mock, .mock, .mock], holdingsInfo: [.mock, .mock, nil], currentSharePrices: [27.32, 30, 26.3])
+        TrackerView(portfolioStocks: [.mock, .mock, .mock], holdingsInfo: [.mock, .mock, nil], currentSharePrices: [27.32, 30, 26.3], portfolioValue: 500, portfolioCostBasis: 450)
+    }
+}
+
+struct CustomDivider: View {
+    let color: Color = .white
+    let width: CGFloat = 2
+    var body: some View {
+        Rectangle()
+            .fill(color)
+            .frame(height: width)
+            .edgesIgnoringSafeArea(.horizontal)
+    }
+}
+
+struct AllHoldingsInfo: View {
+    let totalStocks: Int
+    let value: Double
+    let costBasis: Double
+    
+    private var unrealizedGain: Double {
+        value - costBasis
+    }
+    
+    private var unrealizedGainPercent: Double {
+        ((value / costBasis) - 1.0) * 100
+    }
+    
+    var body: some View {
+        HStack {
+            Text("Total(\(totalStocks))")
+                .foregroundColor(Color("textColor"))
+                .font(.headline)
+            Spacer()
+            
+            VStack(alignment: .trailing) {
+                Text("$\(value, specifier: "%.2f")")
+                    .foregroundColor(Color("textColor"))
+                    .bold()
+                
+                if unrealizedGain >= 0 {
+                    Text("+$\(unrealizedGain, specifier: "%.2f") (▲\(unrealizedGainPercent, specifier: "%.2f")%)")
+                        .bold()
+                        .foregroundColor(Color.green)
+                } else {
+                    Text("-$\(-unrealizedGain, specifier: "%.2f") (▼\(-unrealizedGainPercent, specifier: "%.2f")%)")
+                        .bold()
+                        .foregroundColor(Color.red)
+                }
+            }
+        }
+        .padding(.leading, 16)
+        .padding(.trailing, 16)
     }
 }
 
 struct HoldingsListHeader: View {
     var body: some View {
         HStack {
-            Text("Name")
+            Text("Name / Weight")
             Spacer()
             Text("Value / Unrealized gain")
         }
@@ -69,6 +130,7 @@ struct TrackerRow: View {
     let stock: PortfolioStock
     let holdingInfo: HoldingInfo?
     let sharePrice: Double
+    let portfolioValue: Double
     
     var body: some View {
         HStack {
@@ -83,12 +145,23 @@ struct TrackerRow: View {
             .frame(width: 30, height: 30)
             
             VStack(alignment: .leading) {
-                Text(stock.ticker)
-                    .font(.headline)
-                Text(stock.fullName)
-                    .font(.subheadline)
-                    .lineLimit(1)
+                HStack {
+                    Text(stock.ticker)
+                        .font(.caption)
+                    Text(stock.fullName)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                }
+                
+                if holdingInfo != nil {
+                    Text("\(portfolioWeight(), specifier: "%.2f")%")
+                        .font(.footnote)
+                } else {
+                    Text("N/A")
+                        .font(.footnote)
+                }
             }
+            .foregroundColor(Color("textColor"))
             
             Spacer()
             
@@ -97,6 +170,7 @@ struct TrackerRow: View {
                     if holdingInfo != nil {
                         Text("$\(value(), specifier: "%.2f")")
                             .font(.callout)
+                            .foregroundColor(Color("textColor"))
                         if unrealizedGain() >= 0 {
                             Text("+$\(unrealizedGain(), specifier: "%.2f") (▲\(unrealizedGainPercent(), specifier: "%.2f")%)")
                                 .font(.footnote)
@@ -110,9 +184,9 @@ struct TrackerRow: View {
                 }
             } else {
                 Text("N/A")
+                    .foregroundColor(Color("textColor"))
             }
         }
-        .foregroundColor(Color("textColor"))
     }
     
     private func costBasis() -> Double{
@@ -129,5 +203,9 @@ struct TrackerRow: View {
     
     private func unrealizedGainPercent() -> Double {
         ((value() / costBasis()) - 1.0) * 100
+    }
+    
+    private func portfolioWeight() -> Double {
+        (value() / portfolioValue) * 100
     }
 }
