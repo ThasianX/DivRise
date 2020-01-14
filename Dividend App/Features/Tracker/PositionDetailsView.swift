@@ -81,8 +81,10 @@ struct HoldingInfoForm: View {
             
             Button(action: {
                 withAnimation {
-                    self.editMode?.wrappedValue = .inactive
-                    self.onCommit(self.stock)
+                    if !(self.numOfShares.isEmpty && self.avgCostPerShare.isEmpty) {
+                        self.editMode?.wrappedValue = .inactive
+                        self.onCommit(self.stock)
+                    }
                 }
             }) {
                 Image(systemName: "checkmark.circle.fill")
