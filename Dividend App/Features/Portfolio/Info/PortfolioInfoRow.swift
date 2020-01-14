@@ -22,7 +22,7 @@ struct PortfolioInfoRow: View {
                 Text(stock.fullName)
                     .foregroundColor(Color("textColor"))
                     .font(.caption)
-                    .lineLimit(nil)
+                    .lineLimit(1)
             }
             
             Spacer()

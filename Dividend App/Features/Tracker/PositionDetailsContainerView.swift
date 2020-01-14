@@ -44,17 +44,27 @@ struct PositionDetailsContainerView: View {
     }
     
     private func editHolding(stock: PortfolioStock) {
-        if let shares = Double(numOfShares), let cost = Double(avgCostPerShare) {
-            let holdingInfo = HoldingInfo(numOfShares: shares, avgCostPerShare: cost)
-            store.send(.addHoldingInfo(ticker: stock.ticker, holdingInfo: holdingInfo))
-            numOfShares = ""
-            avgCostPerShare = ""
+        let currentHoldingInfo = store.state.allHoldingsInfo[getTicker()]
+        
+        if let shares = Double(numOfShares), let avgCost = Double(avgCostPerShare) {
+            let holdingInfo = HoldingInfo(numOfShares: shares, avgCostPerShare: avgCost)
+            addAndReset(ticker: stock.ticker, holdingInfo: holdingInfo)
+        } else if let avgCost = Double(avgCostPerShare), Double(numOfShares) == nil {
+            if let holding = currentHoldingInfo {
+                let holdingInfo = HoldingInfo(numOfShares: holding.numOfShares, avgCostPerShare: avgCost)
+                addAndReset(ticker: stock.ticker, holdingInfo: holdingInfo)
+            }
+        } else if let shares = Double(numOfShares), Double(avgCostPerShare) == nil {
+            if let holding = currentHoldingInfo {
+                let holdingInfo = HoldingInfo(numOfShares: shares, avgCostPerShare: holding.avgCostPerShare)
+                addAndReset(ticker: stock.ticker, holdingInfo: holdingInfo)
+            }
         }
     }
+    
+    private func addAndReset(ticker: String, holdingInfo: HoldingInfo) {
+        store.send(.addHoldingInfo(ticker: ticker, holdingInfo: holdingInfo))
+        numOfShares = ""
+        avgCostPerShare = ""
+    }
 }
-
-//struct PositionDetailsContainerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PositionDetailsContainerView(portfolioStocks: <#T##PortfolioStock#>, holdingsInfo: <#T##HoldingInfo?#>, currentSharePrices: <#T##Double#>)
-//    }
-//}
