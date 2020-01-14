@@ -26,8 +26,7 @@ internal let currentStockPriceURL = "https://financialmodelingprep.com/api/v3/st
 internal let everythingURL = "https://newsapi.org/v2/everything"
 
 // MARK: IEX Cloud
-internal let basicDividendURL = "https://sandbox.iexapis.com/stable/stock/{company}/dividends/3m?token=Tsk_654a34bcb8534b22934ed38896ce3d61"
-//https://cloud.iexapis.com/v1/stock/aapl/dividends/3m?token=sk_d8e794430fe94c7eaed86cc0a61da317
+internal let basicDividendURL = "https://cloud.iexapis.com/v1/stock/{company}/dividends/3m?token={apikey}"
 
 struct Request {
     let configuration = Configuration()

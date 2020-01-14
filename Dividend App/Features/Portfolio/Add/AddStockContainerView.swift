@@ -70,13 +70,7 @@ struct AddStockContainerView: View {
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
                 let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector, frequency: "")
-                Current.request.fetchDividendFrequency(portfolioStock: portfolioStock).sink {
-                    let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector, frequency: $0)
-                    
-                    self.store.send(.addToPortfolio(stock: updatedStock))
-                    self.store.send(addNextDividendDate(portfolioStock: updatedStock))
-                }
-                .cancel()
+                store.send(addStockToPortfolio(stock: portfolioStock))
             }
         }
     }

@@ -19,10 +19,11 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.notificationTime = time
         
     // MARK: Portfolio
-    case let .addToPortfolio(stock):
+    case let .addToPortfolio(stock, dividend):
         state.portfolioStocks.append(stock.ticker)
         state.allPortfolioStocks[stock.ticker] = stock
         state.sectorCompanies[stock.sector]?.append(stock)
+        state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
     case let .removeFromPortfolio(offsets):
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
@@ -40,9 +41,6 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .updatePortfolio(stocks):
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
-        
-    case let .addUpcomingDivDate(dividend):
-        state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
