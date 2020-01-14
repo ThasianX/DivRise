@@ -7,12 +7,23 @@
 //
 
 import SwiftUI
+import URLImage
 
-struct PortfolioStockView: View {
+struct PortfolioStockRow: View {
     var portfolioStock: PortfolioStock
     
     var body: some View {
         HStack {
+            URLImage(URL(string: portfolioStock.image)!) { proxy in
+                proxy.image
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipped()
+            }
+            .cornerRadius(8)
+            .frame(width: 30, height: 30)
+            
             VStack(alignment: .leading) {
                 Text(portfolioStock.ticker)
                     .font(.system(size: 16))

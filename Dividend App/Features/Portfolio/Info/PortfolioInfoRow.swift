@@ -22,7 +22,7 @@ struct PortfolioInfoRow: View {
                 Text(stock.fullName)
                     .foregroundColor(Color("textColor"))
                     .font(.caption)
-                    .lineLimit(nil)
+                    .lineLimit(1)
             }
             
             Spacer()
@@ -33,20 +33,24 @@ struct PortfolioInfoRow: View {
                     Text("Starting dividend: ")
                         .foregroundColor(Color("textColor"))
                         .font(.footnote)
+                        .lineLimit(1)
                     Text("$\(stock.startingDividend, specifier: "%.2f")")
                         .foregroundColor(Color("textColor"))
                         .font(.subheadline)
                         .fontWeight(.bold)
+                        .lineLimit(1)
                 }
                 HStack(spacing: 0) {
                     Spacer()
                     Text("Next dividend: ")
                         .foregroundColor(Color("textColor"))
                         .font(.footnote)
+                        .lineLimit(1)
                     Text(date.mediumStyle)
                         .foregroundColor(Color("textColor"))
                         .font(.subheadline)
                         .fontWeight(.bold)
+                        .lineLimit(1)
                 }
             }
         }

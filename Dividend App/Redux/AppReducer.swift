@@ -19,10 +19,11 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.notificationTime = time
         
     // MARK: Portfolio
-    case let .addToPortfolio(stock):
+    case let .addToPortfolio(stock, dividend):
         state.portfolioStocks.append(stock.ticker)
         state.allPortfolioStocks[stock.ticker] = stock
         state.sectorCompanies[stock.sector]?.append(stock)
+        state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
     case let .removeFromPortfolio(offsets):
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
@@ -34,15 +35,12 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
-        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector)
+        let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector, frequency: stock.frequency)
         
         state.allPortfolioStocks[state.portfolioStocks[index]] = updatedStock
         
     case let .updatePortfolio(stocks):
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
-        
-    case let .addUpcomingDivDate(dividend):
-        state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
@@ -52,6 +50,13 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.searchResult = results
         
     // MARK: Dividend Tracker
+    case let .addHoldingInfo(ticker, holdingInfo):
+        state.allHoldingsInfo[ticker] = holdingInfo
+        
+    case let .setCurrentSharePrices(prices):
+        state.currentSharePrices = prices
+        
+    // MARK: Dividend Income
     case let .addMonthlyDividend(record, dividend):
         if state.allMonthlyRecords.last == record {
             let lastIndex = state.allMonthlyRecords.count - 1

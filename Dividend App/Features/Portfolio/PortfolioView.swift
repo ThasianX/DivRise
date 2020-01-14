@@ -40,7 +40,7 @@ struct PortfolioView: View {
 //                            self.selectedIndex = index
 //                            self.showingDetail.toggle()
 //                        }) {
-//                            PortfolioStockView(portfolioStock: stock)
+//                            PortfolioStockRow(portfolioStock: stock)
 //                        }
 //                    }
 //                }
@@ -53,7 +53,7 @@ struct PortfolioView: View {
 
                     List {
                         ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
-                            PortfolioStockView(portfolioStock: stock)
+                            PortfolioStockRow(portfolioStock: stock)
                         }
                     }
                     .opacity(0.5)
@@ -66,7 +66,7 @@ struct PortfolioView: View {
                             self.selectedIndex = index
                             self.showingDetail.toggle()
                         }) {
-                            PortfolioStockView(portfolioStock: stock)
+                            PortfolioStockRow(portfolioStock: stock)
                         }
                     }
                 }
