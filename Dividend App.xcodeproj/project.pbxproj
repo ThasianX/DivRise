@@ -27,10 +27,11 @@
 		1E62D36423B838030093E83B /* CompanyBalanceSheetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36323B838030093E83B /* CompanyBalanceSheetResponse.swift */; };
 		1E62D36623B839B90093E83B /* CompanyCashFlowStatementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36523B839B90093E83B /* CompanyCashFlowStatementResponse.swift */; };
 		1E62D36A23B859700093E83B /* CompanyFinancialGrowthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36923B859700093E83B /* CompanyFinancialGrowthResponse.swift */; };
-		1E62D36C23B86A020093E83B /* PortfolioStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36B23B86A020093E83B /* PortfolioStockView.swift */; };
+		1E62D36C23B86A020093E83B /* PortfolioStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36B23B86A020093E83B /* PortfolioStockRow.swift */; };
 		1E62D36E23B86BDC0093E83B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36D23B86BDC0093E83B /* HostingController.swift */; };
 		1E62D37023B87A020093E83B /* DetailStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D36F23B87A020093E83B /* DetailStock.swift */; };
 		1E64C22D23B3205900C06444 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1E64C22C23B3205900C06444 /* URLImage */; };
+		1E6C639C23CD7C6D0053F480 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6C639B23CD7C6D0053F480 /* Configuration.swift */; };
 		1E6E3F5623B19D8F009A0262 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F5523B19D8F009A0262 /* AppDelegate.swift */; };
 		1E6E3F5823B19D8F009A0262 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E3F5723B19D8F009A0262 /* SceneDelegate.swift */; };
 		1E6E3F5C23B19D90009A0262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E6E3F5B23B19D90009A0262 /* Assets.xcassets */; };
@@ -56,7 +57,6 @@
 		1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* Request.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
 		1EA2B04923CCC66000D5FB31 /* BasicDividendResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */; };
-		1EA2B04B23CD372300D5FB31 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA2B04A23CD372300D5FB31 /* Configuration.swift */; };
 		1EA7B19823B9E620007F1F7A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA7B19723B9E620007F1F7A /* CardView.swift */; };
 		1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC63C923B1EDF200F102CB /* PortfolioView.swift */; };
 		1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */; };
@@ -116,9 +116,10 @@
 		1E62D36323B838030093E83B /* CompanyBalanceSheetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyBalanceSheetResponse.swift; sourceTree = "<group>"; };
 		1E62D36523B839B90093E83B /* CompanyCashFlowStatementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCashFlowStatementResponse.swift; sourceTree = "<group>"; };
 		1E62D36923B859700093E83B /* CompanyFinancialGrowthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyFinancialGrowthResponse.swift; sourceTree = "<group>"; };
-		1E62D36B23B86A020093E83B /* PortfolioStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockView.swift; sourceTree = "<group>"; };
+		1E62D36B23B86A020093E83B /* PortfolioStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStockRow.swift; sourceTree = "<group>"; };
 		1E62D36D23B86BDC0093E83B /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		1E62D36F23B87A020093E83B /* DetailStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStock.swift; sourceTree = "<group>"; };
+		1E6C639B23CD7C6D0053F480 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1E6E3F5223B19D8F009A0262 /* DivRise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DivRise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E6E3F5523B19D8F009A0262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E6E3F5723B19D8F009A0262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		1EA096FD23B1DCDC00A5B8EC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
 		1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDividendResponse.swift; sourceTree = "<group>"; };
-		1EA2B04A23CD372300D5FB31 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1EA7B19723B9E620007F1F7A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1EBC63C923B1EDF200F102CB /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1EC64F2B23B2E1EB00BC63A5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 			children = (
 				1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */,
 				1EBC63C923B1EDF200F102CB /* PortfolioView.swift */,
-				1E62D36B23B86A020093E83B /* PortfolioStockView.swift */,
+				1E62D36B23B86A020093E83B /* PortfolioStockRow.swift */,
 				1E27CB9C23BC686D00FFF7FF /* Info */,
 				1E6E3F8423B1A37D009A0262 /* Add */,
 				1E6E3F8523B1A383009A0262 /* Details */,
@@ -365,9 +365,9 @@
 			isa = PBXGroup;
 			children = (
 				1EA096FD23B1DCDC00A5B8EC /* Request.swift */,
+				1E6C639B23CD7C6D0053F480 /* Configuration.swift */,
 				1E8DCF5D23B1ECAB0018BADB /* Models */,
 				1E6E3F7F23B1A31E009A0262 /* Extensions */,
-				1EA2B04A23CD372300D5FB31 /* Configuration.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -648,7 +648,7 @@
 				1ED966BC23B55C01000BDE8D /* IncomeContainerView.swift in Sources */,
 				1E86AED423B5D63C00B38275 /* Date+Formatter.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
-				1EA2B04B23CD372300D5FB31 /* Configuration.swift in Sources */,
+				1E6C639C23CD7C6D0053F480 /* Configuration.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* CompanyProfileResponse.swift in Sources */,
 				1EE3832823BDB4CB00EB9203 /* StockNews.swift in Sources */,
 				1EE3832A23BDBE7E00EB9203 /* TimeInterval+String.swift in Sources */,
@@ -658,7 +658,7 @@
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
 				1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */,
 				1EA2B04923CCC66000D5FB31 /* BasicDividendResponse.swift in Sources */,
-				1E62D36C23B86A020093E83B /* PortfolioStockView.swift in Sources */,
+				1E62D36C23B86A020093E83B /* PortfolioStockRow.swift in Sources */,
 				1E6E3F8B23B1A422009A0262 /* PortfolioContainerView.swift in Sources */,
 				1ED6132C23B6CAFD00CF4CD0 /* SettingsView.swift in Sources */,
 				1EA7B19823B9E620007F1F7A /* CardView.swift in Sources */,

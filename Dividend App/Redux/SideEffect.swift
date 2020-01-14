@@ -30,7 +30,9 @@ func addStockToPortfolio(stock: PortfolioStock) -> AnyPublisher<AppAction, Never
     }
     .flatMap { updatedStock in
         Current.request.updatedUpcomingDividendDates(stocks: [updatedStock])
-            .map { AppAction.addToPortfolio(stock: updatedStock, dividend: $0.first!) }
+            .map {
+                Logger.info("\(updatedStock) : \($0.first!)")
+                return AppAction.addToPortfolio(stock: updatedStock, dividend: $0.first!) }
             .eraseToAnyPublisher()
     }
     .eraseToAnyPublisher()
