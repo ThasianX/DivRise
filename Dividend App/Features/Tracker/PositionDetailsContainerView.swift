@@ -16,6 +16,32 @@ struct PositionDetailsContainerView: View {
     
     let index: Int
     
+    var upcomingMonths: [String] {
+        var months = [String]()
+        if var date =  store.state.allUpcomingDivDates[getTicker()], let stock = store.state.allPortfolioStocks[getTicker()] {
+            if stock.frequency == "Quarterly" {
+                months.append(date.mediumStyle)
+                for _ in 0...2 {
+                    date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
+                    months.append(date.mediumStyle)
+                }
+            } else if stock.frequency == "Semi-Annual" {
+                months.append(date.mediumStyle)
+                for _ in 0...2 {
+                    date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
+                    months.append(date.mediumStyle)
+                }
+            } else {
+                months.append(date.mediumStyle)
+                for _ in 0...2 {
+                    date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+                    months.append(date.mediumStyle)
+                }
+            }
+        }
+        return months
+    }
+    
     var body: some View {
         PositionDetailsView(
             showStockDetail: $showStockDetail,
@@ -24,7 +50,8 @@ struct PositionDetailsContainerView: View {
             stock: store.state.allPortfolioStocks[getTicker()]!,
             holdingInfo: store.state.allHoldingsInfo[getTicker()],
             currentSharePrice: store.state.currentSharePrices[index],
-            onCommit: editHolding
+            onCommit: editHolding,
+            upcomingMonths: upcomingMonths
         )
             .navigationBarTitle("Position Details")
             .navigationBarItems(trailing: (store.state.allHoldingsInfo[getTicker()] == nil) ? nil : EditButton())

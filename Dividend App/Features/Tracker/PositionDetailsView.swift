@@ -18,25 +18,30 @@ struct PositionDetailsView: View {
     let stock: PortfolioStock
     let holdingInfo: HoldingInfo?
     let currentSharePrice: Double
-    
     let onCommit: (PortfolioStock) -> Void
+    
+    let upcomingMonths: [String]
     
     var body: some View {
         ZStack {
             Color("modalBackground").edgesIgnoringSafeArea(.all)
-            VStack(spacing: 20) {
+            VStack {
                 StockDetailRow(stock: stock)
                     .onTapGesture {
                         self.showStockDetail = true
                 }
-                if holdingInfo == nil || editMode?.wrappedValue == .active {
-                    HoldingInfoForm(numOfShares: $numOfShares, avgCostPerShare: $avgCostPerShare, stock: stock, holdingInfo: holdingInfo, onCommit: onCommit)
-                } else {
-                    StockInfoRectange(stock: stock, holdingInfo: holdingInfo!, currentSharePrice: currentSharePrice)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        if holdingInfo == nil || editMode?.wrappedValue == .active {
+                            HoldingInfoForm(numOfShares: $numOfShares, avgCostPerShare: $avgCostPerShare, stock: stock, holdingInfo: holdingInfo, onCommit: onCommit)
+                        } else {
+                            StockInfoRectange(stock: stock, holdingInfo: holdingInfo!, currentSharePrice: currentSharePrice)
+                            StockUpcomingDividends(months: upcomingMonths, stock: stock, holdingInfo: holdingInfo!)
+                        }
+                    }
                 }
-                Spacer()
+                .padding()
             }
-            .padding()
         }
     }
 }
@@ -94,10 +99,7 @@ struct HoldingInfoForm: View {
             }
         }
         .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.white, lineWidth: 2)
-        )
+        .embedInRectangle()
     }
 }
 
@@ -126,15 +128,12 @@ struct StockDetailRow: View {
             Spacer()
             
             Image(systemName: "chevron.up.circle.fill")
-            .resizable()
+                .resizable()
                 .frame(width: 30, height: 30)
                 .foregroundColor(.white)
         }
         .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.white, lineWidth: 2)
-        )
+        .embedInRectangle()
         .contentShape(Rectangle())
     }
 }
@@ -146,20 +145,17 @@ struct StockInfoRectange: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            StockInfoRow(attribute: "Shares", value: "\(holdingInfo.numOfShares)", valueColor: nil)
-            StockInfoRow(attribute: "Avg Cost per Share", value: String(format: "$%.2f", holdingInfo.avgCostPerShare), valueColor: nil)
-            StockInfoRow(attribute: "Cost Basis", value: String(format: "$%.2f", costBasis()), valueColor: nil)
-            StockInfoRow(attribute: "Value", value: String(format: "$%.2f", value()), valueColor: nil)
+            StockInfoRow(attribute: "Shares", value: "\(holdingInfo.numOfShares)")
+            StockInfoRow(attribute: "Avg Cost per Share", value: String(format: "$%.2f", holdingInfo.avgCostPerShare))
+            StockInfoRow(attribute: "Cost Basis", value: String(format: "$%.2f", costBasis()))
+            StockInfoRow(attribute: "Value", value: String(format: "$%.2f", value()))
             StockInfoRow(attribute: "Unrealized Gain", value: unrealizedGainString(), valueColor: unrealizedGainColor())
-            StockInfoRow(attribute: "Dividend per Share", value: String(format: "$%.2f", dividendPerShare()), valueColor: nil)
-            StockInfoRow(attribute: "Annual Dividend Income", value: String(format: "$%.2f", annualIncome()), valueColor: nil)
-            StockInfoRow(attribute: "Yield on Cost", value: "\(String(format: "%.2f", yieldOnCost()))%", valueColor: nil)
+            StockInfoRow(attribute: "Dividend per Share", value: String(format: "$%.2f", dividendPerShare()))
+            StockInfoRow(attribute: "Annual Dividend Income", value: String(format: "$%.2f", annualIncome()))
+            StockInfoRow(attribute: "Yield on Cost", value: "\(String(format: "%.2f", yieldOnCost()))%")
         }
         .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.white, lineWidth: 2)
-        )
+        .embedInRectangle()
     }
     
     private func costBasis() -> Double{
@@ -178,7 +174,7 @@ struct StockInfoRectange: View {
         if unrealizedGain() >= 0 {
             return "+$\(String(format: "%.2f", unrealizedGain())) (▲\(String(format: "%.2f", unrealizedGainPercent()))%)"
         } else {
-        return "-$\(String(format: "%.2f", -unrealizedGain())) (▼\(String(format: "%.2f", -unrealizedGainPercent()))%)"
+            return "-$\(String(format: "%.2f", -unrealizedGain())) (▼\(String(format: "%.2f", -unrealizedGainPercent()))%)"
         }
     }
     
@@ -210,7 +206,7 @@ struct StockInfoRectange: View {
 struct StockInfoRow: View {
     let attribute: String
     let value: String
-    let valueColor: Color?
+    var valueColor: Color? = nil
     
     var body: some View {
         HStack {
@@ -222,5 +218,40 @@ struct StockInfoRow: View {
                 .bold()
                 .foregroundColor((valueColor == nil) ? Color("textColor") : valueColor)
         }
+    }
+}
+
+struct StockUpcomingDividends: View {
+    let months: [String]
+    let stock: PortfolioStock
+    let holdingInfo: HoldingInfo
+    
+    private var dividend: Double {
+        let annualIncome = stock.currentDividend * holdingInfo.numOfShares
+        
+        if stock.frequency == "Quarterly" {
+            return annualIncome / 4
+        } else if stock.frequency == "Semi-Annual" {
+            return annualIncome / 2
+        } else {
+            return annualIncome / 12
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Upcoming Dividends")
+                .font(.headline)
+                .foregroundColor(Color("textColor"))
+            CustomDivider()
+            
+            VStack(alignment: .leading, spacing: 20) {
+                ForEach(months, id: \.self) { month in
+                    StockInfoRow(attribute: month, value: "$\(self.dividend)")
+                }
+            }
+        }
+        .padding()
+        .embedInRectangle()
     }
 }
