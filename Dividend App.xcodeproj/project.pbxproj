@@ -15,6 +15,7 @@
 		1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E394D8523C1176E00559B91 /* EditInfoView.swift */; };
 		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
 		1E3BCB7223B9CBE400FAD5AA /* CurrentDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */; };
+		1E3CE70C23CFE6F300EB5226 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CE70B23CFE6F300EB5226 /* ScheduleView.swift */; };
 		1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42A6C423B423530010DB8F /* Keyboard.swift */; };
 		1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511CFD23B2817600455C7F /* AddStockContainerView.swift */; };
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
@@ -90,6 +91,7 @@
 		1EF05F8C23CAEBEE006CCD05 /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */; };
 		1EF110A523CE62A9006CA855 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110A423CE62A9006CA855 /* Configuration.swift */; };
 		1EF110A823CEA6A0006CA855 /* View+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110A723CEA6A0006CA855 /* View+Rectangle.swift */; };
+		1EF110AB23CECE2F006CA855 /* ScheduleContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110AA23CECE2F006CA855 /* ScheduleContainerView.swift */; };
 		1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */; };
 		1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */; };
 		1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */; };
@@ -105,6 +107,7 @@
 		1E394D8523C1176E00559B91 /* EditInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoView.swift; sourceTree = "<group>"; };
 		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
 		1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDetailStockRow.swift; sourceTree = "<group>"; };
+		1E3CE70B23CFE6F300EB5226 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		1E42A6C423B423530010DB8F /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		1E511CFD23B2817600455C7F /* AddStockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockContainerView.swift; sourceTree = "<group>"; };
 		1E511D0123B2830E00455C7F /* SearchStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockView.swift; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		1EF110A423CE62A9006CA855 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1EF110A723CEA6A0006CA855 /* View+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Rectangle.swift"; sourceTree = "<group>"; };
+		1EF110AA23CECE2F006CA855 /* ScheduleContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainerView.swift; sourceTree = "<group>"; };
 		1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoRow.swift; sourceTree = "<group>"; };
 		1EF77A3623B1F26400FAD6F3 /* PortfolioDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailContainerView.swift; sourceTree = "<group>"; };
 		1EF77A3823B1F27300FAD6F3 /* PortfolioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailView.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				1E6E3F8623B1A3F5009A0262 /* RootView.swift */,
 				1E6E3F7223B1A0A6009A0262 /* Portfolio */,
 				1ED27F5423CBBD730061FEB6 /* Tracker */,
+				1EF110A923CECE1B006CA855 /* Schedule */,
 				1ED966BA23B55BCD000BDE8D /* Income */,
 				1E6E3F7323B1A0C0009A0262 /* Settings */,
 				1EF05F8A23CAEBD1006CCD05 /* Common */,
@@ -501,6 +506,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1EF110A923CECE1B006CA855 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				1EF110AA23CECE2F006CA855 /* ScheduleContainerView.swift */,
+				1E3CE70B23CFE6F300EB5226 /* ScheduleView.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
 		1EF2530523C41F3900AB224C /* AlphaVantage */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,11 +642,13 @@
 				1ED6131A23B6B1BE00CF4CD0 /* LineView.swift in Sources */,
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
 				1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */,
+				1E3CE70C23CFE6F300EB5226 /* ScheduleView.swift in Sources */,
 				1ED27F5823CBC2BB0061FEB6 /* TrackerContainerView.swift in Sources */,
 				1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */,
 				1ED27F5A23CBC2C00061FEB6 /* TrackerView.swift in Sources */,
 				1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */,
 				1ED6132523B6C7A400CF4CD0 /* BarChartView.swift in Sources */,
+				1EF110AB23CECE2F006CA855 /* ScheduleContainerView.swift in Sources */,
 				1EF77A3923B1F27300FAD6F3 /* PortfolioDetailView.swift in Sources */,
 				1EE3832E23BDC82500EB9203 /* StockNewsView.swift in Sources */,
 				1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */,
