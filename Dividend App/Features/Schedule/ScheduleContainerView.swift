@@ -31,7 +31,7 @@ struct ScheduleContainerView: View {
     
     
     var upcomingSchedule: [(id: String, stock: PortfolioStock, date: Date, amount: String)] {
-        var upcoming = [(id: String, PortfolioStock, Date, String)]()
+        var upcoming = [(id: String, stock: PortfolioStock, date: Date, amount: String)]()
         
         for stock in portfolioStocks {
             if var date = store.state.allUpcomingDivDates[stock.ticker] {
@@ -63,6 +63,7 @@ struct ScheduleContainerView: View {
             }
         }
         
+        Logger.info("\(upcoming.sorted(by: { $0.date < $1.date }))")
         return upcoming
     }
     
