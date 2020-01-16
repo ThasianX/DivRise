@@ -63,7 +63,6 @@ struct ScheduleContainerView: View {
             }
         }
         
-        Logger.info("\(upcoming.sorted(by: { $0.date < $1.date }))")
         return upcoming
     }
     
