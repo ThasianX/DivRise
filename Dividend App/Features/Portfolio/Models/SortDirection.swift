@@ -11,4 +11,8 @@ import Foundation
 struct SortDirection: Codable, Hashable {
     static let up = "↑"
     static let down = "↓"
+    
+    static func toggle(direction: String) -> String {
+        return (direction == up) ? down : up
+    }
 }

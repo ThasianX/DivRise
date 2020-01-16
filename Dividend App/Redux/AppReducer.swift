@@ -64,27 +64,56 @@ func appReducer(state: inout AppState, action: AppAction) {
     case .sortBySymbol:
         let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
         state.portfolioStocks = portfolioStocks.sorted(by: { $0.ticker < $1.ticker }).map { $0.ticker }
-        state.selectedSort = "symbol a-z"
+        if state.selectedSort != PortfolioSortState.symbol {
+            state.selectedSort = PortfolioSortState.symbol
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
         
     case .sortByName:
         let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
         state.portfolioStocks = portfolioStocks.sorted(by: { $0.fullName < $1.fullName }).map { $0.ticker }
-        state.selectedSort = "name a-z"
+        state.selectedSort = PortfolioSortState.name
+        if state.selectedSort != PortfolioSortState.name {
+            state.selectedSort = PortfolioSortState.name
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
         
     case .sortByStartingDiv:
         let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
         state.portfolioStocks = portfolioStocks.sorted(by: { $0.startingDividend > $1.startingDividend }).map { $0.ticker }
-        state.selectedSort = "starting div high to low"
+        state.selectedSort = PortfolioSortState.startingDiv
+        if state.selectedSort != PortfolioSortState.startingDiv {
+            state.selectedSort = PortfolioSortState.startingDiv
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
         
     case .sortByCurrentDiv:
         let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
         state.portfolioStocks = portfolioStocks.sorted(by: { $0.currentDividend > $1.currentDividend }).map { $0.ticker }
-        state.selectedSort = "current div high to low"
+        state.selectedSort = PortfolioSortState.currentDiv
+        if state.selectedSort != PortfolioSortState.currentDiv {
+            state.selectedSort = PortfolioSortState.currentDiv
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
         
     case .sortByGrowth:
         let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
         state.portfolioStocks = portfolioStocks.sorted(by: { $0.growth > $1.growth }).map { $0.ticker }
-        state.selectedSort = "growth high to low"
+        state.selectedSort = PortfolioSortState.growth
+        if state.selectedSort != PortfolioSortState.growth {
+            state.selectedSort = PortfolioSortState.growth
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
         
     // MARK: Search
     case let .setSearchResults(results):
