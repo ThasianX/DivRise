@@ -19,7 +19,8 @@ struct AppState: Codable, Equatable {
     var portfolioStocks: [String] = []
     
     // MARK: Portfolio Sort
-    var selectedSort: String = "Custom"
+    var selectedSort: String = PortfolioSortState.symbol
+    var sortDirection: String = SortDirection.down
     var sortedStocks: [String] = []
     
     // MARK: Portfolio Info

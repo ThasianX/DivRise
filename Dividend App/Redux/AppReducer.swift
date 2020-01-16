@@ -25,6 +25,21 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.sectorCompanies[stock.sector]?.append(stock)
         state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
+        switch state.selectedSort {
+        case PortfolioSortState.symbol:
+            appReducer(state: &state, action: .sortBySymbol)
+        case PortfolioSortState.name:
+            appReducer(state: &state, action: .sortByName)
+        case PortfolioSortState.startingDiv:
+            appReducer(state: &state, action: .sortByStartingDiv)
+        case PortfolioSortState.currentDiv:
+            appReducer(state: &state, action: .sortByCurrentDiv)
+        case PortfolioSortState.growth:
+            appReducer(state: &state, action: .sortByGrowth)
+        default:
+            ()
+        }
+        
     case let .removeFromPortfolio(offsets):
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
         state.portfolioStocks.remove(atOffsets: offsets)
