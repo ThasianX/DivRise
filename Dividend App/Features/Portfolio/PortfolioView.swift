@@ -14,7 +14,7 @@ struct PortfolioView: View {
     @Binding var showingSortActions: Bool
     
     let portfolioStocks: [PortfolioStock]
-    let selectedSort: String
+    let sortString: String
     
     var body: some View {
         VStack {
@@ -37,7 +37,7 @@ struct PortfolioView: View {
             
             Spacer()
                 .frame(height: 20)
-            PortfolioSortHeader(show: $showingSortActions, selectedSort: selectedSort)
+            PortfolioSortHeader(show: $showingSortActions, sortString: sortString)
                 .disabled(portfolioStocks.isEmpty ? true : false)
             
             if portfolioStocks.isEmpty {
@@ -85,19 +85,19 @@ struct PortfolioView: View {
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioView(showingDetail: .constant(false), selectedIndex: .constant(0), showingSortActions: .constant(false), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], selectedSort: "Custom")
+        PortfolioView(showingDetail: .constant(false), selectedIndex: .constant(0), showingSortActions: .constant(false), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock], sortString: SortDirection.sortString(sort: PortfolioSortState.name, direction: SortDirection.up))
             .background(Color("background"))
     }
 }
 
 struct PortfolioSortHeader: View {
     @Binding var show: Bool
-    let selectedSort: String
+    let sortString: String
     
     var body: some View {
         HStack {
             Text("Sort:")
-            Text("\(selectedSort) ▼")
+            Text("\(sortString) ▼")
             .bold()
                 .onTapGesture {
                     self.show = true

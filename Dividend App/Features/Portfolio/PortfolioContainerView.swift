@@ -22,7 +22,7 @@ struct PortfolioContainerView: View {
     }
     
     var body: some View {
-        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, showingSortActions: $showingSortActions, portfolioStocks: portfolioStocks, selectedSort: store.state.selectedSort)
+        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, showingSortActions: $showingSortActions, portfolioStocks: portfolioStocks, sortString: SortDirection.sortString(sort: store.state.selectedSort, direction: store.state.sortDirection))
             .onAppear(perform: reloadDividends)
             .sheet(isPresented: self.$showingDetail) {
                 PortfolioDetailContainerView(portfolioStock: self.portfolioStocks[self.selectedIndex], selectedPeriod: self.store.state.selectedPeriod, attributeNames: self.store.state.attributeNames, show: self.$showingDetail)
@@ -43,23 +43,28 @@ struct PortfolioContainerView: View {
     }
     
     private func sortBySymbol() -> ActionSheet.Button {
-        .default(Text("Symbol ↑") , action: { self.store.send(.sortBySymbol) })
+        let name = (store.state.selectedSort == PortfolioSortState.symbol) ? Text("Symbol \(store.state.sortDirection)") : Text("Symbol")
+        return .default(name, action: { self.store.send(.sortBy(sort: PortfolioSortState.symbol)) })
     }
     
     private func sortByName() -> ActionSheet.Button {
-        .default(Text("Name ↑") , action: { self.store.send(.sortByName) })
+        let name = (store.state.selectedSort == PortfolioSortState.name) ? Text("Name \(store.state.sortDirection)") : Text("Name")
+        return .default(name, action: { self.store.send(.sortBy(sort: PortfolioSortState.name)) })
     }
     
     private func sortByStartingDiv() -> ActionSheet.Button {
-        .default(Text("Starting Dividend ↓") , action: { self.store.send(.sortByStartingDiv) })
+        let name = (store.state.selectedSort == PortfolioSortState.startingDiv) ? Text("Starting Dividend \(store.state.sortDirection)") : Text("Starting Dividend")
+        return .default(name, action: { self.store.send(.sortBy(sort: PortfolioSortState.startingDiv)) })
     }
     
     private func sortByCurrentDiv() -> ActionSheet.Button {
-        .default(Text("Current Dividend ↓") , action: { self.store.send(.sortByCurrentDiv) })
+        let name = (store.state.selectedSort == PortfolioSortState.currentDiv) ? Text("Current Dividend \(store.state.sortDirection)") : Text("Current Dividend")
+        return .default(name, action: { self.store.send(.sortBy(sort: PortfolioSortState.currentDiv)) })
     }
     
     private func sortByGrowth() -> ActionSheet.Button {
-        .default(Text("Growth ↓") , action: { self.store.send(.sortByGrowth) })
+        let name = (store.state.selectedSort == PortfolioSortState.growth) ? Text("Growth \(store.state.sortDirection)") : Text("Growth")
+        return .default(name, action: { self.store.send(.sortBy(sort: PortfolioSortState.growth)) })
     }
 }
 
