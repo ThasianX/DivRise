@@ -164,6 +164,7 @@ struct Menu: Identifiable {
 let menuData = [
     Menu(title: "Portfolio", icon: "person.crop.circle"),
     Menu(title: "Dividend Tracker", icon: "list.bullet"),
+    Menu(title: "Dividend Schedule", icon: "calendar"),
     Menu(title: "Dividend Income", icon: "chart.bar.fill"),
     Menu(title: "Settings", icon: "gear")
 ]
@@ -174,6 +175,7 @@ struct MenuView: View {
     @Binding var show: Bool
     @State var showDividendIncome = false
     @State var showDividendTracker = false
+    @State var showDividendSchedule = false
     @State var showSettings = false
     
     var body: some View {
@@ -196,11 +198,19 @@ struct MenuView: View {
                                         .environmentObject(self.store)
                             }
                         }
-                    } else if item.title == "Dividend Tracker"{
+                    } else if item.title == "Dividend Tracker" {
                         Button(action: { self.showDividendTracker.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
                                 .sheet(isPresented: self.$showDividendTracker) {
                                     TrackerContainerView(show: self.$showDividendTracker)
+                                        .environmentObject(self.store)
+                            }
+                        }
+                    } else if item.title == "Dividend Schedule" {
+                        Button(action: { self.showDividendSchedule.toggle() }) {
+                            MenuRow(image: item.icon, text: item.title)
+                                .sheet(isPresented: self.$showDividendSchedule) {
+                                    ScheduleContainerView(show: self.$showDividendSchedule)
                                         .environmentObject(self.store)
                             }
                         }

@@ -107,8 +107,8 @@ struct AllHoldingsInfo: View {
                 }
             }
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 16)
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
     }
 }
 
@@ -119,8 +119,8 @@ struct HoldingsListHeader: View {
             Spacer()
             Text("Value / Unrealized gain")
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 16)
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
         .font(.caption)
         .foregroundColor(Color("textColor"))
     }
