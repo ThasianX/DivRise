@@ -22,6 +22,13 @@ enum AppAction {
     case updatePortfolio(stocks: [PortfolioStock])
     case updateUpcomingDivDates(dividends: [UpcomingDividend])
     
+    // MARK: Portfolio Sort
+    case sortBySymbol
+    case sortByName
+    case sortByStartingDiv
+    case sortByCurrentDiv
+    case sortByGrowth
+    
     // MARK: Search
     case setSearchResults(results: [SearchStock])
     

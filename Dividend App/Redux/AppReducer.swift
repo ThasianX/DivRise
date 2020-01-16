@@ -29,7 +29,7 @@ func appReducer(state: inout AppState, action: AppAction) {
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
         state.portfolioStocks.remove(atOffsets: offsets)
         state.sectorCompanies[stock.sector]?.removeAll(where: { $0 == stock })
-       
+        
     case let .moveStockInPortfolio(previous, current):
         state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
         
@@ -44,6 +44,32 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
+        
+    // MARK: Portfolio Sort
+    case .sortBySymbol:
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        state.portfolioStocks = portfolioStocks.sorted(by: { $0.ticker < $1.ticker }).map { $0.ticker }
+        state.selectedSort = "symbol a-z"
+        
+    case .sortByName:
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        state.portfolioStocks = portfolioStocks.sorted(by: { $0.fullName < $1.fullName }).map { $0.ticker }
+        state.selectedSort = "name a-z"
+        
+    case .sortByStartingDiv:
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        state.portfolioStocks = portfolioStocks.sorted(by: { $0.startingDividend > $1.startingDividend }).map { $0.ticker }
+        state.selectedSort = "starting div high to low"
+        
+    case .sortByCurrentDiv:
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        state.portfolioStocks = portfolioStocks.sorted(by: { $0.currentDividend > $1.currentDividend }).map { $0.ticker }
+        state.selectedSort = "current div high to low"
+        
+    case .sortByGrowth:
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        state.portfolioStocks = portfolioStocks.sorted(by: { $0.growth > $1.growth }).map { $0.ticker }
+        state.selectedSort = "growth high to low"
         
     // MARK: Search
     case let .setSearchResults(results):

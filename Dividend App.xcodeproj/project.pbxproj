@@ -16,6 +16,7 @@
 		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
 		1E3BCB7223B9CBE400FAD5AA /* CurrentDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */; };
 		1E3CE70C23CFE6F300EB5226 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CE70B23CFE6F300EB5226 /* ScheduleView.swift */; };
+		1E3CE70E23D01AA400EB5226 /* PortfolioDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3CE70D23D01AA400EB5226 /* PortfolioDropDownMenu.swift */; };
 		1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42A6C423B423530010DB8F /* Keyboard.swift */; };
 		1E511CFE23B2817600455C7F /* AddStockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511CFD23B2817600455C7F /* AddStockContainerView.swift */; };
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
@@ -108,6 +109,7 @@
 		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
 		1E3BCB7123B9CBE400FAD5AA /* CurrentDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDetailStockRow.swift; sourceTree = "<group>"; };
 		1E3CE70B23CFE6F300EB5226 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		1E3CE70D23D01AA400EB5226 /* PortfolioDropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDropDownMenu.swift; sourceTree = "<group>"; };
 		1E42A6C423B423530010DB8F /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		1E511CFD23B2817600455C7F /* AddStockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockContainerView.swift; sourceTree = "<group>"; };
 		1E511D0123B2830E00455C7F /* SearchStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockView.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				1E6E3F8A23B1A422009A0262 /* PortfolioContainerView.swift */,
 				1EBC63C923B1EDF200F102CB /* PortfolioView.swift */,
 				1E62D36B23B86A020093E83B /* PortfolioStockRow.swift */,
+				1E3CE70D23D01AA400EB5226 /* PortfolioDropDownMenu.swift */,
 				1E27CB9C23BC686D00FFF7FF /* Info */,
 				1E6E3F8423B1A37D009A0262 /* Add */,
 				1E6E3F8523B1A383009A0262 /* Details */,
@@ -697,6 +700,7 @@
 				1ED6132723B6C7A400CF4CD0 /* BarChartCell.swift in Sources */,
 				1ED6131D23B6B1BE00CF4CD0 /* Line.swift in Sources */,
 				1ED6131C23B6B1BE00CF4CD0 /* LineChartView.swift in Sources */,
+				1E3CE70E23D01AA400EB5226 /* PortfolioDropDownMenu.swift in Sources */,
 				1E62D37023B87A020093E83B /* DetailStock.swift in Sources */,
 				1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */,
 				1E6E3F7C23B1A20A009A0262 /* Store.swift in Sources */,
