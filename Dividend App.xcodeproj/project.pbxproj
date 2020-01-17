@@ -58,6 +58,7 @@
 		1E95DC5023B2B07000FDA3EA /* Double+StringRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC4F23B2B07000FDA3EA /* Double+StringRep.swift */; };
 		1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */; };
 		1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */; };
+		1E97A3CB23D2102E00296D7E /* DarkTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97A3CA23D2102E00296D7E /* DarkTextField.swift */; };
 		1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* Request.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
 		1EA2B04923CCC66000D5FB31 /* BasicDividendResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */; };
@@ -154,6 +155,7 @@
 		1E95DC4F23B2B07000FDA3EA /* Double+StringRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+StringRep.swift"; sourceTree = "<group>"; };
 		1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlertView.swift; sourceTree = "<group>"; };
 		1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
+		1E97A3CA23D2102E00296D7E /* DarkTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTextField.swift; sourceTree = "<group>"; };
 		1EA096FD23B1DCDC00A5B8EC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
 		1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDividendResponse.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			children = (
 				1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */,
 				1E1DB71C23D16F7B006893C3 /* ListHeader.swift */,
+				1E97A3CA23D2102E00296D7E /* DarkTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */,
 				1EF77A3723B1F26400FAD6F3 /* PortfolioDetailContainerView.swift in Sources */,
 				1E95DC5023B2B07000FDA3EA /* Double+StringRep.swift in Sources */,
+				1E97A3CB23D2102E00296D7E /* DarkTextField.swift in Sources */,
 				1ED6131B23B6B1BE00CF4CD0 /* Legend.swift in Sources */,
 				1ED966BE23B55CC0000BDE8D /* SettingsContainerView.swift in Sources */,
 				1E62D36623B839B90093E83B /* CompanyCashFlowStatementResponse.swift in Sources */,

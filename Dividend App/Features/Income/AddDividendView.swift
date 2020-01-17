@@ -29,9 +29,8 @@ struct AddDividendView: View {
                         .font(.system(size: 50))
                         .bold()
                         .foregroundColor(Color("textColor"))
-                    TextField("0.00", text: $input)
+                    DarkTextField(placeholder: "0.00", input: $input)
                         .font(.system(size: 50))
-                        .foregroundColor(Color("textColor"))
                         .keyboardType(.decimalPad)
                 }
                 
@@ -39,7 +38,7 @@ struct AddDividendView: View {
                     Spacer()
                     Button(action: onAdd) {
                         Image(systemName: "dollarsign.circle.fill")
-                        .resizable()
+                            .resizable()
                             .frame(width: 50, height: 50)
                             .foregroundColor(Color("update"))
                     }

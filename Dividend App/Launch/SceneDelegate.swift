@@ -26,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 rootView: AnyView(RootView()
                     .environmentObject(store))
             )
-            // Overriding is necessary as textfield becomes unreadable in dark mode
-            window.overrideUserInterfaceStyle = .light
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -60,7 +60,7 @@ struct HoldingInfoForm: View {
             Text("Number of Shares")
                 .font(.title)
                 .foregroundColor(Color("textColor"))
-            TextField((holdingInfo == nil) ? "0" : "\(holdingInfo!.numOfShares, specifier: "%.2f")", text: $numOfShares)
+            DarkTextField(placeholder: (holdingInfo == nil) ? "0.0" : "\(holdingInfo!.numOfShares, specifier: "%.2f")", input: $numOfShares)
                 .font(.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.decimalPad)
@@ -75,7 +75,7 @@ struct HoldingInfoForm: View {
                 Text("$")
                     .font(.title)
                     .foregroundColor(Color("textColor"))
-                TextField((holdingInfo == nil) ? "0.0" : "\(holdingInfo!.avgCostPerShare, specifier: "%.2f")", text: $avgCostPerShare)
+                DarkTextField(placeholder: (holdingInfo == nil) ? "0.0" : "\(holdingInfo!.avgCostPerShare, specifier: "%.2f")", input: $avgCostPerShare)
                     .font(.title)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
@@ -87,6 +87,7 @@ struct HoldingInfoForm: View {
             Button(action: {
                 withAnimation {
                     if !(self.numOfShares.isEmpty && self.avgCostPerShare.isEmpty) {
+                        UIApplication.shared.endEditing(true)
                         self.editMode?.wrappedValue = .inactive
                         self.onCommit(self.stock)
                     }

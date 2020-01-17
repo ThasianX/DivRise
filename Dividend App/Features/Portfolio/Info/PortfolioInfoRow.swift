@@ -33,7 +33,7 @@ struct PortfolioInfoRow: View {
                     Image(systemName: "pencil.circle")
                         .foregroundColor(.white)
                     Text("$\(stock.startingDividend, specifier: "%.2f")")
-                        .foregroundColor(Color("textColor"))
+                        .foregroundColor(.green)
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .lineLimit(1)
