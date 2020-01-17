@@ -13,6 +13,7 @@
 		1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */; };
 		1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */; };
 		1E1DB71B23D0B108006893C3 /* SortDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71A23D0B108006893C3 /* SortDirection.swift */; };
+		1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71C23D16F7B006893C3 /* ListHeader.swift */; };
 		1E27CB9B23BC593300FFF7FF /* PortfolioInfoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */; };
 		1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E394D8523C1176E00559B91 /* EditInfoView.swift */; };
 		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
@@ -107,6 +108,7 @@
 		1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockRow.swift; sourceTree = "<group>"; };
 		1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSortState.swift; sourceTree = "<group>"; };
 		1E1DB71A23D0B108006893C3 /* SortDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDirection.swift; sourceTree = "<group>"; };
+		1E1DB71C23D16F7B006893C3 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
 		1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoContainerView.swift; sourceTree = "<group>"; };
 		1E394D8523C1176E00559B91 /* EditInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoView.swift; sourceTree = "<group>"; };
 		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */,
+				1E1DB71C23D16F7B006893C3 /* ListHeader.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				1ED6131F23B6B1C600CF4CD0 /* Helpers.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
 				1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */,
+				1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
 				1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */,

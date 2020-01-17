@@ -22,6 +22,7 @@ struct ScheduleView: View {
                     .padding(.leading, 20)
                     .font(.headline)
                 CustomDivider()
+                ListHeader(leadingText: "Name", trailingText: "Div Amount / ~Date")
                 
                 if upcomingSchedule.isEmpty {
                     ZStack {
@@ -92,11 +93,11 @@ struct ScheduleListRow: View {
                 Text(amount)
                     .font(.system(size: 16))
                     .bold()
-                    .foregroundColor(Color("textColor"))
+                    .foregroundColor(Color.green)
                 
                 Text(date.mediumStyle)
                     .font(.system(size: 15))
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color("textColor"))
             }
         }
     }

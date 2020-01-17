@@ -45,6 +45,7 @@ struct PortfolioInfoView: View {
                     SunburstView(configuration: sunburstConfig)
                         .colorScheme(.dark)
                 } else {
+                    ListHeader(leadingText: "Name", trailingText: "Start Div / Next Div Date")
                     if portfolioStocks.count == 0 || portfolioStocks.count != upcomingDates.count {
                         //                    List {
                         //                        ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in

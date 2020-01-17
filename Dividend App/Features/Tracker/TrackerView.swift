@@ -21,7 +21,7 @@ struct TrackerView: View {
             AllHoldingsInfo(totalStocks: portfolioStocks.count, value: portfolioValue, costBasis: portfolioCostBasis)
             CustomDivider()
             
-            HoldingsListHeader()
+            ListHeader(leadingText: "Name / Weight", trailingText: "Value / Unrealized gain")
             
             if portfolioStocks.count == 0 {
                 ZStack {
@@ -109,20 +109,6 @@ struct AllHoldingsInfo: View {
         }
         .padding(.leading, 20)
         .padding(.trailing, 20)
-    }
-}
-
-struct HoldingsListHeader: View {
-    var body: some View {
-        HStack {
-            Text("Name / Weight")
-            Spacer()
-            Text("Value / Unrealized gain")
-        }
-        .padding(.leading, 20)
-        .padding(.trailing, 20)
-        .font(.caption)
-        .foregroundColor(Color("textColor"))
     }
 }
 
