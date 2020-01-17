@@ -12,7 +12,8 @@ import Foundation
 // MARK: Search
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
-        .map { AppAction.setSearchResults(results: $0) }
+        .map { AppAction.setSearchResults(results:
+            $0.sorted(by: { $0.ticker < $1.ticker })) }
         .eraseToAnyPublisher()
 }
 

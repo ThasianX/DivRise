@@ -67,6 +67,9 @@ struct AddStockContainerView: View {
             } else if store.state.allPortfolioStocks.keys.contains(stock.ticker) {
                 errorMessage = "Your portfolio already contains \(stock.ticker). To edit, visit info"
                 showingError = true
+            } else if stock.sector.isEmpty {
+                errorMessage = "Cannot add ETFs to portfolio"
+                showingError = true
             } else {
                 let growth = ((currentDividend / startingDividend) - 1.0) * 100
                 let portfolioStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: startingDividend, currentDividend: currentDividend, growth: growth, sector: stock.sector, frequency: "")
