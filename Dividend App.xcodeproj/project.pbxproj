@@ -11,6 +11,9 @@
 		1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A59C623C77DA700DE39BC /* UIColor+Additions.swift */; };
 		1E114BCB23B2A9C000863E0C /* SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCA23B2A9C000863E0C /* SideEffect.swift */; };
 		1E114BCF23B2ACC600863E0C /* SearchStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */; };
+		1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */; };
+		1E1DB71B23D0B108006893C3 /* SortDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71A23D0B108006893C3 /* SortDirection.swift */; };
+		1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71C23D16F7B006893C3 /* ListHeader.swift */; };
 		1E27CB9B23BC593300FFF7FF /* PortfolioInfoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */; };
 		1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E394D8523C1176E00559B91 /* EditInfoView.swift */; };
 		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
@@ -21,6 +24,7 @@
 		1E511D0223B2830E00455C7F /* SearchStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0123B2830E00455C7F /* SearchStockView.swift */; };
 		1E511D0423B2831E00455C7F /* SearchStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0323B2831E00455C7F /* SearchStock.swift */; };
 		1E511D0623B2870100455C7F /* SearchStockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E511D0523B2870100455C7F /* SearchStockResponse.swift */; };
+		1E52A6AA23D0F05900332866 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E52A6A923D0F05900332866 /* Configuration.swift */; };
 		1E54FC8F23B9AA5600D7DC04 /* DetailAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */; };
 		1E556FA323BBF78400CB569B /* StockHistoricalPriceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E556FA223BBF78400CB569B /* StockHistoricalPriceResponse.swift */; };
 		1E62D36023B82CE80093E83B /* CompanyKeyMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E62D35F23B82CE80093E83B /* CompanyKeyMetrics.swift */; };
@@ -89,7 +93,6 @@
 		1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA279323C6728300D63F4D /* SectorAttributes.swift */; };
 		1EEF292D23BEB20E00BCD51D /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF292C23BEB20E00BCD51D /* SafariView.swift */; };
 		1EF05F8C23CAEBEE006CCD05 /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */; };
-		1EF110A523CE62A9006CA855 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110A423CE62A9006CA855 /* Configuration.swift */; };
 		1EF110A823CEA6A0006CA855 /* View+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110A723CEA6A0006CA855 /* View+Rectangle.swift */; };
 		1EF110AB23CECE2F006CA855 /* ScheduleContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF110AA23CECE2F006CA855 /* ScheduleContainerView.swift */; };
 		1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */; };
@@ -103,6 +106,9 @@
 		1E0A59C623C77DA700DE39BC /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		1E114BCA23B2A9C000863E0C /* SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffect.swift; sourceTree = "<group>"; };
 		1E114BCE23B2ACC600863E0C /* SearchStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockRow.swift; sourceTree = "<group>"; };
+		1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSortState.swift; sourceTree = "<group>"; };
+		1E1DB71A23D0B108006893C3 /* SortDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDirection.swift; sourceTree = "<group>"; };
+		1E1DB71C23D16F7B006893C3 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
 		1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoContainerView.swift; sourceTree = "<group>"; };
 		1E394D8523C1176E00559B91 /* EditInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoView.swift; sourceTree = "<group>"; };
 		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 		1E511D0123B2830E00455C7F /* SearchStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockView.swift; sourceTree = "<group>"; };
 		1E511D0323B2831E00455C7F /* SearchStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStock.swift; sourceTree = "<group>"; };
 		1E511D0523B2870100455C7F /* SearchStockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockResponse.swift; sourceTree = "<group>"; };
+		1E52A6A923D0F05900332866 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1E54FC8E23B9AA5600D7DC04 /* DetailAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAttributes.swift; sourceTree = "<group>"; };
 		1E556FA223BBF78400CB569B /* StockHistoricalPriceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockHistoricalPriceResponse.swift; sourceTree = "<group>"; };
 		1E62D35F23B82CE80093E83B /* CompanyKeyMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyKeyMetrics.swift; sourceTree = "<group>"; };
@@ -181,7 +188,6 @@
 		1EEA279323C6728300D63F4D /* SectorAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorAttributes.swift; sourceTree = "<group>"; };
 		1EEF292C23BEB20E00BCD51D /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
-		1EF110A423CE62A9006CA855 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1EF110A723CEA6A0006CA855 /* View+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Rectangle.swift"; sourceTree = "<group>"; };
 		1EF110AA23CECE2F006CA855 /* ScheduleContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainerView.swift; sourceTree = "<group>"; };
 		1EF2530323C41D1600AB224C /* PortfolioInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoRow.swift; sourceTree = "<group>"; };
@@ -372,7 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				1EA096FD23B1DCDC00A5B8EC /* Request.swift */,
-				1EF110A423CE62A9006CA855 /* Configuration.swift */,
+				1E52A6A923D0F05900332866 /* Configuration.swift */,
 				1E8DCF5D23B1ECAB0018BADB /* Models */,
 				1E6E3F7F23B1A31E009A0262 /* Extensions */,
 			);
@@ -413,6 +419,8 @@
 				1ED5326A23BC5200009CC919 /* UpcomingDividend.swift */,
 				1EE3832723BDB4CB00EB9203 /* StockNews.swift */,
 				1EEA279323C6728300D63F4D /* SectorAttributes.swift */,
+				1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */,
+				1E1DB71A23D0B108006893C3 /* SortDirection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -494,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */,
+				1E1DB71C23D16F7B006893C3 /* ListHeader.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -643,6 +652,7 @@
 				1E6E3F7A23B1A1C1009A0262 /* AppState.swift in Sources */,
 				1ED6132623B6C7A400CF4CD0 /* BarChartRow.swift in Sources */,
 				1E3CE70C23CFE6F300EB5226 /* ScheduleView.swift in Sources */,
+				1E1DB71B23D0B108006893C3 /* SortDirection.swift in Sources */,
 				1ED27F5823CBC2BB0061FEB6 /* TrackerContainerView.swift in Sources */,
 				1EF2530423C41D1600AB224C /* PortfolioInfoRow.swift in Sources */,
 				1ED27F5A23CBC2C00061FEB6 /* TrackerView.swift in Sources */,
@@ -675,12 +685,14 @@
 				1ED966BC23B55C01000BDE8D /* IncomeContainerView.swift in Sources */,
 				1E86AED423B5D63C00B38275 /* Date+Formatter.swift in Sources */,
 				1E6E3F6C23B19EEA009A0262 /* AppAction.swift in Sources */,
-				1EF110A523CE62A9006CA855 /* Configuration.swift in Sources */,
 				1E8DCF6023B1ECCE0018BADB /* CompanyProfileResponse.swift in Sources */,
+				1E52A6AA23D0F05900332866 /* Configuration.swift in Sources */,
 				1EE3832823BDB4CB00EB9203 /* StockNews.swift in Sources */,
 				1EE3832A23BDBE7E00EB9203 /* TimeInterval+String.swift in Sources */,
 				1ED6131F23B6B1C600CF4CD0 /* Helpers.swift in Sources */,
 				1E6E3F7E23B1A21C009A0262 /* Environment.swift in Sources */,
+				1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */,
+				1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
 				1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */,

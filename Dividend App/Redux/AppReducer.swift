@@ -25,13 +25,13 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.sectorCompanies[stock.sector]?.append(stock)
         state.allUpcomingDivDates[dividend.ticker] = dividend.date
         
+        state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        appReducer(state: &state, action: .sortBy(sort: state.selectedSort))
+        
     case let .removeFromPortfolio(offsets):
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
         state.portfolioStocks.remove(atOffsets: offsets)
         state.sectorCompanies[stock.sector]?.removeAll(where: { $0 == stock })
-       
-    case let .moveStockInPortfolio(previous, current):
-        state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
         
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
@@ -39,11 +39,59 @@ func appReducer(state: inout AppState, action: AppAction) {
         
         state.allPortfolioStocks[state.portfolioStocks[index]] = updatedStock
         
+        if state.selectedSort == PortfolioSortState.startingDiv {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+            appReducer(state: &state, action: .sortBy(sort: state.selectedSort))
+        }
+        
     case let .updatePortfolio(stocks):
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
+        if state.selectedSort == PortfolioSortState.currentDiv || state.selectedSort == PortfolioSortState.growth {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+            appReducer(state: &state, action: .sortBy(sort: state.selectedSort))
+        }
         
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
+        
+    // MARK: Portfolio Sort
+    case let .sortBy(sort):
+        let portfolioStocks = state.portfolioStocks.compactMap { state.allPortfolioStocks[$0] }
+        if state.selectedSort != sort {
+            state.selectedSort = sort
+            state.sortDirection = SortDirection.down
+        } else {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+        }
+        switch sort {
+        case PortfolioSortState.symbol:
+            state.portfolioStocks = portfolioStocks.sorted(by: {
+                SortDirection.comparator(sort: sort, direction: state.sortDirection, left: $0.ticker, right: $1.ticker)
+            })
+                .map { $0.ticker }
+        case PortfolioSortState.name:
+            state.portfolioStocks = portfolioStocks.sorted(by: {
+                SortDirection.comparator(sort: sort, direction: state.sortDirection, left: $0.fullName, right: $1.fullName)
+            })
+                .map { $0.ticker }
+        case PortfolioSortState.startingDiv:
+            state.portfolioStocks = portfolioStocks.sorted(by: {
+                SortDirection.comparator(sort: sort, direction: state.sortDirection, left: $0.startingDividend, right: $1.startingDividend)
+            })
+                .map { $0.ticker }
+        case PortfolioSortState.currentDiv:
+            state.portfolioStocks = portfolioStocks.sorted(by: {
+                SortDirection.comparator(sort: sort, direction: state.sortDirection, left: $0.currentDividend, right: $1.currentDividend)
+            })
+                .map { $0.ticker }
+        case PortfolioSortState.growth:
+            state.portfolioStocks = portfolioStocks.sorted(by: {
+                SortDirection.comparator(sort: sort, direction: state.sortDirection, left: $0.growth, right: $1.growth)
+            })
+                .map { $0.ticker }
+        default:
+            ()
+        }
         
     // MARK: Search
     case let .setSearchResults(results):

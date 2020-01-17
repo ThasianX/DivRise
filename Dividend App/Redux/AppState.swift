@@ -18,6 +18,10 @@ struct AppState: Codable, Equatable {
     var allPortfolioStocks: [String: PortfolioStock] = [:]
     var portfolioStocks: [String] = []
     
+    // MARK: Portfolio Sort
+    var selectedSort: String = PortfolioSortState.symbol
+    var sortDirection: String = SortDirection.down
+    
     // MARK: Portfolio Info
     var allUpcomingDivDates: [String: Date] = [:]
     

@@ -20,7 +20,6 @@ struct PortfolioInfoView: View {
     let upcomingDates: [Date]
     
     let onDelete: (IndexSet) -> Void
-    let onMove: (IndexSet, Int) -> Void
     
     let sunburstConfig: SunburstConfiguration
     
@@ -46,6 +45,7 @@ struct PortfolioInfoView: View {
                     SunburstView(configuration: sunburstConfig)
                         .colorScheme(.dark)
                 } else {
+                    ListHeader(leadingText: "Name", trailingText: "Start Div / Next Div Date")
                     if portfolioStocks.count == 0 || portfolioStocks.count != upcomingDates.count {
                         //                    List {
                         //                        ForEach(PortfolioStock.sample.indexed(), id: \.1.self) { index, stock in
@@ -86,7 +86,6 @@ struct PortfolioInfoView: View {
                                     }
                                 }
                                 .onDelete(perform: onDelete)
-                                .onMove(perform: onMove)
                             }
                         }
                 }
@@ -99,7 +98,7 @@ struct PortfolioInfoView: View {
 
 struct PortfolioInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioInfoView(showEditInfo: .constant(false), selectedIndex: .constant(0), showSectorInfo: .constant(false), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock], upcomingDates: [Date(), Date(), Date(), Date(), Date(), Date()], onDelete: { _ in }, onMove: { _, _ in}, sunburstConfig: SunburstConfiguration(nodes: []))
+        PortfolioInfoView(showEditInfo: .constant(false), selectedIndex: .constant(0), showSectorInfo: .constant(false), portfolioStocks: [.mock, .mock, .mock, .mock, .mock, .mock], upcomingDates: [Date(), Date(), Date(), Date(), Date(), Date()], onDelete: { _ in }, sunburstConfig: SunburstConfiguration(nodes: []))
     }
 }
 
