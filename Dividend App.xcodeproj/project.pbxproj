@@ -376,9 +376,9 @@
 			isa = PBXGroup;
 			children = (
 				1EA096FD23B1DCDC00A5B8EC /* Request.swift */,
+				1E52A6A923D0F05900332866 /* Configuration.swift */,
 				1E8DCF5D23B1ECAB0018BADB /* Models */,
 				1E6E3F7F23B1A31E009A0262 /* Extensions */,
-				1E52A6A923D0F05900332866 /* Configuration.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

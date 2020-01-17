@@ -17,7 +17,6 @@ enum AppAction {
     // MARK: Portfolio
     case addToPortfolio(stock: PortfolioStock, dividend: UpcomingDividend)
     case removeFromPortfolio(offsets: IndexSet)
-    case moveStockInPortfolio(previous: IndexSet, current: Int)
     case updateStartingDividend(index: Int, value: Double)
     case updatePortfolio(stocks: [PortfolioStock])
     case updateUpcomingDivDates(dividends: [UpcomingDividend])

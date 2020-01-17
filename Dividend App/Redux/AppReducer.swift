@@ -33,9 +33,6 @@ func appReducer(state: inout AppState, action: AppAction) {
         state.portfolioStocks.remove(atOffsets: offsets)
         state.sectorCompanies[stock.sector]?.removeAll(where: { $0 == stock })
         
-    case let .moveStockInPortfolio(previous, current):
-        state.portfolioStocks.move(fromOffsets: previous, toOffset: current)
-        
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
         let updatedStock = PortfolioStock(ticker: stock.ticker, fullName: stock.fullName, image: stock.image, startingDividend: value, currentDividend: stock.currentDividend, growth: ((stock.currentDividend / value) - 1.0) * 100, sector: stock.sector, frequency: stock.frequency)
@@ -49,6 +46,10 @@ func appReducer(state: inout AppState, action: AppAction) {
         
     case let .updatePortfolio(stocks):
         stocks.forEach { state.allPortfolioStocks[$0.ticker] = $0 }
+        if state.selectedSort == PortfolioSortState.currentDiv || state.selectedSort == PortfolioSortState.growth {
+            state.sortDirection = SortDirection.toggle(direction: state.sortDirection)
+            appReducer(state: &state, action: .sortBy(sort: state.selectedSort))
+        }
         
     case let .updateUpcomingDivDates(dividends):
         dividends.forEach { state.allUpcomingDivDates[$0.ticker] = $0.date }
