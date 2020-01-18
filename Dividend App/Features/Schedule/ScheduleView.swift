@@ -30,14 +30,12 @@ struct ScheduleView: View {
                             .foregroundColor(Color("textColor"))
                             .font(.headline)
                             .italic()
-                        
                         List(ScheduleView.sampleSchedule, id: \.id) { tuple in
                             ScheduleListRow(stock: tuple.1, date: tuple.2, amount: tuple.3)
                         }
                         .opacity(0.3)
                         .disabled(true)
                     }
-                    
                 } else {
                     List(upcomingSchedule, id: \.id) { tuple in
                         ScheduleListRow(stock: tuple.1, date: tuple.2, amount: tuple.3)
@@ -67,38 +65,4 @@ extension ScheduleView {
         (id: "ACFAEA69-BC34-47D2-9AF6-12B5062BD227", DivRise.PortfolioStock(ticker: "JNJ", fullName: "Johnson & Johnson", image: "https://financialmodelingprep.com/images-New-jpg/JNJ.jpg", startingDividend: 1.0, currentDividend: 3.6, growth: 260.0, sector: "Healthcare", frequency: "Quarterly"), Formatter.fullString.date(from: "2020-12-29")!, "N/A"),
         (id: "A5F2BF08-C439-4C3F-8405-C91D1A1A4EFA", DivRise.PortfolioStock(ticker: "T", fullName: "AT&T Inc.", image: "https://financialmodelingprep.com/images-New-jpg/T.jpg", startingDividend: 2.0, currentDividend: 2.04, growth: 2.0000000000000018, sector: "Communication Services", frequency: "Quarterly"), Formatter.fullString.date(from: "2020-12-30")!, "$5.61")
     ]
-}
-
-struct ScheduleListRow: View {
-    let stock: PortfolioStock
-    let date: Date
-    let amount: String
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(stock.ticker)
-                    .font(.system(size: 16))
-                    .bold()
-                    .foregroundColor(Color("textColor"))
-                
-                Text(stock.fullName)
-                    .font(.system(size: 15))
-                    .foregroundColor(Color.gray)
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .trailing) {
-                Text(amount)
-                    .font(.system(size: 16))
-                    .bold()
-                    .foregroundColor(Color.green)
-                
-                Text(date.mediumStyle)
-                    .font(.system(size: 15))
-                    .foregroundColor(Color("textColor"))
-            }
-        }
-    }
 }

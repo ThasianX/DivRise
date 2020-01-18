@@ -10,10 +10,8 @@ import SwiftUI
 
 struct IncomeContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    
     @State private var dividendInput = ""
     @State private var showingAdd = false
-    
     @Binding var show: Bool
     
     private var monthlyRecords: [Record] {
@@ -28,21 +26,25 @@ struct IncomeContainerView: View {
         NavigationView {
             IncomeView(monthlyRecords: monthlyRecords, monthlyDividends: monthlyDividends)
                 .navigationBarItems(
-                    leading: Button(action: {
-                        self.showingAdd = true
-                    }) {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    },
+                    leading: addButton,
                     trailing: ExitButton(show: $show)
             )
                 .sheet(isPresented: $showingAdd, onDismiss: { self.dividendInput = "" }) {
                     AddDividendView(input: self.$dividendInput, onAdd: self.addMonthlyDividend)
             }
-            .navigationBarTitle(Text("Dividend Income"))
+            .navigationBarTitle("Dividend Income")
         }
         
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            self.showingAdd = true
+        }) {
+            Image(systemName: "plus")
+                .resizable()
+                .frame(width: 20, height: 20)
+        }
     }
     
     private func addMonthlyDividend() {

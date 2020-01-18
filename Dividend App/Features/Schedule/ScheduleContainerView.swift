@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ScheduleContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    
     @Binding var show: Bool
     
     var portfolioStocks: Set<PortfolioStock> {
@@ -34,31 +33,19 @@ struct ScheduleContainerView: View {
         var upcoming = [(id: String, stock: PortfolioStock, date: Date, amount: String)]()
         
         for stock in portfolioStocks {
-            if var date = store.state.allUpcomingDivDates[stock.ticker] {
+            if let date = store.state.allUpcomingDivDates[stock.ticker] {
                 let freq = stock.frequency
                 let numOfShares = store.state.allHoldingsInfo[stock.ticker]?.numOfShares
                 
                 if freq == "Quarterly" {
                     let dividend = (numOfShares != nil) ? String(format: "$%.2f", numOfShares! * stock.currentDividend/4) : "N/A"
-                    upcoming.append((UUID().uuidString, stock, date, dividend))
-                    for _ in 0...2 {
-                        date = Calendar.current.date(byAdding: .month, value: 3, to: date)!
-                        upcoming.append((UUID().uuidString, stock, date, dividend))
-                    }
+                    upcoming += appendSchedule(stock: stock, startingDate: date, freq: 3, dividend: dividend)
                 } else if freq == "Semi-Annual" {
                     let dividend = (numOfShares != nil) ? String(format: "$%.2f", numOfShares! * stock.currentDividend/2) : "N/A"
-                    upcoming.append((UUID().uuidString, stock, date, dividend))
-                    for _ in 0...2 {
-                        date = Calendar.current.date(byAdding: .month, value: 6, to: date)!
-                        upcoming.append((UUID().uuidString, stock, date, dividend))
-                    }
+                    upcoming += appendSchedule(stock: stock, startingDate: date, freq: 6, dividend: dividend)
                 } else {
                     let dividend = (numOfShares != nil) ? String(format: "$%.2f", numOfShares! * stock.currentDividend/12) : "N/A"
-                    upcoming.append((UUID().uuidString, stock, date, dividend))
-                    for _ in 0...2 {
-                        date = Calendar.current.date(byAdding: .month, value: 1, to: date)!
-                        upcoming.append((UUID().uuidString, stock, date, dividend))
-                    }
+                    upcoming += appendSchedule(stock: stock, startingDate: date, freq: 1, dividend: dividend)
                 }
             }
         }
@@ -75,5 +62,16 @@ struct ScheduleContainerView: View {
             .navigationBarTitle(Text("Dividend Schedule"))
         }
         
+    }
+    
+    private func appendSchedule(stock: PortfolioStock, startingDate: Date, freq: Int, dividend: String) -> [(String, PortfolioStock, Date, String)] {
+        var upcoming = [(id: String, stock: PortfolioStock, date: Date, amount: String)]()
+        var date = startingDate
+        upcoming.append((UUID().uuidString, stock, date, dividend))
+        for _ in 0..<freq {
+            date = Calendar.current.date(byAdding: .month, value: freq, to: date)!
+            upcoming.append((UUID().uuidString, stock, date, dividend))
+        }
+        return upcoming
     }
 }

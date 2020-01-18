@@ -34,8 +34,10 @@ struct SearchStockView: View {
                         DarkTextField(placeholder: "Search stocks, funds...", input: $query, onCommit: onCommit)
                         
                         Button(action: {
-                            self.query = ""
-                            self.onCommit()
+                            withAnimation {
+                                self.query = ""
+                                self.onCommit()
+                            }
                         }) {
                             Image(systemName: "xmark.circle.fill").opacity(query == "" ? 0 : 1)
                         }
@@ -47,9 +49,11 @@ struct SearchStockView: View {
                     
                     if showCancelButton  {
                         Button("Cancel") {
-                            UIApplication.shared.endEditing(true) // this must be placed before the other commands here
-                            self.query = ""
-                            self.showCancelButton = false
+                            withAnimation {
+                                UIApplication.shared.endEditing(true)
+                                self.query = ""
+                                self.showCancelButton = false
+                            }
                         }
                         .foregroundColor(Color(.systemBlue))
                     }
@@ -71,7 +75,6 @@ struct SearchStockView: View {
                 .resignKeyboardOnDragGesture()
             }
         }
-        
     }
 }
 
