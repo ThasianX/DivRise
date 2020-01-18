@@ -34,6 +34,7 @@ struct PortfolioDetailContainerView: View {
             .sheet(isPresented: $showingSafari) {
                 SafariView(url: self.url)
                     .colorScheme(.dark)
+                    .edgesIgnoringSafeArea(.all)
         }
     }
     

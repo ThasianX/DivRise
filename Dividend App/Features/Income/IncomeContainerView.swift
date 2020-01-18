@@ -15,11 +15,23 @@ struct IncomeContainerView: View {
     @Binding var show: Bool
     
     private var monthlyRecords: [Record] {
+//        [.mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock, .mock]
         store.state.allMonthlyRecords
     }
     
     private var monthlyDividends: [Double] {
+//        [8,23,54,32,12,37,7,23,43]
         store.state.allMonthlyDividends
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            self.showingAdd = true
+        }) {
+            Image(systemName: "plus")
+                .resizable()
+                .frame(width: 20, height: 20)
+        }
     }
     
     var body: some View {
@@ -35,16 +47,6 @@ struct IncomeContainerView: View {
             .navigationBarTitle("Dividend Income")
         }
         
-    }
-    
-    private var addButton: some View {
-        Button(action: {
-            self.showingAdd = true
-        }) {
-            Image(systemName: "plus")
-                .resizable()
-                .frame(width: 20, height: 20)
-        }
     }
     
     private func addMonthlyDividend() {

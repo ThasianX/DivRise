@@ -28,9 +28,11 @@ struct PortfolioInfoContainerView: View {
     }
     
     var body: some View {
+//        PortfolioInfoView(showEditInfo: $showEditInfo, selectedIndex: $selectedIndex, showSectorInfo: $showSectorInfo, portfolioStocks: PortfolioStock.sample.sorted(by: { $0.ticker < $1.ticker }), upcomingDates: UpcomingDividend.sample, onDelete: onDelete, sunburstConfig: sunburstConfiguration())
         PortfolioInfoView(showEditInfo: $showEditInfo, selectedIndex: $selectedIndex, showSectorInfo: $showSectorInfo, portfolioStocks: portfolioStocks, upcomingDates: upcomingDividendDates, onDelete: onDelete, sunburstConfig: sunburstConfiguration())
             .onAppear(perform: reloadDividendDates)
             .sheet(isPresented: $showEditInfo) {
+//                EditInfoView(showEditInfo: self.$showEditInfo, portfolioStock: PortfolioStock.sample[self.selectedIndex],  selectedIndex: self.selectedIndex, onUpdate: self.onUpdate)
                 EditInfoView(showEditInfo: self.$showEditInfo, portfolioStock: self.portfolioStocks[self.selectedIndex],  selectedIndex: self.selectedIndex, onUpdate: self.onUpdate)
         }
     }
