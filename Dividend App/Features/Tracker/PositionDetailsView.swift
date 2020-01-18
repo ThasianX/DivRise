@@ -34,14 +34,15 @@ struct PositionDetailsView: View {
                     VStack(spacing: 20) {
                         if holdingInfo == nil || editMode?.wrappedValue == .active {
                             HoldingInfoForm(numOfShares: $numOfShares, avgCostPerShare: $avgCostPerShare, stock: stock, holdingInfo: holdingInfo, onCommit: onCommit)
+                                .environment(\.editMode, editMode)
                         } else {
                             StockInfoRectange(stock: stock, holdingInfo: holdingInfo!, currentSharePrice: currentSharePrice)
                             StockUpcomingDividends(months: upcomingMonths, stock: stock, holdingInfo: holdingInfo!)
                         }
                     }
                 }
-                .padding()
             }
+            .padding()
         }
     }
 }
