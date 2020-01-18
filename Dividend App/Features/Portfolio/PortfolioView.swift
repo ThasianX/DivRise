@@ -89,23 +89,3 @@ struct PortfolioView_Previews: PreviewProvider {
             .background(Color("background"))
     }
 }
-
-struct PortfolioSortHeader: View {
-    @Binding var show: Bool
-    let sortString: String
-    
-    var body: some View {
-        HStack {
-            Text("Sort:")
-            Text("\(sortString) ▼")
-            .bold()
-                .onTapGesture {
-                    self.show = true
-            }
-            Spacer()
-        }
-        .foregroundColor(Color("textColor"))
-        .font(.caption)
-        .padding(.leading, 20.0)
-    }
-}

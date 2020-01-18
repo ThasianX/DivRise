@@ -52,9 +52,7 @@ struct SettingsView: View {
                             self.showDetailOrdering = true
                         }) {
                             Text("Detail Attribute Ordering")
-                                .foregroundColor(Color("textColor"))
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                     Section(header: Text("Notifications")) {
                         Toggle(isOn: receiveBinding) {

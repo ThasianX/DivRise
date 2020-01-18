@@ -13,14 +13,11 @@ struct PortfolioInfoView: View {
     @SwiftUI.Environment(\.editMode) var editMode
     @Binding var showEditInfo: Bool
     @Binding var selectedIndex: Int
-    
     @Binding var showSectorInfo: Bool
     
     let portfolioStocks: [PortfolioStock]
     let upcomingDates: [Date]
-    
     let onDelete: (IndexSet) -> Void
-    
     let sunburstConfig: SunburstConfiguration
     
     var body: some View {

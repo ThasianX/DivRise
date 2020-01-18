@@ -31,26 +31,29 @@ struct SearchStockView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                         
-                        TextField("Search stocks, funds...", text: $query, onCommit: onCommit)
-                            .foregroundColor(Color.black)
+                        DarkTextField(placeholder: "Search stocks, funds...", input: $query, onCommit: onCommit)
                         
                         Button(action: {
-                            self.query = ""
-                            self.onCommit()
+                            withAnimation {
+                                self.query = ""
+                                self.onCommit()
+                            }
                         }) {
                             Image(systemName: "xmark.circle.fill").opacity(query == "" ? 0 : 1)
                         }
                     }
                     .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                    .foregroundColor(Color.gray)
-                    .background(Color.white)
+                    .foregroundColor(.gray)
+                    .background(Color.black)
                     .cornerRadius(10.0)
                     
                     if showCancelButton  {
                         Button("Cancel") {
-                            UIApplication.shared.endEditing(true) // this must be placed before the other commands here
-                            self.query = ""
-                            self.showCancelButton = false
+                            withAnimation {
+                                UIApplication.shared.endEditing(true)
+                                self.query = ""
+                                self.showCancelButton = false
+                            }
                         }
                         .foregroundColor(Color(.systemBlue))
                     }
@@ -72,7 +75,6 @@ struct SearchStockView: View {
                 .resignKeyboardOnDragGesture()
             }
         }
-        
     }
 }
 

@@ -11,10 +11,8 @@ import SunburstDiagram
 
 struct PortfolioInfoContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    
     @State private var showEditInfo: Bool = false
     @State private var selectedIndex: Int = 0
-    
     @State private var showSectorInfo: Bool = false
     
     private var portfolioStocks: [PortfolioStock] {
