@@ -40,6 +40,7 @@ struct PositionDetailsView: View {
                         }
                     }
                 }
+                .keyboardResponsive()
             }
             .padding()
         }

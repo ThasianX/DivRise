@@ -75,6 +75,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                 .cornerRadius(16)
                 .relativeHeight(0.3)
                 .relativeWidth(0.7)
+                .keyboardResponsive()
             }
         }
     }
