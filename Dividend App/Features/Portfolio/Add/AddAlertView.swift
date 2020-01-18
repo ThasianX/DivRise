@@ -29,7 +29,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         .foregroundColor(Color("textColor"))
                     
                     Text("Enter your starting annual dividend amount")
-                    .fixedSize(horizontal: false, vertical: true)
+                        .fixedSize(horizontal: false, vertical: true)
                         .font(.headline)
                         .foregroundColor(Color("textColor"))
                     
@@ -40,17 +40,9 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                                 .foregroundColor(Color("textColor"))
                         }
                         
-                        if colorScheme == ColorScheme.dark {
-                            TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
+                        DarkTextField(placeholder: "Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", input: $input)
                             .keyboardType(.decimalPad)
                             .font(.system(size: 25))
-                            .foregroundColor(Color("textColor"))
-                        } else {
-                          TextField("Current: $\(Double(stock!.dividend)!, specifier: "%.2f")", text: $input)
-                            .keyboardType(.decimalPad)
-                            .font(.system(size: 25))
-                            .colorInvert()
-                        }
                     }
                     Divider()
                     HStack {
@@ -72,7 +64,7 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                         }) {
                             Spacer()
                             Text("Add")
-                            .foregroundColor(.orange)
+                                .foregroundColor(.orange)
                             Spacer()
                         }
                     }
@@ -81,8 +73,9 @@ struct AddAlertView<Presenting>: View where Presenting: View  {
                 .padding()
                 .background(Color.black)
                 .cornerRadius(16)
-                .relativeHeight(0.35)
+                .relativeHeight(0.3)
                 .relativeWidth(0.7)
+                .keyboardResponsive()
             }
         }
     }

@@ -28,24 +28,18 @@ struct PortfolioInfoRow: View {
             Spacer()
             
             VStack {
-                HStack(spacing: 0) {
+                HStack {
                     Spacer()
-                    Text("Starting dividend: ")
-                        .foregroundColor(Color("textColor"))
-                        .font(.footnote)
-                        .lineLimit(1)
+                    Image(systemName: "pencil.circle")
+                        .foregroundColor(.white)
                     Text("$\(stock.startingDividend, specifier: "%.2f")")
-                        .foregroundColor(Color("textColor"))
+                        .foregroundColor(.green)
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .lineLimit(1)
                 }
-                HStack(spacing: 0) {
+                HStack {
                     Spacer()
-                    Text("Next dividend: ")
-                        .foregroundColor(Color("textColor"))
-                        .font(.footnote)
-                        .lineLimit(1)
                     Text(date.mediumStyle)
                         .foregroundColor(Color("textColor"))
                         .font(.subheadline)

@@ -12,7 +12,8 @@ import Foundation
 // MARK: Search
 func search(query: String) -> AnyPublisher<AppAction, Never> {
     Current.request.getSearchedStocks(query: query)
-        .map { AppAction.setSearchResults(results: $0) }
+        .map { AppAction.setSearchResults(results:
+            $0.sorted(by: { $0.ticker < $1.ticker })) }
         .eraseToAnyPublisher()
 }
 
@@ -30,9 +31,7 @@ func addStockToPortfolio(stock: PortfolioStock) -> AnyPublisher<AppAction, Never
     }
     .flatMap { updatedStock in
         Current.request.updatedUpcomingDividendDates(stocks: [updatedStock])
-            .map {
-                Logger.info("\(updatedStock) : \($0.first!)")
-                return AppAction.addToPortfolio(stock: updatedStock, dividend: $0.first!) }
+            .map { AppAction.addToPortfolio(stock: updatedStock, dividend: $0.first!) }
             .eraseToAnyPublisher()
     }
     .eraseToAnyPublisher()
@@ -189,6 +188,7 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
     .eraseToAnyPublisher()
 }
 
+// MARK: Dividend Tracker
 func setCurrentSharePrices(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.getCurrentSharePrices(stocks: portfolioStocks)
         .map {
@@ -196,4 +196,3 @@ func setCurrentSharePrices(portfolioStocks: [PortfolioStock]) -> AnyPublisher<Ap
             return AppAction.setCurrentSharePrices(prices: $0) }
         .eraseToAnyPublisher()
 }
-

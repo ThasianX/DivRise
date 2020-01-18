@@ -55,11 +55,10 @@ struct EditInfoView: View {
                         Text("$")
                             .font(.system(size: 30))
                             .foregroundColor(Color("textColor"))
-                        TextField("\(portfolioStock.startingDividend, specifier: "%.2f")", text: $startingDividend)
-                            .keyboardType(.decimalPad)
-                            .font(.system(size: 30))
-                            .foregroundColor(Color("textColor"))
-                            .frame(width: 100)
+                        
+                        DarkTextField(placeholder: "\(portfolioStock.startingDividend, specifier: "%.2f")", input: $startingDividend)
+                        .keyboardType(.decimalPad)
+                        .font(.system(size: 30))
                         Spacer()
                     }
                     

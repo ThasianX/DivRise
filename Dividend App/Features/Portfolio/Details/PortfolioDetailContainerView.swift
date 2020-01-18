@@ -33,6 +33,7 @@ struct PortfolioDetailContainerView: View {
             .onAppear(perform: loadDetailStock)
             .sheet(isPresented: $showingSafari) {
                 SafariView(url: self.url)
+                    .colorScheme(.dark)
         }
     }
     
