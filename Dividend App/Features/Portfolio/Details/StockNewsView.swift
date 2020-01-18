@@ -12,6 +12,7 @@ import URLImage
 struct StockNewsView: View {
     @Binding var showingSafari: Bool
     @Binding var url: URL
+    
     let stockNews: [StockNews]
     
     var body: some View {

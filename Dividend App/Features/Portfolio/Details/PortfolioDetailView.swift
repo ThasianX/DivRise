@@ -23,6 +23,39 @@ struct PortfolioDetailView: View {
     let onPeriodChange: () -> Void
     let stockNews: [StockNews]
     
+    private var fullNames: [String] {
+        attributeNames.compactMap {
+            DetailAttributes.full[$0]
+        }
+    }
+    
+    private var abbreviatedNames: [String] {
+        attributeNames.compactMap {
+            DetailAttributes.abbreviated[$0]
+        }
+    }
+    
+    private var descriptions: [String] {
+        attributeNames.compactMap {
+            DetailAttributes.descriptions[$0]
+        }
+    }
+    
+    private var currentValues: [[Double]] {
+        var values = [[Double]]()
+        var inner = [Double]()
+        
+        for (i, arr) in attributeValues.enumerated() {
+            if i % 3 == 0 && !inner.isEmpty {
+                values.append(inner)
+                inner.removeAll()
+            }
+            inner.append(arr.first!)
+        }
+        values.append(inner)
+        return values
+    }
+    
     var body: some View {
         ZStack {
             Color("background")
@@ -58,9 +91,9 @@ struct PortfolioDetailView: View {
                 if self.attributeValues.count > 0 && self.stockNews.count > 0 {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
-                            CurrentDetailStockRow(attributeNames: self.getAbbreviatedNames(), attributeValues: self.getCurrentValues())
+                            CurrentDetailStockRow(attributeNames: self.abbreviatedNames, attributeValues: self.currentValues)
                             
-                            CardDetailStockRow(selectedAttributeIndex: self.$selectedAttributeIndex, abbreviatedNames: self.getAbbreviatedNames(), fullNames: self.getFullNames(), descriptions: self.getDescriptions(), records: self.records, sharePriceRecords: self.sharePriceRecords, attributeValues: self.attributeValues)
+                            CardDetailStockRow(selectedAttributeIndex: self.$selectedAttributeIndex, abbreviatedNames: self.abbreviatedNames, fullNames: self.fullNames, descriptions: self.descriptions, records: self.records, sharePriceRecords: self.sharePriceRecords, attributeValues: self.attributeValues)
                             
                             StockNewsView(showingSafari: self.$showingSafari, url: self.$url, stockNews: self.stockNews)
                         }
@@ -73,45 +106,10 @@ struct PortfolioDetailView: View {
             .animation(.easeInOut)
             
             if self.selectedAttributeIndex != nil {
-                CardView(index: self.$selectedAttributeIndex, abbreviatedName: self.getAbbreviatedNames()[self.selectedAttributeIndex!], fullName: self.getFullNames()[self.selectedAttributeIndex!], description: self.getDescriptions()[self.selectedAttributeIndex!], records: self.records.reversed(), sharePriceRecords: self.sharePriceRecords.reversed(), values: self.attributeValues[self.selectedAttributeIndex!].reversed())
+                CardView(index: self.$selectedAttributeIndex, abbreviatedName: self.abbreviatedNames[self.selectedAttributeIndex!], fullName: self.fullNames[self.selectedAttributeIndex!], description: self.descriptions[self.selectedAttributeIndex!], records: self.records.reversed(), sharePriceRecords: self.sharePriceRecords.reversed(), values: self.attributeValues[self.selectedAttributeIndex!].reversed())
             }
         }
     }
-    
-    // Data helpers
-    private func getFullNames() -> [String] {
-        attributeNames.compactMap {
-            DetailAttributes.full[$0]
-        }
-    }
-    
-    private func getAbbreviatedNames() -> [String] {
-        attributeNames.compactMap {
-            DetailAttributes.abbreviated[$0]
-        }
-    }
-    
-    private func getDescriptions() -> [String] {
-        attributeNames.compactMap {
-            DetailAttributes.descriptions[$0]
-        }
-    }
-    
-    private func getCurrentValues() -> [[Double]] {
-        var values = [[Double]]()
-        var inner = [Double]()
-        
-        for (i, arr) in attributeValues.enumerated() {
-            if i % 3 == 0 && !inner.isEmpty {
-                values.append(inner)
-                inner.removeAll()
-            }
-            inner.append(arr.first!)
-        }
-        values.append(inner)
-        return values
-    }
-    
 }
 
 struct PortfolioDetailView_Previews: PreviewProvider {
