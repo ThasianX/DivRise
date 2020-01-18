@@ -14,6 +14,7 @@
 		1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */; };
 		1E1DB71B23D0B108006893C3 /* SortDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71A23D0B108006893C3 /* SortDirection.swift */; };
 		1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1DB71C23D16F7B006893C3 /* ListHeader.swift */; };
+		1E238DB023D37DF80021F86E /* KeyboardResponsiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E238DAF23D37DF80021F86E /* KeyboardResponsiveModifier.swift */; };
 		1E27CB9B23BC593300FFF7FF /* PortfolioInfoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */; };
 		1E394D8623C1176E00559B91 /* EditInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E394D8523C1176E00559B91 /* EditInfoView.swift */; };
 		1E3BCB7023B9BD7100FAD5AA /* CardDetailStockRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */; };
@@ -123,6 +124,7 @@
 		1E1DB71823D0AEAC006893C3 /* PortfolioSortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSortState.swift; sourceTree = "<group>"; };
 		1E1DB71A23D0B108006893C3 /* SortDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDirection.swift; sourceTree = "<group>"; };
 		1E1DB71C23D16F7B006893C3 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
+		1E238DAF23D37DF80021F86E /* KeyboardResponsiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveModifier.swift; sourceTree = "<group>"; };
 		1E27CB9A23BC593300FFF7FF /* PortfolioInfoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoContainerView.swift; sourceTree = "<group>"; };
 		1E394D8523C1176E00559B91 /* EditInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoView.swift; sourceTree = "<group>"; };
 		1E3BCB6F23B9BD7100FAD5AA /* CardDetailStockRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailStockRow.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				1E97A3D023D2920B00296D7E /* CustomDivider.swift */,
 				1E97A3DC23D2948A00296D7E /* StockInfoRow.swift */,
 				1E4A814B23D29CA700AAB42C /* CheckMarkButton.swift */,
+				1E238DAF23D37DF80021F86E /* KeyboardResponsiveModifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				1EC64F2C23B2E1EB00BC63A5 /* Logger.swift in Sources */,
 				1E97A3D123D2920B00296D7E /* CustomDivider.swift in Sources */,
 				1E97A3D323D2924C00296D7E /* TrackerRow.swift in Sources */,
+				1E238DB023D37DF80021F86E /* KeyboardResponsiveModifier.swift in Sources */,
 				1E62D36E23B86BDC0093E83B /* HostingController.swift in Sources */,
 				1EEF292D23BEB20E00BCD51D /* SafariView.swift in Sources */,
 				1E62D36223B837880093E83B /* CompanyIncomeStatementResponse.swift in Sources */,
