@@ -10,7 +10,7 @@ import SwiftUI
 import URLImage
 
 struct PositionDetailsView: View {
-    @SwiftUI.Environment(\.editMode) var editMode
+    @Binding var editMode: EditMode
     @Binding var showStockDetail: Bool
     @Binding var numOfShares: String
     @Binding var avgCostPerShare: String
@@ -32,9 +32,8 @@ struct PositionDetailsView: View {
                 }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
-                        if holdingInfo == nil || editMode?.wrappedValue == .active {
-                            HoldingInfoForm(numOfShares: $numOfShares, avgCostPerShare: $avgCostPerShare, stock: stock, holdingInfo: holdingInfo, onCommit: onCommit)
-                                .environment(\.editMode, editMode)
+                        if holdingInfo == nil || editMode == .active {
+                            HoldingInfoForm(editMode: $editMode, numOfShares: $numOfShares, avgCostPerShare: $avgCostPerShare, stock: stock, holdingInfo: holdingInfo, onCommit: onCommit)
                         } else {
                             StockInfoRectange(stock: stock, holdingInfo: holdingInfo!, currentSharePrice: currentSharePrice)
                             StockUpcomingDividends(months: upcomingMonths, stock: stock, holdingInfo: holdingInfo!)
@@ -48,7 +47,7 @@ struct PositionDetailsView: View {
 }
 
 struct HoldingInfoForm: View {
-    @SwiftUI.Environment(\.editMode) var editMode
+    @Binding var editMode: EditMode
     @Binding var numOfShares: String
     @Binding var avgCostPerShare: String
     
@@ -89,7 +88,7 @@ struct HoldingInfoForm: View {
                 withAnimation {
                     if !(self.numOfShares.isEmpty && self.avgCostPerShare.isEmpty) {
                         UIApplication.shared.endEditing(true)
-                        self.editMode?.wrappedValue = .inactive
+                        self.editMode = .inactive
                         self.onCommit(self.stock)
                     }
                 }
@@ -249,7 +248,7 @@ struct StockUpcomingDividends: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 ForEach(months, id: \.self) { month in
-                    StockInfoRow(attribute: month, value: "$\(self.dividend)")
+                    StockInfoRow(attribute: month, value: "$\(String(format: "%.2f", self.dividend))")
                 }
             }
         }

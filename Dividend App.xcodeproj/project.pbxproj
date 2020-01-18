@@ -59,6 +59,7 @@
 		1E95DC5623B2B57A00FDA3EA /* AddAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */; };
 		1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */; };
 		1E97A3CB23D2102E00296D7E /* DarkTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97A3CA23D2102E00296D7E /* DarkTextField.swift */; };
+		1E97A3CD23D28B8D00296D7E /* EditMode+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97A3CC23D28B8D00296D7E /* EditMode+Custom.swift */; };
 		1EA096FE23B1DCDC00A5B8EC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FD23B1DCDC00A5B8EC /* Request.swift */; };
 		1EA0970023B1E39B00A5B8EC /* URL+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */; };
 		1EA2B04923CCC66000D5FB31 /* BasicDividendResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */; };
@@ -156,6 +157,7 @@
 		1E95DC5523B2B57A00FDA3EA /* AddAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlertView.swift; sourceTree = "<group>"; };
 		1E95DC5723B2BE3700FDA3EA /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		1E97A3CA23D2102E00296D7E /* DarkTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTextField.swift; sourceTree = "<group>"; };
+		1E97A3CC23D28B8D00296D7E /* EditMode+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditMode+Custom.swift"; sourceTree = "<group>"; };
 		1EA096FD23B1DCDC00A5B8EC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		1EA096FF23B1E39B00A5B8EC /* URL+Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Queries.swift"; sourceTree = "<group>"; };
 		1EA2B04823CCC66000D5FB31 /* BasicDividendResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDividendResponse.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF110A723CEA6A0006CA855 /* View+Rectangle.swift */,
+				1E97A3CC23D28B8D00296D7E /* EditMode+Custom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				1E1DB71923D0AEAC006893C3 /* PortfolioSortState.swift in Sources */,
 				1E1DB71D23D16F7B006893C3 /* ListHeader.swift in Sources */,
 				1EBC63CA23B1EDF200F102CB /* PortfolioView.swift in Sources */,
+				1E97A3CD23D28B8D00296D7E /* EditMode+Custom.swift in Sources */,
 				1E42A6C523B423530010DB8F /* Keyboard.swift in Sources */,
 				1E0A59C723C77DA700DE39BC /* UIColor+Additions.swift in Sources */,
 				1EA2B04923CCC66000D5FB31 /* BasicDividendResponse.swift in Sources */,
