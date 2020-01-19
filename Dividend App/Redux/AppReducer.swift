@@ -32,6 +32,9 @@ func appReducer(state: inout AppState, action: AppAction) {
         let stock = state.allPortfolioStocks[state.portfolioStocks[offsets.first!]]!
         state.portfolioStocks.remove(atOffsets: offsets)
         state.sectorCompanies[stock.sector]?.removeAll(where: { $0 == stock })
+        state.allPortfolioStocks.removeValue(forKey: stock.ticker)
+        state.allHoldingsInfo.removeValue(forKey: stock.ticker)
+        state.currentSharePrices.remove(atOffsets: offsets)
         
     case let .updateStartingDividend(index, value):
         let stock = state.allPortfolioStocks[state.portfolioStocks[index]]!
