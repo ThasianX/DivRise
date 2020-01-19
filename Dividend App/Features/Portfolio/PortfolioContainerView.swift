@@ -22,6 +22,7 @@ struct PortfolioContainerView: View {
     }
     
     var body: some View {
+//        PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, showingSortActions: $showingSortActions, portfolioStocks: PortfolioStock.sample.sorted(by: { $0.ticker < $1.ticker }), sortString: SortDirection.sortString(sort: store.state.selectedSort, direction: store.state.sortDirection))
         PortfolioView(showingDetail: $showingDetail, selectedIndex: $selectedIndex, showingSortActions: $showingSortActions, portfolioStocks: portfolioStocks, sortString: SortDirection.sortString(sort: store.state.selectedSort, direction: store.state.sortDirection))
             .onAppear(perform: reloadDividends)
             .sheet(isPresented: self.$showingDetail) {

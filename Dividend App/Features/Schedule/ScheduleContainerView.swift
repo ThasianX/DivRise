@@ -19,6 +19,10 @@ struct ScheduleContainerView: View {
     }
     
     private var totalDividends: Double {
+//        ScheduleView.sampleSchedule.map {
+//            Double($0.3.suffix($0.3.count-1))!
+//        }
+//        .reduce(0, + )
         store.state.portfolioStocks.map {
             if let holdingInfo = store.state.allHoldingsInfo[$0] {
                 return holdingInfo.numOfShares * store.state.allPortfolioStocks[$0]!.currentDividend
@@ -55,6 +59,7 @@ struct ScheduleContainerView: View {
     
     var body: some View {
         NavigationView {
+//            ScheduleView(upcomingSchedule: ScheduleView.sampleSchedule, yearlyDividendIncome: totalDividends)
             ScheduleView(upcomingSchedule: upcomingSchedule.sorted(by: { $0.date < $1.date }), yearlyDividendIncome: totalDividends)
                 .navigationBarItems(
                     trailing: ExitButton(show: $show)

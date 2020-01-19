@@ -191,8 +191,6 @@ func setCurrentNews(query: String) -> AnyPublisher<AppAction, Never> {
 // MARK: Dividend Tracker
 func setCurrentSharePrices(portfolioStocks: [PortfolioStock]) -> AnyPublisher<AppAction, Never> {
     Current.request.getCurrentSharePrices(stocks: portfolioStocks)
-        .map {
-            Logger.info("\($0)")
-            return AppAction.setCurrentSharePrices(prices: $0) }
+        .map { AppAction.setCurrentSharePrices(prices: $0) }
         .eraseToAnyPublisher()
 }
