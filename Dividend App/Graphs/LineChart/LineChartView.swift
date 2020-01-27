@@ -35,7 +35,7 @@ public struct LineChartView: View {
     @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
     
-    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartDarkStyle, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.detailPrefix = detailPrefix
@@ -69,6 +69,7 @@ public struct LineChartView: View {
                         HStack{
                             Spacer()
                             Text("\(self.currentRecord.month)\((self.currentRecord.day != nil) ? " \(self.currentRecord.day!), " : " ")\(self.currentRecord.year)")
+                            .foregroundColor(self.style.textColor)
                             Spacer()
                         }
                         HStack{
@@ -76,8 +77,10 @@ public struct LineChartView: View {
                             
                             if shortenDouble { Text("\(detailPrefix)\(self.currentValue.shortStringRepresentation)\(detailSuffix)")
                                 .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(self.style.textColor)
                             } else { Text("\(detailPrefix)\(self.currentValue, specifier: "%.2f")\(detailSuffix)")
                                 .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(self.style.textColor)
                             }
                             
                             Spacer()
