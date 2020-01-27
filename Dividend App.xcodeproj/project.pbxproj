@@ -104,6 +104,7 @@
 		1EE3832823BDB4CB00EB9203 /* StockNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832723BDB4CB00EB9203 /* StockNews.swift */; };
 		1EE3832A23BDBE7E00EB9203 /* TimeInterval+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832923BDBE7E00EB9203 /* TimeInterval+String.swift */; };
 		1EE3832E23BDC82500EB9203 /* StockNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3832D23BDC82500EB9203 /* StockNewsView.swift */; };
+		1EE4B08B23DE732B008360F0 /* Path+QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4B08A23DE732B008360F0 /* Path+QuadCurve.swift */; };
 		1EEA279223C66CD200D63F4D /* SunburstDiagram in Frameworks */ = {isa = PBXBuildFile; productRef = 1EEA279123C66CD200D63F4D /* SunburstDiagram */; };
 		1EEA279423C6728300D63F4D /* SectorAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA279323C6728300D63F4D /* SectorAttributes.swift */; };
 		1EEF292D23BEB20E00BCD51D /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF292C23BEB20E00BCD51D /* SafariView.swift */; };
@@ -215,6 +216,7 @@
 		1EE3832723BDB4CB00EB9203 /* StockNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNews.swift; sourceTree = "<group>"; };
 		1EE3832923BDBE7E00EB9203 /* TimeInterval+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+String.swift"; sourceTree = "<group>"; };
 		1EE3832D23BDC82500EB9203 /* StockNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNewsView.swift; sourceTree = "<group>"; };
+		1EE4B08A23DE732B008360F0 /* Path+QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+QuadCurve.swift"; sourceTree = "<group>"; };
 		1EEA279323C6728300D63F4D /* SectorAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorAttributes.swift; sourceTree = "<group>"; };
 		1EEF292C23BEB20E00BCD51D /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1EF05F8B23CAEBEE006CCD05 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				1ED6131623B6B1BE00CF4CD0 /* Legend.swift */,
 				1ED6131723B6B1BE00CF4CD0 /* LineChartView.swift */,
 				1ED6131823B6B1BE00CF4CD0 /* Line.swift */,
+				1EE4B08A23DE732B008360F0 /* Path+QuadCurve.swift */,
 			);
 			path = LineChart;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				1E6E3F7823B1A17C009A0262 /* AppReducer.swift in Sources */,
 				1E6E3F8123B1A333009A0262 /* RandomAccessCollection.swift in Sources */,
 				1EF110A823CEA6A0006CA855 /* View+Rectangle.swift in Sources */,
+				1EE4B08B23DE732B008360F0 /* Path+QuadCurve.swift in Sources */,
 				1E95DC5823B2BE3700FDA3EA /* View+Alert.swift in Sources */,
 				1E6E3F5823B19D8F009A0262 /* SceneDelegate.swift in Sources */,
 				1E86AED123B5CC4500B38275 /* Record.swift in Sources */,

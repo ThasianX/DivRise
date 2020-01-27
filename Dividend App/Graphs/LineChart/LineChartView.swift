@@ -20,6 +20,7 @@ public struct LineChartView: View {
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
+    public var estimate: Bool
     
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
@@ -35,7 +36,7 @@ public struct LineChartView: View {
     @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
     
-    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartDarkStyle, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartDarkStyle, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, estimate: Bool = false){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.detailPrefix = detailPrefix
@@ -46,6 +47,7 @@ public struct LineChartView: View {
         self.style = style
         self.formSize = form!
         self.dropShadow = dropShadow!
+        self.estimate = estimate
     }
     
     public var body: some View {
@@ -91,7 +93,7 @@ public struct LineChartView: View {
                 }
                 Spacer()
                 GeometryReader{ geometry in
-                    Line(data: self.data, frame: .constant(geometry.frame(in: .local)), touchLocation: self.$touchLocation, showIndicator: self.$showIndicatorDot)
+                    Line(data: self.data, frame: .constant(geometry.frame(in: .local)), touchLocation: self.$touchLocation, showIndicator: self.$showIndicatorDot, estimate: self.estimate)
                 }
                 .frame(width: frame.width, height: frame.height+30)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
