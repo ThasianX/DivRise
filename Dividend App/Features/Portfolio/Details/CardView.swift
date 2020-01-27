@@ -46,7 +46,7 @@ struct CardView: View {
                 } else if abbreviatedName == "DPS" {
                     LineChartView(records: records, data: values, title: abbreviatedName, detailPrefix: "$", allowGesture: (index != nil) ? true : false)
                 } else if abbreviatedName == "Price" {
-                    LineChartView(records: sharePriceRecords, data: values, title: abbreviatedName, detailPrefix: "$", allowGesture: (index != nil) ? true : false)
+                    LineChartView(records: sharePriceRecords, data: values, title: abbreviatedName, detailPrefix: "$", allowGesture: (index != nil) ? true : false, estimate: true)
                 } else {
                     LineChartView(records: records, data: values, title: abbreviatedName, allowGesture: (index != nil) ? true : false)
                 }

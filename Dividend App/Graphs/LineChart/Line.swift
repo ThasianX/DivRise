@@ -16,6 +16,7 @@ struct Line: View {
     @State private var showFull: Bool = false
     @State var showBackground: Bool = true
     
+    var estimate: Bool = false
     let padding: CGFloat = 30
     
     var stepWidth: CGFloat {
@@ -51,7 +52,7 @@ struct Line: View {
         ZStack {
             if(self.showFull && self.showBackground){
                 self.closedPath
-                    .fill(LinearGradient(gradient: Gradient(colors: [Colors.GradientUpperBlue, .white]), startPoint: .bottom, endPoint: .top))
+                    .fill(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .bottom, endPoint: .top))
                     .rotationEffect(.degrees(180), anchor: .center)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                     .transition(.opacity)
@@ -64,8 +65,12 @@ struct Line: View {
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .animation(.easeOut(duration: 1.2))
                 .onAppear(){
-                    self.showFull.toggle()
-            }.drawingGroup()
+                    self.showFull = true
+                }.onDisappear {
+                    self.showFull = false
+                }
+                .drawingGroup()
+            
             if(self.showIndicator) {
                 IndicatorPoint()
                     .position(self.getClosestPointOnPath(touchLocation: self.touchLocation))
@@ -76,8 +81,13 @@ struct Line: View {
     }
     
     func getClosestPointOnPath(touchLocation: CGPoint) -> CGPoint {
-        let percentage:CGFloat = min(max(touchLocation.x,0)/self.frame.width,1)
-        let closest = self.path.percentPoint(percentage)
+        let closest: CGPoint
+        if estimate {
+            let percentage:CGFloat = min(max(touchLocation.x,0)/self.frame.width,1)
+            closest = self.path.point(for: percentage)
+        } else {
+            closest = self.path.point(to: touchLocation.x)
+        }
         return closest
     }
     

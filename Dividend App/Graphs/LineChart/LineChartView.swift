@@ -20,6 +20,7 @@ public struct LineChartView: View {
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
+    public var estimate: Bool
     
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
@@ -35,7 +36,7 @@ public struct LineChartView: View {
     @State private var currentRecord: Record = .mock
     let frame = CGSize(width: 180, height: 120)
     
-    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", shortenDouble: Bool = false, allowGesture: Bool = true, legend: String? = nil, style: ChartStyle = Styles.lineChartDarkStyle, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, estimate: Bool = false){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.detailPrefix = detailPrefix
@@ -46,11 +47,12 @@ public struct LineChartView: View {
         self.style = style
         self.formSize = form!
         self.dropShadow = dropShadow!
+        self.estimate = estimate
     }
     
     public var body: some View {
         ZStack(alignment: .center){
-            RoundedRectangle(cornerRadius: 20).fill(self.style.backgroundColor).frame(width: frame.width, height: 240, alignment: .center).shadow(radius: self.dropShadow ? 8 : 0)
+            RoundedRectangle(cornerRadius: 20).fill(self.style.backgroundColor).frame(width: frame.width, height: 240, alignment: .center).shadow(color: .white, radius: self.dropShadow ? 8 : 0)
             VStack(alignment: .leading){
                 if(!self.showIndicatorDot){
                     VStack(alignment: .leading, spacing: 8){
@@ -69,6 +71,7 @@ public struct LineChartView: View {
                         HStack{
                             Spacer()
                             Text("\(self.currentRecord.month)\((self.currentRecord.day != nil) ? " \(self.currentRecord.day!), " : " ")\(self.currentRecord.year)")
+                            .foregroundColor(self.style.textColor)
                             Spacer()
                         }
                         HStack{
@@ -76,8 +79,10 @@ public struct LineChartView: View {
                             
                             if shortenDouble { Text("\(detailPrefix)\(self.currentValue.shortStringRepresentation)\(detailSuffix)")
                                 .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(self.style.textColor)
                             } else { Text("\(detailPrefix)\(self.currentValue, specifier: "%.2f")\(detailSuffix)")
                                 .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(self.style.textColor)
                             }
                             
                             Spacer()
@@ -88,7 +93,7 @@ public struct LineChartView: View {
                 }
                 Spacer()
                 GeometryReader{ geometry in
-                    Line(data: self.data, frame: .constant(geometry.frame(in: .local)), touchLocation: self.$touchLocation, showIndicator: self.$showIndicatorDot)
+                    Line(data: self.data, frame: .constant(geometry.frame(in: .local)), touchLocation: self.$touchLocation, showIndicator: self.$showIndicatorDot, estimate: self.estimate)
                 }
                 .frame(width: frame.width, height: frame.height+30)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
