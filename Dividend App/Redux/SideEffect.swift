@@ -124,9 +124,10 @@ func setCurrentDetailStock(identifier: String, period: String) -> AnyPublisher<A
             
             var sharePriceRecords = [Record]()
             var sharePrices = [Double]()
+            let range = 1500
             
-            if historicalPrices.historical.count > 1500 {
-                for i in ((historicalPrices.historical.count - 1500)..<historicalPrices.historical.count).reversed() {
+            if historicalPrices.historical.count > range {
+                for i in ((historicalPrices.historical.count - range)..<historicalPrices.historical.count).reversed() {
                     if let date = Formatter.fullString.date(from: historicalPrices.historical[i].date) {
                         sharePriceRecords.append(Record(month: date.monthMedium, day: date.day, year: date.year))
                     }

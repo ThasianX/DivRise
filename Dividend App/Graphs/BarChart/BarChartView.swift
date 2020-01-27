@@ -33,7 +33,7 @@ public struct BarChartView : View {
     var isFullWidth:Bool {
         return self.formSize == ChartForm.large
     }
-    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(records: [Record], data: [Double], title: String, detailPrefix: String = "", detailSuffix: String = "", legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeDark, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = ChartData(records: records, points: data)
         self.title = title
         self.legend = legend
@@ -56,7 +56,7 @@ public struct BarChartView : View {
                             .fontWeight(.bold)
                             .foregroundColor(self.style.textColor)
                     }else{
-                        Text("\(self.currentRecord.month) \(self.currentRecord.year) - $\(self.currentValue, specifier: "%.2f")")
+                        Text("$\(self.currentValue, specifier: "%.2f")")
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(self.style.textColor)
@@ -85,6 +85,10 @@ public struct BarChartView : View {
                     }
                 }.padding()
                 BarChartRow(data: data.points, accentColor: self.style.accentColor, secondGradientAccentColor: self.style.secondGradientColor, touchLocation: self.$touchLocation)
+                
+                if showValue {
+                    LabelView(arrowOffset: self.getArrowOffset(touchLocation: self.touchLocation), record: .constant(self.getCurrentRecord())).offset(x: self.getLabelViewOffset(touchLocation: self.touchLocation), y: -6)
+                }
             }
         }.frame(minWidth:self.formSize.width, maxWidth: self.isFullWidth ? .infinity : self.formSize.width, minHeight:self.formSize.height, maxHeight:self.formSize.height)
             .gesture(DragGesture()
@@ -101,6 +105,21 @@ public struct BarChartView : View {
         )
             .gesture(TapGesture()
         )
+    }
+    
+    func getArrowOffset(touchLocation:CGFloat) -> Binding<CGFloat> {
+        let realLoc = (self.touchLocation * self.formSize.width) - 50
+        if realLoc < 10 {
+            return .constant(realLoc - 10)
+        }else if realLoc > self.formSize.width-110 {
+            return .constant((self.formSize.width-110 - realLoc) * -1)
+        } else {
+            return .constant(0)
+        }
+    }
+    
+    func getLabelViewOffset(touchLocation:CGFloat) -> CGFloat {
+        return min(self.formSize.width-110,max(10,(self.touchLocation * self.formSize.width) - 50))
     }
     
     func getCurrentRecord()-> Record {
