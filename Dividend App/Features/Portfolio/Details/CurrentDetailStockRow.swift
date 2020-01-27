@@ -22,7 +22,8 @@ struct CurrentDetailStockRow: View {
                                 HStack {
                                     Text("\(self.attributeNames[i*3 + j])")
                                         .font(.caption)
-                                        .foregroundColor(Color("textColor"))
+                                        .bold()
+                                        .foregroundColor(Color.gray)
                                     Spacer()
                                     
                                     self.getProperName(name: self.attributeNames[i*3 + j], value: value)
