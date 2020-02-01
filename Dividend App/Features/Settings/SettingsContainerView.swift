@@ -27,9 +27,7 @@ struct SettingsContainerView: View {
         NavigationView {
             SettingsView(receive: $receiveNotifications, daySelection: $daySelection, dateSelection: $dateSelection, showDetailOrdering: $showDetailOrdering, openSettings: openSettings, onNotificationChange: onNotificationChange)
                 .navigationBarTitle("Settings")
-                .navigationBarItems(trailing:
-                    ExitButton(show: self.$show)
-            )
+                .navigationBarItems(trailing: ExitButton(show: self.$show))
                 .onAppear(perform: onAppear)
                 .sheet(isPresented: $showDetailOrdering) {
                     NavigationView {
@@ -42,7 +40,7 @@ struct SettingsContainerView: View {
                                 trailing: CheckMarkButton(size: CGSize(width: 20, height: 20), action: self.onCommit)
                         )
                     }
-            }
+                }
         }
     }
     
