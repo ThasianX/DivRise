@@ -10,19 +10,12 @@ import SwiftUI
 
 struct SettingsContainerView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
-    @State var receive: Bool
-    @State var daySelection: Int
-    @State var dateSelection: Date
-    @State var detailOrdering: [String] = []
-    @State var showDetailOrdering: Bool = false
+    @State private var daySelection: Int = 0
+    @State private var dateSelection: Date = Date()
+    @State private var detailOrdering: [String] = []
+    @State private var showDetailOrdering: Bool = false
     @Binding var show: Bool
-    
-    init(receive: Bool, daySelection: Int, dateSelection: Date, show: Binding<Bool>) {
-        _receive = State(initialValue: receive)
-        _daySelection = State(initialValue: daySelection)
-        _dateSelection = State(initialValue: dateSelection)
-        self._show = show
-    }
+    @Binding var receiveNotifications: Bool
     
     private var fullAttributeNames: [String] {
         store.state.attributeNames.compactMap {
@@ -32,11 +25,10 @@ struct SettingsContainerView: View {
     
     var body: some View {
         NavigationView {
-            SettingsView(receive: $receive, daySelection: $daySelection, dateSelection: $dateSelection, showDetailOrdering: $showDetailOrdering, openSettings: openSettings, onNotificationChange: onNotificationChange)
+            SettingsView(receive: $receiveNotifications, daySelection: $daySelection, dateSelection: $dateSelection, showDetailOrdering: $showDetailOrdering, openSettings: openSettings, onNotificationChange: onNotificationChange)
                 .navigationBarTitle("Settings")
-                .navigationBarItems(trailing:
-                    ExitButton(show: self.$show)
-            )
+                .navigationBarItems(trailing: ExitButton(show: self.$show))
+                .onAppear(perform: onAppear)
                 .sheet(isPresented: $showDetailOrdering) {
                     NavigationView {
                         DetailAttributeOrdering(showDetailOrdering: self.$showDetailOrdering, attributeOrder: self.$detailOrdering, fullAttributeNames: self.fullAttributeNames)
@@ -48,13 +40,13 @@ struct SettingsContainerView: View {
                                 trailing: CheckMarkButton(size: CGSize(width: 20, height: 20), action: self.onCommit)
                         )
                     }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                    self.receive = self.store.state.notificationsSet
                 }
-            }
         }
+    }
+    
+    private func onAppear() {
+        daySelection = store.state.notificationDay
+        dateSelection = store.state.notificationTime
     }
     
     private func onCommit() {
@@ -105,6 +97,6 @@ struct SettingsContainerView: View {
 
 struct SettingsContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsContainerView(receive: false, daySelection: 10, dateSelection: Date().dateAtTime(hour: 2, minute: 2), show: .constant(true))
+        SettingsContainerView(show: .constant(true), receiveNotifications: .constant(true))
     }
 }

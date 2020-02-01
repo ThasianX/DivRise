@@ -11,12 +11,12 @@ import UserNotifications
 
 let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-let screen = UIScreen.main.bounds
 
 struct RootView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
     @State var show = false
     @State var showInfo = false
+    @State var receiveNotifications = false
     
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -55,37 +55,37 @@ struct RootView: View {
             .offset(y: showInfo ? statusBarHeight : 80)
             .animation(.spring())
             
-            MenuView(show: $show)
+            MenuView(show: $show, receiveNotifications: $receiveNotifications)
                 .environmentObject(self.store)
         }
         .onAppear(perform: requestPermissions)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            Logger.info("Will enter foreground notification recieved")
             self.requestPermissions()
         }
     }
     
     private func requestPermissions() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-        if success {
-            Logger.info("Permission granted")
-            self.setNotification()
-        } else if let error = error {
-            Logger.info(error.localizedDescription)
-            }
+            Logger.info("Permission granted: \(success)")
+            self.getNotificationSettings()
         }
-        
+    }
+    
+    private func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings() { settings in
             switch settings.authorizationStatus {
             case .authorized:
-                ()
+                Logger.info("Notifications ON")
+                self.receiveNotifications = true
+                self.setNotification()
                 
             case .denied, .notDetermined, .provisional:
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                Logger.info("Notifications OFF")
                 DispatchQueue.main.async {
-                    Logger.info("Denied")
+                    self.receiveNotifications = false
                     self.store.send(.toggleNotifications(enabled: false))
                 }
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 
             @unknown default:
                 ()
@@ -111,7 +111,6 @@ struct RootView: View {
                 if error != nil {
                     Logger.info("Couldn't set notification")
                 } else {
-                    
                     DispatchQueue.main.async {
                         self.store.send(.toggleNotifications(enabled: true))
                         Logger.info("Notification set")
@@ -173,6 +172,7 @@ struct MenuView: View {
     var menu = menuData
     @EnvironmentObject var store: Store<AppState, AppAction>
     @Binding var show: Bool
+    @Binding var receiveNotifications: Bool
     @State var showDividendIncome = false
     @State var showDividendTracker = false
     @State var showDividendSchedule = false
@@ -194,7 +194,7 @@ struct MenuView: View {
                         Button(action: { self.showSettings.toggle() }) {
                             MenuRow(image: item.icon, text: item.title)
                                 .sheet(isPresented: self.$showSettings) {
-                                    SettingsContainerView(receive: self.store.state.notificationsSet, daySelection: self.store.state.notificationDay, dateSelection: self.store.state.notificationTime, show: self.$showSettings)
+                                    SettingsContainerView(show: self.$showSettings, receiveNotifications: self.$receiveNotifications)
                                         .environmentObject(self.store)
                             }
                         }
